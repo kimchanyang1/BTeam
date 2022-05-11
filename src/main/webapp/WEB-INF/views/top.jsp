@@ -45,12 +45,16 @@
         	</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="memberinput"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
-		
-			<li><a href="logingo"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
-		
-		
-		
+			<c:choose>
+				<c:when test="${logon eq true && login != null}">
+					<li><a class="navbar-brand">환영합니다! ${login.mem_nickname}님!</a></li>
+					<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="signupform"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+					<li><a href="loginform"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 </nav>
