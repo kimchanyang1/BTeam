@@ -18,6 +18,8 @@ mem_tel VARCHAR2(13),
 rh_writeday DATE default sysdate,
 rh_content VARCHAR2(20),
 rh_readcount NUMBER(6));
+
+create SEQUENCE rh_no;
  */
 
 public class RehomeDTO {
