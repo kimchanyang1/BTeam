@@ -9,9 +9,9 @@
 <body>
 
 <form action="rehomeinput" method="post" enctype="multipart/form-data">
-	
+	<!-- 
 	<input type="hidden" name="mem_no" value="">
-	
+	 -->
 	<table>
 		<tr>
 			<th>구분1(글 상태)</th>
