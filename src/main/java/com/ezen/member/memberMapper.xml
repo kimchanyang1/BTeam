@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.member.MemberService">
+
+<insert id="Signup">
+	insert into member values(member_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8})
+</insert>
+
+<resultMap type="com.ezen.member.MemberDTO" id="member">
+	<result property="mem_no" column="mem_no"/>
+	<result property="mem_id" column="mem_id"/>
+	<result property="mem_pw" column="mem_pw"/>
+	<result property="mem_name" column="mem_name"/>
+	<result property="mem_nickname" column="mem_nickname"/>
+	<result property="mem_jumin" column="mem_jumin"/>
+	<result property="mem_tel" column="mem_tel"/>
+	<result property="mem_mail" column="mem_mail"/>
+	<result property="mem_address" column="mem_address"/>
+</resultMap>
+
+<select id="Login" resultMap="member">
+	select * from member where mem_id=#{param1} and mem_pw=#{param2}
+</select>
+
+</mapper>
