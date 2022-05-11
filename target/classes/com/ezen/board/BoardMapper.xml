@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.board.BoardService">
+
+<insert id="boardinput">
+INSERT INTO BOARD(BD_NO, BD_TITLE, MEM_NO, MEM_NICKNAME, BD_CONTENT, BD_READCOUNT, BD_IMAGE, BD_LIKES)
+ VALUES(BD_NO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, 0, #{param5}, 0)
+</insert>
+
+
+</mapper>
