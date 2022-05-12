@@ -10,9 +10,28 @@
 		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
 	</definition>
 	
-	<definition name="notice" extends="baseLayout">
-		<put-attribute name="title" value="테스트공지"/>
-		<put-attribute name="body" value="/WEB-INF/views/notice.jsp"/>
+	
+	<definition name="boardoutform" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판"/>
+		<put-attribute name="body" value="/WEB-INF/views/boardoutform.jsp"/>
+	</definition>
+	
+	
+	<definition name="boardinputform" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 글쓰기"/>
+		<put-attribute name="body" value="/WEB-INF/views/boardinputform.jsp"/>
+	</definition>
+	
+	
+	<definition name="boarddetailform" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 디테일"/>
+		<put-attribute name="body" value="/WEB-INF/views/boarddetailform.jsp"/>
+	</definition>
+	
+	
+	<definition name="boardmodifyform" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/boardmodifyform.jsp"/>
 	</definition>
 	
 </tiles-definitions>

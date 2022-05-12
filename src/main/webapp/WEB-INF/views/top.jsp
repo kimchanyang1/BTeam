@@ -41,7 +41,7 @@
 				</ul>
         	</li>
         	<li class="active">
-				<a href="board">자유게시판</a>
+        			<a href="board">자유게시판</a>
         	</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
