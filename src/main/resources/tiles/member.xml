@@ -3,6 +3,7 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+	
 	<definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
 		<put-attribute name="title"/>
 		<put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
@@ -10,14 +11,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
 	</definition>
 	
-	<definition name="home" extends="baseLayout">
-		<put-attribute name="title" value="분양임보"/>
-		<put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
+	<definition name="signupform" extends="baseLayout">
+		<put-attribute name="title" value="회원가입"/>
+		<put-attribute name="body" value="/WEB-INF/views/signupform.jsp"/>
 	</definition>
 	
-	<definition name="Rehomeinputform" extends="baseLayout">
-		<put-attribute name="title" value="분양임보"/>
-		<put-attribute name="body" value="/WEB-INF/views/Rehomeinputform.jsp"/>
+	<definition name="loginform" extends="baseLayout">
+		<put-attribute name="title" value="로그인"/>
+		<put-attribute name="body" value="/WEB-INF/views/loginform.jsp"/>
 	</definition>
 	
 </tiles-definitions>

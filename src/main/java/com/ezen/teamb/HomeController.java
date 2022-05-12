@@ -9,7 +9,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.missing.MissingController;
+
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.ezen.member.MemberController;
+
 import com.ezen.notice.NoticeController;
+import com.ezen.rehome.RehomeController;
 
 @Controller
 public class HomeController {
@@ -18,7 +31,9 @@ public class HomeController {
 	private SqlSession sqlSession;
 	
 	private NoticeController nc = new NoticeController();
-	private MissingController mc = new MissingController();
+	private MissingController mic = new MissingController();
+	private RehomeController rc = new RehomeController();
+	private MemberController mc = new MemberController();
 	
 	@RequestMapping(value = "/")
 	public String home() {
@@ -37,11 +52,51 @@ public class HomeController {
 	
 	@RequestMapping(value = "/missinginputform")
 	public String missing() {
-		return mc.missinginputform();
+		return mic.missinginputform();
 	}
 	
 	@RequestMapping(value = "/missinginput")
 	public String missinginput(MultipartHttpServletRequest request) {
-		return mc.missinginput(request, sqlSession);
+		return mic.missinginput(request, sqlSession);
 	}
+	@RequestMapping(value = "/rehome")
+	public String rehome() {
+		return rc.rehome();
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/rehomeinput")
+	public String rhinput(MultipartHttpServletRequest multi) {
+		return rc.rhinput(multi, sqlSession);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/rehomeoutput")
+	public String rhoutput(Model mo) {
+		return rc.rhoutput(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/signupform")
+	public String Signupform() {
+		return mc.Signupform();
+	}
+	
+	@RequestMapping(value = "/signup")
+	public String Signup(HttpServletRequest request) {
+		return mc.Signup(request, sqlSession);
+	}
+	
+	@RequestMapping(value = "/loginform")
+	public String Loginform() {
+		return mc.Loginform();
+	}
+	
+	@RequestMapping(value = "/login")
+	public String Login(HttpServletRequest request, Model model) {
+		return mc.Login(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/logout")
+	public String Logout(HttpServletRequest request) {
+		return mc.Logout(request);
+	}
+	
 }
