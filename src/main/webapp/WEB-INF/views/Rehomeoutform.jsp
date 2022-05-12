@@ -9,6 +9,10 @@
 </head>
 <body>
 
+<jsp:include page="Rehomesearch.jsp"></jsp:include>
+<br>
+<hr>
+
 <table>
 	<tr><th>글 번호</th><th>글 상태</th><th>제목</th><th>발견 장소</th><th>발견 날짜</th><th>작성 날짜</th><th>조회 수</th></tr>
 	<c:forEach items="${rdto }" var="rh">

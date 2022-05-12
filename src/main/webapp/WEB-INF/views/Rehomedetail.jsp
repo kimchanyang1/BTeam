@@ -14,8 +14,7 @@
 <table>
 	<tr>
 		<td>
-			${rd.rh_image }
-			사진 들어가용
+			<img src="${pageContext.request.contextPath}/image/${rd.rh_image }"> 
 		</td>
 		<td>
 			<table>
