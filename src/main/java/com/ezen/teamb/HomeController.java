@@ -79,6 +79,11 @@ public class HomeController {
 		return rc.rhdetail(sqlSession, request, mo);
 	}
 	
+	@RequestMapping(value = "/rehomedelete")
+	public String rhdelete(HttpServletRequest request, Model mo) {
+		return rc.rhdelete(sqlSession, request);
+	}
+	
 	@RequestMapping(value = "/signupform")
 	public String Signupform() {
 		return mc.Signupform();

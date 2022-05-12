@@ -64,4 +64,15 @@ public class RehomeController {
 		
 		return "Rehomedetail";
 	}
+	
+	public String rhdelete(SqlSession sqlSession, HttpServletRequest request)
+	{
+		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
+		
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		rs.rehomedelete(rh_no);
+		
+		return "redirect: rehomeoutform";
+	}
+
 }
