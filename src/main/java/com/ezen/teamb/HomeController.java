@@ -99,6 +99,11 @@ public class HomeController {
 		return rc.rhmodify(sqlSession, multi);
 	}
 	
+	@RequestMapping(value = "/rehomesearch")
+	public String rhsearch(HttpServletRequest request) {
+		return rc.rhsearch(sqlSession, request);
+	}
+	
 	@RequestMapping(value = "/signupform")
 	public String Signupform() {
 		return mc.Signupform();

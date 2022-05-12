@@ -114,5 +114,15 @@ public class RehomeController {
 		
 		return "redirect: rehomeoutform";
 	}
+	
+	public String rhsearch(SqlSession sqlSession, HttpServletRequest request)
+	{
+		String[] svalue = request.getParameterValues("svalue");
+		
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		rs.rehomesearch(svalue);
+		
+		return "redirect: rehomeoutform";
+	}
 
 }

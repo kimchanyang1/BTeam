@@ -12,10 +12,10 @@
 <table>
 	<tr>
 		<td colspan="2">
-			<input type="checkbox" name="svalue" value="임보"> 임보
-			<input type="checkbox" name="svalue" value="분양"> 분양
-			<input type="checkbox" name="svalue" value="개"> 개
-			<input type="checkbox" name="svalue" value="고양이"> 고양이
+			<input type="checkbox" name="svalue" value="임보"> 임보 &emsp;
+			<input type="checkbox" name="svalue" value="분양"> 분양 &emsp;
+			<input type="checkbox" name="svalue" value="개"> 개 &emsp;
+			<input type="checkbox" name="svalue" value="고양이"> 고양이 &emsp;
 		</td>
 	</tr>
 	<tr>
