@@ -18,7 +18,7 @@
 </insert>
 
 <select id="rehomeoutput" resultType="com.ezen.rehome.RehomeDTO">
-	select * from rehome
+	select * from rehome order by rh_no desc
 </select>
 
 <select id="rehomedetail" resultType="com.ezen.rehome.RehomeDTO">

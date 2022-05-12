@@ -11,11 +11,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public class RehomeController {
 	
-	public String rehome()
-	{
-		return "Rehomeinputform";
-	}
-	
 	public String rhinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
 	{
 		String rh_gb1 = multi.getParameter("rh_gb1");
@@ -73,6 +68,17 @@ public class RehomeController {
 		rs.rehomedelete(rh_no);
 		
 		return "redirect: rehomeoutform";
+	}
+	
+	public String rhmodifyform(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	{
+		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
+		
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		RehomeDTO rd = rs.rehomedetail(rh_no);
+		mo.addAttribute("rd", rd);
+		
+		return "Rehomemodifyform";
 	}
 
 }

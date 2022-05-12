@@ -61,7 +61,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/rehome")
 	public String rehome() {
-		return rc.rehome();
+		return "redirect: rehomeoutform";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/rehomeinput")
@@ -82,6 +82,11 @@ public class HomeController {
 	@RequestMapping(value = "/rehomedelete")
 	public String rhdelete(HttpServletRequest request, Model mo) {
 		return rc.rhdelete(sqlSession, request);
+	}
+	
+	@RequestMapping(value = "/rehomemodifyform")
+	public String rhmodifyform(HttpServletRequest request, Model mo) {
+		return rc.rhmodifyform(sqlSession, request, mo);
 	}
 	
 	@RequestMapping(value = "/signupform")

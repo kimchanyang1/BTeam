@@ -35,7 +35,7 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="Rehomemodify?rh_no=${rd.rh_no }"><input type="button" value="수정"></a>
+			<a href="rehomemodifyform?rh_no=${rd.rh_no }"><input type="button" value="수정"></a>
 			<a href="rehomedelete?rh_no=${rd.rh_no }"><input type="button" value="삭제"></a>
 		</td>
 	</tr>
