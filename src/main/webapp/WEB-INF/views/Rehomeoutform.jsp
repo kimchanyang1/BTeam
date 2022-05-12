@@ -24,7 +24,7 @@
 		<td>${rh.rh_readcount }</td>
 	</tr>
 	</c:forEach>
-	<tr><td><a href="rehome"><input type="button" value="글 등록"></a></td></tr>
+	<tr><td><a href="rehomeinputform"><input type="button" value="글 등록"></a></td></tr>
 </table>
 
 </body>

@@ -4,17 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.rehome.RehomeService">
 
-<select id="memNickname" resultType="com.ezen.member.MemberDTO">
-	select mem_nickname from member where mem_no=#{param1}
-</select>
-
-<select id="memTel" resultType="com.ezen.member.MemberDTO">
-	select mem_tel from member where mem_no=#{param1}
-</select>
-
 <insert id="rehomeinput">
 	insert into rehome(rh_no, rh_gb1, rh_gb2, rh_gb3, rh_title, rh_pname, rh_pno, rh_misdate, rh_misplace, rh_image, mem_no, mem_nickname, mem_tel, rh_content, rh_readcount)
-		values (rh_no.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, 0, 0, 0, #{param10}, 0)
+		values (rh_no.nextval, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11}, #{param12}, #{param13}, 0)
 </insert>
 
 <select id="rehomeoutput" resultType="com.ezen.rehome.RehomeDTO">
@@ -28,5 +20,10 @@
 <delete id="rehomedelete">
 	delete from rehome where rh_no = #{param1}
 </delete>
+
+<update id="rehomemodify">
+	update rehome set rh_gb1=#{param2}, rh_gb2=#{param3}, rh_gb3=#{param4}, rh_title=#{param5}, rh_pname=#{param6}, rh_pno=#{param7}, rh_misdate=#{param8}, rh_misplace=#{param9}, rh_image=#{param10}, mem_no=#{param11}, mem_nickname=#{param12}, mem_tel=#{param13}, rh_content=#{param14}, rh_readcount=#{param15}
+	 where rh_no=#{param1}
+</update>
 
 </mapper>

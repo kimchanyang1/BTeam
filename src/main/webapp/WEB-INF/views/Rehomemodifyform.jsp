@@ -51,7 +51,7 @@
 		</tr>
 		<tr>
 			<th>반려동물 발견날짜</th>
-			<td><input type="date" name="rh_misdate"></td>
+			<td><input type="date" name="rh_misdate" value="${rd.rh_misdate}"></td>
 		</tr>
 		<tr>
 			<th>반려동물 발견장소</th>
@@ -63,7 +63,7 @@
 		</tr>
 		<tr>
 			<th>글 내용</th>
-			<td><textarea rows="20" cols="40" name="rh_content" value="${rd.rh_content}">
+			<td><textarea rows="20" cols="40" name="rh_content">${rd.rh_content}
 				</textarea></td>
 		</tr>
 		<tr>
