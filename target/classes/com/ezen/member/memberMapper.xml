@@ -25,4 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from member where mem_id=#{param1} and mem_pw=#{param2}
 </select>
 
+<delete id="memberdelete">
+	delete from member where mem_no=#{param1}
+</delete>
+
+<update id="membermodify">
+	update member set mem_pw=#{param1}, mem_nickname=#{param2}, mem_jumin=#{param3}, mem_tel=#{param4}, mem_mail=#{param5}, mem_address=#{param6} where mem_no=#{param7}
+</update>
+
 </mapper>

@@ -22,7 +22,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active">
-				<a href="notice">공지</a>
+				<a href="noticeoutform">공지</a>
         	</li>
         	
         		<li class="active">
@@ -50,13 +50,13 @@
 				</ul>
         	</li>
         	<li class="active">
-				<a href="board">자유게시판</a>
+        			<a href="board">자유게시판</a>
         	</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<c:choose>
 				<c:when test="${logon eq true && login != null}">
-					<li><a class="navbar-brand">환영합니다! ${login.mem_nickname}님!</a></li>
+					<li><a class="navbar-brand" href="memberdetail">환영합니다! ${login.mem_nickname}님!</a></li>
 					<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
 				</c:when>
 				<c:otherwise>

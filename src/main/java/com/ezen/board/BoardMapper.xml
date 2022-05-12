@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezen.board.BoardService">
+
+<select id="boardout" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM BOARD ORDER BY BD_NO DESC
+</select>
+
+
+<insert id="boardinput">
+	INSERT INTO BOARD(BD_NO, BD_TITLE, MEM_NO, MEM_NICKNAME, BD_CONTENT, BD_READCOUNT, BD_IMAGE, BD_LIKES)
+	 VALUES(BD_NO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, 0, #{param5}, 0)
+</insert>
+
+
+<select id="boarddetail" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM BOARD WHERE BD_NO = #{param1}
+</select>
+
+<update id="boardreadcount">
+	UPDATE BOARD SET BD_READCOUNT = BD_READCOUNT + 1 WHERE BD_NO = #{param1}
+</update>
+
+
+<select id="boardmodifyselect" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM BOARD WHERE BD_NO = #{param1}
+</select>
+
+<update id="boardmodify">
+	UPDATE BOARD SET BD_TITLE = #{param1}, MEM_NO = #{param2}, MEM_NICKNAME = #{param3}, BD_CONTENT = #{param4}, BD_IMAGE = #{param5} WHERE BD_NO = #{param6}
+</update>
+
+
+<delete id="boarddelete">
+	DELETE FROM BOARD WHERE BD_NO = #{param1}
+</delete>
+
+
+<select id="searchtitle" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM BOARD WHERE BD_TITLE LIKE '%'||#{param1}||'%'
+</select>
+
+<select id="searchnickname" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM BOARD WHERE MEM_NICKNAME LIKE '%'||#{param1}||'%'
+</select>
+
+</mapper>

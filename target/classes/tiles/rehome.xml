@@ -20,4 +20,19 @@
 		<put-attribute name="body" value="/WEB-INF/views/Rehomeinputform.jsp"/>
 	</definition>
 	
+	<definition name="Rehomeoutform" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/Rehomeoutform.jsp"/>
+	</definition>
+	
+	<definition name="Rehomedetail" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/Rehomedetail.jsp"/>
+	</definition>
+	
+	<definition name="Rehomemodifyform" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/Rehomemodifyform.jsp"/>
+	</definition>
+	
 </tiles-definitions>
