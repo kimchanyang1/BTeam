@@ -10,9 +10,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
 	</definition>
 	
-	<definition name="notice" extends="baseLayout">
-		<put-attribute name="title" value="테스트공지"/>
-		<put-attribute name="body" value="/WEB-INF/views/notice.jsp"/>
+	<definition name="noticeoutform" extends="baseLayout">
+		<put-attribute name="title" value="공지"/>
+		<put-attribute name="body" value="/WEB-INF/views/noticeoutform.jsp"/>
+	</definition>
+	
+	<definition name="noticeinputform" extends="baseLayout">
+		<put-attribute name="title" value="공지 작성"/>
+		<put-attribute name="body" value="/WEB-INF/views/noticeinputform.jsp"/>
 	</definition>
 	
 </tiles-definitions>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.notice.NoticeService">
+
+<resultMap type="com.ezen.notice.NoticeDTO" id="noticelist">
+	<result column="nt_no" property="nt_no"/>
+	<result column="mem_no" property="mem_no"/>
+	<result column="mem_nickname" property="mem_nickname"/>
+	<result column="nt_writeday" property="nt_writeday"/>
+	<result column="nt_title" property="nt_title"/>
+	<result column="nt_content" property="nt_content"/>
+	<result column="nt_readcount" property="nt_readcount"/>
+</resultMap>
+
+<select id="noticeoutform" resultMap="noticelist">
+	 select * from notice
+</select>
+
+<insert id="noticeinput">
+	insert into notice values(notice_seq.nextval, #{param1}, #{param2}, sysdate, #{param3}, #{param4}, 0)
+</insert>
+
+</mapper>

@@ -21,4 +21,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/loginform.jsp"/>
 	</definition>
 	
+	<definition name="memberdetail" extends="baseLayout">
+		<put-attribute name="title" value="개인정보확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/memberdetail.jsp"/>
+	</definition>
+	
+	<definition name="membermodifyform" extends="baseLayout">
+		<put-attribute name="title" value="개인정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/membermodifyform.jsp"/>
+	</definition>
+	
 </tiles-definitions>
