@@ -75,19 +75,77 @@ public class HomeController {
 	public String missinginput(MultipartHttpServletRequest request) {
 		return mic.missinginput(request, sqlSession);
 	}
-	@RequestMapping(value = "/rehome")
-	public String rehome() {
-		return rc.rehome();
+	
+	@RequestMapping(value = "/missingoutform")
+	public String missingoutform(Model mo) {
+		return mic.missingoutform(mo,sqlSession);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/rehomeinput")
+	@RequestMapping(value = "/missingdetail")
+	public String missingdetail(HttpServletRequest request,Model mo) {
+		return mic.missingdetail(request, mo ,sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingdelete")
+	public String missingdelete(HttpServletRequest request) {
+		return mic.missingdelete(request,sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingmodifyform")
+	public String missingmodifyform(HttpServletRequest request, Model mo) {
+		return mic.missingmodifyform(request, mo, sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingmodifyinput")
+	public String missingmodifyinput(MultipartHttpServletRequest request) {
+		return mic.missingmodifyinput(request,sqlSession);
+	}
+	
+	
+	
+	@RequestMapping(value = "/rehome")
+	public String rehome() {
+		return "redirect: rehomeoutform";
+	}
+	
+	@RequestMapping(value = "/rehomeinputform")
+	public String rhinputform() {
+		return rc.rhinputform();
+	}
+	
+	@RequestMapping(value = "/rehomeinput")
 	public String rhinput(MultipartHttpServletRequest multi) {
 		return rc.rhinput(multi, sqlSession);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/rehomeoutput")
+	@RequestMapping(value = "/rehomeoutform")
 	public String rhoutput(Model mo) {
 		return rc.rhoutput(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/rehomedetail")
+	public String rhdetail(HttpServletRequest request, Model mo) {
+		return rc.rhdetail(sqlSession, request, mo);
+	}
+	
+	@RequestMapping(value = "/rehomedelete")
+	public String rhdelete(HttpServletRequest request, Model mo) {
+		return rc.rhdelete(sqlSession, request);
+	}
+	
+	@RequestMapping(value = "/rehomemodifyform")
+	public String rhmodifyform(HttpServletRequest request, Model mo) {
+		return rc.rhmodifyform(sqlSession, request, mo);
+	}
+	
+	@RequestMapping(value = "/rehomemodify")
+	public String rhmodify(MultipartHttpServletRequest multi) {
+		return rc.rhmodify(sqlSession, multi);
+	}
+	
+	@RequestMapping(value = "/rehomesearch")
+	public String rhsearch(HttpServletRequest request) {
+		return rc.rhsearch(sqlSession, request);
 	}
 	
 	@RequestMapping(value = "/signupform")

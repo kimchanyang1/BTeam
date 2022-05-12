@@ -24,12 +24,21 @@
 			<li class="active">
 				<a href="noticeoutform">공지</a>
         	</li>
-			<li class="active">
-				<a href="missinginputform">실종신고</a>
+        	
+        		<li class="active">
+        		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					실종<span class="caret"></span>
+				</a>
+        		<ul class="dropdown-menu">
+				<li><a href="missinginputform">실종신고</a><li>
+				<li><a href="missingoutform">출력확인</a><li>     		
+        		</ul>
         	</li>
+        	
 			<li class="active">
 				<a href="rehome">분양/임시보호</a>
         	</li>
+        	
 			<li class="active">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					실종/분양 후기<span class="caret"></span>

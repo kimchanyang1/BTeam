@@ -3,35 +3,35 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
+	<definition name="baseLayout" template="/WEB-INF/views/main/layout.jsp">
 		<put-attribute name="title"/>
-		<put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+		<put-attribute name="top" value="/WEB-INF/views/main/top.jsp"/>
 		<put-attribute name="body"/>
-		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
 	</definition>
 	
 	
 	<definition name="boardoutform" extends="baseLayout">
 		<put-attribute name="title" value="자유게시판"/>
-		<put-attribute name="body" value="/WEB-INF/views/boardoutform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/board/boardoutform.jsp"/>
 	</definition>
 	
 	
 	<definition name="boardinputform" extends="baseLayout">
 		<put-attribute name="title" value="자유게시판 글쓰기"/>
-		<put-attribute name="body" value="/WEB-INF/views/boardinputform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/board/boardinputform.jsp"/>
 	</definition>
 	
 	
 	<definition name="boarddetailform" extends="baseLayout">
 		<put-attribute name="title" value="자유게시판 디테일"/>
-		<put-attribute name="body" value="/WEB-INF/views/boarddetailform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/board/boarddetailform.jsp"/>
 	</definition>
 	
 	
 	<definition name="boardmodifyform" extends="baseLayout">
 		<put-attribute name="title" value="자유게시판 수정폼"/>
-		<put-attribute name="body" value="/WEB-INF/views/boardmodifyform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/board/boardmodifyform.jsp"/>
 	</definition>
 	
 </tiles-definitions>
