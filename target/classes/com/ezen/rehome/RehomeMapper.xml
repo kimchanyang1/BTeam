@@ -21,4 +21,8 @@
 	select * from rehome
 </select>
 
+<select id="rehomedetail" resultType="com.ezen.rehome.RehomeDTO">
+	select * from rehome where rh_no = #{param1}
+</select>
+
 </mapper>

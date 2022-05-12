@@ -74,6 +74,11 @@ public class HomeController {
 		return rc.rhoutput(sqlSession, mo);
 	}
 	
+	@RequestMapping(value = "/rehomedetail")
+	public String rhdetail(HttpServletRequest request, Model mo) {
+		return rc.rhdetail(sqlSession, request, mo);
+	}
+	
 	@RequestMapping(value = "/signupform")
 	public String Signupform() {
 		return mc.Signupform();

@@ -15,7 +15,9 @@
 	<tr>
 		<td>${rh.rh_no }</td>
 		<td>${rh.rh_gb1 }</td>
-		<td>[${rh.rh_gb2 }/${rh.rh_gb3 }/${rh.rh_title}]</td>
+		<td><a href="rehomedetail?rh_no=${rh.rh_no }">
+			[${rh.rh_gb2 }/${rh.rh_gb3 }/${rh.rh_title}]
+			</a></td>
 		<td>${rh.rh_misplace }</td>
 		<td>${rh.rh_misdate }</td>
 		<td>${rh.rh_writeday }</td>

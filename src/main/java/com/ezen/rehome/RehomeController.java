@@ -2,6 +2,8 @@ package com.ezen.rehome;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +16,7 @@ public class RehomeController {
 		return "Rehomeinputform";
 	}
 	
-	public String rhinput(MultipartHttpServletRequest multi, SqlSession sqlsession)
+	public String rhinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
 	{
 		String rh_gb1 = multi.getParameter("rh_gb1");
 		String rh_gb2 = multi.getParameter("rh_gb2");
@@ -27,7 +29,7 @@ public class RehomeController {
 		MultipartFile mf = multi.getFile("rh_image");
 		String rh_image = mf.getOriginalFilename();
 		
-		RehomeService rs = sqlsession.getMapper(RehomeService.class);
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		/*
 		int mem_no = Integer.parseInt(multi.getParameter("mem_no"));
 		String mem_nickname = rs.memNickname(mem_no);
@@ -42,13 +44,24 @@ public class RehomeController {
 		return "redirect: home";
 	}
 	
-	public String rhoutput(SqlSession sqlsession, Model mo)
+	public String rhoutput(SqlSession sqlSession, Model mo)
 	{
-		RehomeService rs = sqlsession.getMapper(RehomeService.class);
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		ArrayList<RehomeDTO> rdto = rs.rehomeoutput();
 		
 		mo.addAttribute("rdto", rdto);
 		
 		return "Rehomeoutform";
+	}
+	
+	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	{
+		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
+		
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		RehomeDTO rd = rs.rehomedetail(rh_no);
+		mo.addAttribute("rd", rd);
+		
+		return "Rehomedetail";
 	}
 }
