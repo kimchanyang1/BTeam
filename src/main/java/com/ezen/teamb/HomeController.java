@@ -59,6 +59,34 @@ public class HomeController {
 	public String missinginput(MultipartHttpServletRequest request) {
 		return mic.missinginput(request, sqlSession);
 	}
+	
+	@RequestMapping(value = "/missingoutform")
+	public String missingoutform(Model mo) {
+		return mic.missingoutform(mo,sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingdetail")
+	public String missingdetail(HttpServletRequest request,Model mo) {
+		return mic.missingdetail(request, mo ,sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingdelete")
+	public String missingdelete(HttpServletRequest request) {
+		return mic.missingdelete(request,sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingmodifyform")
+	public String missingmodifyform(HttpServletRequest request, Model mo) {
+		return mic.missingmodifyform(request, mo, sqlSession);
+	}
+	
+	@RequestMapping(value = "/missingmodifyinput")
+	public String missingmodifyinput(MultipartHttpServletRequest request) {
+		return mic.missingmodifyinput(request,sqlSession);
+	}
+	
+	
+	
 	@RequestMapping(value = "/rehome")
 	public String rehome() {
 		return rc.rehome();

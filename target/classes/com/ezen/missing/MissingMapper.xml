@@ -10,4 +10,19 @@
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, sysdate ,#{param11},0)
 </insert>
 
+<select id="missingout" resultType="com.ezen.missing.MissingDTO">
+	select * from missing
+</select>
+
+<select id="missingdetail" resultType="com.ezen.missing.MissingDTO">
+	select * from missing where mis_no = #{param1}
+</select>
+
+<delete id="missingdelete">
+	delete from missing where mis_no=#{param1}
+</delete>
+
+<update id="missingmodify_insert">
+update missing set mis_gb=#{param1}, mis_title=#{param2}, mis_pname=#{param3}, mis_pno=#{param4},mis_misdate=#{param5}, mis_misplace=#{param6}, mis_miage=#{param7}, mis_writeday=#{param8}, mis_content=#{param9},mis_readcount=#{param10} where mis_no=#{param11}
+</update>
 </mapper>

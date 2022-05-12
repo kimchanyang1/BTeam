@@ -15,4 +15,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/missinginputform.jsp"/>
 	</definition>
 	
+	<definition name="missingoutform" extends="baseLayout">
+		<put-attribute name="title" value="출력확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/missingoutform.jsp"/>
+	</definition>
+	
+		<definition name="missingdetail" extends="baseLayout">
+		<put-attribute name="title" value="상세페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/missingdetail.jsp"/>
+	</definition>
+	
+		<definition name="missingmodifyform" extends="baseLayout">
+		<put-attribute name="title" value="상세페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/missingmodifyform.jsp"/>
+	</definition>
+	
+	
 </tiles-definitions>
