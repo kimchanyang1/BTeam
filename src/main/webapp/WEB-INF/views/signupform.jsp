@@ -18,7 +18,7 @@ $(document).ready(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<form class="form-horizontal" action="Signup" method="post">
+<form class="form-horizontal" action="signup" method="post">
 <div style="width: 50%;margin: auto;padding-top: 20px;">
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="mem_id">아이디</label>

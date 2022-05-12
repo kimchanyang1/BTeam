@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	
 	public String Signupform() {
-		return "Signupform";
+		return "signupform";
 	}
 	
 	public String Signup(HttpServletRequest request, SqlSession sqlsession) {
