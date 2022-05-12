@@ -17,21 +17,13 @@ import com.ezen.member.MemberService;
 import com.ezen.missing.MissingController;
 import com.ezen.notice.NoticeController;
 
+import oracle.net.aso.i;
+
 public class BoardController {
 
 	
 	// 자유게시판
-	public String boardoutform(SqlSession sqlSession, HttpServletRequest request, Model md) {
-		
-		HttpSession hs = request.getSession();
-        MemberDTO login = (MemberDTO) hs.getAttribute("login");
-        
-        	int mem_no = login.getMem_no();
-        	String mem_nickname = login.getMem_nickname();
-            
-			md.addAttribute("mem_no", mem_no);
-			md.addAttribute("mem_nickname", mem_nickname);
-			
+	public String boardoutform(SqlSession sqlSession, Model md) {
 			BoardService bs = sqlSession.getMapper(BoardService.class);
 			ArrayList<BoardDTO> boardlist = bs.boardout();
 			md.addAttribute("boardlist", boardlist);
@@ -42,9 +34,11 @@ public class BoardController {
 
 	// 글쓰기
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
-
-		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
-		String mem_nickname = request.getParameter("mem_nickname");
+		HttpSession hs = request.getSession();
+		MemberDTO login = (MemberDTO) hs.getAttribute("login");
+		
+		int mem_no = login.getMem_no();
+		String mem_nickname = login.getMem_nickname();
 		
 		md.addAttribute("mem_no", mem_no);
 		md.addAttribute("mem_nickname", mem_nickname);
@@ -73,14 +67,17 @@ public class BoardController {
 
 	// 디테일
 	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
-
-		HttpSession hs = request.getSession();
-        MemberDTO login = (MemberDTO) hs.getAttribute("login");
-        int mem_no = login.getMem_no();
-        String mem_nickname = login.getMem_nickname();
-		
-		md.addAttribute("mem_no", mem_no);
-		md.addAttribute("mem_nickname", mem_nickname);
+			HttpSession hs = request.getSession();
+	       MemberDTO login = (MemberDTO) hs.getAttribute("login");
+	       if (login != null) {
+	    	   int mem_no = login.getMem_no();
+	    	   String mem_id = login.getMem_id();
+	    	   String mem_nickname = login.getMem_nickname();
+	    	   
+	    	   md.addAttribute("mem_no", mem_no);
+	    	   md.addAttribute("mem_id", mem_id);
+	    	   md.addAttribute("mem_nickname", mem_nickname);
+	       }
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		

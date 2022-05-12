@@ -137,9 +137,9 @@ public class HomeController {
 	
 	// 자유게시판
 	@RequestMapping(value = "/board")
-	public String bb0(HttpServletRequest request, Model md) {
+	public String bb0(Model md) {
 		
-		return bc.boardoutform(sqlSession, request, md);
+		return bc.boardoutform(sqlSession, md);
 	}
 	
 	

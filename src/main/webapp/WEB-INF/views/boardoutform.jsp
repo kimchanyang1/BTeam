@@ -10,9 +10,9 @@
 <body>
 <h3>자유게시판</h3>
 <br><br>
-<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
-<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
-<button onclick="location.href='boardinputform?mem_no=${mem_no }&mem_nickname=${mem_nickname }'">글쓰기</button>
+<c:if test="${logon eq true && login != null}">
+<button onclick="location.href='boardinputform'">글쓰기</button>
+</c:if>
 <table border="1" align="center">
 <tr>
 	<td colspan="6">
