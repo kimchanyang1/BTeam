@@ -45,11 +45,11 @@
 			<td><input type="text" name="rh_pno"></td>
 		</tr>
 		<tr>
-			<th>반려동물 분실날짜</th>
+			<th>반려동물 발견날짜</th>
 			<td><input type="date" name="rh_misdate"></td>
 		</tr>
 		<tr>
-			<th>반려동물 분실장소</th>
+			<th>반려동물 발견장소</th>
 			<td><input type="text" name="rh_misplace"></td>
 		</tr>
 		<tr>

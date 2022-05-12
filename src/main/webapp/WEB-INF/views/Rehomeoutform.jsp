@@ -10,7 +10,7 @@
 <body>
 
 <table>
-	<tr><th>글 번호</th><th>글 상태</th><th>제목</th><th>실종 장소</th><th>실종 날짜</th><th>작성 날짜</th><th>조회 수</th></tr>
+	<tr><th>글 번호</th><th>글 상태</th><th>제목</th><th>발견 장소</th><th>발견 날짜</th><th>작성 날짜</th><th>조회 수</th></tr>
 	<c:forEach items="${rdto }" var="rh">
 	<tr>
 		<td>${rh.rh_no }</td>
