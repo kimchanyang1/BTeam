@@ -25,7 +25,7 @@
 				<a href="notice">공지</a>
         	</li>
 			<li class="active">
-				<a href="missing">실종신고</a>
+				<a href="missinginputform">실종신고</a>
         	</li>
 			<li class="active">
 				<a href="rehome">분양/임시보호</a>

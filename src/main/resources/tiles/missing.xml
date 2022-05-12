@@ -10,9 +10,9 @@
 		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
 	</definition>
 	
-	<definition name="notice" extends="baseLayout">
-		<put-attribute name="title" value="테스트공지"/>
-		<put-attribute name="body" value="/WEB-INF/views/notice.jsp"/>
+	<definition name="missinginputform" extends="baseLayout">
+		<put-attribute name="title" value="실종신고"/>
+		<put-attribute name="body" value="/WEB-INF/views/missinginputform.jsp"/>
 	</definition>
 	
 </tiles-definitions>
