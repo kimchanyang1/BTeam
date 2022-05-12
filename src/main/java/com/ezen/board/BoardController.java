@@ -3,6 +3,7 @@ package com.ezen.board;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ezen.missing.MissingController;
 import com.ezen.notice.NoticeController;
 
 @Controller
@@ -23,6 +24,6 @@ public class BoardController {
 	@RequestMapping(value = "/notice")
 	public String notice() {
 		return nc.notice();
-	}
+	}	
 	
 }

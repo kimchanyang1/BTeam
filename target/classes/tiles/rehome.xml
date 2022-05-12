@@ -10,9 +10,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
 	</definition>
 	
-	<definition name="notice" extends="baseLayout">
-		<put-attribute name="title" value="테스트공지"/>
-		<put-attribute name="body" value="/WEB-INF/views/notice.jsp"/>
+	<definition name="home" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
+	</definition>
+	
+	<definition name="Rehomeinputform" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/Rehomeinputform.jsp"/>
 	</definition>
 	
 </tiles-definitions>
