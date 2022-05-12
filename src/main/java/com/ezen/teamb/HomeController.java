@@ -69,7 +69,7 @@ public class HomeController {
 		return rc.rhinput(multi, sqlSession);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/rehomeoutput")
+	@RequestMapping(value = "/rehomeoutform")
 	public String rhoutput(Model mo) {
 		return rc.rhoutput(sqlSession, mo);
 	}

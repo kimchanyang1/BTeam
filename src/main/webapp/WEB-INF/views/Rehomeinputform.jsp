@@ -65,6 +65,7 @@
 			<td colspan="2">
 				<input type="submit" value="등록">
 				<input type="reset" value="취소">
+				<a href="rehomeoutform"><input type="button" value="목록"></a>
 			</td>
 		</tr>
 	</table>

@@ -49,6 +49,6 @@ public class RehomeController {
 		
 		mo.addAttribute("rdto", rdto);
 		
-		return "Rehomeoutput";
+		return "Rehomeoutform";
 	}
 }
