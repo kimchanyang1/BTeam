@@ -61,11 +61,18 @@ public class RehomeController {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		rhreadcount(rh_no, sqlSession);
 		RehomeDTO rd = rs.rehomedetail(rh_no);
 		mo.addAttribute("rd", rd);
 		
 		return "Rehomedetail";
 	} //조회 수 넣어야 함!!!!!!!!!
+	
+	public void rhreadcount(int rh_no, SqlSession sqlSession)
+	{
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		rs.rehomereadcount(rh_no);
+	}
 	
 	public String rhdelete(SqlSession sqlSession, HttpServletRequest request)
 	{

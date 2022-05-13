@@ -17,6 +17,10 @@
 	select * from rehome where rh_no = #{param1}
 </select>
 
+<update id="rehomereadcount">
+	update rehome set rh_readcount = rh_readcount +1 where rh_no = #{param1}
+</update>
+
 <delete id="rehomedelete">
 	delete from rehome where rh_no = #{param1}
 </delete>
