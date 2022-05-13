@@ -8,14 +8,14 @@
 </head>
 <body>
 
-<form action="rehomesearch">
+<form action="rehomesearch" method="post">
 <table>
 	<tr>
-		<td colspan="2">
-			<input type="checkbox" name="svalue" value="임보"> 임보 &emsp;
-			<input type="checkbox" name="svalue" value="분양"> 분양 &emsp;
-			<input type="checkbox" name="svalue" value="개"> 개 &emsp;
-			<input type="checkbox" name="svalue" value="고양이"> 고양이 &emsp;
+		<td colspan="3">
+			<input type="checkbox" name="gb2" value="임보"> 임보 &emsp;
+			<input type="checkbox" name="gb2" value="분양"> 분양 &emsp;
+			<input type="checkbox" name="gb3" value="개"> 개 &emsp;
+			<input type="checkbox" name="gb3" value="고양이"> 고양이 &emsp;
 		</td>
 	</tr>
 	<tr>
@@ -23,10 +23,10 @@
 			발견장소
 		</th>
 		<td>
-			<input type="text" name="svalue">
+			<input type="text" name="sword">
 		</td>
 		<td>
-			<input type="submit" value="검색">
+			<input type="submit" value="조회">
 		</td>
 	</tr>
 </table>

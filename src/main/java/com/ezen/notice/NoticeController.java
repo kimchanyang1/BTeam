@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import com.ezen.member.MemberDTO;
 
 public class NoticeController {
-	
+
 	public String noticeoutform(SqlSession sqlSession, Model model) {
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ArrayList<NoticeDTO> noticelist = ns.noticeoutform();
@@ -34,7 +34,44 @@ public class NoticeController {
 		String nt_content = request.getParameter("nt_content");
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ns.noticeinput(mem_no, mem_nickname, nt_title, nt_content);
+		return "redirect:noticeoutform";
+	}
+
+	public String noticedetail(HttpServletRequest request, SqlSession sqlSession, Model model) {
+		int nt_no = Integer.parseInt(request.getParameter("nt_no"));
+		NoticeService ns = sqlSession.getMapper(NoticeService.class);
+		noticereadcount(nt_no, ns);
+		NoticeDTO ndto = ns.noticedetail(nt_no);
+		model.addAttribute("ndto", ndto);
+		return "noticedetail";
+	}
+	
+	public void noticereadcount(int nt_no, NoticeService ns) {
+		ns.noticereadcount(nt_no);
+	}
+
+	public String noticemodify(HttpServletRequest request, SqlSession sqlSession, Model model) {
+		int nt_no = Integer.parseInt(request.getParameter("nt_no"));
+		String nt_title = request.getParameter("nt_title");
+		String nt_content = request.getParameter("nt_content");
+		NoticeService ns = sqlSession.getMapper(NoticeService.class);
+		ns.noticemodify(nt_no, nt_title, nt_content);
+		return "redirect:noticedetail?nt_no="+nt_no;
+	}
+
+	public String noticedelete(HttpServletRequest request, SqlSession sqlSession, Model model) {
+		int nt_no = Integer.parseInt(request.getParameter("nt_no"));
+		NoticeService ns = sqlSession.getMapper(NoticeService.class);
+		ns.noticedelete(nt_no);
 		return "redirect:home";
+	}
+
+	public String noticemodifyform(HttpServletRequest request, SqlSession sqlSession, Model model) {
+		int nt_no = Integer.parseInt(request.getParameter("nt_no"));
+		NoticeService ns = sqlSession.getMapper(NoticeService.class);
+		NoticeDTO ndto = ns.noticedetail(nt_no);
+		model.addAttribute("ndto", ndto);
+		return "noticemodifyform";
 	}
 	
 }
