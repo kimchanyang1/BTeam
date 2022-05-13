@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,10 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="rehomemodifyform?rh_no=${rd.rh_no }"><input type="button" value="수정"></a>
-			<a href="rehomedelete?rh_no=${rd.rh_no }"><input type="button" value="삭제"></a>
+			<c:if test="${mem_nickname eq rd.mem_nickname || mem_id eq 'admin'}">
+				<a href="rehomemodifyform?rh_no=${rd.rh_no }"><input type="button" value="수정"></a>
+				<a href="rehomedelete?rh_no=${rd.rh_no }"><input type="button" value="삭제"></a>
+			</c:if>
 		</td>
 	</tr>
 </table>

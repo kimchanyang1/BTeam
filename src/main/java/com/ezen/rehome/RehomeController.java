@@ -32,10 +32,9 @@ public class RehomeController {
 		String rh_image = mf.getOriginalFilename();
 		
 		HttpSession hs = multi.getSession();
-        MemberDTO login = (MemberDTO) hs.getAttribute("login");
-        int mem_no = login.getMem_no();
-        String mem_nickname = login.getMem_nickname();
-        String mem_tel = login.getMem_tel();
+        int mem_no = (int) hs.getAttribute("mem_no");
+        String mem_nickname = (String) hs.getAttribute("mem_nickname");
+        String mem_tel = (String) hs.getAttribute("mem_tel");
         
         String rh_content = multi.getParameter("rh_content");	
 		

@@ -13,7 +13,7 @@
 <br>
 <hr>
 
-<table>
+<table border="1">
 	<tr><th>글 번호</th><th>글 상태</th><th>제목</th><th>발견 장소</th><th>발견 날짜</th><th>작성 날짜</th><th>조회 수</th></tr>
 	<c:forEach items="${rdto }" var="rh">
 	<tr>
@@ -28,7 +28,13 @@
 		<td>${rh.rh_readcount }</td>
 	</tr>
 	</c:forEach>
-	<tr><td><a href="rehomeinputform"><input type="button" value="글 등록"></a></td></tr>
+	<tr>
+		<td>
+			<c:if test="${logon eq true && mem_no != null}">
+				<a href="rehomeinputform"><input type="button" value="글 등록"></a>
+			</c:if>
+		</td>
+	</tr>
 </table>
 
 </body>
