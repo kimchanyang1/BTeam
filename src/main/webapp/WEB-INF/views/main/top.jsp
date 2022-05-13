@@ -1,3 +1,4 @@
+<%@page import="com.ezen.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -11,7 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 <header style="text-align: center;">
 	<h1>?????????</h1>
 </header>
@@ -55,8 +55,8 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<c:choose>
-				<c:when test="${logon eq true && login != null}">
-					<li><a class="navbar-brand" href="memberdetail">환영합니다! ${login.mem_nickname}님!</a></li>
+				<c:when test="${logon eq true && mem_nickname != null}">
+					<li><a class="navbar-brand" href="memberdetail">환영합니다! ${mem_nickname}님!</a></li>
 					<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
 				</c:when>
 				<c:otherwise>

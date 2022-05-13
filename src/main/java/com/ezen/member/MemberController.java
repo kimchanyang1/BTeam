@@ -49,7 +49,10 @@ public class MemberController {
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		MemberDTO login = ms.Login(mem_id, mem_pw);
 		if (login != null) {
-			hs.setAttribute("login", login);
+			hs.setAttribute("mem_no", login.getMem_no());
+			hs.setAttribute("mem_id", login.getMem_id());
+			hs.setAttribute("mem_nickname", login.getMem_nickname());
+			hs.setAttribute("mem_tel", login.getMem_tel());
 			hs.setAttribute("logon", true);
 			if (memoryid != null) {
 				hs.setAttribute("memoryid", mem_id);
@@ -64,12 +67,20 @@ public class MemberController {
 	
 	public String Logout(HttpServletRequest request) {
 		HttpSession hs = request.getSession();
-		hs.removeAttribute("login");
+		hs.removeAttribute("mem_no");
+		hs.removeAttribute("mem_id");
+		hs.removeAttribute("mem_nickname");
+		hs.removeAttribute("mem_tel");
 		hs.removeAttribute("logon");
 		return "redirect:home";
 	}
 	
-	public String memberdetail() {
+	public String memberdetail(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		HttpSession hs = request.getSession();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		MemberDTO mdto = ms.memberdetail(mem_no);
+		model.addAttribute("mdto", mdto);
 		return "memberdetail";
 	}
 	
@@ -80,7 +91,8 @@ public class MemberController {
 		return "redirect:logout";
 	}
 
-	public String membermodifyform() {
+	public String membermodifyform(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		memberdetail(request, model, sqlSession);
 		return "membermodifyform";
 	}
 

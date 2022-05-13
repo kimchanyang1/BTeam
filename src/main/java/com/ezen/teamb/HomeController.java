@@ -66,6 +66,30 @@ public class HomeController {
 		return nc.noticeinput(request, sqlSession);
 	}
 	
+	//공지 자세히보기
+	@RequestMapping(value = "/noticedetail")
+	public String noticedetail(HttpServletRequest request, Model model) {
+		return nc.noticedetail(request, sqlSession, model);
+	}
+	
+	//공지 수정
+	@RequestMapping(value = "/noticemodifyform")
+	public String noticemodifyform(HttpServletRequest request, Model model) {
+		return nc.noticemodifyform(request, sqlSession, model);
+	}
+	
+	//공지 수정
+	@RequestMapping(value = "/noticemodify")
+	public String noticemodify(HttpServletRequest request, Model model) {
+		return nc.noticemodify(request, sqlSession, model);
+	}
+	
+	//공지 삭제
+	@RequestMapping(value = "/noticedelete")
+	public String noticedelete(HttpServletRequest request, Model model) {
+		return nc.noticedelete(request, sqlSession, model);
+	}
+	
 	@RequestMapping(value = "/missinginputform")
 	public String missing() {
 		return mic.missinginputform();
@@ -174,8 +198,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/memberdetail")
-	public String memberdetail() {
-		return mc.memberdetail();
+	public String memberdetail(HttpServletRequest request, Model model) {
+		return mc.memberdetail(request, model, sqlSession);
 	}
 	
 	@RequestMapping(value = "/memberdelete")
@@ -184,8 +208,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/membermodifyform")
-	public String membermodifyform() {
-		return mc.membermodifyform();
+	public String membermodifyform(HttpServletRequest request, Model model) {
+		return mc.membermodifyform(request, model, sqlSession);
 	}
 	
 	@RequestMapping(value = "/membermodify", method = RequestMethod.POST)

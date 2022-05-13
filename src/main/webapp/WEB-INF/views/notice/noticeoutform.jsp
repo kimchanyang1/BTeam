@@ -23,7 +23,7 @@
 		<tr>
 			<td>${data.nt_no}</td>
 			<td>${data.mem_nickname}</td>
-			<td>${data.nt_title}</td>
+			<td><a href="noticedetail?nt_no=${data.nt_no}">${data.nt_title}</a></td>
 			<td>${data.nt_writeday}</td>
 			<td>${data.nt_readcount}</td>
 		</tr>

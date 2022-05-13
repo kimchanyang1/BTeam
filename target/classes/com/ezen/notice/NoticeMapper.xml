@@ -23,4 +23,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into notice values(notice_seq.nextval, #{param1}, #{param2}, sysdate, #{param3}, #{param4}, 0)
 </insert>
 
+<update id="noticereadcount">
+	update notice set nt_readcount=nt_readcount+1 where nt_no=#{nt_no}
+</update>
+
+<select id="noticedetail" resultMap="noticelist">
+	select * from notice where nt_no=#{nt_no}
+</select>
+
+<update id="noticemodify">
+	update notice set nt_title=#{param2}, nt_content=#{param3} where nt_no=#{param1}
+</update>
+
+<delete id="noticedelete">
+	delete from notice where nt_no=#{nt_no}
+</delete>
+
 </mapper>
