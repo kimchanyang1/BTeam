@@ -4,21 +4,31 @@
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 	
-	<definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
+	<definition name="baseLayout" template="/WEB-INF/views/main/layout.jsp">
 		<put-attribute name="title"/>
-		<put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+		<put-attribute name="top" value="/WEB-INF/views/main/top.jsp"/>
 		<put-attribute name="body"/>
-		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
 	</definition>
 	
 	<definition name="signupform" extends="baseLayout">
 		<put-attribute name="title" value="회원가입"/>
-		<put-attribute name="body" value="/WEB-INF/views/signupform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/signupform.jsp"/>
 	</definition>
 	
 	<definition name="loginform" extends="baseLayout">
 		<put-attribute name="title" value="로그인"/>
-		<put-attribute name="body" value="/WEB-INF/views/loginform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/loginform.jsp"/>
+	</definition>
+	
+	<definition name="memberdetail" extends="baseLayout">
+		<put-attribute name="title" value="개인정보확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberdetail.jsp"/>
+	</definition>
+	
+	<definition name="membermodifyform" extends="baseLayout">
+		<put-attribute name="title" value="개인정보수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/membermodifyform.jsp"/>
 	</definition>
 	
 </tiles-definitions>

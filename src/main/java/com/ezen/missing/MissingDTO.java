@@ -23,12 +23,23 @@ create SEQUENCE mis_no;
 
 public class MissingDTO {
 	
-	String mis_gb,mis_title,mis_pname,mis_misdate,mis_misplace,mis_pno,mis_image,miswriteday,mis_content;
+	int mis_no;
+	String mis_gb,mis_title,mis_pname,mis_misdate,mis_misplace,mis_pno,mis_image;
+	int mem_no;
+	String mem_nickname, mem_tel,mis_writeday,mis_content;
 	int mis_readcount;
 	
 	public MissingDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getMis_no() {
+		return mis_no;
+	}
+
+	public void setMis_no(int mis_no) {
+		this.mis_no = mis_no;
 	}
 
 	public String getMis_gb() {
@@ -87,12 +98,36 @@ public class MissingDTO {
 		this.mis_image = mis_image;
 	}
 
-	public String getMiswriteday() {
-		return miswriteday;
+	public int getMem_no() {
+		return mem_no;
 	}
 
-	public void setMiswriteday(String miswriteday) {
-		this.miswriteday = miswriteday;
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
+	}
+
+	public String getMem_nickname() {
+		return mem_nickname;
+	}
+
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
+	}
+
+	public String getMem_tel() {
+		return mem_tel;
+	}
+
+	public void setMem_tel(String mem_tel) {
+		this.mem_tel = mem_tel;
+	}
+
+	public String getMis_writeday() {
+		return mis_writeday;
+	}
+
+	public void setMis_writeday(String mis_writeday) {
+		this.mis_writeday = mis_writeday;
 	}
 
 	public String getMis_content() {
@@ -110,6 +145,11 @@ public class MissingDTO {
 	public void setMis_readcount(int mis_readcount) {
 		this.mis_readcount = mis_readcount;
 	}
+	
+	
+	
+	
+	
 	
 	
 	

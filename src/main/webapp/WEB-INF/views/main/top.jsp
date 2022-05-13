@@ -22,14 +22,23 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active">
-				<a href="notice">공지</a>
+				<a href="noticeoutform">공지</a>
         	</li>
-			<li class="active">
-				<a href="missinginputform">실종신고</a>
+        	
+        		<li class="active">
+        		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					실종<span class="caret"></span>
+				</a>
+        		<ul class="dropdown-menu">
+				<li><a href="missinginputform">실종신고</a><li>
+				<li><a href="missingoutform">출력확인</a><li>     		
+        		</ul>
         	</li>
+        	
 			<li class="active">
 				<a href="rehome">분양/임시보호</a>
         	</li>
+        	
 			<li class="active">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					실종/분양 후기<span class="caret"></span>
@@ -47,7 +56,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			<c:choose>
 				<c:when test="${logon eq true && login != null}">
-					<li><a class="navbar-brand">환영합니다! ${login.mem_nickname}님!</a></li>
+					<li><a class="navbar-brand" href="memberdetail">환영합니다! ${login.mem_nickname}님!</a></li>
 					<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
 				</c:when>
 				<c:otherwise>

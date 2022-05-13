@@ -3,21 +3,31 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<definition name="baseLayout" template="/WEB-INF/views/layout.jsp">
+	<definition name="baseLayout" template="/WEB-INF/views/main/layout.jsp">
 		<put-attribute name="title"/>
-		<put-attribute name="top" value="/WEB-INF/views/top.jsp"/>
+		<put-attribute name="top" value="/WEB-INF/views/main/top.jsp"/>
 		<put-attribute name="body"/>
-		<put-attribute name="footer" value="/WEB-INF/views/bottom.jsp"/>
-	</definition>
-	
-	<definition name="home" extends="baseLayout">
-		<put-attribute name="title" value="분양임보"/>
-		<put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
 	</definition>
 	
 	<definition name="Rehomeinputform" extends="baseLayout">
 		<put-attribute name="title" value="분양임보"/>
-		<put-attribute name="body" value="/WEB-INF/views/Rehomeinputform.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomeinputform.jsp"/>
+	</definition>
+	
+	<definition name="Rehomeoutform" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomeoutform.jsp"/>
+	</definition>
+	
+	<definition name="Rehomedetail" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomedetail.jsp"/>
+	</definition>
+	
+	<definition name="Rehomemodifyform" extends="baseLayout">
+		<put-attribute name="title" value="분양임보"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomemodifyform.jsp"/>
 	</definition>
 	
 </tiles-definitions>

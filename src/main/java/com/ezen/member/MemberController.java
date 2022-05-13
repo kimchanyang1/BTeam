@@ -15,7 +15,7 @@ public class MemberController {
 		return "signupform";
 	}
 	
-	public String Signup(HttpServletRequest request, SqlSession sqlsession) {
+	public String Signup(HttpServletRequest request, SqlSession sqlSession) {
 		String mem_id = request.getParameter("mem_id");
 		String mem_pw = request.getParameter("mem_pw");
 		String mem_name = request.getParameter("mem_name");
@@ -29,7 +29,7 @@ public class MemberController {
 		}
 		String mem_mail = emailid+"@"+domain;
 		String mem_address = request.getParameter("mem_address");
-		MemberService ms = sqlsession.getMapper(MemberService.class);
+		MemberService ms = sqlSession.getMapper(MemberService.class);
 		ms.Signup(mem_id, mem_pw, mem_name, mem_nickname, mem_jumin, mem_tel, mem_mail, mem_address);
 		return "redirect:home";
 	}
@@ -38,7 +38,7 @@ public class MemberController {
 		return "loginform";
 	}
 	
-	public String Login(HttpServletRequest request, Model model, SqlSession sqlsession) {
+	public String Login(HttpServletRequest request, Model model, SqlSession sqlSession) {
 		HttpSession hs = request.getSession();
 		hs.removeAttribute("memoryid");
 		hs.removeAttribute("memorycheck");
@@ -46,7 +46,7 @@ public class MemberController {
 		String mem_pw = request.getParameter("mem_pw");
 		String memoryid = request.getParameter("memoryid");
 		
-		MemberService ms = sqlsession.getMapper(MemberService.class);
+		MemberService ms = sqlSession.getMapper(MemberService.class);
 		MemberDTO login = ms.Login(mem_id, mem_pw);
 		if (login != null) {
 			hs.setAttribute("login", login);
@@ -67,6 +67,35 @@ public class MemberController {
 		hs.removeAttribute("login");
 		hs.removeAttribute("logon");
 		return "redirect:home";
+	}
+	
+	public String memberdetail() {
+		return "memberdetail";
+	}
+	
+	public String memberdelete(HttpServletRequest request, SqlSession sqlSession) {
+		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms.memberdelete(mem_no);
+		return "redirect:logout";
+	}
+
+	public String membermodifyform() {
+		return "membermodifyform";
+	}
+
+	public String membermodify(HttpServletRequest request, SqlSession sqlSession, Model model) {
+		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
+		String mem_pw = request.getParameter("mem_pw");
+		String mem_nickname = request.getParameter("mem_nickname");
+		String mem_jumin = request.getParameter("mem_jumin");
+		String mem_tel = request.getParameter("mem_tel");
+		String mem_mail = request.getParameter("mem_mail");
+		String mem_address = request.getParameter("mem_address");
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ms.membermodify(mem_pw, mem_nickname, mem_jumin, mem_tel, mem_mail, mem_address, mem_no);
+		Login(request, model, sqlSession);
+		return "redirect:memberdetail";
 	}
 	
 }
