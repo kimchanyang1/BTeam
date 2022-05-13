@@ -23,6 +23,6 @@ INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, #{param1}, #{param2}, #{param3}, #{pa
 </delete>
 
 <update id="missingmodify_insert">
-update missing set mis_gb=#{param1}, mis_title=#{param2}, mis_pname=#{param3}, mis_pno=#{param4},mis_misdate=#{param5}, mis_misplace=#{param6}, mis_miage=#{param7}, mis_writeday=#{param8}, mis_content=#{param9},mis_readcount=#{param10} where mis_no=#{param11}
+update missing set mis_gb=#{param2}, mis_title=#{param3}, mis_pname=#{param4}, mis_pno=#{param5}, mis_misdate=#{param6}, mis_misplace=#{param7}, mis_image=#{param8}, mem_no=#{param9}, mem_nickname=#{param10}, mem_tel=#{param11}, mis_content=#{param12},mis_readcount=#{param13} where mis_no=#{param1}
 </update>
 </mapper>

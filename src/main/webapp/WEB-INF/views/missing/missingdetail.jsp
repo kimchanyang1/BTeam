@@ -9,8 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <h1>여기는 상세페이지</h1>
-<c:forEach items="${missingdetail}" var="mic">
+
 <table border="1">
 <tr>
 <td>반려견사진 </td>
@@ -35,6 +37,5 @@
 </td>
 </tr>
 </table>
-</c:forEach>
 </body>
 </html>

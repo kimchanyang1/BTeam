@@ -9,7 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <h3>실종강아지</h3>
+<tr><td><a href="missinginputform"><input type="button" value="글 작성"></a></td></tr>
 <c:forEach items="${missingout}" var="mic">
 <table border="1">
 <tr><td>글번호</td><td>${mic.mis_no}</td></tr>

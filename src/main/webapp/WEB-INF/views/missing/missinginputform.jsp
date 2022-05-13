@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <form action="missinginput" method="post" enctype="multipart/form-data">
 <table border="1">
 <tr><td>구분</td><td><input type="text" name="mis_gb"></td></tr>
