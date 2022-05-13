@@ -8,23 +8,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>자유게시판 글수정</h3>
+<h3>후기게시판 글수정</h3>
 <br><br>
-<form action="boardmodify" method="post" enctype="multipart/form-data">
+<form action="epiloguemodify" method="post" enctype="multipart/form-data">
 <table border="1" align="center" width="600">
-<c:forEach items="${boardmodify }" var="b">
+<c:forEach items="${epiloguelist }" var="e">
 <tr>
-	<td><input type="hidden" name="bd_no" value="${b.bd_no}" readonly="readonly"></td></tr>
+	<td><input type="hidden" name="ep_no" value="${e.ep_no}" readonly="readonly"></td></tr>
+<tr>
+	<th>　구분　</th>
+	<td><input type="text" value="${e.ep_gb }" readonly="readonly"></td></tr>	
 <tr>
 	<th>　제목　</th>
-	<td><input type="text" name="bd_title" value="${b.bd_title }"></td></tr>
+	<td><input type="text" name="ep_title" value="${e.ep_title }"></td></tr>
 <tr>
 	<th>　내용　</th>
-	<td><textarea name="bd_content">${b.bd_content }</textarea></td></tr>
+	<td><textarea name="ep_content">${e.ep_content }</textarea></td></tr>
 <tr>
 	<th>　이미지　</th>
-	<td><img src="${pageContext.request.contextPath}/image/${b.bd_image}">
-		<input type="file" name="bd_image"></td></tr>	
+	<td><img src="${pageContext.request.contextPath}/image/${e.ep_image}">
+		<input type="file" name="ep_image"></td></tr>	
 <tr>
 	<td colspan="2" align="center">　　
 		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly"></td></tr>

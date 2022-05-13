@@ -12,7 +12,7 @@ public interface BoardService {
 	public void boardinput(String bd_title, int mem_no, String mem_nickname, String bd_content, String bd_image);
 
 
-	// 디테일
+	// 디테일, 조회수 증가
 	public ArrayList<BoardDTO> boarddetail(int bd_no);
 
 	public void boardreadcount(int bd_no);

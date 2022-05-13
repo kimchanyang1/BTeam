@@ -24,16 +24,18 @@ public class BoardController {
 	
 	// 자유게시판
 	public String boardoutform(SqlSession sqlSession, Model md) {
-			BoardService bs = sqlSession.getMapper(BoardService.class);
-			ArrayList<BoardDTO> boardlist = bs.boardout();
-			md.addAttribute("boardlist", boardlist);
+
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+		ArrayList<BoardDTO> boardlist = bs.boardout();
+		md.addAttribute("boardlist", boardlist);
 			
-			return "boardoutform";
+		return "boardoutform";
 	}
 		
 
 	// 글쓰기
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
+
 		HttpSession hs = request.getSession();
 		MemberDTO login = (MemberDTO) hs.getAttribute("login");
 		
@@ -67,23 +69,26 @@ public class BoardController {
 
 	// 디테일
 	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
-			HttpSession hs = request.getSession();
-	       MemberDTO login = (MemberDTO) hs.getAttribute("login");
-	       if (login != null) {
-	    	   int mem_no = login.getMem_no();
-	    	   String mem_id = login.getMem_id();
-	    	   String mem_nickname = login.getMem_nickname();
+
+		HttpSession hs = request.getSession();
+		MemberDTO login = (MemberDTO) hs.getAttribute("login");
+
+		if (login != null) {
+			
+			int mem_no = login.getMem_no();
+			String mem_id = login.getMem_id();
+			String mem_nickname = login.getMem_nickname();
 	    	   
-	    	   md.addAttribute("mem_no", mem_no);
-	    	   md.addAttribute("mem_id", mem_id);
-	    	   md.addAttribute("mem_nickname", mem_nickname);
-	       }
+			md.addAttribute("mem_no", mem_no);
+			md.addAttribute("mem_id", mem_id);
+			md.addAttribute("mem_nickname", mem_nickname);
+		}
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
-		ArrayList<BoardDTO> boardlist = bs.boarddetail(bd_no);
 		boardreadcount(bd_no, sqlSession);
+		ArrayList<BoardDTO> boardlist = bs.boarddetail(bd_no);
 		md.addAttribute("boarddetail", boardlist);
 		
 		return "boarddetailform";

@@ -34,4 +34,5 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/boardmodifyform.jsp"/>
 	</definition>
 	
+	
 </tiles-definitions>

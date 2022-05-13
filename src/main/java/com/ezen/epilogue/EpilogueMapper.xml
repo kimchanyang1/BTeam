@@ -5,4 +5,55 @@
 <mapper namespace="com.ezen.epilogue.EpilogueService">
 
 
+<select id="epilogueout" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE ORDER BY EP_NO DESC
+</select>
+
+
+<insert id="epilogueinput">
+	INSERT INTO EPILOGUE(EP_NO, EP_GB, EP_TITLE, MEM_NO, MEM_NICKNAME, EP_CONTENT, EP_READCOUNT, EP_IMAGE)
+	 VALUES(EP_NO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, 0, #{param6})
+</insert>
+
+
+<select id="epiloguedetail" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE WHERE EP_NO = #{param1}
+</select>
+
+<update id="epiloguereadcount">
+	UPDATE EPILOGUE SET EP_READCOUNT = EP_READCOUNT + 1 WHERE EP_NO = #{param1}
+</update>
+
+
+<select id="epiloguemodifyselect" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE WHERE EP_NO = #{param1}
+</select>
+
+<update id="epiloguemodify">
+	UPDATE EPILOGUE SET EP_TITLE = #{param1}, MEM_NO = #{param2}, MEM_NICKNAME = #{param3}, EP_CONTENT = #{param4}, EP_IMAGE = #{param5} WHERE EP_NO = #{param6}
+</update>
+
+
+<delete id="epiloguedelete">
+	DELETE FROM EPILOGUE WHERE EP_NO = #{param1}
+</delete>
+
+
+<select id="searchgohometitle" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE WHERE EP_GB = '귀가' AND EP_TITLE LIKE '%'||#{param1}||'%'
+</select>
+
+<select id="searchgohomenickname" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE WHERE EP_GB = '귀가' AND MEM_NICKNAME LIKE '%'||#{param1}||'%'
+</select>
+
+<select id="searchrehometitle" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE WHERE EP_GB = '분양' AND EP_TITLE LIKE '%'||#{param1}||'%'
+</select>
+
+<select id="searchrehomenickname" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM EPILOGUE WHERE EP_GB = '분양' AND MEM_NICKNAME LIKE '%'||#{param1}||'%'
+</select>
+
+
 </mapper>
