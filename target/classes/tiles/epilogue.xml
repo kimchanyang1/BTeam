@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/main/layout.jsp">
+		<put-attribute name="title"/>
+		<put-attribute name="top" value="/WEB-INF/views/main/top.jsp"/>
+		<put-attribute name="body"/>
+		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
+	</definition>
+	
+	
+	<definition name="epilogueoutform" extends="baseLayout">
+		<put-attribute name="title" value="후기게시판"/>
+		<put-attribute name="body" value="/WEB-INF/views/epilogue/epilogueoutform.jsp"/>
+	</definition>
+	
+	<definition name="epilogueinputform" extends="baseLayout">
+		<put-attribute name="title" value="후기게시판 글쓰기"/>
+		<put-attribute name="body" value="/WEB-INF/views/epilogue/epilogueinputform.jsp"/>
+	</definition>
+	
+	<definition name="epiloguedetailform" extends="baseLayout">
+		<put-attribute name="title" value="후기게시판 디테일"/>
+		<put-attribute name="body" value="/WEB-INF/views/epilogue/epiloguedetailform.jsp"/>
+	</definition>
+	
+	<definition name="epiloguemodifyform" extends="baseLayout">
+		<put-attribute name="title" value="후기게시판 수정폼"/>
+		<put-attribute name="body" value="/WEB-INF/views/epilogue/epiloguemodifyform.jsp"/>
+	</definition>
+	
+	
+</tiles-definitions>

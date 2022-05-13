@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.board.BoardController;
+import com.ezen.epilogue.EpilogueController;
 import com.ezen.member.MemberController;
 
 import com.ezen.notice.NoticeController;
@@ -35,8 +36,7 @@ public class HomeController {
 	private MissingController mic = new MissingController();
 	private RehomeController rc = new RehomeController();
 	private MemberController mc = new MemberController();
-	
-	// BoardControlloer
+	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
 		
 		
@@ -192,6 +192,71 @@ public class HomeController {
 	public String membermodify(HttpServletRequest request, Model model) {
 		return mc.membermodify(request, sqlSession, model);
 	}
+	
+	
+	
+	
+	// 후기게시판
+	@RequestMapping(value = "/epilogue")
+	public String ee0(Model md) {
+			
+		return ep.epilogueoutform(sqlSession, md);
+	}
+	
+	
+	// 글쓰기
+	@RequestMapping(value = "/epilogueinputform")
+	public String ee1(HttpServletRequest request, Model md)	{
+					
+		return ep.epilogueinputformgo(sqlSession, request, md);
+	}
+		
+	@RequestMapping(value = "/epilogueinput")
+	public String ee2(MultipartHttpServletRequest multi) {
+			
+		return ep.epilogueinput(sqlSession, multi);
+	}
+	
+	
+	// 디테일
+	@RequestMapping(value = "/epiloguedetail")
+	public String ee3(HttpServletRequest request, Model md) {
+		
+		return ep.epiloguedetailform(sqlSession, request, md);
+	}
+	
+	
+	// 수정
+	@RequestMapping(value = "/epiloguemodifyselect")
+	public String ee4(HttpServletRequest request, Model md) {
+		
+		return ep.epiloguemodifyselect(sqlSession, request, md);
+	}
+	
+	@RequestMapping(value = "/epiloguemodify")
+	public String ee5(MultipartHttpServletRequest multi) {
+		
+		return ep.epiloguemodify(sqlSession, multi);
+	}
+	
+	
+	// 삭제
+	@RequestMapping(value = "/epiloguedelete")
+	public String ee6(HttpServletRequest request, Model md) {
+		
+		return ep.epiloguedelete(sqlSession, request, md);
+	}
+	
+	
+	// 검색
+	@RequestMapping(value = "/epiloguesearch")
+	public String ee7(HttpServletRequest request, Model md) {
+			
+		return ep.epiloguesearch(sqlSession, request, md);
+	}
+		
+		
+	
 	
 	// 자유게시판
 	@RequestMapping(value = "/board")
