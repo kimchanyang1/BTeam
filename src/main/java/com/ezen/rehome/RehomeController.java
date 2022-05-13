@@ -1,7 +1,6 @@
 package com.ezen.rehome;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -66,7 +65,7 @@ public class RehomeController {
 		mo.addAttribute("rd", rd);
 		
 		return "Rehomedetail";
-	}
+	} //조회 수 넣어야 함!!!!!!!!!
 	
 	public String rhdelete(SqlSession sqlSession, HttpServletRequest request)
 	{
@@ -115,14 +114,23 @@ public class RehomeController {
 		return "redirect: rehomeoutform";
 	}
 	
-	public String rhsearch(SqlSession sqlSession, HttpServletRequest request)
+	public String rhsearch(SqlSession sqlSession, HttpServletRequest request, Model mo)
 	{
-		String[] svalue = request.getParameterValues("svalue");
-		
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
-		rs.rehomesearch(svalue);
 		
-		return "redirect: rehomeoutform";
-	}
+		String[] gb2list = request.getParameterValues("gb2");
+		String[] gb3list = request.getParameterValues("gb3");
+		String sword = request.getParameter("sword");
+		
+		RehomesearchVO rsvo = new RehomesearchVO();
+		rsvo.setGb2list(gb2list);
+		rsvo.setGb3list(gb3list);
+		rsvo.setSword(sword);
+		
+		ArrayList<RehomeDTO> rdto = rs.rehomesearch(rsvo);
+		mo.addAttribute("rdto", rdto);
+		
+		return "Rehomeoutform";
+	} //아무 것도 값이 없을 때 전체조회가 되도록 하기!!!!!!!!!!
 
 }

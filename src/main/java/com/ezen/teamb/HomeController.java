@@ -144,8 +144,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/rehomesearch")
-	public String rhsearch(HttpServletRequest request) {
-		return rc.rhsearch(sqlSession, request);
+	public String rhsearch(HttpServletRequest request, Model mo) {
+		return rc.rhsearch(sqlSession, request, mo);
 	}
 	
 	@RequestMapping(value = "/signupform")
