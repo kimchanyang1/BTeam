@@ -17,6 +17,10 @@
 	select * from rehome where rh_no = #{param1}
 </select>
 
+<update id="rehomereadcount">
+	update rehome set rh_readcount = rh_readcount +1 where rh_no = #{param1}
+</update>
+
 <delete id="rehomedelete">
 	delete from rehome where rh_no = #{param1}
 </delete>
@@ -26,4 +30,23 @@
 	 where rh_no=#{param1}
 </update>
 
+<select id="rehomesearch" resultType="com.ezen.rehome.RehomeDTO">
+	select * from rehome
+		<where>
+			<if test="gb2list != null">
+				rh_gb2 in
+					<foreach collection="gb2list" item="gb2" open="(" close=")" separator=",">
+						#{gb2}
+					</foreach>
+			</if>
+			and
+			<if test="gb3list != null">
+				rh_gb3 in
+					<foreach collection="gb3list" item="gb3" open="(" close=")" separator=",">
+						#{gb3}
+					</foreach>
+			</if>
+			and rh_misplace like '%'||#{sword}||'%'
+		</where>
+</select>
 </mapper>
