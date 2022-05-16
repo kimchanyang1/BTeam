@@ -14,10 +14,11 @@
 <hr>
 
 <table border="1">
-	<tr><th>글 번호</th><th>제목</th><th>발견 장소</th><th>발견 날짜</th><th>작성 날짜</th><th>조회 수</th></tr>
+	<tr><th>글 번호</th><th>글 상태</th><th>제목</th><th>발견 장소</th><th>발견 날짜</th><th>작성 날짜</th><th>조회 수</th></tr>
 	<c:forEach items="${rdto}" var="rh">
 	<tr>
 		<td>${rh.rh_no }</td>
+		<td>${rh.rh_gb1 }</td>
 		<td><a href="rehomedetail?rh_no=${rh.rh_no }">
 			[${rh.rh_gb2 }/${rh.rh_gb3 }]${rh.rh_title}
 			</a></td>

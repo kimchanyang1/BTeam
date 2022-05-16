@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FileUploadController  {
-   private static final String CURR_IMAGE_REPO_PATH = "D:\\JAVA\\spring workspace\\Team Project\\src\\main\\webapp\\image";
+   private static final String CURR_IMAGE_REPO_PATH = "C:\\BTeam\\src\\main\\webapp\\image";
    @RequestMapping(value="/form")
    public String form() {
        return "uploadForm";
@@ -44,7 +44,6 @@ public class FileUploadController  {
       map.put("fileList", fileList);
       ModelAndView mav = new ModelAndView();
       mav.addObject("map", map);
-      mav.setViewName("redirect:index");
       return mav;
    }
    

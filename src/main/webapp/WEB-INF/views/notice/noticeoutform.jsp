@@ -30,7 +30,7 @@
 	</c:forEach>
 	</tbody>
 </table>
-<c:if test="${logon eq true && login.mem_id eq 'admin'}">
+<c:if test="${mem_id eq 'admin'}">
 <button onclick="location.href='noticeinputform'">글 입력</button>
 </c:if>
 </body>

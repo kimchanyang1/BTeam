@@ -9,10 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.board.BoardDTO;
 import com.ezen.board.BoardService;
 import com.ezen.member.MemberDTO;
+import com.ezen.teamb.FileUploadController;
 
 public class EpilogueController {
 	
@@ -31,19 +33,22 @@ public class EpilogueController {
 	public String epilogueinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
-		MemberDTO login = (MemberDTO) hs.getAttribute("login");
 		
-		int mem_no = login.getMem_no();
-		String mem_nickname = login.getMem_nickname();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		String mem_nickname = (String) hs.getAttribute("mem_nickname");
+		String ep_gb = request.getParameter("ep_gb");
+		int ep_originno = Integer.parseInt(request.getParameter("ep_originno"));
 		
 		md.addAttribute("mem_no", mem_no);
 		md.addAttribute("mem_nickname", mem_nickname);
+		md.addAttribute("ep_gb", ep_gb);
+		md.addAttribute("ep_originno", ep_originno);
 		
 		return "epilogueinputform";
 	}
 	
 	// input
-	public String epilogueinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	public ModelAndView epilogueinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("ep_image");
 		
@@ -51,14 +56,24 @@ public class EpilogueController {
 		String ep_title=multi.getParameter("ep_title");
 		String ep_content=multi.getParameter("ep_content");					
 		String ep_image=mf.getOriginalFilename();
-		
+
+		ModelAndView mav = new ModelAndView();
+		FileUploadController fuc = new FileUploadController();
+		try {
+			mav = fuc.upload(multi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:epilogue");
+
+		int ep_originno=Integer.parseInt(multi.getParameter("ep_originno"));
 		int mem_no=Integer.parseInt(multi.getParameter("mem_no"));
 		String mem_nickname=multi.getParameter("mem_nickname");
 		
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
-		ep.epilogueinput(ep_gb, ep_title, mem_no, mem_nickname, ep_content, ep_image);
+		ep.epilogueinput(ep_originno, ep_gb, ep_title, mem_no, mem_nickname, ep_content, ep_image);
 		
-		return "redirect: epilogue";
+		return mav;
 	}
 
 	

@@ -25,14 +25,8 @@
 				<a href="noticeoutform">공지</a>
         	</li>
         	
-        		<li class="active">
-        		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					실종<span class="caret"></span>
-				</a>
-        		<ul class="dropdown-menu">
-				<li><a href="missinginputform">실종신고</a><li>
-				<li><a href="missingoutform">출력확인</a><li>     		
-        		</ul>
+        	<li class="active">
+        		<a href="missingoutform">실종</a>
         	</li>
         	
 			<li class="active">
@@ -56,6 +50,15 @@
 		<ul class="nav navbar-nav navbar-right">
 			<c:choose>
 				<c:when test="${logon eq true && mem_nickname != null}">
+					<c:if test="${mem_no eq 0}">
+						<li class="active">
+							<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;">관리자 메뉴<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="rehomeadmin">분양/임시보호 관리</a></li>
+								<li><a href="">회원목록 관리</a></li>
+							</ul>
+						</li>
+					</c:if>
 					<li><a class="navbar-brand" href="memberdetail">환영합니다! ${mem_nickname}님!</a></li>
 					<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
 				</c:when>

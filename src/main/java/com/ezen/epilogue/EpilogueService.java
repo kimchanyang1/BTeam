@@ -9,7 +9,7 @@ public interface EpilogueService {
 
 	
 	// 입력
-	public void epilogueinput(String ep_gb, String ep_title, int mem_no, String mem_nickname, String ep_content, String ep_image);
+	public void epilogueinput(int ep_originno, String ep_gb, String ep_title, int mem_no, String mem_nickname, String ep_content, String ep_image);
 
 
 	// 디테일, 조회수 증가

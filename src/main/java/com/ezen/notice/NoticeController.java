@@ -21,9 +21,8 @@ public class NoticeController {
 	
 	public String noticeinputform(HttpServletRequest request, Model model) {
 		HttpSession hs = request.getSession();
-		MemberDTO login = (MemberDTO) hs.getAttribute("login");
-		model.addAttribute("mem_no", login.getMem_no());
-		model.addAttribute("mem_nickname", login.getMem_nickname());
+		model.addAttribute("mem_no", hs.getAttribute("mem_no"));
+		model.addAttribute("mem_nickname", hs.getAttribute("mem_nickname"));
 		return "noticeinputform";
 	}
 

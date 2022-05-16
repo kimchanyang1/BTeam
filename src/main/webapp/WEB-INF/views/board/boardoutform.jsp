@@ -11,7 +11,7 @@
 <body>
 <h3>자유게시판</h3>
 <br><br>
-<c:if test="${logon eq true && login != null}">
+<c:if test="${logon eq true && mem_no != null}">
 <button onclick="location.href='boardinputform'">글쓰기</button>
 </c:if>
 <table border="1" align="center">

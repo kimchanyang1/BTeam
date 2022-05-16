@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.missing.MissingController;
 
@@ -96,7 +97,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/missinginput")
-	public String missinginput(MultipartHttpServletRequest request) {
+	public ModelAndView missinginput(MultipartHttpServletRequest request) {
 		return mic.missinginput(request, sqlSession);
 	}
 	
@@ -125,6 +126,15 @@ public class HomeController {
 		return mic.missingmodifyinput(request,sqlSession);
 	}
 	
+	@RequestMapping(value = "/missingend")
+	public String missingend(Model mo) {
+		return mic.missingend(mo,sqlSession);
+	}
+	
+	@RequestMapping(value = "/rehoming")
+	public String rehoming(HttpServletRequest request) {
+		return mic.rehoming(request,sqlSession);
+	}
 	
 	
 	@RequestMapping(value = "/rehome")
@@ -138,13 +148,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/rehomeinput")
-	public String rhinput(MultipartHttpServletRequest multi) {
+	public ModelAndView rhinput(MultipartHttpServletRequest multi) {
 		return rc.rhinput(multi, sqlSession);
 	}
 	
 	@RequestMapping(value = "/rehomeoutform")
 	public String rhoutput(Model mo) {
 		return rc.rhoutput(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeend")
+	public String rehomeend(Model mo) {
+		return rc.rehomeend(sqlSession, mo);
 	}
 	
 	@RequestMapping(value = "/rehomedetail")
@@ -170,6 +185,31 @@ public class HomeController {
 	@RequestMapping(value = "/rehomesearch")
 	public String rhsearch(HttpServletRequest request, Model mo) {
 		return rc.rhsearch(sqlSession, request, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeadmin")
+	public String rehomeadmin(Model mo) {
+		return rc.rehomeadmin(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeok")
+	public String rehomeok(HttpServletRequest request) {
+		return rc.rehomeok(sqlSession, request);
+	}
+	
+	@RequestMapping(value = "/rehomeimboform")
+	public String rehomeimboform(HttpServletRequest request, Model mo) {
+		return rc.rehomeimboform(request, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeimbo", method = RequestMethod.POST)
+	public String rehomeimbo(HttpServletRequest request) {
+		return rc.rehomeimbo(sqlSession, request);
+	}
+	
+	@RequestMapping(value = "/rehomebun")
+	public String rehomebun(HttpServletRequest request) {
+		return rc.rehomebun(sqlSession, request);
 	}
 	
 	@RequestMapping(value = "/signupform")
@@ -236,7 +276,7 @@ public class HomeController {
 	}
 		
 	@RequestMapping(value = "/epilogueinput")
-	public String ee2(MultipartHttpServletRequest multi) {
+	public ModelAndView ee2(MultipartHttpServletRequest multi) {
 			
 		return ep.epilogueinput(sqlSession, multi);
 	}

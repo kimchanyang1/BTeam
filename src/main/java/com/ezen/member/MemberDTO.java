@@ -13,6 +13,9 @@ mem_mail VARCHAR2(40),
 mem_address VARCHAR2(100));
 
 create SEQUENCE member_seq;
+
+包府磊拌沥 admin
+INSERT INTO member VALUES (0,'admin','admin','包府磊','包府磊','','','','');
 */
 
 

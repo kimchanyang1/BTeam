@@ -11,9 +11,6 @@
 <body>
 <h3>후기게시판</h3>
 <br><br>
-<c:if test="${logon eq true && mem_no != null}">
-<button onclick="location.href='epilogueinputform'">글쓰기</button>
-</c:if>
 <table border="1" align="center">
 <tr>
 	<td colspan="6">

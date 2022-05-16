@@ -11,9 +11,7 @@
 <body>
 
 <h3>실종강아지</h3>
-<c:if test="${logon eq true && mem_no != null}">
 <a href="missinginputform"><input type="button" value="글 작성"></a>
-</c:if>
 <table border="1">
 	<thead>
 		<tr>
@@ -24,7 +22,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${missingout}" var="mic">
+		<c:forEach items="${missingend}" var="mic">
 		<tr>
 			<td>${mic.mis_no}</td>
 			<td><a href="missingdetail?mis_no=${mic.mis_no}">${mic.mis_title}</a></td>

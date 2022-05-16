@@ -37,10 +37,9 @@ public class BoardController {
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
-		MemberDTO login = (MemberDTO) hs.getAttribute("login");
 		
-		int mem_no = login.getMem_no();
-		String mem_nickname = login.getMem_nickname();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		String mem_nickname = (String) hs.getAttribute("mem_nickname");
 		
 		md.addAttribute("mem_no", mem_no);
 		md.addAttribute("mem_nickname", mem_nickname);

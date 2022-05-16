@@ -19,7 +19,17 @@
 <td>
 <table border="1">
 	<tr><td>글번호</td><td>${mic.mis_no}</td></tr>
-	<tr><td>구분</td><td>${mic.mis_gb}</td></tr>
+	<tr>
+		<td>구분</td>
+		<td>
+			${mic.mis_gb}
+			<c:if test="${mem_id eq 'admin' || mem_no eq mic.mem_no}">
+				<c:if test="${mic.mis_gb eq '실종'}">
+					<button onclick="location.href='rehoming?mis_no=${mic.mis_no}'">귀가완료</button>
+				</c:if>
+			</c:if>
+		</td>
+	</tr>
 	<tr><td>제목</td><td>${mic.mis_title}</td></tr>
 	<tr><td>반려동물이름</td><td>${mic.mis_pname}</td></tr>
 	<tr><td>등록번호</td><td>${mic.mis_pno}</td></tr>
@@ -33,9 +43,13 @@
 	<tr><td>조회수</td><td>${mic.mis_readcount}</td></tr>
 	<tr><td>글삭제/수정</td>
 		<td>
-			<a href="missingdelete?mis_no=${mic.mis_no}">삭제</a>
-			<a href="missingmodifyform?mis_no=${mic.mis_no}">수정</a>
-			<button onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'">후기글쓰기</button>
+			<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">
+					<a href="missingdelete?mis_no=${mic.mis_no}">삭제</a>
+					<a href="missingmodifyform?mis_no=${mic.mis_no}">수정</a>
+				<c:if test="${mic.mis_gb eq '귀가'}">
+					<button onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'">후기글쓰기</button>
+				</c:if>
+			</c:if>
 		</td>
 	</tr>
 </table>

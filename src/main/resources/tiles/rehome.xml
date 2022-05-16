@@ -30,4 +30,19 @@
 		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomemodifyform.jsp"/>
 	</definition>
 	
+	<definition name="rehomeadmin" extends="baseLayout">
+		<put-attribute name="title" value="분양/임시보호 관리자페이지"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeadmin.jsp"/>
+	</definition>
+	
+	<definition name="rehomeend" extends="baseLayout">
+		<put-attribute name="title" value="분양완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeend.jsp"/>
+	</definition>
+	
+	<definition name="rehomeimboform" extends="baseLayout">
+		<put-attribute name="title" value="분양완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeimboform.jsp"/>
+	</definition>
+	
 </tiles-definitions>

@@ -13,7 +13,7 @@
 <table border="1" align="center">
 <tr>
 	<th>　구분　</th>
-	<td><input type="text" name="ep_gb"></td></tr>
+	<td><input type="text" name="ep_gb" value="${ep_gb}" readonly="readonly"></td></tr>
 <tr>
 	<th>　제목　</th>
 	<td><input type="text" name="ep_title"></td></tr>
@@ -22,17 +22,15 @@
 	<td><textarea name="ep_content"></textarea></td></tr>
 <tr>
 	<th>　이미지　</th>
-	<td><input type="file" name="ep_image"></td></tr>
-<tr>
-	<td colspan="2" align="center">　　
-		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly"></td></tr>
-<tr>
-	<td colspan="2" align="center">　　
-		<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly"></td></tr>
+	<td><input type="file" name="ep_image"></td>
+</tr>
 <tr>
 	<td colspan="2" align="center">
 		<input type="submit" value="등록"></td></tr>
 </table>
+<input type="hidden" name="mem_nickname" value="${mem_nickname}" readonly="readonly">
+<input type="hidden" name="mem_no" value="${mem_no}" readonly="readonly">
+<input type="hidden" name="ep_originno" value="${ep_originno}" readonly="readonly">
 </form>
 </body>
 </html>

@@ -10,7 +10,6 @@
 
 <form action="missinginput" method="post" enctype="multipart/form-data">
 <table border="1">
-<tr><td>구분</td><td><input type="text" name="mis_gb"></td></tr>
 <tr><td>글제목</td><td><input type="text" name="mis_title"></td></tr>
 <tr><td>이름</td><td><input type="text" name="mis_pname"></td></tr>
 <tr><td>상세정보</td>

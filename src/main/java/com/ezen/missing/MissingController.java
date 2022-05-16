@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
+import com.ezen.rehome.RehomeService;
+import com.ezen.teamb.FileUploadController;
 
 
 
@@ -31,8 +33,8 @@ public class MissingController {
 	
 	
 
-	public String missinginput(MultipartHttpServletRequest multi, SqlSession sqlsession) {
-		String mis_gb = multi.getParameter("mis_gb");		
+	public ModelAndView missinginput(MultipartHttpServletRequest multi, SqlSession sqlSession) {
+		String mis_gb = "╫га╬";
 		String mis_title = multi.getParameter("mis_title");
 		String mis_pname = multi.getParameter("mis_pname");
 		String mis_content = multi.getParameter("mis_content");
@@ -42,60 +44,74 @@ public class MissingController {
 		MultipartFile mf = multi.getFile("mis_image");
 		String mis_image = mf.getOriginalFilename();
 		
-		HttpSession hs = multi.getSession();
-        MemberDTO login = (MemberDTO) hs.getAttribute("login");
-        int mem_no = login.getMem_no();
-        String mem_nickname = login.getMem_nickname();
-        String mem_tel = login.getMem_tel();
+		ModelAndView mav = new ModelAndView();
+		FileUploadController fuc = new FileUploadController();
+		try {
+			mav = fuc.upload(multi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:missingoutform");
 		
-		MissingService mic = sqlsession.getMapper(MissingService.class);
+		HttpSession hs = multi.getSession();
+        int mem_no = (int) hs.getAttribute("mem_no");
+        String mem_nickname = (String) hs.getAttribute("mem_nickname");
+        String mem_tel = (String) hs.getAttribute("mem_tel");
+		
+		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.missing_insert(mis_gb, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel ,mis_content);
-		return "redirect:missingoutform";
+		return mav;
 		
 	}
 	
-	public String missingoutform(Model mo, SqlSession sqlsession)
+	public String missingoutform(Model mo, SqlSession sqlSession)
 	{
-			MissingService micdao = sqlsession.getMapper(MissingService.class);
+			MissingService micdao = sqlSession.getMapper(MissingService.class);
 			ArrayList<MissingDTO> missingout = micdao.missingout();
 			mo.addAttribute("missingout",missingout);
 			return "missingoutform";
 	}
 	
-	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlsession)
+	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession)
 	{
 		int mis_no;
 		mis_no = Integer.parseInt(request.getParameter("mis_no"));
-		
-		MissingService micdao = sqlsession.getMapper(MissingService.class);
+		missingreadcount(mis_no, sqlSession);
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		MissingDTO missingdetail = micdao.missingdetail(mis_no);
 		mo.addAttribute("mic",missingdetail);
 			
 		return "missingdetail";
 	}
 	
-	public String missingdelete(HttpServletRequest request,SqlSession sqlsession)
+	public void missingreadcount(int mis_no, SqlSession sqlSession)
+	{
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		micdao.missingreadcount(mis_no);
+	}
+	
+	public String missingdelete(HttpServletRequest request,SqlSession sqlSession)
 	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
 		
-		MissingService micdao = sqlsession.getMapper(MissingService.class);
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		micdao.missingdelete(mis_no);
 	
 		return "redirect:missingoutform";
 	}
 	
-	public String missingmodifyform(HttpServletRequest request,Model mo, SqlSession sqlsession)
+	public String missingmodifyform(HttpServletRequest request,Model mo, SqlSession sqlSession)
 	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
 		
-		MissingService micdao = sqlsession.getMapper(MissingService.class);
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		MissingDTO micdto = micdao.missingdetail(mis_no);
 		mo.addAttribute("mic", micdto);
 		
 		return "missingmodifyform";
 	}
 	
-	public String missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlsession)
+	public String missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
 	{
 		int mis_no = Integer.parseInt(multi.getParameter("mis_no"));
 		String mis_gb = multi.getParameter("mis_gb");		
@@ -115,9 +131,27 @@ public class MissingController {
         String mem_nickname = login.getMem_nickname();
         String mem_tel = login.getMem_tel();
 		
-		MissingService mic = sqlsession.getMapper(MissingService.class);
+		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.missingmodify_insert(mis_no, mis_gb, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel,mis_content,mis_readcount);
 		return "redirect:missingoutform";
+	}
+
+
+
+	public String rehoming(HttpServletRequest request, SqlSession sqlSession) {
+		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
+		MissingService mic = sqlSession.getMapper(MissingService.class);
+		mic.rehoming(mis_no);
+		return "redirect:missingdetail?mis_no="+mis_no;
+	}
+
+
+
+	public String missingend(Model mo, SqlSession sqlSession) {
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		ArrayList<MissingDTO> missingend = micdao.missingend();
+		mo.addAttribute("missingend",missingend);
+		return "missingend";
 	}
 	
 }
