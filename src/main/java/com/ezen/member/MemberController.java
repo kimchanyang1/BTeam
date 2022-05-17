@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class MemberController {
 	
+	public String signpolicy(){
+		return "Memberpolicy";
+	}
+	
 	public String Signupform() {
 		return "signupform";
 	}

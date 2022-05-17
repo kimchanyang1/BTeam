@@ -212,6 +212,11 @@ public class HomeController {
 		return rc.rehomebun(sqlSession, request);
 	}
 	
+	@RequestMapping(value = "/signpolicy")
+	public String Signpolicy() {
+		return mc.signpolicy();
+	}
+	
 	@RequestMapping(value = "/signupform")
 	public String Signupform() {
 		return mc.Signupform();

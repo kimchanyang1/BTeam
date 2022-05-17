@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양/임보 목록</title>
+<title>분양/임시보호 목록</title>
 </head>
 <body>
 
@@ -35,6 +35,6 @@
 		</td>
 	</tr>
 </table>
-
+ 
 </body>
 </html>

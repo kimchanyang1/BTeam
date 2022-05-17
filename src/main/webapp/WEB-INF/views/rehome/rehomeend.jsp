@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양/임보 목록</title>
+<title>분양/임시보호 완료 목록</title>
 </head>
 <body>
 
