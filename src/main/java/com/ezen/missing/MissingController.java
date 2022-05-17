@@ -34,7 +34,7 @@ public class MissingController {
 	
 
 	public ModelAndView missinginput(MultipartHttpServletRequest multi, SqlSession sqlSession) {
-		String mis_gb = "½ÇÁ¾";
+		String mis_gb = "ì‹¤ì¢…";
 		String mis_title = multi.getParameter("mis_title");
 		String mis_pname = multi.getParameter("mis_pname");
 		String mis_content = multi.getParameter("mis_content");

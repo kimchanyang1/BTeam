@@ -7,32 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="./resources/css/style.css" rel="stylesheet" />
 </head>
 <body>
 
-<h3>실종강아지</h3>
+<h3>실종반려동물</h3>
 <c:if test="${logon eq true && mem_no != null}">
 <a href="missinginputform"><input type="button" value="글 작성"></a>
 </c:if>
 <table border="1">
-	<thead>
-		<tr>
-			<th>글번호</th>
-			<th>제목</th>
-			<th>작성일자</th>
-			<th>조회수</th>
-		</tr>
-	</thead>
 	<tbody>
-		<c:forEach items="${missingout}" var="mic">
-		<tr>
-			<td>${mic.mis_no}</td>
-			<td><a href="missingdetail?mis_no=${mic.mis_no}">${mic.mis_title}</a></td>
-			<td>${mic.mis_writeday}</td>
-			<td>${mic.mis_readcount}</td>
+		<c:forEach items="${missingout}" var="mic">		
+		<tr> 
+		<td><img src="${pageContext.request.contextPath}/image/${mic.mis_image}"></td>	
 		</tr>
+		<tr>
+			<td><a href="missingdetail?mis_no=${mic.mis_no}">${mic.mis_title}</a></td>
+		</tr>
+		
 		</c:forEach>
 	</tbody>
 </table>
+
 </body>
 </html>

@@ -15,7 +15,7 @@
 
 <table border="1">
 <tr>
-<td>반려견사진 </td>
+<td><img src="${pageContext.request.contextPath}/image/${mic.mis_image }"></td>
 <td>
 <table border="1">
 	<tr><td>글번호</td><td>${mic.mis_no}</td></tr>
