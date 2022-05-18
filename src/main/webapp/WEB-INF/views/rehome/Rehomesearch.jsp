@@ -8,7 +8,6 @@
 <title>분양/임시보호 검색</title>
 </head>
 <body>
-
 <form action="rehomesearch" method="post" class="form-horizontal">
 	<div class="form-group text-center">
 		<label class="col-sm-offset-4 col-sm-1"><input type="checkbox" name="gb2" value="임시보호"> 임시보호</label>
@@ -28,6 +27,5 @@
 		</div>
 	</div>
 </form>
-
 </body>
 </html>

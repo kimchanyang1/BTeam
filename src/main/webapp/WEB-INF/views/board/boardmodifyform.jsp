@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section>
 <h3>자유게시판 글수정</h3>
 <br><br>
 <form action="boardmodify" method="post" enctype="multipart/form-data">
@@ -37,5 +38,6 @@
 </c:forEach>
 </table>
 </form>
+</section>
 </body>
 </html>

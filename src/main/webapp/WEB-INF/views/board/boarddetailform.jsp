@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section>
 <h3>자유게시판</h3>
 <br><br>
 <table border="1" align="center" width="600">
@@ -24,7 +25,6 @@
 	<td><input type="text" value="${b.bd_readcount}" readonly="readonly"></td></tr>	
 <tr>
 	<th>　작성일자　</th>
-	<td><!-- a hh: 오전/오후　　HH: 24시 기준 -->
 		<fmt:parseDate value="${b.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
 		<input type="text" value="${writedaystring }" readonly="readonly">
@@ -55,5 +55,6 @@
 	</td></tr>
 </c:forEach>
 </table>
+</section>
 </body>
 </html>

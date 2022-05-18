@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section>
 <h3>자유게시판 글쓰기</h3>
 <br><br>
 <form action="boardinput" method="post" enctype="multipart/form-data">
@@ -31,5 +32,6 @@
 		<input type="submit" value="등록"></td></tr>
 </table>
 </form>
+</section>
 </body>
 </html>

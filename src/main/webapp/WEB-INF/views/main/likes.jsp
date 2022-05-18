@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
 
@@ -13,16 +15,50 @@
 <div>
 	<c:if test="${ mem_id == null }">
 		추천은 로그인 후 사용 가능합니다.
-			<i class="fa fa-heart" style="font-size:16px;color:red"></i> <!-- 아이콘이 안먹힌다...! -->
-			<span class="likes_count"></span>	<!-- 추천 수 보이는 용도 -->	
+			<i class="fas fa-heart" style="font-size:16px;color:red"></i>
+			<span class="likes_count"></span>	
 	</c:if>
 	<c:if test="${ mem_id != null }">
 		<button class="w3-button w3-black w3-round" id="likes_update">
-			<i class="fa fa-heart" style="font-size:16px;color:red"></i>
+			<i class="fas fa-heart" style="font-size:16px;color:red"></i>
 			&nbsp;<span class="likes_count"></span>
 		</button> 
 	</c:if>
 </div>
-		
+
+<script type="text/javascript">
+$(function(){
+	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	$("#likes_update").click(function(){
+		$.ajax({
+			url: "/java/com/ezen/likes/LikesController/likesupdate.do", //경로... 어케 잡지?
+            type: "POST",
+            data: {
+            	likes_boardno: ${b.bd_no},
+            	likes_id: ${mem_id}
+            },
+            success: function () {
+		        likesCount();
+            },
+		})
+	})
+	
+	// 게시글 추천수
+    function likesCount() {
+		$.ajax({
+			url: "/java/com/ezen/likes/LikesController/likesupdate.do", //경로...
+            type: "POST",
+            data: {
+                no: ${b.bd_no}
+            },
+            success: function (count) {
+            	$(".likes_count").html(count); //span 으로 가서 추천 수 보여줌
+            },
+		})
+    };
+    likesCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+});
+</script>
+	
 </body>
 </html>
