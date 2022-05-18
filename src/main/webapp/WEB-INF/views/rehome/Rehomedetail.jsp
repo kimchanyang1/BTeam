@@ -40,6 +40,7 @@
 		</div>	
 	</c:if>
 	<br>
+	<jsp:include page="/WEB-INF/views/main/likes.jsp"></jsp:include>
 	<div class="col-sm-offset-2 col-sm-2">제목</div>
 	<div class="col-sm-offset-1">	
 		[${rd.rh_gb2 }/${rd.rh_gb3 }]${rd.rh_title}
