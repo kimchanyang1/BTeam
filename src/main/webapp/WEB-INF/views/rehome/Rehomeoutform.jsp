@@ -71,8 +71,6 @@
 	<c:if test="${e%3 eq 2}">
 	</td>
 </tr>
-<tr>
-	<td>
 	</c:if>
 	</c:forEach>
 </table>

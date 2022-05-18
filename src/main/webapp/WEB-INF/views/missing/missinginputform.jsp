@@ -7,13 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section>
 <h3>실종신고 접수</h3>
 <form action="missinginput" method="post" enctype="multipart/form-data">
 <div style="width: 50%;margin: auto;padding-top: 20px;">
 	<div class="form-group">
-		<label class="control-label col-sm-2" for="mis_gb2">동물종류</label>	
+	<label class="control-label col-sm-2" for="mis_gb2">동물종류</label>	
 			<td>
-				&emsp;<input type="radio" name="mis_gb2" value="개">개
+				<input type="radio" name="mis_gb2" value="개">개
 				<input type="radio" name="mis_gb2" value="고양이">고양이
 			</td>
 	</div>
@@ -67,30 +68,8 @@
 			<button type="submit" class="btn btn-default">접수</button>
 		</div>
 	</div>
-<!-- 
-<table border="1">
-<tr><td>글제목</td><td><input type="text" class="mis_title" id="mis_title" name="mis_title"></td></tr>
-<tr><td>이름</td><td><input type="text" name="mis_pname"></td></tr>
-<tr><td>상세정보</td>
-<td> 
-<textarea name="mis_content" cols="30" rows="5">
-품종 :
-색상 :
-크기 :
-나이 :
-성별 :
-사고경위 :
-</textarea>
-</td></tr>
-<tr><td>분실날짜</td><td><input type="date" name="mis_misdate"></td></tr>
-<tr><td>분실장소</td><td><input type="text" name="mis_misplace"></td></tr>
-<tr><td>등록번호</td><td><input type="text" name="mis_pno"></td></tr>
-<tr><td>동물사진</td><td><input type="file" name="mis_image"></td></tr>
-<tr><td></td></tr>
-</table>
-<input class="btn btn-default" type="submit" value="신고">
- -->
  </div>
 </form>
+</section>
 </body>
 </html>
