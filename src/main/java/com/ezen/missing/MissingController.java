@@ -35,6 +35,7 @@ public class MissingController {
 
 	public ModelAndView missinginput(MultipartHttpServletRequest multi, SqlSession sqlSession) {
 		String mis_gb = "실종";
+		String mis_gb2 = multi.getParameter("mis_gb2");
 		String mis_title = multi.getParameter("mis_title");
 		String mis_pname = multi.getParameter("mis_pname");
 		String mis_content = multi.getParameter("mis_content");
@@ -59,7 +60,7 @@ public class MissingController {
         String mem_tel = (String) hs.getAttribute("mem_tel");
 		
 		MissingService mic = sqlSession.getMapper(MissingService.class);
-		mic.missing_insert(mis_gb, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel ,mis_content);
+		mic.missing_insert(mis_gb,mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel ,mis_content);
 		return mav;
 		
 	}
@@ -114,7 +115,8 @@ public class MissingController {
 	public String missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
 	{
 		int mis_no = Integer.parseInt(multi.getParameter("mis_no"));
-		String mis_gb = multi.getParameter("mis_gb");		
+		String mis_gb = multi.getParameter("mis_gb");	
+		String mis_gb2 = multi.getParameter("mis_gb2");	
 		String mis_title = multi.getParameter("mis_title");
 		String mis_pname = multi.getParameter("mis_pname");
 		String mis_content = multi.getParameter("mis_content");
@@ -124,15 +126,22 @@ public class MissingController {
 		MultipartFile mf = multi.getFile("mis_image");
 		String mis_image = mf.getOriginalFilename();
 		String mis_readcount = multi.getParameter("mis_readcount");	
-		
+				
+		HttpSession hs = multi.getSession();
+        int mem_no = (int) hs.getAttribute("mem_no");
+        String mem_nickname = (String) hs.getAttribute("mem_nickname");
+        String mem_tel = (String) hs.getAttribute("mem_tel");
+		 
+		/*
 		HttpSession hs = multi.getSession();
         MemberDTO login = (MemberDTO) hs.getAttribute("login");
         int mem_no = login.getMem_no();
         String mem_nickname = login.getMem_nickname();
         String mem_tel = login.getMem_tel();
+		*/
 		
 		MissingService mic = sqlSession.getMapper(MissingService.class);
-		mic.missingmodify_insert(mis_no, mis_gb, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel,mis_content,mis_readcount);
+		mic.missingmodify_insert(mis_no, mis_gb, mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel,mis_content,mis_readcount);
 		return "redirect:missingoutform";
 	}
 

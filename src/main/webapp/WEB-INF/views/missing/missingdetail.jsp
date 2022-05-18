@@ -30,7 +30,9 @@
 			</c:if>
 		</td>
 	</tr>
+	
 	<tr><td>제목</td><td>${mic.mis_title}</td></tr>
+	<tr><td>동물종류</td><td>${mic.mis_gb2}</td></tr>
 	<tr><td>반려동물이름</td><td>${mic.mis_pname}</td></tr>
 	<tr><td>등록번호</td><td>${mic.mis_pno}</td></tr>
 	<tr><td>실종날짜</td><td>${mic.mis_misdate}</td></tr>

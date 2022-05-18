@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
+<style type="text/css">
 #table1{
 		margin-left: 100px;
 		margin-top: 5px;
@@ -45,7 +45,7 @@
    	list-style:none;
     list-style-type:none;
    	}
-	</style>
+</style>
 <meta charset="EUC-KR">
 <title>title</title>
 </head>

@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -11,6 +10,13 @@
 <h3>실종신고 접수</h3>
 <form action="missinginput" method="post" enctype="multipart/form-data">
 <div style="width: 50%;margin: auto;padding-top: 20px;">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="mis_gb2">동물종류</label>	
+			<td>
+				&emsp;<input type="radio" name="mis_gb2" value="개">개
+				<input type="radio" name="mis_gb2" value="고양이">고양이
+			</td>
+	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="mis_title">글제목</label>
 		<div class="col-sm-10">

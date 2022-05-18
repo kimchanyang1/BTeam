@@ -7,7 +7,7 @@
 <mapper namespace="com.ezen.missing.MissingService">
 
 <insert id="missing_insert">
-	INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, sysdate ,#{param11},0)
+	INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11}, sysdate ,#{param12},0)
 </insert>
 
 <select id="missingout" resultType="com.ezen.missing.MissingDTO">
@@ -27,7 +27,7 @@
 </delete>
 
 <update id="missingmodify_insert">
-	update missing set mis_gb=#{param2}, mis_title=#{param3}, mis_pname=#{param4}, mis_pno=#{param5}, mis_misdate=#{param6}, mis_misplace=#{param7}, mis_image=#{param8}, mem_no=#{param9}, mem_nickname=#{param10}, mem_tel=#{param11}, mis_content=#{param12},mis_readcount=#{param13} where mis_no=#{param1}
+	update missing set mis_gb=#{param2}, mis_gb2=#{param3}, mis_title=#{param4}, mis_pname=#{param5}, mis_pno=#{param6}, mis_misdate=#{param7}, mis_misplace=#{param8}, mis_image=#{param9}, mem_no=#{param10}, mem_nickname=#{param11}, mem_tel=#{param12}, mis_content=#{param13},mis_readcount=#{param14} where mis_no=#{param1}
 </update>
 
 <update id="rehoming">
