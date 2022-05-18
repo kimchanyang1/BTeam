@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<section>
 <form action="rehomesearch" method="post">
-<table>
+<table border="1" align="center" width="500">
 	<tr>
 		<td colspan="3">
 			<input type="checkbox" name="gb2" value="임보"> 임보 &emsp;
@@ -19,18 +19,12 @@
 		</td>
 	</tr>
 	<tr>
-		<th>
-			발견장소
-		</th>
-		<td>
-			<input type="text" name="sword">
-		</td>
-		<td>
-			<input type="submit" value="조회">
-		</td>
+		<td>　발견장소　</td>
+		<td><input type="text" name="sword"></td>
+		<td><input type="submit" value="조회"></td>
 	</tr>
 </table>
 </form>
-
+</section>
 </body>
 </html>

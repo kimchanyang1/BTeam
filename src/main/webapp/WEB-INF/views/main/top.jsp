@@ -12,10 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header style="text-align: center;">
-	<h1>?????????</h1>
+<header>
+	<h1>TeamB</h1>
 </header>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
 		<a class="navbar-brand" href="home"><span class="glyphicon glyphicon-home"></span></a>

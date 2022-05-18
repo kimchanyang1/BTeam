@@ -39,7 +39,7 @@ public class HomeController {
 	private MemberController mc = new MemberController();
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
-		
+	
 		
 	
 	@RequestMapping(value = "/")
