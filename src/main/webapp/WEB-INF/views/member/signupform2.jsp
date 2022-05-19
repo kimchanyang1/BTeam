@@ -47,31 +47,61 @@ function id_check(){
 	window.open(url, windowTargetName, features);
 }
 */
-</script>
-<script type="text/javascript">
-
 function checking() {
 	try{
-		alert("회원가입 시작");
 		var f = document.form1;
+		
 		var id = f.mem_id.value;
 		var idCheck = f.idCheck.value;
+		var pw = f.mem_pw.value;
+		var pwCheck = f.pwCheck.value;
+		var name = f.mem_name.value;
+		var nickname = f.mem_nickname.value;
+		var jumin = f.mem_jumin.value;
+		var tel = f.mem_tel.value;
+		var emailid = f.emailid.value;
+		var domain2 = f.domain2.value;
+		var address = f.mem_address.value;
 		if (id=="") {
 			alert("아이디를 입력해 주세요");
 			return false;
 		}else if (idCheck!="idChecked") {
 			alert("아이디 체크를 해주세요");
 			return false;
+		}else if (pw=="") {
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}else if (pw!=pwCheck) {
+			alert("비밀번호가 서로 다릅니다.");
+			return false;
+		}else if (name=="") {
+			alert("이름을 입력해 주세요.");
+			return false;
+		}else if (nickname=="") {
+			alert("닉네임을 입력해 주세요.");
+			return false;
+		}else if (jumin=="") {
+			alert("주민번호를 입력해 주세요.");
+			return false;
+		}else if (tel=="") {
+			alert("전화번호를 입력해 주세요.");
+			return false;
+		}else if (emailid=="") {
+			alert("이메일을 입력해 주세요.");
+			return false;
+		}else if (address=="") {
+			alert("주소를 입력해 주세요.");
+			return false;
 		}
-		alert("회원가입 완료");
 		document.form1.submit();
-		alert("서브밋 왜안먹음;");
+		alert("회원가입 완료");
     }
     catch(err){
 		alert(err.message);
     }
 }
-
+</script>
+<script type="text/javascript">
 /*
 $(document).ready(function(){
 	$("#submit").click(function(){
