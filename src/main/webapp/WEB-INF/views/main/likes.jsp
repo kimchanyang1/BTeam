@@ -40,7 +40,7 @@ $(function(){
             },
             success: function () {
 		        likesCount();
-            },
+            }
 		})
 	})
 	
@@ -56,7 +56,7 @@ $(function(){
             	$(".likes_count").html(count); //span 으로 가서 추천 수 보여줌
             },
 		})
-    };
+    }
     likesCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
 });
 </script>

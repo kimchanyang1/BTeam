@@ -13,42 +13,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LikesController {
 
 	@RequestMapping(value = "/likesupdate")
-	public String likesupdate(HttpServletRequest request, SqlSession sqlSession)
+	public void likesupdate(int likes_boardno, String likes_id, SqlSession sqlSession)
 	{
-		int likes_boardno = Integer.parseInt(request.getParameter("likes_boardno"));
-		String likes_id = request.getParameter("likes_id");
-		
+		System.out.println("좋아요 컨트롤러 진입");
 		Map<String, Object> map = new HashMap<>();
 		map.put("likes_boardno", likes_boardno);
 		map.put("likes_id", likes_id);
 		
 		int result = 0;
-		
+		System.out.println("데이터 받아옴");
 		LikesService ls = sqlSession.getMapper(LikesService.class);
 		result = ls.likes_check(map); //동일 게시글에 대한 이전 추천 여부 확인
-		
+
+		System.out.println("sql 실행함");
 		if(result == 0){ // 추천하지 않았다면 추천 추가
 			ls.likes_update(map);
 		}else{ // 추천을 하였다면 추천 삭제
 			ls.likes_delete(map);
 		}
-		
-		return "";
+		System.out.println("업데이트 완료");
 	}
 	
-	@RequestMapping(value = "/likescount")
-	public String likescount(HttpServletRequest request, SqlSession sqlSession, Model mo)
+	public int likescount(int likes_boardno, SqlSession sqlSession)
 	{
-		int likes_boardno = Integer.parseInt(request.getParameter("likes_boardno"));
-		
 		int count = 0;
 		
 		LikesService ls = sqlSession.getMapper(LikesService.class);
 		count = ls.likes_count(likes_boardno); //게시글 총 추천 수
 		
-		mo.addAttribute("count", count);
-		
-		return "likes";
+		return count;
 	}
 	
 }

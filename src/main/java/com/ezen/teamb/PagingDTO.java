@@ -2,14 +2,10 @@ package com.ezen.teamb;
 
 
 public class PagingDTO {
-			// 현재페이지, 시작페이지, 끝페이지, 게시글 총개수, 페이지당 글개수, 마지막 페이지, query에서 쓸 row start,end
 	private int nowPage, startPage, endPage, total, cntPerPage,lastPage, start,end;
-	private int cntPage= 5; //총페이지수
+	private int cntPage= 5;
 	
-	public PagingDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public PagingDTO() {}
 	
 	public PagingDTO(int total, int nowPage, int cntPerPage)
 	{
@@ -20,12 +16,12 @@ public class PagingDTO {
 		calcStartEndPage(getNowPage(), cntPage);
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
-	// 제일 마지막 페이지 계산
+	// �젣�씪 留덉�留� �럹�씠吏� 怨꾩궛
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
 	
-	//시작 , 끝 페이지 계산
+	//�떆�옉 , �걹 �럹�씠吏� 怨꾩궛
 	public void calcStartEndPage(int nowPage, int cntPage)
 	{
 		setEndPage((int)Math.ceil((double)nowPage / (double)cntPage) * cntPage);
@@ -39,7 +35,7 @@ public class PagingDTO {
 			setStartPage(1);
 		}		
 	}
-	//DB 쿼리에서 사용할 start, end값 계산
+	//DB 荑쇰━�뿉�꽌 �궗�슜�븷 start, end媛� 怨꾩궛
 	public void calcStartEnd(int nowpage, int cntPerPage)
 	{
 		setEnd(nowPage * cntPerPage);

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.board.BoardController;
 import com.ezen.epilogue.EpilogueController;
+import com.ezen.likes.LikesController;
 import com.ezen.member.MemberController;
 
 import com.ezen.notice.NoticeController;
@@ -43,6 +44,7 @@ public class HomeController {
 	private MemberController mc = new MemberController();
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
+	private LikesController lc = new LikesController();
 	
 	
 	@RequestMapping(value = "/")
@@ -421,5 +423,17 @@ public class HomeController {
 	public String location()
 	{		
 		return "location";
+	}
+	
+	@RequestMapping(value="/likesupdate")
+	public @ResponseBody void likesupdate(@RequestParam("likes_boardno") int likes_boardno, @RequestParam("likes_id") String likes_id) {
+		System.out.println("홈 컨트롤러 진입");
+		lc.likesupdate(likes_boardno, likes_id, sqlSession);
+	}
+	
+	@RequestMapping(value="/likescount")
+	public @ResponseBody int likescount(@RequestParam("likes_boardno") int likes_boardno)
+	{
+		return lc.likescount(likes_boardno, sqlSession);
 	}
 }
