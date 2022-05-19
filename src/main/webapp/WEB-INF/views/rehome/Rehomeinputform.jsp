@@ -23,7 +23,6 @@ textarea {
 <title>분양/임시보호</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">임시분양/보호 게시판 글쓰기</font></B></h4>
 <br><br>
@@ -103,14 +102,12 @@ textarea {
 	<tr>
 		<td>　　</td>
 	<tr>
-		<td colspan="2" align="center">
-		<input type="submit" value="수정">
-		<a href="rehomeoutform"><input type="button" value="취소"></a>
-		</td>
+		<th colspan="2">
+		<input type="submit" value="등록">
+		</th>
 	</tr>
 </table>
 </form>
 
-</section>
 </body>
 </html>

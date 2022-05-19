@@ -10,12 +10,12 @@
 <title>분양/임보 목록</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">관리자 전용 분양 완료 게시판</font></B></h4>
-<h6><B><font color="red">관리자 전용 게시판입니다</font><br>
-승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
+<h6><B><font color="red">관리자 전용 게시판입니다</font></B></h6>
+<h6><B>승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
 <br><br>
+
 <table border="0" align="center" width="700">
 <tr>
 	<td>
@@ -44,6 +44,7 @@
 	<td>
 	</c:if>
 	</c:forEach>
-</section>
+</table>
+
 </body>
 </html>

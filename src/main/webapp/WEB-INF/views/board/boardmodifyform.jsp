@@ -4,40 +4,54 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+td {
+	text-align: center;
+	height: 35px;
+}
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+textarea {
+	line-height: 150%;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<section>
-<h3>자유게시판 글수정</h3>
+
+<h4><B><font color="#fdafab">글수정</font></B></h4>
 <br><br>
+
 <form action="boardmodify" method="post" enctype="multipart/form-data">
-<table border="1" align="center" width="600">
+	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
+
+<table border="0" align="center">
 <c:forEach items="${boardmodify }" var="b">
 <tr>
-	<td><input type="hidden" name="bd_no" value="${b.bd_no}" readonly="readonly"></td></tr>
+	<td><B>　글번호　</B></td>
+	<td><input type="text" name="bd_no" value="${b.bd_no}" readonly="readonly"></td></tr>
 <tr>
-	<th>　제목　</th>
+	<td><B>　제목　</B></td>
 	<td><input type="text" name="bd_title" value="${b.bd_title }"></td></tr>
 <tr>
-	<th>　내용　</th>
+	<td><B>　내용　</B></td>
 	<td><textarea name="bd_content">${b.bd_content }</textarea></td></tr>
 <tr>
-	<th>　이미지　</th>
-	<td><img src="${pageContext.request.contextPath}/image/${b.bd_image}">
-		<input type="file" name="bd_image"></td></tr>	
+	<td><B>　이미지　</B></td>
+	<td><input type="file" name="bd_image"></td></tr>	
 <tr>
-	<td colspan="2" align="center">　　
-		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly"></td></tr>
+	<td colspan="2">　　</td></tr>
 <tr>
-	<td colspan="2" align="center">　　
-		<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly"></td></tr>
-<tr>
-	<td colspan="2" align="center">
-		<input type="submit" value="수정"></td></tr>
+	<td colspan="2"><B>
+		<input type="submit" value="수정"></B>
+		<button onclick="location.href='board'"><B>취소</B></button></td></tr>
 </c:forEach>
 </table>
 </form>
-</section>
+
 </body>
 </html>

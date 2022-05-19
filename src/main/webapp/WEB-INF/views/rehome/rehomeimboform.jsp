@@ -20,7 +20,6 @@ table {
 <title>분양/임시보호 게시글 수정</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">임시보호자 정보 입력</font></B></h4>
 <br><br>
@@ -57,6 +56,5 @@ table {
 </table>
 </form>
 
-</section>
 </body>
 </html>

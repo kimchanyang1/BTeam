@@ -18,7 +18,6 @@ textarea {
 <title>Insert title here</title>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
-<section>
 
 <h4><B><font color="#fdafab">임시분양/보호 게시판</font></B></h4>
 <br><br>
@@ -83,18 +82,18 @@ textarea {
 
 <table border="0" align="center" width="700">
 <tr>
-	<td colspan="3">
+	<td colspan="4">
 		<B>　</B>
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="4">
 		<B>　</B>
 	</td>
 </tr>
 <tr>
 	<td>　　　　</td>
-	<td colspan="2"><img src="${pageContext.request.contextPath}/image/${rd.rh_image }"></td>
+	<td colspan="2"><img src="${pageContext.request.contextPath}/image/${rd.rh_image }" width="500px"></td>
 	<td>　　　　</td>
 </tr>
 <tr>
@@ -118,8 +117,15 @@ textarea {
 				</c:if>
 		</c:if>
 	</td>
-</tr>		
+</tr>
+<tr>
+	<td colspan="4">
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='rehome'"><B>목록</B></button>
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+	</td>
+</tr>
 </table>
-</section>
+
 </body>
 </html>

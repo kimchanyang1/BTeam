@@ -10,7 +10,6 @@
 <title>분양/임시보호</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">임시분양/보호 게시판</font></B></h4>
 <h6><B>임시분양자 또는 분양자를 구하는 게시판입니다</B></h6>
@@ -30,11 +29,10 @@
 	<tr>
 		<td>　발견장소　</td>
 		<td><input type="text" name="sword"></td>
-		<td><input type="submit" value="조회"></td>
+		<td><B><input type="submit" value="조회"></B></td>
 	</tr>
 </table>
 </form>
-<br><br>
 
 <table border="0" align="center" width="700">
 <tr>
@@ -77,6 +75,5 @@
 	</c:forEach>
 </table>
 
-</section>
 </body>
 </html>

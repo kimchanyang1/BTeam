@@ -10,7 +10,6 @@
 <title>분양/임보 목록</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">분양 완료 게시판</font></B></h4>
 <h6><B>이곳에 있는 아이들은 분양이 완료된 아이들입니다</B></h6>
@@ -45,6 +44,7 @@
 	<td>
 	</c:if>
 	</c:forEach>
-</section>
+</table>
+
 </body>
 </html>

@@ -23,7 +23,6 @@ textarea {
 <title>분양/임시보호 게시글 수정</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">글수정</font></B></h4>
 <br><br>
@@ -45,13 +44,13 @@ textarea {
 			<table border="0" align="center">
 			<tr>
 				<th>　　구분　　</th>
-				<td><input type="radio" name="rh_gb2" value="임보">임보
-					<input type="radio" name="rh_gb2" value="분양">분양</td>
+				<td><input type="radio" name="rh_gb2" value="임보"> 임보　　
+					<input type="radio" name="rh_gb2" value="분양"> 분양</td>
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="rh_gb3" value="개">개
-					<input type="radio" name="rh_gb3" value="고양이">고양이</td>
+				<td><input type="radio" name="rh_gb3" value="개"> 개　　
+					<input type="radio" name="rh_gb3" value="고양이"> 고양이</td>
 			</tr>
 			<tr>
 				<th>　　제목　　</th>
@@ -105,14 +104,13 @@ textarea {
 	<tr>
 		<td>　　</td>
 	<tr>
-		<td colspan="2" align="center">
+		<th colspan="2">
 		<input type="submit" value="등록">
 		<a href="rehomeoutform"><input type="button" value="취소"></a>
-		</td>
+		</th>
 	</tr>
 </table>
 </form>
 
-</section>
 </body>
 </html>

@@ -338,7 +338,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/boardinput")
-	public String bb2(MultipartHttpServletRequest multi) {
+	public ModelAndView bb2(MultipartHttpServletRequest multi) {
 		
 		return bc.boardinput(sqlSession, multi);
 	}

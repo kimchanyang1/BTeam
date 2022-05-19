@@ -16,7 +16,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section>
+
 <h4><B><font color="#fdafab">후기게시판</font></B></h4>
 <h6><B>분양이 완료된 아이들의 후기글이 올라오는 게시판입니다</B></h6>
 <h6><B>🐶😻</B></h6>
@@ -67,11 +67,11 @@
 		  		<option value="mem_nickname">　작성자　</option>
 		  	</select>
 			<input type="text" name="searchname">
-			<input type="submit" value="검색">
+			<B><input type="submit" value="검색"></B>
 		</form>
 	</td>
 </tr>
 </table>
-</section>
+
 </body>
 </html>

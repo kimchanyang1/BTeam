@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
 import com.ezen.member.MemberService;
 import com.ezen.missing.MissingController;
 import com.ezen.notice.NoticeController;
+import com.ezen.teamb.FileUploadController;
 
 import oracle.net.aso.i;
 
@@ -48,7 +50,7 @@ public class BoardController {
 	}
 	
 	// input
-	public String boardinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	public ModelAndView boardinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("bd_image");
 		
@@ -56,13 +58,22 @@ public class BoardController {
 		String bd_content=multi.getParameter("bd_content");					
 		String bd_image=mf.getOriginalFilename();
 		
+		ModelAndView mav = new ModelAndView();
+		FileUploadController fuc = new FileUploadController();
+		try {
+			mav = fuc.upload(multi);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect: board");
+		
 		int mem_no=Integer.parseInt(multi.getParameter("mem_no"));
 		String mem_nickname=multi.getParameter("mem_nickname");
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardinput(bd_title, mem_no, mem_nickname, bd_content, bd_image);
 		
-		return "redirect: board";
+		return mav;
 	}
 
 
