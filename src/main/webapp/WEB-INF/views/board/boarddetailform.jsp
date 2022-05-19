@@ -16,15 +16,13 @@ textarea {
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-	
 	$("#likes_update").click(function(){
-		alert("추천시작"+";");
 		$.ajax({
-			url: "likesupdate", //경로... 어케 잡지?
+			url: "likesupdate",
 	        type: "POST",
 	        data: {
 	        	likes_boardno: ${boarddetail.bd_no},
-	        	likes_id: ${mem_id}
+	        	likes_id: "${mdto.mem_id}"
 	        },
 	        success: function () {
 		        likesCount();
@@ -38,7 +36,7 @@ $(document).ready(function(){
 	
 	function likesCount() {
 		$.ajax({
-			url: "likescount", //경로... 근데 백을 제가 다르게 짜놔서 경로 잡아도 안될듯
+			url: "likescount",
             type: "POST",
             data: {
             	likes_boardno: ${boarddetail.bd_no}
@@ -64,11 +62,10 @@ $(document).ready(function(){
 
 <h4><B><font color="#fdafab">자유게시판</font></B></h4>
 <br><br>
-;${mem_id1};
 <table border="0" align="center" width="700">
 	<input type="hidden" value="${boarddetail.mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
+	<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
 <tr>
 	<td colspan="3" align="left">
 		<B>　글번호 ${boarddetail.bd_no}</B>
@@ -104,32 +101,30 @@ $(document).ready(function(){
 <tr>
 	<td colspan="3" align="center">
 		<input type="hidden" value="${e.mem_no }" readonly="readonly">
-		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
+		<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
 	</td>
 </tr>
 <tr>
 	<td colspan="3" align="center">　　
-		<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
+		<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
 	</td></tr>
 <tr>
 	<td colspan="3" align="right">
-		<button><a href=""><B>추천</B></a></button>
 		<div>
-			<c:if test="${ mem_id == null }">
+			<c:if test="${ mdto.mem_id == null }">
 				추천은 로그인 후 사용 가능합니다.
 					<i class="fas fa-heart" style="font-size:16px;color:red"></i>
 					<span class="likes_count"></span>	
 			</c:if>
-			<c:if test="${ mem_id != null }">
+			<c:if test="${ mdto.mem_id != null }">
 				<button class="w3-button w3-black w3-round" id="likes_update">
 					<i class="fas fa-heart" style="font-size:16px;color:red"></i>
 					&nbsp;<span class="likes_count"></span>
 				</button> 
 			</c:if>
 		</div>
-		<p id="check">el표기먹는지</p>
-		<c:if test="${boarddetail.mem_no eq mem_no || mem_id eq 'admin'}">
-			<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'"><B>수정</B></button>
+		<c:if test="${boarddetail.mem_no eq mdto.mem_no || mdto.mem_id eq 'admin'}">
+			<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
 			<button onclick="location.href='boarddelete?bd_no=${boarddetail.bd_no }'"><B>삭제</B></button>
 		</c:if>
 	</td>

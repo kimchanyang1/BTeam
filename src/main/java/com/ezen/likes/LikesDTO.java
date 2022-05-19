@@ -2,10 +2,10 @@ package com.ezen.likes;
 
 /*
 CREATE TABLE likes(
-likes_count NUMBER(6, 0) PRIMARY KEY,
 likes_boardno NUMBER(6, 0),
 likes_id VARCHAR2(20),
-likes_seq NUMBER(6, 0));
+likes_seq NUMBER(6, 0) PRIMARY KEY
+);
 
 CREATE SEQUENCE likes_SEQ;
 */
@@ -19,7 +19,6 @@ public class LikesDTO {
 	
 	public LikesDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public LikesDTO(int likes_seq, int likes_count, int likes_boardno, String likes_id) {

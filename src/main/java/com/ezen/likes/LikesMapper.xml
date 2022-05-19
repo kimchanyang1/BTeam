@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 게시글 추천 -->
 <insert id="likes_update" >
-	insert into likes values(#{likes_boardno}, #{likes_id})
+	insert into likes values(#{likes_boardno}, #{likes_id}, likes_seq.nextval)
 </insert>
 	
 <!-- 게시글 추천 취소 -->

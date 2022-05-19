@@ -427,7 +427,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/likesupdate")
 	public @ResponseBody void likesupdate(@RequestParam("likes_boardno") int likes_boardno, @RequestParam("likes_id") String likes_id) {
-		System.out.println("홈 컨트롤러 진입");
 		lc.likesupdate(likes_boardno, likes_id, sqlSession);
 	}
 	
