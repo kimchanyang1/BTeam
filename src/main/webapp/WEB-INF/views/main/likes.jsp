@@ -31,7 +31,7 @@ $(function(){
 	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
 	$("#likes_update").click(function(){
 		$.ajax({
-			url: "/java/com/ezen/likes/LikesController/likesupdate.do", //경로... 어케 잡지?
+			url: "/", //경로... 어케 잡지?
             type: "POST",
             data: {
             	likes_boardno: ${b.bd_no},
@@ -46,10 +46,10 @@ $(function(){
 	// 게시글 추천수
     function likesCount() {
 		$.ajax({
-			url: "/java/com/ezen/likes/LikesController/likesupdate.do", //경로...
+			url: "/", //경로...
             type: "POST",
             data: {
-                no: ${b.bd_no}
+            	likes_boardno: ${b.bd_no}
             },
             success: function (count) {
             	$(".likes_count").html(count); //span 으로 가서 추천 수 보여줌

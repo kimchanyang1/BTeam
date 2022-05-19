@@ -1,39 +1,54 @@
 package com.ezen.likes;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class LikesC
- */
-public class LikesController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LikesController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+public class LikesController {
+
+	@RequestMapping(method = RequestMethod.POST, value = "/likesupdate")
+	public String likesupdate(HttpServletRequest request, SqlSession sqlSession)
+	{
+		int likes_boardno = Integer.parseInt(request.getParameter("likes_boardno"));
+		String likes_id = request.getParameter("likes_id");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("likes_boardno", likes_boardno);
+		map.put("likes_id", likes_id);
+		
+		int result = 0;
+		
+		LikesService ls = sqlSession.getMapper(LikesService.class);
+		result = ls.likes_check(map); //동일 게시글에 대한 이전 추천 여부 확인
+		
+		if(result == 0){ // 추천하지 않았다면 추천 추가
+			ls.likes_update(map);
+		}else{ // 추천을 하였다면 추천 삭제
+			ls.likes_delete(map);
+		}
+		
+		return "";
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+	@RequestMapping(value = "/likescount")
+	public String likescount(HttpServletRequest request, SqlSession sqlSession, Model mo)
+	{
+		int likes_boardno = Integer.parseInt(request.getParameter("likes_boardno"));
+		
+		int count = 0;
+		
+		LikesService ls = sqlSession.getMapper(LikesService.class);
+		count = ls.likes_count(likes_boardno); //게시글 총 추천 수
+		
+		mo.addAttribute("count", count);
+		
+		return "likes";
 	}
-
+	
 }
