@@ -38,4 +38,15 @@
 	update missing set mis_readcount=mis_readcount+1 where mis_no=#{param1}
 </update>
 
+<select id="cntpost" resultType="int">
+	select count(*) from  missing
+</select>
+
+<select id="selectpost" resultType="com.ezen.missing.MissingDTO">
+	select * from(
+		select rownum rn,A.* from(
+		select * from missing order by groups desc,step asc)A)
+			where rn between #{start} and #{end}
+</select>
+
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.member.MemberDTO;
 import com.ezen.rehome.RehomeService;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.PagingDTO;
 
 
 
@@ -147,7 +149,8 @@ public class MissingController {
 
 
 
-	public String rehoming(HttpServletRequest request, SqlSession sqlSession) {
+	public String rehoming(HttpServletRequest request, SqlSession sqlSession) 
+	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
 		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.rehoming(mis_no);
@@ -156,11 +159,41 @@ public class MissingController {
 
 
 
-	public String missingend(Model mo, SqlSession sqlSession) {
+	public String missingend(Model mo, SqlSession sqlSession) 
+	{
 		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		ArrayList<MissingDTO> missingend = micdao.missingend();
 		mo.addAttribute("missingend",missingend);
 		return "missingend";
+	}
+	
+	@RequestMapping("/post")
+		public String postList(PagingDTO dto, Model mo,SqlSession sqlSession
+				,@RequestParam(value="nowPage", required=false)String nowPage
+				,@RequestParam(value="cntPerPage", required=false)String cntPerPage)
+	{
+		MissingService mic = sqlSession.getMapper(MissingService.class);
+		int total = mic.cntpost();
+		if(nowPage == null && cntPerPage == null)
+		{
+			nowPage = "1";
+			cntPerPage = "3";
+		}
+		else if(nowPage == null)
+		{
+			nowPage = "1";
+		}
+		else if(cntPerPage == null)
+		{
+			cntPerPage="3";
+		}
+		System.out.println("현재페이지"+nowPage+" "+cntPerPage);
+		System.out.println("총레코드 :"+total);
+		
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("viewAll", mic.selectpost(dto));
+		return "missingoutform";
 	}
 	
 }
