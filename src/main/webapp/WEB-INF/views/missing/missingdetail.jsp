@@ -5,56 +5,120 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+textarea {
+	line-height: 150%;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 
+<h4><B><font color="#fdafab">실종신고 게시판</font></B></h4>
+<br><br>
 
-<h1>여기는 상세페이지</h1>
-
-<table border="1">
-<tr>
-<td>반려견사진 </td>
-<td>
-<table border="1">
-	<tr><td>글번호</td><td>${mic.mis_no}</td></tr>
+<table border="0" align="center" width="700">
 	<tr>
-		<td>구분</td>
-		<td>
-			${mic.mis_gb}
+		<th align="left" colspan="4">　${mic.mis_gb}　 
 			<c:if test="${mem_id eq 'admin' || mem_no eq mic.mem_no}">
-				<c:if test="${mic.mis_gb eq '실종'}">
-					<button onclick="location.href='rehoming?mis_no=${mic.mis_no}'">귀가완료</button>
-				</c:if>
+					<c:if test="${mic.mis_gb eq '실종'}">
+						<button onclick="location.href='rehoming?mis_no=${mic.mis_no}'">귀가완료</button>
+					</c:if>
 			</c:if>
+		</th>
+	</tr>		
+	<tr>
+		<td colspan="4" align="left">
+			<h4><B>　[${mic.mis_gb }/${mic.mis_gb2 }]${mic.mis_title}</B></h4>
 		</td>
 	</tr>
-	<tr><td>제목</td><td>${mic.mis_title}</td></tr>
-	<tr><td>반려동물이름</td><td>${mic.mis_pname}</td></tr>
-	<tr><td>등록번호</td><td>${mic.mis_pno}</td></tr>
-	<tr><td>실종날짜</td><td>${mic.mis_misdate}</td></tr>
-	<tr><td>실종장소</td><td>${mic.mis_misplace}</td></tr>
-	<tr><td>회원번호</td><td>${mic.mem_no}</td></tr>
-	<tr><td>회원닉네임</td><td>${mic.mem_nickname}</td></tr>
-	<tr><td>회원전화</td><td>${mic.mem_tel}</td></tr>
-	<tr><td>작성일자</td><td>${mic.mis_writeday}</td></tr>
-	<tr><td>내용</td><td>${mic.mis_content}</td></tr>
-	<tr><td>조회수</td><td>${mic.mis_readcount}</td></tr>
-	<tr><td>글삭제/수정</td>
-		<td>
-			<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">
-					<a href="missingdelete?mis_no=${mic.mis_no}">삭제</a>
-					<a href="missingmodifyform?mis_no=${mic.mis_no}">수정</a>
-				<c:if test="${mic.mis_gb eq '귀가'}">
-					<button onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'">후기글쓰기</button>
-				</c:if>
-			</c:if>
-		</td>
+	
+	<tr>
+		<td colspan="4" align="left">
+			<fmt:parseDate value="${mic.mis_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+			<B>　${mic.mem_nickname }</B>　　조회 ${mic.mis_readcount}　　${writedaystring }　　댓글 ?</td>
+	</tr>
+		
+	<tr>
+		<td>　　</td></tr>
+		
+	<tr>
+		<td colspan="4" align="center" bgcolor="#fbdee2"><B>　반려동물 정보　</B></td></tr>
+	
+	<tr>
+		<td width="100px"><B>이름</B></td><td width="250px">${mic.mis_pname }</td>
+		<td width="100px"><B>등록번호</B></td><td width="250px">${mic.mis_pno }</td>
+	</tr>
+	<tr>
+		<td><B>발견장소</B></td><td>${mic.mis_misplace }</td>
+		<td><B>발견날짜</B></td><td>${mic.mis_misdate }</td>
+	</tr>
+	
+	<tr>
+		<td>　　</td></tr>
+	
+	<tr><td colspan="4" align="center" bgcolor="#fbdee2"><B>　실종신고자 정보　</B></td></tr>
+	<tr>
+		<td width="100px"><B>닉네임</B></td><td width="250px">${mic.mem_nickname }</td>
+		<td width="100px"><B>연락처</B></td><td width="250px">${mic.mem_tel }</td>
 	</tr>
 </table>
-</td>
+
+<table border="0" align="center" width="700">
+<tr>
+	<td colspan="3"><B>　</B></td>	</tr>
+<tr>
+	<td colspan="3"><B>　</B></td>
 </tr>
+
+<tr>
+	<td>　　　　</td>
+	<td colspan="2"><img src="${pageContext.request.contextPath}/image/${mic.mis_image }"></td>
+	<td>　　　　</td>
+</tr>
+
+<tr>
+	<td>　　</td></tr>
+	
+<tr>
+	<td>　　　　</td>
+	<td colspan="2" height="300px">
+	<textarea id="detailarea" readonly="readonly">${mic.mis_content }</textarea>
+	</td>
+	<td>　　　　</td>
+</tr>
+
+<tr>
+	<td>　　</td></tr>
+	
+<tr>
+	<td>　　</td></tr>
+	
+	<tr>
+	<td colspan="4" align="right">
+		<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">
+					<a href="missingmodifyform?mis_no=${mic.mis_no}"><B><input type="button" value="수정"></B></a>
+					<a href="missingdelete?mis_no=${mic.mis_no}"><B><input type="button" value="삭제"></a>	
+				<c:if test="${mic.mis_gb eq '귀가'}">
+					<button id="longbutton" onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'"><B>후기글쓰기</B></button>
+				</c:if>
+		</c:if>
+	</td>
+	</tr>
+<tr>
+	<td colspan="4">
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='rehome'"><B>목록</B></button>
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+	</td>
+</tr>		
 </table>
+
 </body>
 </html>

@@ -12,6 +12,7 @@
 <body>
 
 <!-- 추천기능 -->
+<!-- https://blog.naver.com/PostView.nhn?blogId=heartflow89&logNo=221042458016&parentCategoryNo=&categoryNo=96&viewDate=&isShowPopularPosts=false&from=postView -->
 <div>
 	<c:if test="${ mem_id == null }">
 		추천은 로그인 후 사용 가능합니다.
@@ -46,7 +47,7 @@ $(function(){
 	// 게시글 추천수
     function likesCount() {
 		$.ajax({
-			url: "/", //경로...
+			url: "/", //경로... 근데 백을 제가 다르게 짜놔서 경로 잡아도 안될듯
             type: "POST",
             data: {
             	likes_boardno: ${b.bd_no}

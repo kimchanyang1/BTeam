@@ -40,7 +40,6 @@ public class HomeController {
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
 	
-		
 	
 	@RequestMapping(value = "/")
 	public String home() {
@@ -67,25 +66,25 @@ public class HomeController {
 		return nc.noticeinput(request, sqlSession);
 	}
 	
-	//°øÁö ÀÚ¼¼È÷º¸±â
+	//å ì™ì˜™å ì™ì˜™ å ìŒ˜ì‡½ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/noticedetail")
 	public String noticedetail(HttpServletRequest request, Model model) {
 		return nc.noticedetail(request, sqlSession, model);
 	}
 	
-	//°øÁö ¼öÁ¤
+	//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/noticemodifyform")
 	public String noticemodifyform(HttpServletRequest request, Model model) {
 		return nc.noticemodifyform(request, sqlSession, model);
 	}
 	
-	//°øÁö ¼öÁ¤
+	//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/noticemodify")
 	public String noticemodify(HttpServletRequest request, Model model) {
 		return nc.noticemodify(request, sqlSession, model);
 	}
 	
-	//°øÁö »èÁ¦
+	//å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/noticedelete")
 	public String noticedelete(HttpServletRequest request, Model model) {
 		return nc.noticedelete(request, sqlSession, model);
@@ -265,7 +264,7 @@ public class HomeController {
 	
 	
 	
-	// ÈÄ±â°Ô½ÃÆÇ
+	// å ì‹ê¹ì˜™ç£å ì™ì˜™å ï¿½
 	@RequestMapping(value = "/epilogue")
 	public String ee0(Model md) {
 			
@@ -273,7 +272,7 @@ public class HomeController {
 	}
 	
 	
-	// ±Û¾²±â
+	// å ìŒœì–µì˜™å ì™ì˜™
 	@RequestMapping(value = "/epilogueinputform")
 	public String ee1(HttpServletRequest request, Model md)	{
 					
@@ -287,7 +286,7 @@ public class HomeController {
 	}
 	
 	
-	// µğÅ×ÀÏ
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/epiloguedetail")
 	public String ee3(HttpServletRequest request, Model md) {
 		
@@ -295,7 +294,7 @@ public class HomeController {
 	}
 	
 	
-	// ¼öÁ¤
+	// å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/epiloguemodifyselect")
 	public String ee4(HttpServletRequest request, Model md) {
 		
@@ -309,7 +308,7 @@ public class HomeController {
 	}
 	
 	
-	// »èÁ¦
+	// å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/epiloguedelete")
 	public String ee6(HttpServletRequest request, Model md) {
 		
@@ -317,7 +316,7 @@ public class HomeController {
 	}
 	
 	
-	// °Ë»ö
+	// å ì‹¯ì‚¼ì˜™
 	@RequestMapping(value = "/epiloguesearch")
 	public String ee7(HttpServletRequest request, Model md) {
 			
@@ -327,7 +326,7 @@ public class HomeController {
 		
 	
 	
-	// ÀÚÀ¯°Ô½ÃÆÇ
+	// å ì™ì˜™å ì™ì˜™å ìŒ‰ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/board")
 	public String bb0(Model md) {
 		
@@ -335,7 +334,7 @@ public class HomeController {
 	}
 	
 	
-	// ±Û¾²±â
+	// å ìŒœì–µì˜™å ì™ì˜™
 	@RequestMapping(value = "/boardinputform")
 	public String bb1(HttpServletRequest request, Model md)	{
 				
@@ -343,13 +342,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/boardinput")
-	public String bb2(MultipartHttpServletRequest multi) {
+	public ModelAndView bb2(MultipartHttpServletRequest multi) {
 		
 		return bc.boardinput(sqlSession, multi);
 	}
 	
 	
-	// µğÅ×ÀÏ
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/boarddetail")
 	public String bb3(HttpServletRequest request, Model md) {
 		
@@ -357,7 +356,7 @@ public class HomeController {
 	}
 	
 	
-	// ¼öÁ¤
+	// å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/boardmodifyselect")
 	public String bb4(HttpServletRequest request, Model md) {
 		
@@ -371,7 +370,7 @@ public class HomeController {
 	}
 	
 	
-	// »èÁ¦
+	// å ì™ì˜™å ì™ì˜™
 	@RequestMapping(value = "/boarddelete")
 	public String bb6(HttpServletRequest request, Model md) {
 		
@@ -379,11 +378,29 @@ public class HomeController {
 	}
 	
 	
-	// °Ë»ö
+	// å ì‹¯ì‚¼ì˜™
 	@RequestMapping(value = "/boardsearch")
 	public String bb7(HttpServletRequest request, Model md) {
 		
 		return bc.boardsearch(sqlSession, request, md);
 	}
 	
+	@RequestMapping(value="/policyprivate")
+	public String policyprivate()
+	{
+			
+		return "policyprivate";
+	}
+	
+	@RequestMapping(value="/policyservice")
+	public String policyservice()
+	{		
+		return "policyservice";
+	}
+	
+	@RequestMapping(value="/location")
+	public String location()
+	{		
+		return "location";
+	}
 }

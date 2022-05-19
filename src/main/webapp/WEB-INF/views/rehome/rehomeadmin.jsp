@@ -10,15 +10,16 @@
 <title>분양/임시보호 관리자 페이지</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">관리자 전용 분양 완료 게시판</font></B></h4>
-<h6><B><font color="red">관리자 전용 게시판입니다</font><br>
-승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
+<h6><B><font color="red">관리자 전용 게시판입니다</font></B></h6>
+<h6><B>승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
 <br><br>
+
 <table border="0" align="center" width="700">
 <tr>
 	<td>
+	<c:if test="${fn:length(rdto) > 0}">
 	<c:forEach var="rd" begin="0" end="${fn:length(rdto)-1}" step="1">
 	<div class="container">
 		<div class="row">
@@ -44,6 +45,8 @@
 	<td>
 	</c:if>
 	</c:forEach>
-</section>
+	</c:if>
+</table>
+
 </body>
 </html>

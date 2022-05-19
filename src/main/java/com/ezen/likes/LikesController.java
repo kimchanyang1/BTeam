@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class LikesController {
 
-	@RequestMapping(method = RequestMethod.POST, value = "/likesupdate")
+	@RequestMapping(value = "/likesupdate")
 	public String likesupdate(HttpServletRequest request, SqlSession sqlSession)
 	{
 		int likes_boardno = Integer.parseInt(request.getParameter("likes_boardno"));
