@@ -7,5 +7,6 @@ public interface MemberService {
 	public void memberdelete(int mem_no);
 	public void membermodify(String mem_pw, String mem_nickname, String mem_jumin, String mem_tel, String mem_mail, String mem_address, int mem_no);
 	public MemberDTO memberdetail(int mem_no);
+	public int IdCheck(String mem_id);
 	
 }

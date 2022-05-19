@@ -13,23 +13,106 @@ $(document).ready(function(){
 		}
 	});
 });
+function id_check(){
+    var mem_id = $('#mem_id').val();
+    $.ajax({
+        url:'IdCheckForm', //Controller에서 인식할 주소
+        type:'GET', //POST 방식으로 전달
+        data:{'mem_id':mem_id},
+        async:true,
+        success:function(responseData){
+        	$("#ajax").remove();
+			var use = JSON.parse(responseData);
+            alert(use+"개의 아이디 보유");
+            if (use == 0) {
+                $("#idCheck").attr("value","idChecked");
+			}else {
+                $("#idCheck").attr("value","idUnchecked");
+			}
+        },
+        error:function(request,error){
+            alert("에러입니다"+mem_id);
+            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+        }
+    });
+};
+function reCheck() {
+    $("#idCheck").attr("value","idUnchecked");
+}
+/*
+function id_check(){
+	var url = "IdCheckForm";
+	var windowTargetName = "targetName";
+	var features = "scrollbars=no,width=500,height=300,location=no, resizable=no";
+	window.open(url, windowTargetName, features);
+}
+*/
+</script>
+<script type="text/javascript">
+
+function checking() {
+	try{
+		alert("회원가입 시작");
+		var f = document.form1;
+		var id = f.mem_id.value;
+		var idCheck = f.idCheck.value;
+		if (id=="") {
+			alert("아이디를 입력해 주세요");
+			return false;
+		}else if (idCheck!="idChecked") {
+			alert("아이디 체크를 해주세요");
+			return false;
+		}
+		alert("회원가입 완료");
+		document.form1.submit();
+		alert("서브밋 왜안먹음;");
+    }
+    catch(err){
+		alert(err.message);
+    }
+}
+
+/*
+$(document).ready(function(){
+	$("#submit").click(function(){
+		alert("회원가입 시작");
+		var f = document.form1;
+		var id = f.mem_id.value;
+		var idCheck = f.idCheck.value;
+		if (id="") {
+			alert("아이디를 입력해 주세요");
+		}else if (idCheck!="idChecked") {
+			alert("아이디 체크를 해주세요");
+		}
+		alert("회원가입 완료");
+	});
+});
+*/
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<form class="form-horizontal" action="signup" method="post">
+<form class="form-horizontal" action="signup" method="post" name="form1">
 <div style="width: 50%;margin: auto;padding-top: 20px;">
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="mem_id">아이디</label>
 		<div class="col-sm-10">
-			<input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="아이디를 입력해주세요">
+			<input type="text" id="mem_id" name="mem_id" placeholder="아이디를 입력해주세요" onkeydown="reCheck()">
+			<button type="button" onclick="id_check()" id="parentForm">아이디 중복확인</button>
+			<input type="text" value="idUnchecked" name="idCheck" id="idCheck" readonly="readonly">
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="mem_pw">비밀번호</label>
 		<div class="col-sm-10">
 			<input type="password" class="form-control" id="mem_pw" name="mem_pw" placeholder="비밀번호를 입력해주세요">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="pwCheck">비밀번호 확인</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" id="pwCheck" name="pwCheck" placeholder="비밀번호를 다시 입력해주세요">
 		</div>
 	</div>
 	<div class="form-group">
@@ -77,7 +160,7 @@ $(document).ready(function(){
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="submit" class="btn btn-default">입력</button>
+			<input type="button" onclick="checking()" value="입력">
 		</div>
 	</div>
 </div>
