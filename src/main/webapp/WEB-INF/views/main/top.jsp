@@ -12,10 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header style="text-align: center;">
-	<h1>?????????</h1>
+<header>
+	<h1>TeamB</h1>
 </header>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
 		<a class="navbar-brand" href="home"><span class="glyphicon glyphicon-home"></span></a>
@@ -40,7 +40,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="missingend">귀가 완료</a></li>
 					<li><a href="rehomeend">분양 완료</a></li>
-					<li><a href="epilogue">후기</a></li>
+					<li><a href="epilogue">후기글</a></li>
 				</ul>
         	</li>
         	<li class="active">
@@ -63,7 +63,7 @@
 					<li><a href="logout"><span class="glyphicon glyphicon-log-in"></span> 로그아웃</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="signupform1"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+					<li><a href="signpolicy"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
 					<li><a href="loginform"><span class="glyphicon glyphicon-log-in"></span> 로그인</a></li>
 				</c:otherwise>
 			</c:choose>

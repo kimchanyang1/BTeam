@@ -22,6 +22,14 @@ public class MemberController {
 		return "signupform2";
 	}
 	
+	public String signpolicy(){
+		return "Memberpolicy";
+	}
+	
+	public String Signupform() {
+		return "signupform";
+	}
+	
 	public String Signup(HttpServletRequest request, SqlSession sqlSession) {
 		String mem_id = request.getParameter("mem_id");
 		String mem_pw = request.getParameter("mem_pw");

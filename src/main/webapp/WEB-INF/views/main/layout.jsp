@@ -4,9 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<jsp:include page="cdn.jsp"/>
 <style type="text/css">
 #container {
 	border: 1px slid #bcbcbc;
@@ -21,13 +19,7 @@
 #body {
 	width: 100%;
 }
-#footer {
-	width: 100%;
-	text-align: center;
-	font-size: 20px;
-	line-height: 30px;
-	height: 30px;
-}
+
 </style>
 <meta charset="UTF-8">
 <title><t:insertAttribute name="title"/></title>

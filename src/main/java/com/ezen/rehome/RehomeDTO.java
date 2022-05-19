@@ -3,8 +3,8 @@ package com.ezen.rehome;
 /*
 create table rehome(
 rh_no NUMBER(6) PRIMARY KEY,
-rh_gb1 VARCHAR2(10),
-rh_gb2 VARCHAR(10),
+rh_gb1 VARCHAR2(20),
+rh_gb2 VARCHAR(20),
 rh_gb3 VARCHAR2(10),
 rh_title VARCHAR2(80),
 rh_pname VARCHAR2(20),

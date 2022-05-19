@@ -4,6 +4,7 @@ package com.ezen.missing;
 create table missing(
 mis_no NUMBER(6) PRIMARY KEY,
 mis_gb VARCHAR2(10),
+mis_gb2 VARCHAR2(10),
 mis_title VARCHAR2(80),
 mis_pname VARCHAR2(20),
 mis_pno VARCHAR2(20),
@@ -24,14 +25,13 @@ create SEQUENCE mis_no;
 public class MissingDTO {
 	
 	int mis_no;
-	String mis_gb,mis_title,mis_pname,mis_misdate,mis_misplace,mis_pno,mis_image;
+	String mis_gb,mis_gb2,mis_title,mis_pname,mis_misdate,mis_misplace,mis_pno,mis_image;
 	int mem_no;
 	String mem_nickname, mem_tel,mis_writeday,mis_content;
 	int mis_readcount;
 	
 	public MissingDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getMis_no() {
@@ -48,6 +48,14 @@ public class MissingDTO {
 
 	public void setMis_gb(String mis_gb) {
 		this.mis_gb = mis_gb;
+	}
+
+	public String getMis_gb2() {
+		return mis_gb2;
+	}
+
+	public void setMis_gb2(String mis_gb2) {
+		this.mis_gb2 = mis_gb2;
 	}
 
 	public String getMis_title() {
@@ -145,10 +153,6 @@ public class MissingDTO {
 	public void setMis_readcount(int mis_readcount) {
 		this.mis_readcount = mis_readcount;
 	}
-	
-	
-	
-	
 	
 	
 	
