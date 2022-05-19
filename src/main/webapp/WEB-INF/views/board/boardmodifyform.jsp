@@ -47,8 +47,8 @@ textarea {
 	<td colspan="2">　　</td></tr>
 <tr>
 	<td colspan="2"><B>
-		<input type="submit" value="수정"></B>
-		<button onclick="location.href='board'"><B>취소</B></button></td></tr>
+		<input type="submit" value="수정">
+		<a href="boarddetail?bd_no=${b.bd_no}"><input id="cancel" type="button" value="취소"></a></B></td></tr>
 </c:forEach>
 </table>
 </form>

@@ -25,6 +25,7 @@
 <table border="0" align="center" width="700">
 <tr>
 	<td>
+	<c:if test="${fn:length(epiloguelist) > 0}">
 	<c:forEach var="e" begin="0" end="${fn:length(epiloguelist)-1}" step="1">
 	<div class="container">
 		<div class="row">
@@ -50,6 +51,7 @@
 	<td>
 	</c:if>
 	</c:forEach>
+	</c:if>
 </table>
 
 <br><br>

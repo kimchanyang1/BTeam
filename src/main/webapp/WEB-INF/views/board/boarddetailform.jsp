@@ -81,9 +81,9 @@ textarea {
 </tr>
 <tr>
 	<td colspan="3">
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='boarddetail?bd_no=${(b.bd_no)-1 }'"><B>◀ 이전글</B></button>
 		<button id="b2" onclick="location.href='board'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+		<button id="b2" onclick="location.href='barddetail?bd_no=${(b.bd_no)+1 }'"><B>다음글 ▶</B></button>
 	</td>
 </tr>
 </c:forEach>

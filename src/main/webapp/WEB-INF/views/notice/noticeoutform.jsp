@@ -11,6 +11,7 @@ th {
 	height: 35px;
 }
 td {
+	text-align: left;
 	height: 35px;
 }
 table {

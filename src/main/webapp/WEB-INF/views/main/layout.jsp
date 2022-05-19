@@ -22,13 +22,7 @@
 #body {
 	width: 100%;
 }
-#footer {
-	width: 100%;
-	text-align: center;
-	font-size: 20px;
-	line-height: 30px;
-	height: 30px;
-}
+
 </style>
 <meta charset="UTF-8">
 <title><t:insertAttribute name="title"/></title>

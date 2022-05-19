@@ -47,7 +47,8 @@ textarea {
 	<td colspan="2">　　</td></tr>
 <tr>
 	<td colspan="2"><B>
-		<input type="submit" value="등록"></B></td></tr>
+		<input type="submit" value="등록">
+		<a href="epilogue"><input id="cancel" type="button" value="취소"></a></B></td></tr>
 </table>
 </form>
 

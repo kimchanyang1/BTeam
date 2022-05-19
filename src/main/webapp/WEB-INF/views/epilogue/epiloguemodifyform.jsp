@@ -48,7 +48,8 @@ textarea {
 	<td colspan="2">　　</td></tr>
 <tr>
 	<td colspan="2"><B>
-		<input type="submit" value="수정"></B></td></tr>
+		<input type="submit" value="수정">
+		<a href="epiloguedetail?ep_no=${e.ep_no}"><input id="cancel" type="button" value="취소"></a></B></td></tr>
 </c:forEach>
 </table>
 </form>
