@@ -32,7 +32,6 @@ public class MissingDTO {
 	
 	public MissingDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getMis_no() {

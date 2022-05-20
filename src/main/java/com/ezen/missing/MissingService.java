@@ -13,6 +13,6 @@ public interface MissingService {
 	public void rehoming(int mis_no);
 	public ArrayList<MissingDTO> missingend();
 	public void missingreadcount(int mis_no);
-	public int cntpost();
-	public ArrayList<MissingDTO> selectpost(PagingDTO dto);
+	public int cntpage();
+	public ArrayList<MissingDTO> selectpage(PagingDTO dto);
 }

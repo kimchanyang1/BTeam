@@ -7,10 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양/임보 목록</title>
+<title>분양/임시보호 완료 목록</title>
 </head>
 <body>
-<section>
 
 <h4><B><font color="#fdafab">분양 완료 게시판</font></B></h4>
 <h6><B>이곳에 있는 아이들은 분양이 완료된 아이들입니다</B></h6>
@@ -20,6 +19,7 @@
 <table border="0" align="center" width="700">
 <tr>
 	<td>
+	<c:if test="${fn:length(rdto) > 0}">
 	<c:forEach var="rd" begin="0" end="${fn:length(rdto)-1}" step="1">
 	<div class="container">
 		<div class="row">
@@ -45,6 +45,8 @@
 	<td>
 	</c:if>
 	</c:forEach>
-</section>
+	</c:if>
+</table>
+
 </body>
 </html>

@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>분양/임시보호 검색</title>
 </head>
 <body>
-<section>
+
 <form action="rehomesearch" method="post">
 <table border="1" align="center" width="500">
 	<tr>
@@ -25,6 +25,6 @@
 	</tr>
 </table>
 </form>
-</section>
+
 </body>
 </html>

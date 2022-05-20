@@ -60,6 +60,10 @@ public class MissingController {
         int mem_no = (int) hs.getAttribute("mem_no");
         String mem_nickname = (String) hs.getAttribute("mem_nickname");
         String mem_tel = (String) hs.getAttribute("mem_tel");
+        
+        System.out.println(mem_no);
+        System.out.println(mem_nickname);
+        System.out.println(mem_tel);
 		
 		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.missing_insert(mis_gb,mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel ,mis_content);
@@ -167,32 +171,19 @@ public class MissingController {
 		return "missingend";
 	}
 	
-	@RequestMapping("/post")
-		public String postList(PagingDTO dto, Model mo,SqlSession sqlSession
-				,@RequestParam(value="nowPage", required=false)String nowPage
-				,@RequestParam(value="cntPerPage", required=false)String cntPerPage)
+	public String missingpage(PagingDTO dto, Model mo,SqlSession sqlSession
+				,@RequestParam(value="nowPage", required=false)String nowPage)
 	{
 		MissingService mic = sqlSession.getMapper(MissingService.class);
-		int total = mic.cntpost();
-		if(nowPage == null && cntPerPage == null)
-		{
-			nowPage = "1";
-			cntPerPage = "3";
-		}
-		else if(nowPage == null)
+		int total = mic.cntpage();
+		if(nowPage == null)
 		{
 			nowPage = "1";
 		}
-		else if(cntPerPage == null)
-		{
-			cntPerPage="3";
-		}
-		System.out.println("현재페이지"+nowPage+" "+cntPerPage);
-		System.out.println("총레코드 :"+total);
-		
-		dto = new PagingDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+	
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
 		mo.addAttribute("paging", dto);
-		mo.addAttribute("viewAll", mic.selectpost(dto));
+		mo.addAttribute("missingout", mic.selectpage(dto));
 		return "missingoutform";
 	}
 	

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.likes.LikesService">
+
+<!-- 동일 게시글에 대한 이전 추천 여부 확인 -->
+<select id="likes_check"  resultType="int">
+	select count(*) from likes where likes_boardno = #{likes_boardno} and likes_id = #{likes_id}
+</select>
+
+<!-- 게시글 추천 -->
+<insert id="likes_update" >
+	insert into likes values(#{likes_boardno}, #{likes_id}, likes_seq.nextval)
+</insert>
+	
+<!-- 게시글 추천 취소 -->
+<delete id="likes_delete" >
+	delete from likes where likes_boardno = #{likes_boardno} and likes_id = #{likes_id}
+</delete>
+	
+<!-- 게시글 추천수 -->
+<select id="likes_count" resultType="int">
+	select count(*) from likes where likes_boardno = #{likes_boardno}
+</select>
+
+</mapper>

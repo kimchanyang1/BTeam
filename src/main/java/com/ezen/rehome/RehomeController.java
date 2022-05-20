@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.member.MemberController;
 import com.ezen.member.MemberDTO;
 import com.ezen.member.MemberService;
+import com.ezen.missing.MissingService;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.PagingDTO;
 
 public class RehomeController {
 	
@@ -196,5 +199,21 @@ public class RehomeController {
 		mo.addAttribute("rh_no", rh_no);
 		return "rehomeimboform";
 	}
+	
+	public String rehomepage(PagingDTO dto, Model mo,SqlSession sqlSession
+			,@RequestParam(value="nowPage", required=false)String nowPage)
+	{
+	RehomeService rh = sqlSession.getMapper(RehomeService.class);
+	int total = rh.cntpage();
+	if(nowPage == null)
+	{
+		nowPage = "1";
+	}
+
+	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+	mo.addAttribute("paging", dto);
+	mo.addAttribute("rdto", rh.selectpage(dto));
+	return "Rehomeoutform";
+}
 
 }

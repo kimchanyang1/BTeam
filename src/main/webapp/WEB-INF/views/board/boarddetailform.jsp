@@ -5,56 +5,138 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+textarea {
+	line-height: 150%;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#likes_update").click(function(){
+		$.ajax({
+			url: "likesupdate",
+	        type: "POST",
+	        data: {
+	        	likes_boardno: ${boarddetail.bd_no},
+	        	likes_id: "${mdto.mem_id}"
+	        },
+	        success: function () {
+		        likesCount();
+	        },
+	        error:function(request,error){
+	            alert("에러입니다");
+	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+	        }
+		});
+	});
+	
+	function likesCount() {
+		$.ajax({
+			url: "likescount",
+            type: "POST",
+            data: {
+            	likes_boardno: ${boarddetail.bd_no}
+            },
+            success: function (responseData) {
+            	$("#ajax").remove();
+    			var count = JSON.parse(responseData);
+            	$(".likes_count").html(count); //span 으로 가서 추천 수 보여줌
+            },
+	        error:function(request,error){
+	            alert("에러입니다"+${boarddetail.bd_no}+";");
+	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+	        }
+		});
+    }
+    likesCount();
+});
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-<section>
-<h3>자유게시판</h3>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
+
+<h4><B><font color="#fdafab">자유게시판</font></B></h4>
 <br><br>
-<table border="1" align="center" width="600">
-<c:forEach items="${boarddetail }" var="b">
+<table border="0" align="center" width="700">
+	<input type="hidden" value="${boarddetail.mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
 <tr>
-	<th>　글번호　</th>
-	<td><input type="text" name="bd_no" value="${b.bd_no}" readonly="readonly"></td></tr>
+	<td colspan="3" align="left">
+		<B>　글번호 ${boarddetail.bd_no}</B>
+	</td>
+</tr>
 <tr>
-	<th>　작성자　</th>
-	<td><input type="text" value="${b.mem_nickname}" readonly="readonly"></td></tr>
+	<td colspan="3" align="left">
+		<h4><B>　${boarddetail.bd_title }</B></h4>
+	</td>
+</tr>
 <tr>
-	<th>　조회수　</th>
-	<td><input type="text" value="${b.bd_readcount}" readonly="readonly"></td></tr>	
-<tr>
-	<th>　작성일자　</th>
-		<fmt:parseDate value="${b.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+	<td colspan="3" align="left">
+		<fmt:parseDate value="${boarddetail.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<input type="text" value="${writedaystring }" readonly="readonly">
+		<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　추천수 ?</td>
+</tr>
+<tr>
+	<td>　　</td></tr>
+<tr>
+	<td>　　</td></tr>
+<tr>
+	<td>　　　　</td>
+	<td><img src="${pageContext.request.contextPath}/image/${boarddetail.bd_image}" width="500px"></td>
+	<td>　　　　</td>
+</tr>
+<tr>
+	<td>　　</td></tr>
+<tr>
+	<td>　　　　</td>
+	<td><textarea id="detailarea" readonly="readonly">${boarddetail.bd_content }</textarea></td>
+	<td>　　　　</td>
+</tr>
+<tr>
+	<td colspan="3" align="center">
+		<input type="hidden" value="${e.mem_no }" readonly="readonly">
+		<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
+	</td>
+</tr>
+<tr>
+	<td colspan="3" align="center">　　
+		<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
 	</td></tr>
 <tr>
-	<th>　제목　</th>
-	<td><input type="text" value="${b.bd_title }" readonly="readonly"></td></tr>
-<tr>
-	<th>　이미지　</th>
-	<td><img src="${pageContext.request.contextPath}/image/${b.bd_image}"></td></tr>
-<tr>
-	<th>　내용　</th>
-	<td><textarea readonly="readonly">${b.bd_content }</textarea></td></tr>	
-<tr>
-	<td colspan="2" align="center">　　
-		<input type="hidden" value="${b.mem_no }" readonly="readonly">
-		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly"></td></tr>
-<tr>
-	<td colspan="2" align="center">　　
-		<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly"></td></tr>
-<tr>
-	<td colspan="2" align="right">
-		<button><a href="">추천</a></button>
-		<c:if test="${b.mem_no eq mem_no || mem_id eq 'admin'}">
-			<button onclick="location.href='boardmodifyselect?bd_no=${b.bd_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'">수정</button>
-			<button onclick="location.href='boarddelete?bd_no=${b.bd_no }'">삭제</button>
+	<td colspan="3" align="right">
+		<div>
+			<c:if test="${ mdto.mem_id == null }">
+				추천은 로그인 후 사용 가능합니다.
+					<i class="fas fa-heart" style="font-size:16px;color:red"></i>
+					<span class="likes_count"></span>	
+			</c:if>
+			<c:if test="${ mdto.mem_id != null }">
+				<button class="w3-button w3-black w3-round" id="likes_update">
+					<i class="fas fa-heart" style="font-size:16px;color:red"></i>
+					&nbsp;<span class="likes_count"></span>
+				</button> 
+			</c:if>
+		</div>
+		<c:if test="${boarddetail.mem_no eq mdto.mem_no || mdto.mem_id eq 'admin'}">
+			<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
+			<button onclick="location.href='boarddelete?bd_no=${boarddetail.bd_no }'"><B>삭제</B></button>
 		</c:if>
-	</td></tr>
-</c:forEach>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<button id="b2" onclick="location.href='boarddetail?bd_no=${(boarddetail.bd_no)-1 }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='board'"><B>목록</B></button>
+		<button id="b2" onclick="location.href='barddetail?bd_no=${(boarddetail.bd_no)+1 }'"><B>다음글 ▶</B></button>
+	</td>
+</tr>
 </table>
-</section>
+
 </body>
 </html>

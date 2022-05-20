@@ -15,52 +15,74 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<style type="text/css">
+th {
+	text-align: center;
+}
+td {
+	text-align: left;
+	height: 35px;
+}
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<table style="margin: auto;" border="1">
+<h4><B><font color="#fdafab">회원정보</font></B></h4>
+<h6><B>　　</B></h6>
+<h6><B><font color="red">　　</font></B></h6>
+<br><br>
+
+<table border="0" align="center">
 	<tr>
-		<th>회원번호</th>
-		<td id="mem_no">${mdto.mem_no}</td>
+		<th><B>　회원번호　</B></th>
+		<td id="mem_no"><input type="text" value="${mdto.mem_no}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>아이디</th>
-		<td>${mdto.mem_id}</td>
+		<th><B>　아이디　</B></th>
+		<td><input type="text" value="${mdto.mem_id}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>비밀번호</th>
-		<td>${mdto.mem_pw}</td>
+		<th><B>　비밀번호　</B></th>
+		<td><input type="password" value="${mdto.mem_pw}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>이름</th>
-		<td>${mdto.mem_name}</td>
+		<th><B>　이름　</B></th>
+		<td><input type="text" value="${mdto.mem_name}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>닉네임</th>
-		<td id="mem_nickname">${mdto.mem_nickname}</td>
+		<th><B>　닉네임　</B></th>
+		<td id="mem_nickname"><input type="text" value="${mdto.mem_nickname}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>주민등록번호</th>
-		<td>${mdto.mem_jumin}</td>
+		<th><B>　주민등록번호　</B></th>
+		<td><input type="text" value="${mdto.mem_jumin}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>전화번호</th>
-		<td>${mdto.mem_tel}</td>
+		<th><B>　연락처　</B></th>
+		<td><input type="tel" value="${mdto.mem_tel}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>이메일</th>
-		<td>${mdto.mem_mail}</td>
+		<th><B>　이메일　</B></th>
+		<td><input type="email" value="${mdto.mem_mail}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<th>주소</th>
-		<td>${mdto.mem_address}</td>
+		<th><B>　주소　</B></th>
+		<td><input type="text" value="${mdto.mem_address}" readonly="readonly"></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<button onclick="location.href='membermodifyform'">수정</button>
+		<td colspan="2">　　</td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<button onclick="location.href='membermodifyform'">수정</button>　
 			<button id="memberdelete">회원탈퇴</button>
-		</td>
+		</th>
 	</tr>
 </table>
 </body>

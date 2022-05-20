@@ -6,29 +6,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="./resources/css/style.css" rel="stylesheet" />
 </head>
-
 <body>
-<section style="overflow:auto; overflow-x:hidden; height: 700px">
-<h4><B><font color="#fdafab">실종신고게시판</font></B></h4>
+<section style="overflow: scroll; height: 700px; overflow-x: hidden; " >
+<h4><B><font color="#fdafab">실종신고 게시판</font></B></h4>
 <h6><B>실종된 반려동물을 찾는 게시판입니다</B></h6>
 <h6><B><font color="red">* 글쓰기는 로그인 후 가능합니다</font></B></h6>
 <br><br>
 
-<table border="0"  align="center" width="500">
+
+<table border="0" align="center" width="700">
 	<tr>
-		<td>
+		<td align="left">　
 			<c:if test="${logon eq true && mem_no != null}">
-			<a href="missinginputform"><input type="button" value="글 작성"></a>
+				<button onclick="location.href='missinginputform'"><B>글쓰기</B></button></a>
 			</c:if>
 		</td>
 	</tr>
-
 	<tr>
+		<td colspan="6">　　</td></tr>
+	<tr>
+		<td colspan="6">　　</td></tr>
+		
 		<td>
+		<c:if test="${fn:length(missingout) > 0}">
 		<c:forEach var="mic" begin="0" end="${fn:length(missingout)-1}" step="1">		
 		<div class="container">
 			<div class="row">
@@ -51,29 +55,36 @@
 	</tr>
 		</c:if>
 		</c:forEach>
+		</c:if>
+		
 		 <tr>      
-               <td colspan="5">
+               <td colspan="5">             
                <c:if test="${paging.startPage != 1 }">
-                  <a href="post?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+               <a href="missingpage?nowPage=${paging.startPage - 1}">&lt;</a>
                </c:if>
-               <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
-                  <c:choose>
-                     <c:when test="${p == paging.nowPage }">
-                        <b>${p }</b>
-                     </c:when>
-                     <c:when test="${p != paging.nowPage }">
-                        <a href="post?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-                     </c:when>
-                  </c:choose>
-               </c:forEach>
+                   
+               <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+               	<c:choose>
+               		<c:when test="${paging.nowPage eq i}">
+               			${i}
+               		</c:when>
+               		<c:otherwise>
+               			<a href="missingpage?nowPage=${i}">${i}</a>
+               		</c:otherwise>      		
+               	</c:choose>        	
+                </c:forEach>
+                
                <c:if test="${paging.endPage != paging.lastPage}">
-                  <a  href="post?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+                  <a  href="missingpage?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
                </c:if>
                </td>
             </tr>
 	</tbody>
 
 </table>
+
+
+      
 </section>
 </body>
 </html>

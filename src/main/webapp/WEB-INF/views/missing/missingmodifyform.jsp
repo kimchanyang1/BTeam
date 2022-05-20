@@ -23,8 +23,6 @@ textarea {
 <title>실종신고 게시글 수정</title>
 </head>
 <body>
-<h1>여기는 수정폼</h1>
-<section style="overflow:auto; overflow-x:hidden; height: 700px;">
 
 <h4><B><font color="#fdafab">글수정</font></B></h4>
 <br><br>
@@ -109,13 +107,12 @@ textarea {
 	</tr>
 	
 	<tr>
-		<td colspan="2" align="center">
-		<input type="submit" value="등록">
-		<a href="rehomeoutform"><input type="button" value="취소"></a>
-		</td>
-	</tr>
-	
+		<th colspan="2">
+		<input type="submit" value="수정">
+			<a href="missingdetail?mis_no=${mic.mis_no}"><input id="cancel" type="button" value="취소"></a>
+		</th>
+	</tr>	
 </table>
-</section>
+
 </body>
 </html>

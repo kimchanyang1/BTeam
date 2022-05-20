@@ -13,7 +13,7 @@ public interface BoardService {
 
 
 	// 디테일, 조회수 증가
-	public ArrayList<BoardDTO> boarddetail(int bd_no);
+	public BoardDTO boarddetail(int bd_no);
 
 	public void boardreadcount(int bd_no);
 

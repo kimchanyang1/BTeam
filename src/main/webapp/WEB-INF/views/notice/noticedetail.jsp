@@ -1,13 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+table {
+	border-spacing: 10px;
+	border-collapse: separate;
+}
+textarea {
+	line-height: 150%;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
+
+<h4><B><font color="#fdafab">공지게시판</font></B></h4>
+<br><br>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#noticedelete').click(function(){
@@ -20,35 +34,50 @@ $(document).ready(function(){
 	});
 });
 </script>
-<table style="width: 50%;margin: auto;" border="1">
-	<tr>
-		<th>글번호</th>
-		<td id="nt_no">${ndto.nt_no}</td>
-	</tr>
-	<tr>
-		<th>닉네임</th>
-		<td id="mem_nickname">${ndto.mem_nickname}</td>
-	</tr>
-	<tr>
-		<th>작성일자</th>
-		<td>${ndto.nt_writeday}</td>
-	</tr>
-	<tr>
-		<th>조회수</th>
-		<td>${ndto.nt_readcount}</td>
-	</tr>
-	<tr>
-		<th>제목</th>
-		<td>${ndto.nt_title}</td>
-	</tr>
-	<tr>
-		<th>내용</th>
-		<td>${ndto.nt_content}</td>
-	</tr>
+
+<table border="0" align="center" width="700">
+<tr>
+	<td colspan="3" align="left">
+	<B>　글번호 ${ndto.nt_no}</B>
+	</td>
+</tr>
+<tr>
+	<td colspan="3" align="left">
+	<h4><B>　${ndto.nt_title}</B></h4>
+	</td>
+</tr>
+<tr>
+	<td colspan="3" align="left">
+		<fmt:parseDate value="${ndto.nt_writeday}" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+		<B>　${ndto.mem_nickname}</B>　　조회 ${ndto.nt_readcount}　　${writedaystring }　　댓글 ?　　추천수 ?</td>
+</tr>
+<tr>
+	<td>　　</td></tr>
+<tr>
+	<td>　　</td></tr>
+<tr>
+	<td>　　　　</td>
+	<td><textarea id="detailarea" readonly="readonly">${ndto.nt_content}</textarea></td>
+	<td>　　　　</td>
+</tr>
+<tr>
+	<td colspan="3" align="right">
+		<c:if test="${logon eq true && mem_id eq 'admin'}">
+			<button onclick="location.href='noticemodifyform?nt_no=${ndto.nt_no}'"><B>수정</B></button>
+			<button id="noticedelete"><B>삭제</B></button>
+		</c:if>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='noticeoutform'"><B>목록</B></button>
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+	</td>
+</tr>
+
 </table>
-<c:if test="${logon eq true && mem_id eq 'admin'}">
-<button onclick="location.href='noticemodifyform?nt_no=${ndto.nt_no}'">수정</button>
-<button id="noticedelete">삭제</button>
-</c:if>
+
 </body>
 </html>

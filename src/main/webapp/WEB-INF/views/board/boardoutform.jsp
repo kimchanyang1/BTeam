@@ -7,61 +7,65 @@
 <head>
 <style type="text/css">
 th {
-text-align: center;
+	text-align: center;
+	height: 35px;
+}
+td {
+	height: 35px;
+}
+table {
+	border-spacing: 5px;
+	border-collapse: separate;
 }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<section>
+
 <h4><B><font color="#fdafab">자유게시판</font></B></h4>
-<h6><B><font color="red">* 글쓰기는 로그인 후 가능합니다.</font></B></h6>
+<h6><B>자유롭고 깨끗하게 사용해 주세요</B></h6>
+<h6><B><font color="red">* 글쓰기는 로그인 후 가능합니다</font></B></h6>
 <br><br>
-<table border="0" align="center" width="700">
+
+<table border="0" align="center" width="800">
 <tr>
 	<td colspan="6" align="left">
 		<c:if test="${logon eq true && mem_no != null}">
-			<button onclick="location.href='boardinputform'">글쓰기</button>
+			<button onclick="location.href='boardinputform'"><B>글쓰기</B></button>
 		</c:if>
 	</td>
 </tr>
-<tr>
-	<td colspan="6">　　</td></tr>
-<tr>
-	<td colspan="6">　　</td></tr>
-<tr>
-	<td colspan="6">　　</td></tr>
+</table>
+<table border="0" align="center" width="800">
 <tr>
 	<th>　글번호　</th>
 	<th>　제목　</th>
 	<th>　작성자　</th>
 	<th>　작성일자　</th>
 	<th>　조회수　</th>
-	<th>　추천수　</th></tr>
-<tr>
-	<td colspan="6">　　</td></tr>	
+	<th>　추천수　</th>
+</tr>	
 <c:forEach items="${boardlist }" var="b">
 <tr>
 	<th>　${b.bd_no }　</th>
 	<th>
 		<a href="boarddetail?bd_no=${b.bd_no }">
-			<input type="text" value="　${b.bd_title }"></a></th>
+			<input id="title" type="text" value="　${b.bd_title }" readonly="readonly" style="cursor: pointer;"></a></th>
 	<th>　${b.mem_nickname }　</th>
 	<th>　<fmt:parseDate value="${b.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yy-MM-dd HH:mm"/>
 		${writedaystring }　</th>
 	<th>　${b.bd_readcount }　</th>
-	<th>　${b.bd_likes }　</th></tr>
+	<th>　${b.bd_likes }　</th>
+</tr>
 </c:forEach>
 </table>
-<br>
-<br>
+<br><br>
+
 <table border="0" align="center" width="700">
 <tr>
-	<td colspan="6">　　</td></tr>
-<tr>
-	<td colspan="6">
+	<th colspan="6">
 		<form action="boardsearch">
 			<select name="selectname">
 		  		<option value="bd_title">　제목　</option>
@@ -70,9 +74,9 @@ text-align: center;
 			<input type="text" name="searchname">
 			<input type="submit" value="검색">
 		</form>
-	</td>
+	</th>
 </tr>
 </table>
-</section>
+
 </body>
 </html>

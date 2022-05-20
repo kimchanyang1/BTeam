@@ -3,6 +3,9 @@ package com.ezen.rehome;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ezen.missing.MissingDTO;
+import com.ezen.teamb.PagingDTO;
+
 public interface RehomeService {
 
 	public void rehomeinput(String rh_gb2, String rh_gb3, String rh_title, String rh_pname, int rh_pno, String rh_misdate, String rh_misplace, String rh_image, int mem_no, String mem_nickname, String mem_tel, String rh_content);
@@ -17,5 +20,7 @@ public interface RehomeService {
 	public void rehomeimbo(int rh_no, int mem_no, String mem_nickname, String mem_tel);
 	public void rehomebun(int rh_no);
 	public ArrayList<RehomeDTO> rehomeend();
+	public int cntpage();
+	public ArrayList<RehomeDTO> selectpage(PagingDTO dto);
 	
 }

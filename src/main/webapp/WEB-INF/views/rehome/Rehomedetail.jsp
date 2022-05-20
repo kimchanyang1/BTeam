@@ -15,10 +15,9 @@ textarea {
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>분양/임시보호 게시글</title>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
-<section>
 
 <h4><B><font color="#fdafab">임시분양/보호 게시판</font></B></h4>
 <br><br>
@@ -39,7 +38,7 @@ textarea {
 <tr>
 	<th align="left" colspan="4"><B>　${rd.rh_gb2}　</B>	
 		<c:if test="${mem_no eq 0}">
-			<c:if test="${rd.rh_gb2 eq '임보'}">
+			<c:if test="${rd.rh_gb2 eq '임시보호'}">
 				<button id="longbutton" onclick="location.href='rehomeimboform?rh_no=${rd.rh_no}'">임시보호 완료</button>
 			</c:if>
 			<c:if test="${rd.rh_gb2 != '분양완료'}">
@@ -80,21 +79,20 @@ textarea {
 	<td width="100px"><B>연락처</B></td><td width="250px">${rd.mem_tel }</td></tr>
 </table>
 
-
 <table border="0" align="center" width="700">
 <tr>
-	<td colspan="3">
+	<td colspan="4">
 		<B>　</B>
 	</td>
 </tr>
 <tr>
-	<td colspan="3">
+	<td colspan="4">
 		<B>　</B>
 	</td>
 </tr>
 <tr>
 	<td>　　　　</td>
-	<td colspan="2"><img src="${pageContext.request.contextPath}/image/${rd.rh_image }"></td>
+	<td colspan="2"><img src="${pageContext.request.contextPath}/image/${rd.rh_image }" width="500px"></td>
 	<td>　　　　</td>
 </tr>
 <tr>
@@ -118,8 +116,15 @@ textarea {
 				</c:if>
 		</c:if>
 	</td>
-</tr>		
+</tr>
+<tr>
+	<td colspan="4">
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='rehome'"><B>목록</B></button>
+		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+	</td>
+</tr>
 </table>
-</section>
+
 </body>
 </html>

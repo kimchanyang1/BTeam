@@ -46,5 +46,6 @@
 		</c:if>
 		</c:forEach>
 </section>
+</table>
 </body>
 </html>
