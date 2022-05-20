@@ -194,7 +194,7 @@ public class MissingController {
 		System.out.println("�쁽�옱�럹�씠吏�"+nowPage+" "+cntPerPage);
 		System.out.println("珥앸젅肄붾뱶 :"+total);
 		
-		dto = new PagingDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		dto = new PagingDTO(int total, int nowPage, int cntPerPage, int cntPage);
 		mo.addAttribute("paging", dto);
 		mo.addAttribute("viewAll", mic.selectpost(dto));
 		return "missingoutform";

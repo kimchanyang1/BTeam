@@ -23,7 +23,6 @@ table {
 <title>Insert title here</title>
 </head>
 <body>
-
 <h4><B><font color="#fdafab">공지게시판</font></B></h4>
 <h6><B>　　</B></h6>
 <h6><B><font color="red">　　</font></B></h6>

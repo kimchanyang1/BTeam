@@ -9,17 +9,6 @@
 #container {
 	border: 1px slid #bcbcbc;
 }
-#header {
-	text-align: center;
-	width: 100%;
-}
-#nav {
-	width: 100%;
-}
-#body {
-	width: 100%;
-}
-
 </style>
 <meta charset="UTF-8">
 <title><t:insertAttribute name="title"/></title>
@@ -35,6 +24,6 @@
 		<div id="footer">
 			<t:insertAttribute name="footer"/>
 		</div>
-	</div>
+	</div>	
 </body>
 </html>
