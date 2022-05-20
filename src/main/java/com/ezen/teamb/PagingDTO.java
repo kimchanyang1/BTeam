@@ -2,30 +2,29 @@ package com.ezen.teamb;
 
 
 public class PagingDTO {
-			// 현재페이지, 시작페이지, 끝페이지, 게시글 총개수, 페이지당 글개수, 마지막 페이지, query에서 쓸 row start,end
-	private int nowPage, startPage, endPage, total, cntPerPage,lastPage, start,end;
-	private int cntPage= 5; //총페이지수
+	//          내가 보는   아래에 보여지는 아래에 보여지는 보유중인   모든 자료의   현재 페이지의
+	//          현재 페이지, 시작 페이지,  마지막 페이지, 총 자료 수, 최종 페이지, 시작,     끝
+	private int nowPage, startPage, endPage,    total,   lastPage, start, end;
+	//한 페이지당 몇개의 페이지를 보여줄 건지
+	private int cntPage;
+	//한 페이지당 항목 개수
+	private int cntPerPage;
 	
-	public PagingDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public PagingDTO(int total, int nowPage, int cntPerPage)
+	public PagingDTO(int total, int nowPage, int cntPerPage, int cntPage)
 	{
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);
 		setTotal(total);
+		setCntPage(cntPage);
 		calcLastPage(getTotal(), getCntPerPage());
-		calcStartEndPage(getNowPage(), cntPage);
+		calcStartEndPage(getNowPage(), getCntPage());
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
-	// 제일 마지막 페이지 계산
+	
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
 	
-	//시작 , 끝 페이지 계산
 	public void calcStartEndPage(int nowPage, int cntPage)
 	{
 		setEndPage((int)Math.ceil((double)nowPage / (double)cntPage) * cntPage);
@@ -39,7 +38,7 @@ public class PagingDTO {
 			setStartPage(1);
 		}		
 	}
-	//DB 쿼리에서 사용할 start, end값 계산
+	
 	public void calcStartEnd(int nowpage, int cntPerPage)
 	{
 		setEnd(nowPage * cntPerPage);

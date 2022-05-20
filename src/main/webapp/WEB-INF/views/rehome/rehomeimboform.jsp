@@ -17,7 +17,8 @@ table {
 }
 </style>
 <meta charset="UTF-8">
-<title>분양/임시보호 게시글 수정</title>
+
+<title>분양/임시보호 보호자 정보 수정</title>
 </head>
 <body>
 

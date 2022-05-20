@@ -81,24 +81,23 @@ public class BoardController {
 	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
-		MemberDTO login = (MemberDTO) hs.getAttribute("login");
-
-		if (login != null) {
+		if (hs.getAttribute("mem_no")!=null) {
+			int mem_no = (int) hs.getAttribute("mem_no");
+			String mem_id = (String) hs.getAttribute("mem_id");
+			String mem_nickname = (String) hs.getAttribute("mem_nickname");
+			MemberDTO mdto = new MemberDTO();
+			mdto.setMem_no(mem_no);
+			mdto.setMem_id(mem_id);
+			mdto.setMem_nickname(mem_nickname);
 			
-			int mem_no = login.getMem_no();
-			String mem_id = login.getMem_id();
-			String mem_nickname = login.getMem_nickname();
-	    	   
-			md.addAttribute("mem_no", mem_no);
-			md.addAttribute("mem_id", mem_id);
-			md.addAttribute("mem_nickname", mem_nickname);
+			md.addAttribute("mdto", mdto);
 		}
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		boardreadcount(bd_no, sqlSession);
-		ArrayList<BoardDTO> boardlist = bs.boarddetail(bd_no);
+		BoardDTO boardlist = bs.boarddetail(bd_no);
 		md.addAttribute("boarddetail", boardlist);
 		
 		return "boarddetailform";

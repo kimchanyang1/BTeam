@@ -14,6 +14,47 @@ textarea {
 	line-height: 150%;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#likes_update").click(function(){
+		$.ajax({
+			url: "likesupdate",
+	        type: "POST",
+	        data: {
+	        	likes_boardno: ${boarddetail.bd_no},
+	        	likes_id: "${mdto.mem_id}"
+	        },
+	        success: function () {
+		        likesCount();
+	        },
+	        error:function(request,error){
+	            alert("에러입니다");
+	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+	        }
+		});
+	});
+	
+	function likesCount() {
+		$.ajax({
+			url: "likescount",
+            type: "POST",
+            data: {
+            	likes_boardno: ${boarddetail.bd_no}
+            },
+            success: function (responseData) {
+            	$("#ajax").remove();
+    			var count = JSON.parse(responseData);
+            	$(".likes_count").html(count); //span 으로 가서 추천 수 보여줌
+            },
+	        error:function(request,error){
+	            alert("에러입니다"+${boarddetail.bd_no}+";");
+	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+	        }
+		});
+    }
+    likesCount();
+});
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -21,28 +62,25 @@ textarea {
 
 <h4><B><font color="#fdafab">자유게시판</font></B></h4>
 <br><br>
-
 <table border="0" align="center" width="700">
-	<input type="hidden" value="${b.mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
-
-<c:forEach items="${boarddetail }" var="b">
+	<input type="hidden" value="${boarddetail.mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
 <tr>
 	<td colspan="3" align="left">
-		<B>　글번호 ${b.bd_no}</B>
+		<B>　글번호 ${boarddetail.bd_no}</B>
 	</td>
 </tr>
 <tr>
 	<td colspan="3" align="left">
-		<h4><B>　${b.bd_title }</B></h4>
+		<h4><B>　${boarddetail.bd_title }</B></h4>
 	</td>
 </tr>
 <tr>
 	<td colspan="3" align="left">
-		<fmt:parseDate value="${b.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<fmt:parseDate value="${boarddetail.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${b.mem_nickname}</B>　　조회 ${b.bd_readcount}　　${writedaystring }　　댓글 ?　　추천수 ?</td>
+		<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　추천수 <font color="#ff8000">???</font></td>
 </tr>
 <tr>
 	<td>　　</td></tr>
@@ -50,43 +88,52 @@ textarea {
 	<td>　　</td></tr>
 <tr>
 	<td>　　　　</td>
-	<td><img src="${pageContext.request.contextPath}/image/${b.bd_image}" width="500px"></td>
+	<td><img src="${pageContext.request.contextPath}/image/${boarddetail.bd_image}" width="500px"></td>
 	<td>　　　　</td>
 </tr>
 <tr>
 	<td>　　</td></tr>
 <tr>
 	<td>　　　　</td>
-	<td><textarea id="detailarea" readonly="readonly">${b.bd_content }</textarea></td>
+	<td><textarea id="detailarea" readonly="readonly">${boarddetail.bd_content }</textarea></td>
 	<td>　　　　</td>
 </tr>
 <tr>
 	<td colspan="3" align="center">
 		<input type="hidden" value="${e.mem_no }" readonly="readonly">
-		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
+		<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
 	</td>
 </tr>
 <tr>
 	<td colspan="3" align="center">　　
-		<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
+		<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
 	</td></tr>
 <tr>
 	<td colspan="3" align="right">
-		<button><a href=""><B>추천</B></a></button>
-		<c:if test="${b.mem_no eq mem_no || mem_id eq 'admin'}">
-			<button onclick="location.href='boardmodifyselect?bd_no=${b.bd_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'"><B>수정</B></button>
-			<button onclick="location.href='boarddelete?bd_no=${b.bd_no }'"><B>삭제</B></button>
+		<c:if test="${ mdto.mem_id == null }">
+			추천은 로그인 후 사용 가능합니다.
+				<i class="fas fa-heart" style="font-size:16px;color:red"></i>
+				<span class="likes_count"></span>
+		</c:if>
+		<c:if test="${ mdto.mem_id != null }">
+			<button class="w3-button w3-black w3-round" id="likes_update">
+				<i class="fas fa-heart" style="font-size:16px;color:red"></i>
+				&nbsp;<span class="likes_count"></span>
+			</button> 
+		</c:if>
+		<c:if test="${boarddetail.mem_no eq mdto.mem_no || mdto.mem_id eq 'admin'}">
+			<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
+			<button onclick="location.href='boarddelete?bd_no=${boarddetail.bd_no }'"><B>삭제</B></button>
 		</c:if>
 	</td>
 </tr>
 <tr>
 	<td colspan="3">
-		<button id="b2" onclick="location.href='boarddetail?bd_no=${(b.bd_no)-1 }'"><B>◀ 이전글</B></button>
+		<button id="b2" onclick="location.href='boarddetail?bd_no=${(boarddetail.bd_no)-1 }'"><B>◀ 이전글</B></button>
 		<button id="b2" onclick="location.href='board'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='barddetail?bd_no=${(b.bd_no)+1 }'"><B>다음글 ▶</B></button>
+		<button id="b2" onclick="location.href='barddetail?bd_no=${(boarddetail.bd_no)+1 }'"><B>다음글 ▶</B></button>
 	</td>
 </tr>
-</c:forEach>
 </table>
 
 </body>

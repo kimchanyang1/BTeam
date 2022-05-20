@@ -51,7 +51,7 @@ table {
 	<th>　${b.bd_no }　</th>
 	<th>
 		<a href="boarddetail?bd_no=${b.bd_no }">
-			<input id="title" type="text" value="　${b.bd_title }"></a></th>
+			<input id="title" type="text" value="　${b.bd_title }" readonly="readonly" style="cursor: pointer;"></a></th>
 	<th>　${b.mem_nickname }　</th>
 	<th>　<fmt:parseDate value="${b.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yy-MM-dd HH:mm"/>

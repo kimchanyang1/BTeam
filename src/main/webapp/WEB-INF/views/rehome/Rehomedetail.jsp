@@ -15,7 +15,8 @@ textarea {
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>분양/임시보호 게시글</title>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 
@@ -38,7 +39,7 @@ textarea {
 <tr>
 	<th align="left" colspan="4"><B>　${rd.rh_gb2}　</B>	
 		<c:if test="${mem_no eq 0}">
-			<c:if test="${rd.rh_gb2 eq '임보'}">
+			<c:if test="${rd.rh_gb2 eq '임시보호'}">
 				<button id="longbutton" onclick="location.href='rehomeimboform?rh_no=${rd.rh_no}'">임시보호 완료</button>
 			</c:if>
 			<c:if test="${rd.rh_gb2 != '분양완료'}">
@@ -78,7 +79,6 @@ textarea {
 	<td width="100px"><B>닉네임</B></td><td width="250px">${rd.mem_nickname }</td>
 	<td width="100px"><B>연락처</B></td><td width="250px">${rd.mem_tel }</td></tr>
 </table>
-
 
 <table border="0" align="center" width="700">
 <tr>

@@ -11,9 +11,19 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
 	</definition>
 	
+	<definition name="Memberpolicy" extends="baseLayout">
+		<put-attribute name="title" value="회원가입"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/Memberpolicy.jsp"/>
+	</definition>
+	
 	<definition name="signupform" extends="baseLayout">
 		<put-attribute name="title" value="회원가입"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/signupform.jsp"/>
+	</definition>
+	
+	<definition name="signupform2" extends="baseLayout">
+		<put-attribute name="title" value="회원가입"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/signupform2.jsp"/>
 	</definition>
 	
 	<definition name="loginform" extends="baseLayout">

@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>분양/임시보호 검색</title>
 </head>
 <body>
 

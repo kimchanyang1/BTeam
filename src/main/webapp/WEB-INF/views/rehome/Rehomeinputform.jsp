@@ -20,7 +20,8 @@ textarea {
 }
 </style>
 <meta charset="UTF-8">
-<title>분양/임시보호</title>
+
+<title>분양/임시보호 게시글 등록</title>
 </head>
 <body>
 
@@ -41,7 +42,7 @@ textarea {
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="rh_gb3" value="개">개 &emsp;
+				<td><input type="radio" name="rh_gb3" value="개"> 개 &emsp;
 					<input type="radio" name="rh_gb3" value="고양이"> 고양이</td>
 			</tr>
 			<tr>

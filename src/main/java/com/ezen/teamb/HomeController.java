@@ -1,10 +1,12 @@
 package com.ezen.teamb;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +20,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.board.BoardController;
 import com.ezen.epilogue.EpilogueController;
+import com.ezen.likes.LikesController;
 import com.ezen.member.MemberController;
 
 import com.ezen.notice.NoticeController;
@@ -39,8 +44,8 @@ public class HomeController {
 	private MemberController mc = new MemberController();
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
+	private LikesController lc = new LikesController();
 	
-		
 	
 	@RequestMapping(value = "/")
 	public String home() {
@@ -67,25 +72,25 @@ public class HomeController {
 		return nc.noticeinput(request, sqlSession);
 	}
 	
-	//���� �ڼ�������
+	//占쏙옙占쏙옙 占쌘쇽옙占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/noticedetail")
 	public String noticedetail(HttpServletRequest request, Model model) {
 		return nc.noticedetail(request, sqlSession, model);
 	}
 	
-	//���� ����
+	//占쏙옙占쏙옙 占쏙옙占쏙옙
 	@RequestMapping(value = "/noticemodifyform")
 	public String noticemodifyform(HttpServletRequest request, Model model) {
 		return nc.noticemodifyform(request, sqlSession, model);
 	}
 	
-	//���� ����
+	//占쏙옙占쏙옙 占쏙옙占쏙옙
 	@RequestMapping(value = "/noticemodify")
 	public String noticemodify(HttpServletRequest request, Model model) {
 		return nc.noticemodify(request, sqlSession, model);
 	}
 	
-	//���� ����
+	//占쏙옙占쏙옙 占쏙옙占쏙옙
 	@RequestMapping(value = "/noticedelete")
 	public String noticedelete(HttpServletRequest request, Model model) {
 		return nc.noticedelete(request, sqlSession, model);
@@ -212,6 +217,26 @@ public class HomeController {
 		return rc.rehomebun(sqlSession, request);
 	}
 	
+	@RequestMapping(value = "/signupform1")
+	public String signupform1() {
+		return mc.signupform1();
+	}
+	
+	@RequestMapping(value = "/signupform2")
+	public String signupform2() {
+		return mc.signupform2();
+	}
+	
+	@RequestMapping(value = "/IdCheckForm", method = RequestMethod.GET)
+	public @ResponseBody int IdCheckForm(@RequestParam("mem_id") String mem_id, HttpServletResponse response) {
+		return mc.IdCheckForm(mem_id, sqlSession, response);
+	}
+	
+	@RequestMapping(value = "/signpolicy")
+	public String Signpolicy() {
+		return mc.signpolicy();
+	}
+	
 	@RequestMapping(value = "/signupform")
 	public String Signupform() {
 		return mc.Signupform();
@@ -260,7 +285,7 @@ public class HomeController {
 	
 	
 	
-	// �ı�Խ���
+	// 占식깍옙督占쏙옙占�
 	@RequestMapping(value = "/epilogue")
 	public String ee0(Model md) {
 			
@@ -268,7 +293,7 @@ public class HomeController {
 	}
 	
 	
-	// �۾���
+	// 占쌜억옙占쏙옙
 	@RequestMapping(value = "/epilogueinputform")
 	public String ee1(HttpServletRequest request, Model md)	{
 					
@@ -282,7 +307,7 @@ public class HomeController {
 	}
 	
 	
-	// ������
+	// 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/epiloguedetail")
 	public String ee3(HttpServletRequest request, Model md) {
 		
@@ -290,7 +315,7 @@ public class HomeController {
 	}
 	
 	
-	// ����
+	// 占쏙옙占쏙옙
 	@RequestMapping(value = "/epiloguemodifyselect")
 	public String ee4(HttpServletRequest request, Model md) {
 		
@@ -304,7 +329,7 @@ public class HomeController {
 	}
 	
 	
-	// ����
+	// 占쏙옙占쏙옙
 	@RequestMapping(value = "/epiloguedelete")
 	public String ee6(HttpServletRequest request, Model md) {
 		
@@ -312,7 +337,7 @@ public class HomeController {
 	}
 	
 	
-	// �˻�
+	// 占싯삼옙
 	@RequestMapping(value = "/epiloguesearch")
 	public String ee7(HttpServletRequest request, Model md) {
 			
@@ -322,7 +347,7 @@ public class HomeController {
 		
 	
 	
-	// �����Խ���
+	// 占쏙옙占쏙옙占쌉쏙옙占쏙옙
 	@RequestMapping(value = "/board")
 	public String bb0(Model md) {
 		
@@ -330,7 +355,7 @@ public class HomeController {
 	}
 	
 	
-	// �۾���
+	// 占쌜억옙占쏙옙
 	@RequestMapping(value = "/boardinputform")
 	public String bb1(HttpServletRequest request, Model md)	{
 				
@@ -344,7 +369,7 @@ public class HomeController {
 	}
 	
 	
-	// ������
+	// 占쏙옙占쏙옙占쏙옙
 	@RequestMapping(value = "/boarddetail")
 	public String bb3(HttpServletRequest request, Model md) {
 		
@@ -352,7 +377,7 @@ public class HomeController {
 	}
 	
 	
-	// ����
+	// 占쏙옙占쏙옙
 	@RequestMapping(value = "/boardmodifyselect")
 	public String bb4(HttpServletRequest request, Model md) {
 		
@@ -366,7 +391,7 @@ public class HomeController {
 	}
 	
 	
-	// ����
+	// 占쏙옙占쏙옙
 	@RequestMapping(value = "/boarddelete")
 	public String bb6(HttpServletRequest request, Model md) {
 		
@@ -374,7 +399,7 @@ public class HomeController {
 	}
 	
 	
-	// �˻�
+	// 占싯삼옙
 	@RequestMapping(value = "/boardsearch")
 	public String bb7(HttpServletRequest request, Model md) {
 		
@@ -398,5 +423,16 @@ public class HomeController {
 	public String location()
 	{		
 		return "location";
+	}
+	
+	@RequestMapping(value="/likesupdate")
+	public @ResponseBody void likesupdate(@RequestParam("likes_boardno") int likes_boardno, @RequestParam("likes_id") String likes_id) {
+		lc.likesupdate(likes_boardno, likes_id, sqlSession);
+	}
+	
+	@RequestMapping(value="/likescount")
+	public @ResponseBody int likescount(@RequestParam("likes_boardno") int likes_boardno)
+	{
+		return lc.likescount(likes_boardno, sqlSession);
 	}
 }

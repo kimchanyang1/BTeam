@@ -37,4 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from member where mem_no=#{mem_no}
 </select>
 
+<select id="IdCheck" resultType="int">
+	SELECT COUNT(mem_id) FROM member WHERE mem_id=#{mem_id}
+</select>
+
 </mapper>

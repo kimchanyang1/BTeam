@@ -1,6 +1,9 @@
 package com.ezen.member;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 public class MemberController {
+	
+	public String signupform1() {
+		return "signupform1";
+	}
+	
+	public String signupform2() {
+		return "signupform2";
+	}
+	
+	public String signpolicy(){
+		return "Memberpolicy";
+	}
 	
 	public String Signupform() {
 		return "signupform";
@@ -61,7 +76,7 @@ public class MemberController {
 			return "redirect:home";
 		} else {
 			model.addAttribute("result", "loginfail");
-			return "redirect:signupform";
+			return "redirect:signupform1";
 		}
 	}
 	
@@ -108,6 +123,20 @@ public class MemberController {
 		ms.membermodify(mem_pw, mem_nickname, mem_jumin, mem_tel, mem_mail, mem_address, mem_no);
 		Login(request, model, sqlSession);
 		return "redirect:memberdetail";
+	}
+
+	public int IdCheckForm(String mem_id, SqlSession sqlSession, HttpServletResponse response) {
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		int use = ms.IdCheck(mem_id);
+		/*
+		String parseJson = "{\"id\":\""+use+"\"}";
+		try {
+			response.getWriter().print(parseJson);
+		} catch (IOException e) {
+			e.printStackTrace();
+		};
+		*/
+		return use;
 	}
 	
 }

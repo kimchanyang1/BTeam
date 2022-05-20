@@ -20,6 +20,7 @@ textarea {
 }
 </style>
 <meta charset="UTF-8">
+
 <title>분양/임시보호 게시글 수정</title>
 </head>
 <body>
@@ -37,6 +38,7 @@ textarea {
 	<input type="hidden" name="rh_writeday" value="${rd.rh_writeday}">
 	<input type="hidden" name="rh_readcount" value="${rd.rh_readcount}">
 
+
 <table border="0" align="center">
 	<tr>
 		<td bgcolor="#fbdee2">　　</td>
@@ -50,7 +52,7 @@ textarea {
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="rh_gb3" value="개">개 &emsp;
+				<td><input type="radio" name="rh_gb3" value="개"> 개 &emsp;
 					<input type="radio" name="rh_gb3" value="고양이"> 고양이</td>
 			</tr>
 			<tr>
