@@ -19,6 +19,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 select * from notice
 </select>
 
+<select id="noticetotalcount" resultType="int">
+	select count(*) from notice
+</select>
+
+<select id="noticePage" resultMap="noticelist">
+	select * from (select rownum rn, A.* from(select * from notice order by nt_no desc)A) where rn between #{start} and #{end}
+</select>
+
 <insert id="noticeinput">
 	insert into notice values(notice_seq.nextval, #{param1}, #{param2}, sysdate, #{param3}, #{param4}, 0)
 </insert>

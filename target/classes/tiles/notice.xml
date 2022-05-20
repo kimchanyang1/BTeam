@@ -15,6 +15,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/notice/noticeoutform.jsp"/>
 	</definition>
 	
+	<definition name="noticePage" extends="baseLayout">
+		<put-attribute name="title" value="공지"/>
+		<put-attribute name="body" value="/WEB-INF/views/notice/noticepage.jsp"/>
+	</definition>
+	
 	<definition name="noticeinputform" extends="baseLayout">
 		<put-attribute name="title" value="공지 작성"/>
 		<put-attribute name="body" value="/WEB-INF/views/notice/noticeinputform.jsp"/>

@@ -8,6 +8,14 @@
 	SELECT * FROM BOARD ORDER BY BD_NO DESC
 </select>
 
+<select id="boardtotalcount" resultType="int">
+	SELECT count(*) FROM BOARD
+</select>
+
+<select id="boardpage" resultType="com.ezen.board.BoardDTO">
+	select * from (select rownum rn, A.* from(select * from BOARD order by BD_NO asc)A) where rn between #{start} and #{end} order by rn desc
+</select>
+
 
 <insert id="boardinput">
 	INSERT INTO BOARD(BD_NO, BD_TITLE, MEM_NO, MEM_NICKNAME, BD_CONTENT, BD_READCOUNT, BD_IMAGE, BD_LIKES)

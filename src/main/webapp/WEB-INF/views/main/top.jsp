@@ -22,7 +22,7 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active">
-				<a href="noticeoutform">공지</a>
+				<a href="NoticePage">공지</a>
         	</li>
         	
         	<li class="active">
@@ -44,7 +44,7 @@
 				</ul>
         	</li>
         	<li class="active">
-        			<a href="board">자유게시판</a>
+        			<a href="boardpage">자유게시판</a>
         	</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

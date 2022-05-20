@@ -57,7 +57,15 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/noticeoutform")
+	@RequestMapping(value = "/NoticePage")
+	public String noticepage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return nc.noticepage(sqlSession, model, nowPage);
+	}
+	
+	@RequestMapping(value = "/NoticeOutForm")
 	public String noticeoutform(Model model) {
 		return nc.noticeoutform(sqlSession, model);
 	}
@@ -346,12 +354,18 @@ public class HomeController {
 		
 		
 	
-	
-	// 占쏙옙占쏙옙占쌉쏙옙占쏙옙
 	@RequestMapping(value = "/board")
 	public String bb0(Model md) {
 		
 		return bc.boardoutform(sqlSession, md);
+	}
+	
+	@RequestMapping(value = "/boardpage")
+	public String boardpage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return bc.boardpage(sqlSession, model, nowPage);
 	}
 	
 	

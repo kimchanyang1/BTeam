@@ -2,6 +2,8 @@ package com.ezen.board;
 
 import java.util.ArrayList;
 
+import com.ezen.teamb.PagingDTO;
+
 public interface BoardService {
 
 	// Ãâ·Â
@@ -32,6 +34,12 @@ public interface BoardService {
 	public ArrayList<BoardDTO> searchtitle(String searchname);
 
 	public ArrayList<BoardDTO> searchnickname(String searchname);
+
+
+	public int boardtotalcount();
+
+
+	public ArrayList<BoardDTO> boardpage(PagingDTO page);
 
 	
 

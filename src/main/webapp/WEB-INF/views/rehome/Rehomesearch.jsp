@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="cdn.jsp"></jsp:include>
 <title>분양/임시보호 검색</title>
 </head>
 <body>
