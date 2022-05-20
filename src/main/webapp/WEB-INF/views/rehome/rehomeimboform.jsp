@@ -17,7 +17,6 @@ table {
 }
 </style>
 <meta charset="UTF-8">
-<jsp:include page="cdn.jsp"></jsp:include>
 <title>분양/임시보호 보호자 정보 수정</title>
 </head>
 <body>

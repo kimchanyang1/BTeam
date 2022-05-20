@@ -25,11 +25,9 @@
       	<put-attribute name="body" value="/WEB-INF/views/main/policyprivate.jsp"/>
     </definition>
     
-        <definition name="location" extends="baseLayout">
+    <definition name="location" extends="baseLayout">
     	<put-attribute name="title" value="찾아오시는길"/>
       	<put-attribute name="body" value="/WEB-INF/views/main/location.jsp"/>
     </definition>
     
-    
-	
 </tiles-definitions>

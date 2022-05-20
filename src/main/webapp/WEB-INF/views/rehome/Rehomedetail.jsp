@@ -15,7 +15,6 @@ textarea {
 }
 </style>
 <meta charset="UTF-8">
-<jsp:include page="cdn.jsp"></jsp:include>
 <title>분양/임시보호 게시글</title>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>

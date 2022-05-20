@@ -1,6 +1,9 @@
 package com.ezen.member;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +13,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ezen.board.BoardDTO;
+import com.ezen.board.BoardService;
+import com.ezen.epilogue.EpilogueDTO;
+import com.ezen.missing.MissingDTO;
+import com.ezen.rehome.RehomeDTO;
 
 
 public class MemberController {
@@ -137,6 +146,131 @@ public class MemberController {
 		};
 		*/
 		return use;
+	}
+	
+	public String ADmemberlist(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	{
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ArrayList<MemberDTO> list = ms.memberlist();
+	    mo.addAttribute("list", list);
+		
+	    // 나이와 성별 구하기
+		HttpSession hs = request.getSession();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		
+		Calendar calendar = new GregorianCalendar();
+		int nowyear = calendar.get(Calendar.YEAR);
+		int age = 0;
+		String gender = "";
+
+	    
+	    MemberDTO mdto = ms.memberdetail(mem_no);
+	    String jumin = mdto.getMem_jumin();
+	    switch (jumin.substring(8, 9)) {
+	    	case "1":
+	            gender = "남자";
+	            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
+	            break;
+	        case "2":
+	            gender = "여자";
+	            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
+	            break;
+	        case "3":
+	            gender = "남자";
+	            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
+	            break;
+	        case "4":
+	            gender = "여자";
+	            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
+	            break;
+	        }
+	    
+	    mo.addAttribute("age", age);	
+	    mo.addAttribute("gender", gender);	
+	    
+		return "ADmemberlist";
+	}
+	
+	public String ADmemberdetail(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		MemberDTO mdto = ms.memberdetail(mem_no);
+		model.addAttribute("mdto", mdto);
+		return "ADmemberdetail";
+	}
+	
+	public String ADmembersearch(SqlSession sqlSession, HttpServletRequest request, Model model) {
+		
+		String selectname = request.getParameter("selectname");
+		String searchname = request.getParameter("searchname");
+		
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		ArrayList<MemberDTO> list = null;
+		
+		if(selectname.equals("mem_id"))
+		{
+			list = ms.searchid(searchname);
+		}
+		else if(selectname.equals("mem_name"))
+		{
+			list = ms.searchname(searchname);
+		}
+		else
+		{
+			list = ms.searchnickname(searchname);
+		}
+		
+		model.addAttribute("list", list);
+		
+		return "ADmemberlist";
+	}
+
+	public String memberwritelist(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		return "memberwritelist";
+	}
+	
+	public String membermissingwrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		HttpSession hs = request.getSession();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		
+		ArrayList<MissingDTO> missingout = ms.membermissingwrite(mem_no);
+		model.addAttribute("missingout",missingout);
+		
+		return "missingoutform";
+	}
+	
+	public String memberrehomewrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		HttpSession hs = request.getSession();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		
+		ArrayList<RehomeDTO> rdto = ms.memberrehomewrite(mem_no);
+		model.addAttribute("rdto",rdto);
+		
+		return "Rehomeoutform";
+	}
+	
+	public String memberepiloguewrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		HttpSession hs = request.getSession();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		
+		ArrayList<EpilogueDTO> epiloguelist = ms.memberepiloguewrite(mem_no);
+		model.addAttribute("epiloguelist",epiloguelist);
+		
+		return "epilogueoutform";
+	}
+	
+	public String memberboardwrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+		HttpSession hs = request.getSession();
+		int mem_no = (int) hs.getAttribute("mem_no");
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		
+		ArrayList<BoardDTO> boardlist = ms.memberboardwrite(mem_no);
+		model.addAttribute("boardlist", boardlist);
+		
+		return "boardoutform";
 	}
 	
 }
