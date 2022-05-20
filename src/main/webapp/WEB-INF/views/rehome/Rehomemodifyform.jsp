@@ -44,12 +44,13 @@ textarea {
 			<table border="0" align="center">
 			<tr>
 				<th>　　구분　　</th>
-				<td><input type="radio" name="rh_gb2" value="임보"> 임보　　
-					<input type="radio" name="rh_gb2" value="분양"> 분양</td>
+				<td><input type="radio" name="rh_gb2" value="임보"> 임시보호 &emsp;
+					<input type="radio" name="rh_gb2" value="분양"> 분양
+				</td>
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="rh_gb3" value="개"> 개　　
+				<td><input type="radio" name="rh_gb3" value="개">개 &emsp;
 					<input type="radio" name="rh_gb3" value="고양이"> 고양이</td>
 			</tr>
 			<tr>
