@@ -15,10 +15,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="nt_readcount" property="nt_readcount"/>
 </resultMap>
 
-<select id="noticeoutform" resultMap="noticelist">
-	 select * from notice
-</select>
-
 <select id="noticetotalcount" resultType="int">
 	select count(*) from notice
 </select>

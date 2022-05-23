@@ -12,13 +12,6 @@ import com.ezen.teamb.PagingDTO;
 
 public class NoticeController {
 
-	public String noticeoutform(SqlSession sqlSession, Model model) {
-		NoticeService ns = sqlSession.getMapper(NoticeService.class);
-		ArrayList<NoticeDTO> noticelist = ns.noticeoutform();
-		model.addAttribute("noticelist", noticelist);
-		return "noticeoutform";
-	}
-
 	public String noticepage(SqlSession sqlSession, Model model, String nowPage) {
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		

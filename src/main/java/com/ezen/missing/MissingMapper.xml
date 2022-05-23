@@ -14,10 +14,6 @@
 	select * from missing where mis_gb='실종'
 </select>
 
-<select id="missingend" resultType="com.ezen.missing.MissingDTO">
-	select * from missing where mis_gb='귀가'
-</select>
-
 <select id="missingEndTotal" resultType="int">
 	select count(*) from missing where mis_gb='귀가'
 </select>

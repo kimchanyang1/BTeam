@@ -4,10 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.board.BoardService">
 
-<select id="boardout" resultType="com.ezen.board.BoardDTO">
-	SELECT * FROM BOARD ORDER BY BD_NO DESC
-</select>
-
 <select id="boardtotalcount" resultType="int">
 	SELECT count(*) FROM BOARD
 </select>

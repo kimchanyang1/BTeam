@@ -182,14 +182,6 @@ public class RehomeController {
 		return "redirect:rehomedetail?rh_no="+rh_no;
 	}
 
-	public String rehomeend(SqlSession sqlSession, Model mo) {
-		RehomeService rs = sqlSession.getMapper(RehomeService.class);
-		ArrayList<RehomeDTO> rdto = rs.rehomeend();
-		
-		mo.addAttribute("rdto", rdto);
-		return "rehomeend";
-	}
-
 	public String rehomeimboform(HttpServletRequest request, Model mo) {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		mo.addAttribute("rh_no", rh_no);

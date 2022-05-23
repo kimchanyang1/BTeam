@@ -6,7 +6,6 @@ import com.ezen.teamb.PagingDTO;
 
 public interface NoticeService {
 	
-	public ArrayList<NoticeDTO> noticeoutform();
 	public void noticeinput(int mem_no, String mem_nickname, String nt_title, String nt_content);
 	public NoticeDTO noticedetail(int nt_no);
 	public void noticereadcount(int nt_no);

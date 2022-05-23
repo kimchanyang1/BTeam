@@ -3,7 +3,6 @@ package com.ezen.member;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +15,7 @@ import com.ezen.board.BoardDTO;
 import com.ezen.epilogue.EpilogueDTO;
 import com.ezen.missing.MissingDTO;
 import com.ezen.rehome.RehomeDTO;
+import com.ezen.teamb.PagingDTO;
 
 
 public class MemberController {
@@ -145,57 +145,6 @@ public class MemberController {
 		return use;
 	}
 	
-	public String ADmemberlist(SqlSession sqlSession, HttpServletRequest request, Model mo)
-	{
-		MemberService ms = sqlSession.getMapper(MemberService.class);
-		ArrayList<MemberDTO> list = ms.memberlist();
-
-		Calendar calendar = new GregorianCalendar();
-		int nowyear = calendar.get(Calendar.YEAR);
-		int age = 0;
-		String gender = "";
-		
-		for (MemberDTO memberDTO : list) {
-			int mem_no = (int) memberDTO.getMem_no();
-		    
-		    MemberDTO mdto = ms.memberdetail(mem_no);
-		    String jumin = mdto.getMem_jumin();
-		    if (jumin!=null) {
-		    	if (jumin.length()>8) {
-			    switch (jumin.substring(7, 8)) {
-			    	case "1":
-			            gender = "남자";
-			            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
-			            break;
-			        case "2":
-			            gender = "여자";
-			            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
-			            break;
-			        case "3":
-			            gender = "남자";
-			            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
-			            break;
-			        case "4":
-			            gender = "여자";
-			            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
-			            break;
-			        }
-				}else {
-		            gender = "주민등록번호오류";
-		            age = -2;
-				}
-			} else {
-	            gender = "주민등록번호없음";
-	            age = -1;
-			}
-		    memberDTO.setAge(age);
-		    memberDTO.setGender(gender);
-		}
-	    
-	    mo.addAttribute("ADmemberlist", list);
-		return "ADmemberlist";
-	}
-	
 	public String ADmemberdetail(HttpServletRequest request, Model model, SqlSession sqlSession) {
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		MemberService ms = sqlSession.getMapper(MemberService.class);
@@ -276,6 +225,65 @@ public class MemberController {
 		model.addAttribute("boardlist", boardlist);
 		
 		return "boardoutform";
+	}
+
+	public String ADmemberPage(SqlSession sqlSession, Model model, String nowPage) {
+		MemberService ms = sqlSession.getMapper(MemberService.class);
+		int total = ms.ADmemberTotal();
+		int cntPage = 5;
+		int cntPerPage = 15;
+		if (nowPage==null) {
+			nowPage="1";
+		}
+		
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		
+		ArrayList<MemberDTO> list = ms.memberlist();
+		
+		Calendar calendar = new GregorianCalendar();
+		int nowyear = calendar.get(Calendar.YEAR);
+		int age = 0;
+		String gender = "";
+		
+		for (MemberDTO memberDTO : list) {
+			int mem_no = (int) memberDTO.getMem_no();
+		    
+		    MemberDTO mdto = ms.memberdetail(mem_no);
+		    String jumin = mdto.getMem_jumin();
+		    if (jumin!=null) {
+		    	if (jumin.length()>8) {
+			    switch (jumin.substring(7, 8)) {
+			    	case "1":
+			            gender = "남자";
+			            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
+			            break;
+			        case "2":
+			            gender = "여자";
+			            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
+			            break;
+			        case "3":
+			            gender = "남자";
+			            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
+			            break;
+			        case "4":
+			            gender = "여자";
+			            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
+			            break;
+			        }
+				}else {
+		            gender = "주민등록번호오류";
+		            age = -2;
+				}
+			} else {
+	            gender = "주민등록번호없음";
+	            age = -1;
+			}
+		    memberDTO.setAge(age);
+		    memberDTO.setGender(gender);
+		}
+		model.addAttribute("ADmemberList", list);
+		model.addAttribute("page", page);
+		return "ADmemberPage";
 	}
 	
 }

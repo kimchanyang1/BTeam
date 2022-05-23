@@ -13,10 +13,6 @@
 	select * from rehome where rh_gb1='승인' and rh_gb2!='분양완료' order by rh_no desc
 </select>
 
-<select id="rehomeend" resultType="com.ezen.rehome.RehomeDTO">
-	select * from rehome where rh_gb2='분양완료' order by rh_no desc
-</select>
-
 <select id="rehomeendtotal" resultType="int">
 	select count(*) from rehome where rh_gb2='분양완료'
 </select>

@@ -6,6 +6,7 @@ import com.ezen.board.BoardDTO;
 import com.ezen.epilogue.EpilogueDTO;
 import com.ezen.missing.MissingDTO;
 import com.ezen.rehome.RehomeDTO;
+import com.ezen.teamb.PagingDTO;
 
 public interface MemberService {
 	
@@ -24,6 +25,9 @@ public interface MemberService {
 	public ArrayList<MissingDTO> membermissingwrite(int mem_no);
 	public ArrayList<RehomeDTO> memberrehomewrite(int mem_no);
 	public ArrayList<EpilogueDTO> memberepiloguewrite(int mem_no);
-	public ArrayList<BoardDTO> memberboardwrite(int mem_no);	
+	public ArrayList<BoardDTO> memberboardwrite(int mem_no);
+	
+	public int ADmemberTotal();
+	public ArrayList<MemberDTO> ADmemberPage(PagingDTO page);	
 	
 }

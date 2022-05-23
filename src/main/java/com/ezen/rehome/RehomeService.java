@@ -17,7 +17,6 @@ public interface RehomeService {
 	public void rehomeok(int rh_no, String rh_gb1);
 	public void rehomeimbo(int rh_no, int mem_no, String mem_nickname, String mem_tel);
 	public void rehomebun(int rh_no);
-	public ArrayList<RehomeDTO> rehomeend();
 	public int cntpage();
 	public ArrayList<RehomeDTO> selectpage(PagingDTO dto);
 	

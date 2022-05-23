@@ -65,18 +65,6 @@ table {
 
 <table border="0" align="center" width="700">
 	<tr>
-		<th colspan="6">
-			<form action="boardsearch">
-				<select name="selectname">
-			  		<option value="bd_title">　제목　</option>
-			  		<option value="mem_nickname">　작성자　</option>
-			  	</select>
-				<input type="text" name="searchname">
-				<input type="submit" value="검색">
-			</form>
-		</th>
-	</tr>
-	<tr>
 		<th colspan="5">
 			<c:if test="${page.startPage != 1}">
 				<a href="boardpage?nowPage=1">&lt;&lt;</a>
@@ -96,6 +84,18 @@ table {
 			<c:if test="${page.endPage != page.lastPage}">
 				<a href="boardpage?nowPage=${page.lastPage}">&gt;&gt;</a>
 			</c:if>
+		</th>
+	</tr>
+	<tr>
+		<th colspan="6">
+			<form action="boardsearch">
+				<select name="selectname">
+			  		<option value="bd_title">　제목　</option>
+			  		<option value="mem_nickname">　작성자　</option>
+			  	</select>
+				<input type="text" name="searchname">
+				<input type="submit" value="검색">
+			</form>
 		</th>
 	</tr>
 </table>

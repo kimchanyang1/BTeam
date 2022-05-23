@@ -156,16 +156,6 @@ public class MissingController {
 
 
 
-	public String missingend(Model mo, SqlSession sqlSession) 
-	{
-		MissingService micdao = sqlSession.getMapper(MissingService.class);
-		ArrayList<MissingDTO> missingend = micdao.missingend();
-		mo.addAttribute("missingend",missingend);
-		return "missingend";
-	}
-
-
-
 	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
 		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		int total = micdao.missingEndTotal();
