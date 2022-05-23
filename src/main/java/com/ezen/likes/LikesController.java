@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ezen.board.BoardDTO;
 
 public class LikesController {
 
@@ -35,5 +38,5 @@ public class LikesController {
 		
 		return count;
 	}
-	
+
 }

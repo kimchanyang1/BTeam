@@ -414,14 +414,7 @@ public class HomeController {
 	public String epiloguepage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return ep.epiloguepage(dto, mo, sqlSession, nowPage);
 	}
-		
-		
 	
-	@RequestMapping(value = "/board")
-	public String bb0(Model md) {
-		
-		return bc.boardoutform(sqlSession, md);
-	}
 	
 	@RequestMapping(value = "/boardpage")
 	public String boardpage(

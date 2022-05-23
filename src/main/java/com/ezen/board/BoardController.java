@@ -11,22 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.likes.LikesController;
+import com.ezen.likes.LikesService;
 import com.ezen.member.MemberDTO;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
-
-	
-	// 자유게시판
-	public String boardoutform(SqlSession sqlSession, Model md) {
-
-		BoardService bs = sqlSession.getMapper(BoardService.class);
-		ArrayList<BoardDTO> boardlist = bs.boardout();
-		md.addAttribute("boardlist", boardlist);
-			
-		return "boardoutform";
-	}
 		
 
 	// 글쓰기
