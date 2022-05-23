@@ -99,7 +99,7 @@ textarea {
 	<tr>
 		<th colspan="2">
 		<input type="submit" value="등록">　
-		<a href="missingoutform"><input id="cancel" type="button" value="취소"></a>
+		<a href="missingpage"><input id="cancel" type="button" value="취소"></a>
 		</th>
 	</tr>
 </table>

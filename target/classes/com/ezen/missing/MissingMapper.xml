@@ -11,7 +11,7 @@
 </insert>
 
 <select id="missingout" resultType="com.ezen.missing.MissingDTO">
-	select * from missing where mis_gb='실종'
+	select * from missing where mis_gb='실종' order by mis_no desc
 </select>
 
 <select id="missingEndTotal" resultType="int">

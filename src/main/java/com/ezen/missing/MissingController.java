@@ -141,7 +141,7 @@ public class MissingController {
 		
 		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.missingmodify_insert(mis_no, mis_gb, mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel,mis_content,mis_readcount);
-		return "redirect:missingoutform";
+		return "redirect:missingpage";
 	}
 
 
