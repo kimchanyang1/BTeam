@@ -80,7 +80,8 @@ $(document).ready(function(){
 	<td colspan="3" align="left">
 		<fmt:parseDate value="${boarddetail.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　추천수 <font color="#ff8000">???</font></td>
+		<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　
+		추천수 <font color="#ff8000">　<B><span class="likes_count"></span></B></font></td>
 </tr>
 <tr>
 	<td>　　</td></tr>

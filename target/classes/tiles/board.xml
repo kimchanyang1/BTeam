@@ -11,11 +11,6 @@
 	</definition>
 	
 	
-	<definition name="boardoutform" extends="baseLayout">
-		<put-attribute name="title" value="자유게시판"/>
-		<put-attribute name="body" value="/WEB-INF/views/board/boardoutform.jsp"/>
-	</definition>
-	
 	<definition name="boardpage" extends="baseLayout">
 		<put-attribute name="title" value="자유게시판"/>
 		<put-attribute name="body" value="/WEB-INF/views/board/boardpage.jsp"/>

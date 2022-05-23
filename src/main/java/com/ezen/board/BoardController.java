@@ -17,8 +17,6 @@ import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
-
-	
 	// ±Û¾²±â
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
