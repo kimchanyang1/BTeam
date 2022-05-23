@@ -52,43 +52,40 @@
 		<c:if test="${e%3 eq 2}">
 		</td>
 	</tr>
-			</div>
-		</div>
-		</c:if>
+	</c:if>
 		
-		</c:forEach>
-		</c:if>
-		
-		 <tr>      
-               <td colspan="5">             
-               <c:if test="${paging.startPage != 1 }">
-               <a href="missingpage?nowPage=${paging.startPage - 1}">&lt;</a>
-               </c:if>
+	</c:forEach>
+	</c:if>
+	<tr>
+		<th colspan="5">　　</th></tr>	
+	<tr>
+		<td colspan="5" align="center">
+			<c:if test="${paging.startPage != 1}">
+				<a href="missingoutform?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
+			</c:if>
+			<c:if test="${paging.startPage != 1 }">
+				<a href="missingoutform?nowPage=${paging.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
+			</c:if>
                    
                <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
                	<c:choose>
                		<c:when test="${paging.nowPage eq i}">
-               			${i}
+               			<font color="#ff8000"><B>　${i}　</B></font>
                		</c:when>
                		<c:otherwise>
-               			<a href="missingpage?nowPage=${i}">${i}</a>
+               			<a href="missingoutform?nowPage=${i}">　${i}　</a>
                		</c:otherwise>      		
                	</c:choose>        	
                 </c:forEach>
-                
                <c:if test="${paging.endPage != paging.lastPage}">
-                  <a  href="missingpage?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+                  <a  href="missingoutform?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-right" style="font-size:18px;"></i></a>
                </c:if>
-               </td>
-            </tr>
-	</tbody>
+               <c:if test="${paging.endPage != paging.lastPage}">
+				<a href="missingoutform?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
+			</c:if>
+		</td>
+	</tr>
 
 </table>
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 082df691277e9b00901caf2b3ad6689c490e0aa5
 </body>
 </html>

@@ -27,7 +27,7 @@ public class NoticeController {
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("page", page);
-		return "noticePage";
+		return "noticeoutform";
 	}
 	
 	public String noticeinputform(HttpServletRequest request, Model model) {
@@ -44,7 +44,7 @@ public class NoticeController {
 		String nt_content = request.getParameter("nt_content");
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ns.noticeinput(mem_no, mem_nickname, nt_title, nt_content);
-		return "redirect:noticeoutform";
+		return "redirect: noticeoutform";
 	}
 
 	public String noticedetail(HttpServletRequest request, SqlSession sqlSession, Model model) {

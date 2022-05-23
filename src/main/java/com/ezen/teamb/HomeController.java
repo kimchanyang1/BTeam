@@ -50,13 +50,14 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/NoticePage")
+	@RequestMapping(value = "/noticeoutform")
 	public String noticepage(
 			Model model, 
 			@RequestParam(value = "nowPage", required = false)String nowPage
 			) {
 		return nc.noticepage(sqlSession, model, nowPage);
 	}
+	
 	
 	@RequestMapping(value = "/noticeinputform")
 	public String noticeinputform(HttpServletRequest request, Model model) {
@@ -102,10 +103,6 @@ public class HomeController {
 		return mic.missinginput(request, sqlSession);
 	}
 	
-	@RequestMapping(value = "/missingoutform")
-	public String missingoutform(Model mo) {
-		return mic.missingoutform(mo,sqlSession);
-	}
 	
 	@RequestMapping(value = "/missingdetail")
 	public String missingdetail(HttpServletRequest request,Model mo) {
@@ -127,15 +124,18 @@ public class HomeController {
 		return mic.missingmodifyinput(request,sqlSession);
 	}
 	
-	@RequestMapping(value = "/missingEndPage")
+	
+	// 귀가 완료
+	@RequestMapping(value = "/missingend")
 	public String missingEndPage(
 			Model model, 
 			@RequestParam(value = "nowPage", required = false)String nowPage
 			) {
 		return mic.missingEndPage(sqlSession, model, nowPage);
 	}
+	
 
-	@RequestMapping(value = "/missingpage")
+	@RequestMapping(value = "/missingoutform")
 	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return mic.missingpage(dto, mo, sqlSession, nowPage);
 	}
@@ -146,11 +146,7 @@ public class HomeController {
 		return mic.rehoming(request,sqlSession);
 	}
 	
-	
-	@RequestMapping(value = "/rehome")
-	public String rehome() {
-		return "redirect: rehomeoutform";
-	}
+
 	
 	@RequestMapping(value = "/rehomeinputform")
 	public String rhinputform() {
@@ -167,7 +163,8 @@ public class HomeController {
 		return rc.rhoutput(sqlSession, mo);
 	}
 	
-	@RequestMapping(value = "/rehomeEndPage")
+	// REHOME
+	@RequestMapping(value = "/rehomeend")
 	public String rehomeEndPage(
 			Model model, 
 			@RequestParam(value = "nowPage", required = false)String nowPage
@@ -225,7 +222,8 @@ public class HomeController {
 		return rc.rehomebun(sqlSession, request);
 	}
 	
-	@RequestMapping(value = "/rehomepage")
+	// REHOME
+	@RequestMapping(value = "/rehome")
 	public String rehomegpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return rc.rehomepage(dto, mo, sqlSession, nowPage);
 	}
@@ -343,12 +341,16 @@ public class HomeController {
 		return mc.ADmembersearch(sqlSession, request, model);
 	}
 	
+	
+	
+	//EPILOGUE	
 	@RequestMapping(value = "/epilogue")
-	public String ee0(Model md) {
-			
-		return ep.epilogueoutform(sqlSession, md);
+	public String epiloguepage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return ep.epiloguepage(dto, mo, sqlSession, nowPage);
 	}
 	
+	
+	// 글쓰기
 	@RequestMapping(value = "/epilogueinputform")
 	public String ee1(HttpServletRequest request, Model md)	{
 					
@@ -361,12 +363,16 @@ public class HomeController {
 		return ep.epilogueinput(sqlSession, multi);
 	}
 	
+	
+	// 디테일
 	@RequestMapping(value = "/epiloguedetail")
 	public String ee3(HttpServletRequest request, Model md) {
 		
 		return ep.epiloguedetailform(sqlSession, request, md);
 	}
 	
+	
+	// 수정
 	@RequestMapping(value = "/epiloguemodifyselect")
 	public String ee4(HttpServletRequest request, Model md) {
 		
@@ -380,6 +386,7 @@ public class HomeController {
 	}
 	
 	
+	// 삭제
 	@RequestMapping(value = "/epiloguedelete")
 	public String ee6(HttpServletRequest request, Model md) {
 		
@@ -387,19 +394,18 @@ public class HomeController {
 	}
 	
 	
+	// 검색
 	@RequestMapping(value = "/epiloguesearch")
 	public String ee7(HttpServletRequest request, Model md) {
 			
 		return ep.epiloguesearch(sqlSession, request, md);
 	}
 	
-	@RequestMapping(value = "/epiloguepage")
-	public String epiloguepage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
-		return ep.epiloguepage(dto, mo, sqlSession, nowPage);
-	}
 	
-
-	@RequestMapping(value = "/boardpage")
+	
+	
+	// BOARD
+	@RequestMapping(value = "/board")
 	public String boardpage(
 			Model model, 
 			@RequestParam(value = "nowPage", required = false)String nowPage
@@ -408,7 +414,7 @@ public class HomeController {
 	}
 	
 	
-	// 占쌜억옙占쏙옙
+	// 글쓰기
 	@RequestMapping(value = "/boardinputform")
 	public String bb1(HttpServletRequest request, Model md)	{
 				
@@ -422,7 +428,7 @@ public class HomeController {
 	}
 	
 	
-	// 占쏙옙占쏙옙占쏙옙
+	// 디테일
 	@RequestMapping(value = "/boarddetail")
 	public String bb3(HttpServletRequest request, Model md) {
 		
@@ -430,7 +436,7 @@ public class HomeController {
 	}
 	
 	
-	// 占쏙옙占쏙옙
+	// 검색
 	@RequestMapping(value = "/boardmodifyselect")
 	public String bb4(HttpServletRequest request, Model md) {
 		

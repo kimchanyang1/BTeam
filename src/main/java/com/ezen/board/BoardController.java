@@ -165,6 +165,7 @@ public class BoardController {
 
 
 	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
+
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		LikesController lc = new LikesController();
 		int total = bs.boardtotalcount();
@@ -182,7 +183,8 @@ public class BoardController {
 		}
 		model.addAttribute("page", page);
 		model.addAttribute("boardlist", list);
-		return "boardpage";
+		
+		return "boardoutform";
 	}
 
 }

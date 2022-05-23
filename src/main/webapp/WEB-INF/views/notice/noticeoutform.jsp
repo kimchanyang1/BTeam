@@ -61,24 +61,28 @@ table {
 	</tr>
 	</c:forEach>
 	<tr>
+		<th colspan="5">　　</th></tr>
+	<tr>
 		<th colspan="5">
 			<c:if test="${page.startPage != 1}">
-				<a href="NoticePage?nowPage=1">&lt;&lt;</a>
+				<a href="noticeoutform?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
 			</c:if>
 			<c:if test="${page.startPage != 1}">
-				<a href="NoticePage?nowPage=${page.startPage - 1}">&lt;</a>
+				<a href="noticeoutform?nowPage=${page.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
 			</c:if>
 			<c:forEach begin="${page.startPage}" end="${page.endPage}" step="1" var="i">
 				<c:choose>
-					<c:when test="${i eq page.nowPage}">${i}</c:when>
-					<c:otherwise><a href="NoticePage?nowPage=${i}">${i}</a></c:otherwise>
+					<c:when test="${i eq page.nowPage}">
+						<font color="#ff8000"><B> 　${i}　</B></font>
+					</c:when>
+					<c:otherwise><a href="noticeoutform?nowPage=${i}">　${i}　</a></c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${page.endPage != page.lastPage}">
-				<a href="NoticePage?nowPage=${page.endPage + 1}">&gt;</a>
+				<a href="noticeoutform?nowPage=${page.endPage + 1}"><i class="fas fa-angle-right" style="font-size:18px;"></i></a>
 			</c:if>
 			<c:if test="${page.endPage != page.lastPage}">
-				<a href="NoticePage?nowPage=${page.lastPage}">&gt;&gt;</a>
+				<a href="noticeoutform?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
 			</c:if>
 		</th>
 	</tr>

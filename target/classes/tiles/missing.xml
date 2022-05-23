@@ -10,34 +10,34 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
 	</definition>
 	
+	
 	<definition name="missinginputform" extends="baseLayout">
 		<put-attribute name="title" value="실종신고"/>
 		<put-attribute name="body" value="/WEB-INF/views/missing/missinginputform.jsp"/>
 	</definition>
+	
 	
 	<definition name="missingoutform" extends="baseLayout">
 		<put-attribute name="title" value="출력확인"/>
 		<put-attribute name="body" value="/WEB-INF/views/missing/missingoutform.jsp"/>
 	</definition>
 	
+	
 		<definition name="missingdetail" extends="baseLayout">
 		<put-attribute name="title" value="상세페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/missing/missingdetail.jsp"/>
 	</definition>
+	
 	
 	<definition name="missingmodifyform" extends="baseLayout">
 		<put-attribute name="title" value="수정페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/missing/missingmodifyform.jsp"/>
 	</definition>
 	
+	
 	<definition name="missingend" extends="baseLayout">
 		<put-attribute name="title" value="귀가완료"/>
 		<put-attribute name="body" value="/WEB-INF/views/missing/missingend.jsp"/>
-	</definition>
-	
-	<definition name="missingEndPage" extends="baseLayout">
-		<put-attribute name="title" value="귀가완료"/>
-		<put-attribute name="body" value="/WEB-INF/views/missing/missingEndPage.jsp"/>
 	</definition>
 	
 	
