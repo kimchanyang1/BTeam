@@ -51,6 +51,29 @@
 	</c:if>
 	</c:forEach>
 	</c:if>
+	
+	   		<tr>      
+               <td colspan="5">             
+               <c:if test="${paging.startPage != 1 }">
+               <a href="epiloguepage?nowPage=${paging.startPage - 1}">&lt;</a>
+               </c:if>
+                   
+               <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+               	<c:choose>
+               		<c:when test="${paging.nowPage eq i}">
+               			${i}
+               		</c:when>
+               		<c:otherwise>
+               			<a href="epiloguepage?nowPage=${i}">${i}</a>
+               		</c:otherwise>      		
+               	</c:choose>        	
+                </c:forEach>
+                
+               <c:if test="${paging.endPage != paging.lastPage}">
+                  <a  href="epiloguepage?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+               </c:if>
+               </td>
+            </tr>
 </table>
 
 <br><br>
@@ -72,6 +95,8 @@
 		</form>
 	</td>
 </tr>
+
+			
 </table>
 
 </body>

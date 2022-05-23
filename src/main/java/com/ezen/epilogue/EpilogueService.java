@@ -2,33 +2,36 @@ package com.ezen.epilogue;
 
 import java.util.ArrayList;
 
+import com.ezen.missing.MissingDTO;
+import com.ezen.teamb.PagingDTO;
+
 public interface EpilogueService {
 
-	// Ãâ·Â
+	// ï¿½ï¿½ï¿½
 	public ArrayList<EpilogueDTO> epilogueout();
 
 	
-	// ÀÔ·Â
+	// ï¿½Ô·ï¿½
 	public void epilogueinput(int ep_originno, String ep_gb, String ep_title, int mem_no, String mem_nickname, String ep_content, String ep_image);
 
 
-	// µðÅ×ÀÏ, Á¶È¸¼ö Áõ°¡
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<EpilogueDTO> epiloguedetail(int ep_no);
 
 	public void epiloguereadcount(int ep_no);
 
 
-	// ¼öÁ¤
+	// ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<EpilogueDTO> epiloguemodifyselect(int ep_no);
 
 	public void epiloguemodify(String ep_title, int mem_no, String mem_nickname, String ep_content, String ep_image, int ep_no);
 
 
-	// »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½
 	public void epiloguedelete(int ep_no);
 
 
-	// °Ë»ö
+	// ï¿½Ë»ï¿½
 	public ArrayList<EpilogueDTO> searchgohometitle(String searchname);
 
 	public ArrayList<EpilogueDTO> searchgohomenickname(String searchname);
@@ -37,6 +40,8 @@ public interface EpilogueService {
 
 	public ArrayList<EpilogueDTO> searchrehomenickname(String searchname);
 
+	public int cntpage();
 	
+	public ArrayList<EpilogueDTO> selectpage(PagingDTO dto);
 
 }

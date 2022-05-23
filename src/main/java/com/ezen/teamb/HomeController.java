@@ -354,6 +354,11 @@ public class HomeController {
 			
 		return ep.epiloguesearch(sqlSession, request, md);
 	}
+	
+	@RequestMapping(value = "/epiloguepage")
+	public String epiloguepage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return ep.epiloguepage(dto, mo, sqlSession, nowPage);
+	}
 		
 		
 	
