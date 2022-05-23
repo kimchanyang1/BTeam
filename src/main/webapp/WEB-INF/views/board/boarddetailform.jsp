@@ -128,6 +128,11 @@ $(document).ready(function(){
 	</td>
 </tr>
 <tr>
+	<td>
+		<jsp:include page="../main/reply.jsp"></jsp:include>
+	</td>
+</tr>
+<tr>
 	<td colspan="3">
 		<button id="b2" onclick="location.href='boarddetail?bd_no=${(boarddetail.bd_no)-1 }'"><B>◀ 이전글</B></button>
 		<button id="b2" onclick="location.href='board'"><B>목록</B></button>
