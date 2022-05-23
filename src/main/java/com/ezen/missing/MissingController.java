@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
+import com.ezen.rehome.RehomeDTO;
 import com.ezen.rehome.RehomeService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.PagingDTO;
@@ -170,34 +171,25 @@ public class MissingController {
 		mo.addAttribute("missingend",missingend);
 		return "missingend";
 	}
-	
-	@RequestMapping("/post")
-		public String postList(PagingDTO dto, Model mo,SqlSession sqlSession
-				,@RequestParam(value="nowPage", required=false)String nowPage
-				,@RequestParam(value="cntPerPage", required=false)String cntPerPage)
-	{
-		MissingService mic = sqlSession.getMapper(MissingService.class);
-		int total = mic.cntpost();
-		if(nowPage == null && cntPerPage == null)
-		{
-			nowPage = "1";
-			cntPerPage = "3";
+
+
+
+	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		int total = micdao.missingEndTotal();
+		int cntPage = 5;
+		int cntPerPage = 9;
+		if (nowPage==null) {
+			nowPage="1";
 		}
-		else if(nowPage == null)
-		{
-			nowPage = "1";
-		}
-		else if(cntPerPage == null)
-		{
-			cntPerPage="3";
-		}
-		System.out.println("�쁽�옱�럹�씠吏�"+nowPage+" "+cntPerPage);
-		System.out.println("珥앸젅肄붾뱶 :"+total);
 		
-		dto = new PagingDTO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		mo.addAttribute("paging", dto);
-		mo.addAttribute("viewAll", mic.selectpost(dto));
-		return "missingoutform";
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<MissingDTO> list = micdao.missingEndPage(page);
+		
+		model.addAttribute("missingEndList", list);
+		model.addAttribute("page", page);
+		
+		return "missingEndPage";
 	}
 	
 }

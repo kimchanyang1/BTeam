@@ -144,6 +144,14 @@ public class HomeController {
 		return mic.missingend(mo,sqlSession);
 	}
 	
+	@RequestMapping(value = "/missingEndPage")
+	public String missingEndPage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return mic.missingEndPage(sqlSession, model, nowPage);
+	}
+	
 	@RequestMapping(value = "/rehoming")
 	public String rehoming(HttpServletRequest request) {
 		return mic.rehoming(request,sqlSession);
@@ -173,6 +181,14 @@ public class HomeController {
 	@RequestMapping(value = "/rehomeend")
 	public String rehomeend(Model mo) {
 		return rc.rehomeend(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeEndPage")
+	public String rehomeEndPage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return rc.rehomeEndPage(sqlSession, model, nowPage);
 	}
 	
 	@RequestMapping(value = "/rehomedetail")

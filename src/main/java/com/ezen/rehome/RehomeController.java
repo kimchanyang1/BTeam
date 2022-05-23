@@ -14,6 +14,7 @@ import com.ezen.member.MemberController;
 import com.ezen.member.MemberDTO;
 import com.ezen.member.MemberService;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.PagingDTO;
 
 public class RehomeController {
 	
@@ -195,6 +196,24 @@ public class RehomeController {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		mo.addAttribute("rh_no", rh_no);
 		return "rehomeimboform";
+	}
+	
+	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
+	{
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		int total = rs.rehomeendtotal();
+		int cntPage = 5;
+		int cntPerPage = 9;
+		if (nowPage==null) {
+			nowPage="1";
+		}
+		
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<RehomeDTO> list = rs.rehomeendpage(page);
+		
+		mo.addAttribute("rehomeEndList", list);
+		mo.addAttribute("page", page);
+		return "rehomeEndPage";
 	}
 
 }

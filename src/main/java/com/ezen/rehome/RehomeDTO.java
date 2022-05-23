@@ -20,6 +20,16 @@ rh_content VARCHAR2(2000),
 rh_readcount NUMBER(6));
 
 create SEQUENCE rh_no;
+
+분양완료 데이터
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트1', '양산형개1', 0000001, sysdate, '실종지1', '1.png', 1, '테스터1', '010-1111-1111', sysdate, '테스트용글내용1', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트2', '양산형개2', 0000001, sysdate, '실종지1', '1.png', 1, '테스터2', '010-2222-2222', sysdate, '테스트용글내용2', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트3', '양산형개3', 0000003, sysdate, '실종지3', '1.png', 3, '테스터3', '030-3333-3333', sysdate, '테스트용글내용3', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트4', '양산형개4', 0000004, sysdate, '실종지4', '1.png', 4, '테스터4', '040-4444-4444', sysdate, '테스트용글내용4', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트5', '양산형개5', 0000005, sysdate, '실종지5', '1.png', 5, '테스터5', '050-5555-5555', sysdate, '테스트용글내용5', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트6', '양산형개6', 0000006, sysdate, '실종지6', '1.png', 6, '테스터6', '060-6666-6666', sysdate, '테스트용글내용6', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트7', '양산형개7', 0000007, sysdate, '실종지7', '1.png', 7, '테스터7', '070-7777-7777', sysdate, '테스트용글내용7', 0);
+insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트8', '양산형개8', 0000008, sysdate, '실종지8', '1.png', 8, '테스터8', '080-8888-8888', sysdate, '테스트용글내용8', 0);
  */
 
 public class RehomeDTO {

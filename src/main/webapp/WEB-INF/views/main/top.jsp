@@ -38,8 +38,8 @@
 					실종/분양 후기<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="missingend">귀가 완료</a></li>
-					<li><a href="rehomeend">분양 완료</a></li>
+					<li><a href="missingEndPage">귀가 완료</a></li>
+					<li><a href="rehomeEndPage">분양 완료</a></li>
 					<li><a href="epilogue">후기글</a></li>
 				</ul>
         	</li>

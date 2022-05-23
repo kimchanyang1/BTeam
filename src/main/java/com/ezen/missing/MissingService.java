@@ -2,6 +2,7 @@ package com.ezen.missing;
 
 import java.util.ArrayList;
 
+import com.ezen.rehome.RehomeDTO;
 import com.ezen.teamb.PagingDTO;
 
 public interface MissingService {
@@ -15,4 +16,7 @@ public interface MissingService {
 	public void missingreadcount(int mis_no);
 	public int cntpost();
 	public ArrayList<MissingDTO> selectpost(PagingDTO dto);
+	
+	public int missingEndTotal();
+	public ArrayList<MissingDTO> missingEndPage(PagingDTO page);
 }
