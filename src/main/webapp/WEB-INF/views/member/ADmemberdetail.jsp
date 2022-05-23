@@ -6,7 +6,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#memberdelete').click(function(){
-		let kk = confirm($('#mem_nickname').text()+'님 정말 탈퇴하실건가요?');
+		let kk = confirm($('#mem_nickname').text()+'님 정말 탈퇴시킬건가요?');
 		if (kk) {
 			alert('탈퇴 실행');
 			var url = "memberdelete?mem_no="+$('#mem_no').text();
@@ -39,10 +39,6 @@ table {
 <br><br>
 
 <table border="0" align="center">
-	<tr>
-		<th></th>
-		<td style="text-align: right;"><B><button onclick="location.href='memberwritelist'">내 글 확인</button></B></td>
-	</tr>
 	<tr>
 		<th><B>　회원번호　</B></th>
 		<td id="mem_no"><input type="text" value="${mdto.mem_no}" readonly="readonly"></td>

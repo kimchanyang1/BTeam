@@ -35,7 +35,7 @@ textarea {
 			<table border="0" align="center">
 			<tr>
 				<th>　　구분　　</th>
-				<td><input type="radio" name="rh_gb2" value="임보"> 임시보호 &emsp;
+				<td><input type="radio" name="rh_gb2" value="임시보호"> 임시보호 &emsp;
 					<input type="radio" name="rh_gb2" value="분양"> 분양
 				</td>
 			</tr>

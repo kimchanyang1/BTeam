@@ -61,11 +61,11 @@ textarea {
 				<td><input type="text" name="mis_pno"></td>
 			</tr>
 			<tr>
-				<th>　발견날짜　</th>
+				<th>　실종날짜　</th>
 				<td><input type="date" name="mis_misdate"></td>
 			</tr>
 			<tr>
-				<th>　발견장소　</th>
+				<th>　실종장소　</th>
 				<td><input type="text" name="mis_misplace"></td>
 			</tr>
 			<tr>

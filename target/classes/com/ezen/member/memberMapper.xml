@@ -41,4 +41,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT COUNT(mem_id) FROM member WHERE mem_id=#{mem_id}
 </select>
 
+<select id="memberlist" resultMap="member">
+	select * from member order by mem_no desc
+</select>
+
+<select id="searchid" resultMap="member">
+	SELECT * FROM member WHERE mem_id LIKE '%'||#{param1}||'%' order by mem_no desc
+</select>
+
+<select id="searchname" resultMap="member">
+	SELECT * FROM member WHERE MEM_NAME LIKE '%'||#{param1}||'%' order by mem_no desc
+</select>
+
+<select id="searchnickname" resultMap="member">
+	SELECT * FROM member WHERE MEM_NICKNAME LIKE '%'||#{param1}||'%' order by mem_no desc
+</select>
+
+<select id="membermissingwrite" resultType="com.ezen.missing.MissingDTO">
+	SELECT * FROM missing WHERE mem_no=#{mem_no} order by mis_no desc
+</select>
+
+<select id="memberrehomewrite" resultType="com.ezen.rehome.RehomeDTO">
+	SELECT * FROM rehome WHERE mem_no=#{mem_no} order by rh_no desc
+</select>
+
+<select id="memberepiloguewrite" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM epilogue WHERE mem_no=#{mem_no} order by ep_no desc
+</select>
+
+<select id="memberboardwrite" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM board WHERE mem_no=#{mem_no} order by bd_no desc
+</select>
+
 </mapper>

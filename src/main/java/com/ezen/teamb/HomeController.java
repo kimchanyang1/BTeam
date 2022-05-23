@@ -295,6 +295,31 @@ public class HomeController {
 		return mc.memberdetail(request, model, sqlSession);
 	}
 	
+	@RequestMapping(value = "/memberwritelist")
+	public String memberwritelist(HttpServletRequest request, Model model) {
+		return mc.memberwritelist(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/membermissingwrite")
+	public String membermissingwrite(HttpServletRequest request, Model model) {
+		return mc.membermissingwrite(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/memberrehomewrite")
+	public String memberrehomewrite(HttpServletRequest request, Model model) {
+		return mc.memberrehomewrite(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/memberepiloguewrite")
+	public String memberepiloguewrite(HttpServletRequest request, Model model) {
+		return mc.memberepiloguewrite(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/memberboardwrite")
+	public String memberboardwrite(HttpServletRequest request, Model model) {
+		return mc.memberboardwrite(request, model, sqlSession);
+	}
+	
 	@RequestMapping(value = "/memberdelete")
 	public String memberdelete(HttpServletRequest request) {
 		return mc.memberdelete(request, sqlSession);
@@ -310,7 +335,20 @@ public class HomeController {
 		return mc.membermodify(request, sqlSession, model);
 	}
 	
+	@RequestMapping(value = "/memberlist")
+	public String ADmemberlist(HttpServletRequest request, Model model) {
+		return mc.ADmemberlist(sqlSession, request, model);
+	}
 	
+	@RequestMapping(value = "/ADmemberdetail")
+	public String ADmemberdetail(HttpServletRequest request, Model model) {
+		return mc.ADmemberdetail(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/ADmembersearch")
+	public String ADmembersearch(HttpServletRequest request, Model model) {
+		return mc.ADmembersearch(sqlSession, request, model);
+	}
 	
 	
 	// 占식깍옙督占쏙옙占�
