@@ -18,15 +18,27 @@ import com.ezen.teamb.PagingDTO;
 
 public class EpilogueController {
 	
-	public String epilogueoutform(SqlSession sqlSession, Model md) {
-
+	// out
+	public String epiloguepage(PagingDTO dto, Model mo,SqlSession sqlSession
+			,@RequestParam(value="nowPage", required=false)String nowPage)
+	{
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
-		ArrayList<EpilogueDTO> epiloguelist = ep.epilogueout();
-		md.addAttribute("epiloguelist", epiloguelist);
-			
-		return "epilogueoutform";
+	int total = ep.cntpage();
+	if(nowPage == null)
+	{
+		nowPage = "1";
+	}
+
+	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+	mo.addAttribute("paging", dto);
+	mo.addAttribute("epiloguelist", ep.selectpage(dto));
+	
+	return "epilogueoutform";
+	
 	}
 	
+	
+	// input
 	public String epilogueinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
@@ -44,7 +56,6 @@ public class EpilogueController {
 		return "epilogueinputform";
 	}
 	
-	// input
 	public ModelAndView epilogueinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("ep_image");
@@ -73,6 +84,8 @@ public class EpilogueController {
 		return mav;
 	}
 	
+	
+	// detail
 	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		HttpSession hs = request.getSession();
@@ -105,6 +118,8 @@ public class EpilogueController {
 		ep.epiloguereadcount(ep_no);
 	}
 	
+	
+	// modify
 	public String epiloguemodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int ep_no=Integer.parseInt(request.getParameter("ep_no"));
@@ -139,7 +154,7 @@ public class EpilogueController {
 	}
 
 
-	// ����
+	// delete
 	public String epiloguedelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int ep_no=Integer.parseInt(request.getParameter("ep_no"));
@@ -150,6 +165,8 @@ public class EpilogueController {
 		return "redirect: epilogue";
 	}
 	
+	
+	// search
 	public String epiloguesearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		String selectname1 = request.getParameter("selectname1");
@@ -186,21 +203,6 @@ public class EpilogueController {
 		
 		return "epilogueoutform";
 	}
-	
-	public String epiloguepage(PagingDTO dto, Model mo,SqlSession sqlSession
-			,@RequestParam(value="nowPage", required=false)String nowPage)
-{
-		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
-	int total = ep.cntpage();
-	if(nowPage == null)
-	{
-		nowPage = "1";
-	}
 
-	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
-	mo.addAttribute("paging", dto);
-	mo.addAttribute("epiloguelist", ep.selectpage(dto));
-	return "epilogueoutform";
-}
 	
 }

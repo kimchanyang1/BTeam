@@ -168,6 +168,7 @@ public class BoardController {
 
 
 	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
+
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		int total = bs.boardtotalcount();
 		int cntPage = 5;
@@ -179,7 +180,8 @@ public class BoardController {
 		ArrayList<BoardDTO> list = bs.boardpage(page);
 		model.addAttribute("page", page);
 		model.addAttribute("boardlist", list);
-		return "boardpage";
+		
+		return "boardoutform";
 	}
 
 }

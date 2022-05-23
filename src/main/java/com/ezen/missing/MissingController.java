@@ -20,13 +20,32 @@ import com.ezen.teamb.PagingDTO;
 
 @Controller
 public class MissingController {
+
+	// out
+	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		int total = micdao.missingEndTotal();
+		int cntPage = 1;
+		int cntPerPage = 9;
+		if (nowPage==null) {
+			nowPage="1";
+		}
+		
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<MissingDTO> list = micdao.missingEndPage(page);
+		
+		model.addAttribute("missingEndList", list);
+		model.addAttribute("page", page);
+		
+		return "missingend";
+	}
 	
+	
+	// input
 	public String missinginputform()
 	{
 			return "missinginputform";
 	}
-	
-	
 
 	public ModelAndView missinginput(MultipartHttpServletRequest multi, SqlSession sqlSession) {
 		String mis_gb = "실종";
@@ -47,7 +66,7 @@ public class MissingController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.setViewName("redirect:missingoutform");
+		mav.setViewName("redirect: missingoutform");
 		
 		HttpSession hs = multi.getSession();
         int mem_no = (int) hs.getAttribute("mem_no");
@@ -62,14 +81,6 @@ public class MissingController {
 		mic.missing_insert(mis_gb,mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel ,mis_content);
 		return mav;
 		
-	}
-	
-	public String missingoutform(Model mo, SqlSession sqlSession)
-	{
-			MissingService micdao = sqlSession.getMapper(MissingService.class);
-			ArrayList<MissingDTO> missingout = micdao.missingout();
-			mo.addAttribute("missingout",missingout);
-			return "missingoutform";
 	}
 	
 	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession)
@@ -153,36 +164,7 @@ public class MissingController {
 		mic.rehoming(mis_no);
 		return "redirect:missingdetail?mis_no="+mis_no;
 	}
-
-
-
-	public String missingend(Model mo, SqlSession sqlSession) 
-	{
-		MissingService micdao = sqlSession.getMapper(MissingService.class);
-		ArrayList<MissingDTO> missingend = micdao.missingend();
-		mo.addAttribute("missingend",missingend);
-		return "missingend";
-	}
-
-
-
-	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
-		MissingService micdao = sqlSession.getMapper(MissingService.class);
-		int total = micdao.missingEndTotal();
-		int cntPage = 5;
-		int cntPerPage = 9;
-		if (nowPage==null) {
-			nowPage="1";
-		}
-		
-		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
-		ArrayList<MissingDTO> list = micdao.missingEndPage(page);
-		
-		model.addAttribute("missingEndList", list);
-		model.addAttribute("page", page);
-		
-		return "missingEndPage";
-	}
+	
 	
 	public String missingpage(PagingDTO dto, Model mo,SqlSession sqlSession
 				,@RequestParam(value="nowPage", required=false)String nowPage)
@@ -197,6 +179,7 @@ public class MissingController {
 		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
 		mo.addAttribute("paging", dto);
 		mo.addAttribute("missingout", mic.selectpage(dto));
+		
 		return "missingoutform";
 	}
 	

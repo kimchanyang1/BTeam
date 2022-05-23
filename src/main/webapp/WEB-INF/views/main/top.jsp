@@ -22,15 +22,15 @@
 		</div>
 		<ul class="nav navbar-nav">
 			<li class="active">
-				<a href="NoticePage">공지</a>
+				<a href="noticeoutform">공지</a>
         	</li>
         	
         	<li class="active">
-        		<a href="missingpage">실종</a>
+        		<a href="missingoutform">실종</a>
         	</li>
         	
 			<li class="active">
-				<a href="rehomepage">분양/임시보호</a>
+				<a href="rehome">분양/임시보호</a>
         	</li>
         	
 			<li class="active">
@@ -38,13 +38,13 @@
 					실종/분양 후기<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="missingEndPage">귀가 완료</a></li>
-					<li><a href="rehomeEndPage">분양 완료</a></li>
-					<li><a href="epiloguepage">후기글</a></li>
+					<li><a href="missingend">귀가 완료</a></li>
+					<li><a href="rehomeend">분양 완료</a></li>
+					<li><a href="epilogue">후기글</a></li>
 				</ul>
         	</li>
         	<li class="active">
-        			<a href="boardpage">자유게시판</a>
+        			<a href="board">자유게시판</a>
         	</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">

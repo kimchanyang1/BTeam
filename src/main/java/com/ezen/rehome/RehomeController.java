@@ -182,13 +182,6 @@ public class RehomeController {
 		return "redirect:rehomedetail?rh_no="+rh_no;
 	}
 
-	public String rehomeend(SqlSession sqlSession, Model mo) {
-		RehomeService rs = sqlSession.getMapper(RehomeService.class);
-		ArrayList<RehomeDTO> rdto = rs.rehomeend();
-		
-		mo.addAttribute("rdto", rdto);
-		return "rehomeend";
-	}
 
 	public String rehomeimboform(HttpServletRequest request, Model mo) {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
@@ -196,6 +189,8 @@ public class RehomeController {
 		return "rehomeimboform";
 	}
 	
+	
+	// 분양 완료
 	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
@@ -211,9 +206,11 @@ public class RehomeController {
 		
 		mo.addAttribute("rehomeEndList", list);
 		mo.addAttribute("page", page);
-		return "rehomeEndPage";
+		
+		return "rehomeend";
 	}
 
+	
 	public String rehomepage(PagingDTO dto, Model mo,SqlSession sqlSession
 			,@RequestParam(value="nowPage", required=false)String nowPage)
 	{
@@ -227,6 +224,7 @@ public class RehomeController {
 	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
 	mo.addAttribute("paging", dto);
 	mo.addAttribute("rdto", rh.selectpage(dto));
+	
 	return "Rehomeoutform";
 }
 
