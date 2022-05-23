@@ -6,23 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.missing.MissingController;
 
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.board.BoardController;
 import com.ezen.epilogue.EpilogueController;
@@ -151,6 +144,12 @@ public class HomeController {
 			) {
 		return mic.missingEndPage(sqlSession, model, nowPage);
 	}
+
+	@RequestMapping(value = "/missingpage")
+	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return mic.missingpage(dto, mo, sqlSession, nowPage);
+	}
+
 	
 	@RequestMapping(value = "/rehoming")
 	public String rehoming(HttpServletRequest request) {
@@ -239,6 +238,11 @@ public class HomeController {
 	@RequestMapping(value = "/rehomebun")
 	public String rehomebun(HttpServletRequest request) {
 		return rc.rehomebun(sqlSession, request);
+	}
+	
+	@RequestMapping(value = "/rehomepage")
+	public String rehomegpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return rc.rehomepage(dto, mo, sqlSession, nowPage);
 	}
 	
 	@RequestMapping(value = "/signupform1")
@@ -366,6 +370,11 @@ public class HomeController {
 	public String ee7(HttpServletRequest request, Model md) {
 			
 		return ep.epiloguesearch(sqlSession, request, md);
+	}
+	
+	@RequestMapping(value = "/epiloguepage")
+	public String epiloguepage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return ep.epiloguepage(dto, mo, sqlSession, nowPage);
 	}
 		
 		

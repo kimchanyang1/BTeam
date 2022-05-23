@@ -1,26 +1,18 @@
 package com.ezen.missing;
 
-import java.security.Provider.Service;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.member.MemberDTO;
-import com.ezen.rehome.RehomeDTO;
-import com.ezen.rehome.RehomeService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.PagingDTO;
 
@@ -190,6 +182,22 @@ public class MissingController {
 		model.addAttribute("page", page);
 		
 		return "missingEndPage";
+	}
+	
+	public String missingpage(PagingDTO dto, Model mo,SqlSession sqlSession
+				,@RequestParam(value="nowPage", required=false)String nowPage)
+	{
+		MissingService mic = sqlSession.getMapper(MissingService.class);
+		int total = mic.cntpage();
+		if(nowPage == null)
+		{
+			nowPage = "1";
+		}
+	
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("missingout", mic.selectpage(dto));
+		return "missingoutform";
 	}
 	
 }

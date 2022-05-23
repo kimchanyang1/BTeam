@@ -10,6 +10,8 @@ public class PagingDTO {
 	//한 페이지당 항목 개수
 	private int cntPerPage;
 	
+	
+	public PagingDTO() {}
 	public PagingDTO(int total, int nowPage, int cntPerPage, int cntPage)
 	{
 		setNowPage(nowPage);

@@ -26,11 +26,11 @@
         	</li>
         	
         	<li class="active">
-        		<a href="missingoutform">실종</a>
+        		<a href="missingpage">실종</a>
         	</li>
         	
 			<li class="active">
-				<a href="rehome">분양/임시보호</a>
+				<a href="rehomepage">분양/임시보호</a>
         	</li>
         	
 			<li class="active">
@@ -40,7 +40,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="missingEndPage">귀가 완료</a></li>
 					<li><a href="rehomeEndPage">분양 완료</a></li>
-					<li><a href="epilogue">후기글</a></li>
+					<li><a href="epiloguepage">후기글</a></li>
 				</ul>
         	</li>
         	<li class="active">

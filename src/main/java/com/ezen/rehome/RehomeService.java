@@ -1,7 +1,6 @@
 package com.ezen.rehome;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.ezen.teamb.PagingDTO;
 
@@ -19,6 +18,8 @@ public interface RehomeService {
 	public void rehomeimbo(int rh_no, int mem_no, String mem_nickname, String mem_tel);
 	public void rehomebun(int rh_no);
 	public ArrayList<RehomeDTO> rehomeend();
+	public int cntpage();
+	public ArrayList<RehomeDTO> selectpage(PagingDTO dto);
 	
 	public ArrayList<RehomeDTO> rehomeendpage(PagingDTO page);
 	public int rehomeendtotal();

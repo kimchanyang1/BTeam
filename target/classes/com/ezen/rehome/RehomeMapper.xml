@@ -80,4 +80,14 @@
 	update rehome set rh_gb2='분양완료' where rh_no=#{param1}
 </update>
 
+<select id="cntpage" resultType="int">
+	select count(*) from  rehome
+</select>
+
+<select id="selectpage" resultType="com.ezen.rehome.RehomeDTO">
+	select * from(
+		select rownum rn,A.* from(
+		select * from rehome order by rh_no desc)A)
+			where rn between #{start} and #{end}
+</select>
 </mapper>
