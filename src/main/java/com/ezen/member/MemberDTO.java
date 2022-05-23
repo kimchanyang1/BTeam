@@ -14,14 +14,16 @@ mem_address VARCHAR2(100));
 
 create SEQUENCE member_seq;
 
-�����ڰ��� admin
-INSERT INTO member VALUES (0,'admin','admin','관리자','관리자','','','','');
+占쏙옙占쏙옙占쌘곤옙占쏙옙 admin
+INSERT INTO member VALUES (0,'admin','admin','愿�由ъ옄','愿�由ъ옄','','','','');
 */
 
 
 public class MemberDTO {
 	int mem_no;
 	String mem_id, mem_pw, mem_name, mem_nickname, mem_jumin, mem_tel, mem_mail, mem_address;
+	int age;
+	String gender;
 	
 	public MemberDTO() {
 	}
@@ -116,6 +118,22 @@ public class MemberDTO {
 
 	public void setMem_address(String mem_address) {
 		this.mem_address = mem_address;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }

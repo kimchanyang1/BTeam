@@ -55,5 +55,15 @@
 	SELECT * FROM EPILOGUE WHERE EP_GB = '분양' AND MEM_NICKNAME LIKE '%'||#{param1}||'%'
 </select>
 
+<select id="cntpage" resultType="int">
+	SELECT COUNT(*) FROM  EPILOGUE
+</select>
+
+<select id="selectpage" resultType="com.ezen.epilogue.EpilogueDTO">
+	SELECT * FROM(
+		SELECT ROWNUM RN,A.* FROM(
+		SELECT * FROM EPILOGUE ORDER BY EP_NO DESC)A)
+			WHERE RN BETWEEN #{start} AND #{end}
+</select>
 
 </mapper>

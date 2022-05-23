@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.ezen.member.MemberDTO;
+import com.ezen.teamb.PagingDTO;
 
 public class NoticeController {
 
@@ -17,6 +17,24 @@ public class NoticeController {
 		ArrayList<NoticeDTO> noticelist = ns.noticeoutform();
 		model.addAttribute("noticelist", noticelist);
 		return "noticeoutform";
+	}
+
+	public String noticepage(SqlSession sqlSession, Model model, String nowPage) {
+		NoticeService ns = sqlSession.getMapper(NoticeService.class);
+		
+		int total = ns.noticetotalcount();
+		int cntPage = 5;
+		int cntPerPage = 15;
+		if (nowPage==null) {
+			nowPage="1";
+		}
+		
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<NoticeDTO> noticeList = ns.noticePage(page);
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("page", page);
+		return "noticePage";
 	}
 	
 	public String noticeinputform(HttpServletRequest request, Model model) {
@@ -72,5 +90,6 @@ public class NoticeController {
 		model.addAttribute("ndto", ndto);
 		return "noticemodifyform";
 	}
+	
 	
 }

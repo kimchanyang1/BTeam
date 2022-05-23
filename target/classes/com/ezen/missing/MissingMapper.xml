@@ -18,6 +18,14 @@
 	select * from missing where mis_gb='귀가'
 </select>
 
+<select id="missingEndTotal" resultType="int">
+	select count(*) from missing where mis_gb='귀가'
+</select>
+
+<select id="missingEndPage" resultType="com.ezen.missing.MissingDTO">
+	select * from (select rownum rn, A.* from(select * from missing where mis_gb='귀가' order by mis_no desc)A) where rn between #{start} and #{end}
+</select>
+
 <select id="missingdetail" resultType="com.ezen.missing.MissingDTO">
 	select * from missing where mis_no = #{param1}
 </select>
@@ -38,14 +46,14 @@
 	update missing set mis_readcount=mis_readcount+1 where mis_no=#{param1}
 </update>
 
-<select id="cntpost" resultType="int">
+<select id="cntpage" resultType="int">
 	select count(*) from  missing
 </select>
 
-<select id="selectpost" resultType="com.ezen.missing.MissingDTO">
+<select id="selectpage" resultType="com.ezen.missing.MissingDTO">
 	select * from(
 		select rownum rn,A.* from(
-		select * from missing order by groups desc,step asc)A)
+		select * from missing order by mis_no desc)A)
 			where rn between #{start} and #{end}
 </select>
 

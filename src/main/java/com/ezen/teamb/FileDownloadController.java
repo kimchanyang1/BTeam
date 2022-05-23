@@ -2,10 +2,8 @@ package com.ezen.teamb;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FileDownloadController {
    //파일의 저장 위치를 
-   private static String CURR_IMAGE_REPO_PATH = "D:\\JAVA\\spring workspace\\spring day11(booktest)\\src\\main\\webapp\\resources\\image";
+   private static String CURR_IMAGE_REPO_PATH = "C:\\BTeam\\src\\main\\webapp\\image";
 
    @RequestMapping("/download")
    //다운 로드할 이미지 화일 이름을 알려줌 

@@ -17,11 +17,20 @@ BD_IMAGE VARCHAR2(50),
 BD_LIKES NUMBER(6, 0));
 
 CREATE SEQUENCE BD_NO_SEQ;
+
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플1', 8, '예제용8', sysdate, '샘플내용1', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플2', 7, '예제용7', sysdate, '샘플내용2', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플3', 6, '예제용6', sysdate, '샘플내용3', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플4', 5, '예제용5', sysdate, '샘플내용4', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플5', 4, '예제용4', sysdate, '샘플내용5', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플6', 3, '예제용3', sysdate, '샘플내용6', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플7', 2, '예제용2', sysdate, '샘플내용7', 0, '1.jpg', 0);
+INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플8', 1, '예제용1', sysdate, '샘플내용8', 0, '1.jpg', 0);
 */
 	
 	int bd_no, mem_no, bd_readcount, bd_likes;
 	String bd_title, mem_nickname, bd_writeday, bd_content, bd_image;
-
+	int rn;
 	
 	public BoardDTO() {
 		super();
@@ -96,6 +105,14 @@ CREATE SEQUENCE BD_NO_SEQ;
 	}
 	public void setBd_image(String bd_image) {
 		this.bd_image = bd_image;
+	}
+
+	public int getRn() {
+		return rn;
+	}
+
+	public void setRn(int rn) {
+		this.rn = rn;
 	}
 
 }

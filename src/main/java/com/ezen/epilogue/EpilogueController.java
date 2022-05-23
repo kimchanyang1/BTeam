@@ -7,18 +7,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.board.BoardDTO;
-import com.ezen.board.BoardService;
 import com.ezen.member.MemberDTO;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.PagingDTO;
 
 public class EpilogueController {
 	
-	// ÈÄ±â°Ô½ÃÆÇ
 	public String epilogueoutform(SqlSession sqlSession, Model md) {
 
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
@@ -28,8 +27,6 @@ public class EpilogueController {
 		return "epilogueoutform";
 	}
 	
-	
-	// ±Û¾²±â
 	public String epilogueinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
@@ -75,9 +72,7 @@ public class EpilogueController {
 		
 		return mav;
 	}
-
 	
-	// µðÅ×ÀÏ
 	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		HttpSession hs = request.getSession();
@@ -104,15 +99,12 @@ public class EpilogueController {
 		return "epiloguedetailform";
 	}
 	
-	// Á¶È¸¼ö Áõ°¡
 	public void epiloguereadcount(int ep_no, SqlSession sqlSession) {
 		
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
 		ep.epiloguereadcount(ep_no);
 	}
 	
-	
-	// ¼öÁ¤
 	public String epiloguemodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int ep_no=Integer.parseInt(request.getParameter("ep_no"));
@@ -147,7 +139,7 @@ public class EpilogueController {
 	}
 
 
-	// »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½
 	public String epiloguedelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int ep_no=Integer.parseInt(request.getParameter("ep_no"));
@@ -158,8 +150,6 @@ public class EpilogueController {
 		return "redirect: epilogue";
 	}
 	
-	
-	// °Ë»ö
 	public String epiloguesearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		String selectname1 = request.getParameter("selectname1");
@@ -196,5 +186,21 @@ public class EpilogueController {
 		
 		return "epilogueoutform";
 	}
+	
+	public String epiloguepage(PagingDTO dto, Model mo,SqlSession sqlSession
+			,@RequestParam(value="nowPage", required=false)String nowPage)
+{
+		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
+	int total = ep.cntpage();
+	if(nowPage == null)
+	{
+		nowPage = "1";
+	}
+
+	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+	mo.addAttribute("paging", dto);
+	mo.addAttribute("epiloguelist", ep.selectpage(dto));
+	return "epilogueoutform";
+}
 	
 }

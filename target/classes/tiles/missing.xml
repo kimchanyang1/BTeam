@@ -35,5 +35,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/missing/missingend.jsp"/>
 	</definition>
 	
+	<definition name="missingEndPage" extends="baseLayout">
+		<put-attribute name="title" value="귀가완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/missing/missingEndPage.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>

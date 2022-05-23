@@ -6,20 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
-import com.ezen.member.MemberService;
-import com.ezen.missing.MissingController;
-import com.ezen.notice.NoticeController;
 import com.ezen.teamb.FileUploadController;
-
-import oracle.net.aso.i;
+import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
 
@@ -179,6 +173,22 @@ public class BoardController {
 		md.addAttribute("boardlist", boardlist);
 		
 		return "boardoutform";
+	}
+
+
+	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+		int total = bs.boardtotalcount();
+		int cntPage = 5;
+		int cntPerPage = 15;
+		if (nowPage == null) {
+			nowPage="1";
+		}
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<BoardDTO> list = bs.boardpage(page);
+		model.addAttribute("page", page);
+		model.addAttribute("boardlist", list);
+		return "boardpage";
 	}
 
 }

@@ -9,7 +9,9 @@ public class PagingDTO {
 	private int cntPage;
 	//한 페이지당 항목 개수
 	private int cntPerPage;
+
 	
+	public PagingDTO() {}
 	public PagingDTO(int total, int nowPage, int cntPerPage, int cntPage)
 	{
 		setNowPage(nowPage);
@@ -21,9 +23,11 @@ public class PagingDTO {
 		calcStartEnd(getNowPage(), getCntPerPage());
 	}
 	
+	
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double)total / (double)cntPerPage));
 	}
+	
 	
 	public void calcStartEndPage(int nowPage, int cntPage)
 	{
@@ -38,6 +42,7 @@ public class PagingDTO {
 			setStartPage(1);
 		}		
 	}
+	
 	
 	public void calcStartEnd(int nowpage, int cntPerPage)
 	{

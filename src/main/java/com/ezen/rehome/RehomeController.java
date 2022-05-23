@@ -6,14 +6,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.member.MemberController;
-import com.ezen.member.MemberDTO;
-import com.ezen.member.MemberService;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.PagingDTO;
 
 public class RehomeController {
 	
@@ -196,5 +195,40 @@ public class RehomeController {
 		mo.addAttribute("rh_no", rh_no);
 		return "rehomeimboform";
 	}
+	
+	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
+	{
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		int total = rs.rehomeendtotal();
+		int cntPage = 5;
+		int cntPerPage = 9;
+		if (nowPage==null) {
+			nowPage="1";
+		}
+		
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<RehomeDTO> list = rs.rehomeendpage(page);
+		
+		mo.addAttribute("rehomeEndList", list);
+		mo.addAttribute("page", page);
+		return "rehomeEndPage";
+	}
+
+	public String rehomepage(PagingDTO dto, Model mo,SqlSession sqlSession
+			,@RequestParam(value="nowPage", required=false)String nowPage)
+	{
+	RehomeService rh = sqlSession.getMapper(RehomeService.class);
+	int total = rh.cntpage();
+	if(nowPage == null)
+	{
+		nowPage = "1";
+	}
+
+	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+	mo.addAttribute("paging", dto);
+	mo.addAttribute("rdto", rh.selectpage(dto));
+	return "Rehomeoutform";
+}
+
 
 }

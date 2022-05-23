@@ -6,23 +6,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.missing.MissingController;
 
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.ezen.board.BoardController;
 import com.ezen.epilogue.EpilogueController;
@@ -57,7 +50,15 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/noticeoutform")
+	@RequestMapping(value = "/NoticePage")
+	public String noticepage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return nc.noticepage(sqlSession, model, nowPage);
+	}
+	
+	@RequestMapping(value = "/NoticeOutForm")
 	public String noticeoutform(Model model) {
 		return nc.noticeoutform(sqlSession, model);
 	}
@@ -136,6 +137,20 @@ public class HomeController {
 		return mic.missingend(mo,sqlSession);
 	}
 	
+	@RequestMapping(value = "/missingEndPage")
+	public String missingEndPage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return mic.missingEndPage(sqlSession, model, nowPage);
+	}
+
+	@RequestMapping(value = "/missingpage")
+	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return mic.missingpage(dto, mo, sqlSession, nowPage);
+	}
+
+	
 	@RequestMapping(value = "/rehoming")
 	public String rehoming(HttpServletRequest request) {
 		return mic.rehoming(request,sqlSession);
@@ -165,6 +180,14 @@ public class HomeController {
 	@RequestMapping(value = "/rehomeend")
 	public String rehomeend(Model mo) {
 		return rc.rehomeend(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeEndPage")
+	public String rehomeEndPage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return rc.rehomeEndPage(sqlSession, model, nowPage);
 	}
 	
 	@RequestMapping(value = "/rehomedetail")
@@ -217,6 +240,11 @@ public class HomeController {
 		return rc.rehomebun(sqlSession, request);
 	}
 	
+	@RequestMapping(value = "/rehomepage")
+	public String rehomegpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return rc.rehomepage(dto, mo, sqlSession, nowPage);
+	}
+	
 	@RequestMapping(value = "/signupform1")
 	public String signupform1() {
 		return mc.signupform1();
@@ -267,6 +295,31 @@ public class HomeController {
 		return mc.memberdetail(request, model, sqlSession);
 	}
 	
+	@RequestMapping(value = "/memberwritelist")
+	public String memberwritelist(HttpServletRequest request, Model model) {
+		return mc.memberwritelist(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/membermissingwrite")
+	public String membermissingwrite(HttpServletRequest request, Model model) {
+		return mc.membermissingwrite(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/memberrehomewrite")
+	public String memberrehomewrite(HttpServletRequest request, Model model) {
+		return mc.memberrehomewrite(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/memberepiloguewrite")
+	public String memberepiloguewrite(HttpServletRequest request, Model model) {
+		return mc.memberepiloguewrite(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/memberboardwrite")
+	public String memberboardwrite(HttpServletRequest request, Model model) {
+		return mc.memberboardwrite(request, model, sqlSession);
+	}
+	
 	@RequestMapping(value = "/memberdelete")
 	public String memberdelete(HttpServletRequest request) {
 		return mc.memberdelete(request, sqlSession);
@@ -282,7 +335,20 @@ public class HomeController {
 		return mc.membermodify(request, sqlSession, model);
 	}
 	
+	@RequestMapping(value = "/memberlist")
+	public String ADmemberlist(HttpServletRequest request, Model model) {
+		return mc.ADmemberlist(sqlSession, request, model);
+	}
 	
+	@RequestMapping(value = "/ADmemberdetail")
+	public String ADmemberdetail(HttpServletRequest request, Model model) {
+		return mc.ADmemberdetail(request, model, sqlSession);
+	}
+	
+	@RequestMapping(value = "/ADmembersearch")
+	public String ADmembersearch(HttpServletRequest request, Model model) {
+		return mc.ADmembersearch(sqlSession, request, model);
+	}
 	
 	
 	// 占식깍옙督占쏙옙占�
@@ -343,15 +409,26 @@ public class HomeController {
 			
 		return ep.epiloguesearch(sqlSession, request, md);
 	}
+	
+	@RequestMapping(value = "/epiloguepage")
+	public String epiloguepage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return ep.epiloguepage(dto, mo, sqlSession, nowPage);
+	}
 		
 		
 	
-	
-	// 占쏙옙占쏙옙占쌉쏙옙占쏙옙
 	@RequestMapping(value = "/board")
 	public String bb0(Model md) {
 		
 		return bc.boardoutform(sqlSession, md);
+	}
+	
+	@RequestMapping(value = "/boardpage")
+	public String boardpage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return bc.boardpage(sqlSession, model, nowPage);
 	}
 	
 	

@@ -17,6 +17,14 @@
 	select * from rehome where rh_gb2='분양완료' order by rh_no desc
 </select>
 
+<select id="rehomeendtotal" resultType="int">
+	select count(*) from rehome where rh_gb2='분양완료'
+</select>
+
+<select id="rehomeendpage" resultType="com.ezen.rehome.RehomeDTO">
+	select * from (select rownum rn, A.* from(select * from rehome where rh_gb2='분양완료' order by rh_no desc)A) where rn between #{start} and #{end}
+</select>
+
 <select id="rehomeadmin" resultType="com.ezen.rehome.RehomeDTO">
 	select * from rehome order by rh_no desc
 </select>
@@ -72,4 +80,14 @@
 	update rehome set rh_gb2='분양완료' where rh_no=#{param1}
 </update>
 
+<select id="cntpage" resultType="int">
+	select count(*) from  rehome
+</select>
+
+<select id="selectpage" resultType="com.ezen.rehome.RehomeDTO">
+	select * from(
+		select rownum rn,A.* from(
+		select * from rehome order by rh_no desc)A)
+			where rn between #{start} and #{end}
+</select>
 </mapper>

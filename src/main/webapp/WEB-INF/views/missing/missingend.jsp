@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section>
 
 <h4><B><font color="#fdafab">귀가 완료 게시판</font></B></h4>
 <h6><B>이곳에 있는 아이들은 귀가 완료된 아이들입니다</B></h6>
@@ -19,7 +20,6 @@
 <table border="0" align="center" width="700">
 <tr>
 	<td>
-		<c:if test="${fn:length(missingend) > 0}">
 		<c:forEach var="mic" begin="0" end="${fn:length(missingend)-1}" step="1">
 		<div class="container">
 			<div class="row">
@@ -43,10 +43,9 @@
 	</tr>
 		<tr>
 		<td>
-			</c:if>
-		</c:forEach>
 		</c:if>
+		</c:forEach>
+</section>
 </table>
-
 </body>
 </html>

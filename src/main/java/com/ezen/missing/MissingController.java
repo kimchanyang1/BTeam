@@ -1,25 +1,18 @@
 package com.ezen.missing;
 
-import java.security.Provider.Service;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.member.MemberDTO;
-import com.ezen.rehome.RehomeService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.PagingDTO;
 
@@ -170,33 +163,40 @@ public class MissingController {
 		mo.addAttribute("missingend",missingend);
 		return "missingend";
 	}
+
+
+
+	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		int total = micdao.missingEndTotal();
+		int cntPage = 5;
+		int cntPerPage = 9;
+		if (nowPage==null) {
+			nowPage="1";
+		}
+		
+		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
+		ArrayList<MissingDTO> list = micdao.missingEndPage(page);
+		
+		model.addAttribute("missingEndList", list);
+		model.addAttribute("page", page);
+		
+		return "missingEndPage";
+	}
 	
-	@RequestMapping("/post")
-		public String postList(PagingDTO dto, Model mo,SqlSession sqlSession
-				,@RequestParam(value="nowPage", required=false)String nowPage
-				,@RequestParam(value="cntPerPage", required=false)String cntPerPage)
+	public String missingpage(PagingDTO dto, Model mo,SqlSession sqlSession
+				,@RequestParam(value="nowPage", required=false)String nowPage)
 	{
 		MissingService mic = sqlSession.getMapper(MissingService.class);
-		int total = mic.cntpost();
-		if(nowPage == null && cntPerPage == null)
-		{
-			nowPage = "1";
-			cntPerPage = "3";
-		}
-		else if(nowPage == null)
+		int total = mic.cntpage();
+		if(nowPage == null)
 		{
 			nowPage = "1";
 		}
-		else if(cntPerPage == null)
-		{
-			cntPerPage="3";
-		}
-		System.out.println("�쁽�옱�럹�씠吏�"+nowPage+" "+cntPerPage);
-		System.out.println("珥앸젅肄붾뱶 :"+total);
-		
-		dto = new PagingDTO(int total, int nowPage, int cntPerPage, int cntPage);
+	
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
 		mo.addAttribute("paging", dto);
-		mo.addAttribute("viewAll", mic.selectpost(dto));
+		mo.addAttribute("missingout", mic.selectpage(dto));
 		return "missingoutform";
 	}
 	
