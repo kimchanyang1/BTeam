@@ -42,10 +42,33 @@
 	</td>
 </tr>
 <tr>
-	<td>
 	</c:if>
 	</c:forEach>
 	</c:if>
+		
+		<tr>      
+               <td colspan="5">             
+               <c:if test="${paging.startPage != 1 }">
+               <a href="rehomeadminpage?nowPage=${paging.startPage - 1}">&lt;</a>
+               </c:if>
+                   
+               <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+               	<c:choose>
+               		<c:when test="${paging.nowPage eq i}">
+               			${i}
+               		</c:when>
+               		<c:otherwise>
+               			<a href="rehomeadminpage?nowPage=${i}">${i}</a>
+               		</c:otherwise>      		
+               	</c:choose>        	
+                </c:forEach>
+                
+               <c:if test="${paging.endPage != paging.lastPage}">
+                  <a  href="rehomeadminpage?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+               </c:if>
+               </td>
+        </tr>
+			
 </table>
 
 </body>

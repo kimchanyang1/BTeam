@@ -245,6 +245,11 @@ public class HomeController {
 		return rc.rehomepage(dto, mo, sqlSession, nowPage);
 	}
 	
+	@RequestMapping(value = "/rehomeadminpage")
+	public String rehomeadminpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return rc.rehomeadminpage(dto, mo, sqlSession, nowPage);
+	}
+	
 	@RequestMapping(value = "/signupform1")
 	public String signupform1() {
 		return mc.signupform1();

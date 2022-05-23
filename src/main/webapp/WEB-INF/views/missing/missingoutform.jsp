@@ -11,7 +11,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<section style="overflow: scroll; height: 700px; overflow-x: hidden; " >
 <h4><B><font color="#fdafab">실종신고 게시판</font></B></h4>
 <h6><B>실종된 반려동물을 찾는 게시판입니다</B></h6>
 <h6><B><font color="red">* 글쓰기는 로그인 후 가능합니다</font></B></h6>
@@ -84,7 +83,6 @@
 </table>
 
 
-      
-</section>
+
 </body>
 </html>

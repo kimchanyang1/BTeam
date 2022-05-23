@@ -128,7 +128,7 @@ public class RehomeController {
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		rs.rehomemodify(rh_no, rh_gb1, rh_gb2, rh_gb3, rh_title, rh_pname, rh_pno, rh_misdate, rh_misplace, rh_image, mem_no, mem_nickname, mem_tel, rh_content, rh_readcount);		
 		
-		return "redirect: rehomeoutform";
+		return "redirect: rehomepage";
 	}
 	
 	public String rhsearch(SqlSession sqlSession, HttpServletRequest request, Model mo)
@@ -229,6 +229,22 @@ public class RehomeController {
 	mo.addAttribute("rdto", rh.selectpage(dto));
 	return "Rehomeoutform";
 }
+	
+	public String rehomeadminpage(PagingDTO dto, Model mo,SqlSession sqlSession
+			,@RequestParam(value="nowPage", required=false)String nowPage)
+	{
+	RehomeService rh = sqlSession.getMapper(RehomeService.class);
+	int total = rh.cntpage();
+	if(nowPage == null)
+	{
+		nowPage = "1";
+	}
 
+	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+	mo.addAttribute("paging", dto);
+	mo.addAttribute("rdto", rh.selectpage(dto));
+	return "rehomeadmin";
+}
+	
 
 }
