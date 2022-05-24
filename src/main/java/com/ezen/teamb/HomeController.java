@@ -24,6 +24,7 @@ import com.ezen.member.MemberController;
 
 import com.ezen.notice.NoticeController;
 import com.ezen.rehome.RehomeController;
+import com.ezen.reply.ReplyController;
 
 @Controller
 public class HomeController {
@@ -38,7 +39,7 @@ public class HomeController {
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
 	private LikesController lc = new LikesController();
-	
+	private ReplyController rep = new ReplyController();
 	
 	@RequestMapping(value = "/")
 	public String home() {
@@ -489,4 +490,16 @@ public class HomeController {
 	{
 		return lc.likescount(likes_boardno, sqlSession);
 	}
+	
+	
+	@RequestMapping(value = "/boardreplyinput")
+	public String boardreplyinput(HttpServletRequest request, Model mo) {
+		return bc.boardreplyinput(request, mo, sqlSession);
+	}
+	
+	@RequestMapping(value = "/boardreplydelete")
+	public String boardreplydelete(HttpServletRequest request, Model mo) {
+		return bc.boardreplydelete(request, mo, sqlSession);
+	}
+	
 }

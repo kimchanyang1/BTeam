@@ -5,4 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.ezen.reply.ReplyService">
 
+<!-- 댓글 입력 -->
+<insert id="boardreplyinput">
+	insert into reply values(#{param1}, rep_no.nextval, #{param2}, sysdate, #{param3})
+</insert>
+
+<select id="boardreplyout" resultType="com.ezen.reply.ReplyDTO">
+	select * from reply where rep_originno=#{param1}
+</select>
+
+<delete id="boardreplydelete">
+	delete from reply where rep_no=#{param1}
+</delete>
+
 </mapper>
