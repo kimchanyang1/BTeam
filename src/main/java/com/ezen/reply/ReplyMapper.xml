@@ -7,7 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 댓글 입력 -->
 <insert id="replyinput">
-	insert into reply values(rep_no.nextval, #{bd_no}, #{mem_id}, sysdate, #{rep_content})
+	insert into reply values(#{param1}, rep_no.nextval, #{param2}, sysdate, #{param3})
 </insert>
+
+<select id="replyout" resultType="com.ezen.reply.ReplyDTO">
+	select * from reply where rep_originno=#{param1}
+</select>
 
 </mapper>

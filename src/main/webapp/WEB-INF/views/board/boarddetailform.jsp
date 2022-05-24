@@ -129,7 +129,34 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td>
-		<jsp:include page="../main/reply.jsp"></jsp:include>
+		<div class="w3-border w3-padding">댓글</div>
+					<div class="w3-border w3-padding">
+						<c:if test="${ mdto.mem_id == null }">
+							<textarea rows="5" cols="50" class="w3-input w3-border newLogin" readonly>로그인 후 댓글 달기</textarea>
+						</c:if>
+						<c:if test="${ mdto.mem_id != null }">
+							<i class="fas fa-user w3-padding-16"></i> ${ mdto.mem_id }
+							<form action="replyinput" method="post">
+								<input type="hidden" name="bd_no" id="bd_no" value="${ boarddetail.bd_no }"> 
+								<input type="hidden" name="mem_id" id="mem_id" value="${ mdto.mem_id }">
+								<textarea rows="5" cols="50" class="w3-input w3-border" placeholder="댓글 작성" name="rep_content" id="rep_content"></textarea>
+								<input type="submit" class="w3-button w3-border" id="reply_btn" value="댓글 등록">
+							</form>
+						</c:if>
+					</div>
+		
+		<table>
+			<c:forEach items="${replist }" var="rep">
+				<tr>
+					<td>
+						${rep.rep_id }
+					</td>
+					<td>
+						${rep.rep_content }
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</td>
 </tr>
 <tr>

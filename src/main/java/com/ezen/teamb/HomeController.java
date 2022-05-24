@@ -514,9 +514,17 @@ public class HomeController {
 		return lc.likescount(likes_boardno, sqlSession);
 	}
 	
+	/*
 	@RequestMapping(value="/replyinput")
 	public @ResponseBody void replyinput(@RequestParam("bd_no") int bd_no, @RequestParam("mem_id") String mem_id, @RequestParam("rep_content") String rep_content)
 	{
 		rep.replyinput(bd_no, mem_id, rep_content, sqlSession);
 	}
+	*/
+	
+	@RequestMapping(value = "/replyinput")
+	public String replyinput(HttpServletRequest request, Model mo) {
+		return rep.replyinput(request, mo, sqlSession);
+	}
+	
 }

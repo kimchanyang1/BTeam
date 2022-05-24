@@ -7,11 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
+import com.ezen.reply.ReplyDTO;
+import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.PagingDTO;
 
@@ -94,6 +97,8 @@ public class BoardController {
 		BoardDTO boardlist = bs.boarddetail(bd_no);
 		md.addAttribute("boarddetail", boardlist);
 		
+		replyout(bd_no, md, sqlSession);
+		
 		return "boarddetailform";
 	}
 	
@@ -103,7 +108,28 @@ public class BoardController {
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardreadcount(bd_no);
 	}
-
+	
+	
+	//´ñ±Û ÀÔ·Â
+	public String replyinput(HttpServletRequest request, Model mo,SqlSession sqlSession)
+	{
+		int rep_originno = Integer.parseInt(request.getParameter("bd_no"));
+		String rep_id = request.getParameter("mem_id");
+		String rep_content = request.getParameter("rep_content");
+		
+		ReplyService res = sqlSession.getMapper(ReplyService.class);
+		res.replyinput(rep_originno, rep_id, rep_content);
+		
+		return "boarddetailform";
+	}
+	
+	//´ñ±Û ¸ñ·Ï
+	public void replyout(int rep_originno, Model mo, SqlSession sqlSession)
+	{
+		ReplyService res = sqlSession.getMapper(ReplyService.class);
+		ArrayList<ReplyDTO> replist = res.replyout(rep_originno);
+		mo.addAttribute("replist", replist);
+	}
 
 	// ¼öÁ¤
 	public String boardmodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
