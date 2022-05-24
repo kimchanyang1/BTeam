@@ -21,7 +21,6 @@ public class ReplyDTO {
 	
 	public ReplyDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ReplyDTO(int rep_originno, int rep_no, String rep_id, String rep_writeday, String rep_content) {
