@@ -41,9 +41,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/membermodifyform.jsp"/>
 	</definition>
 	
-	<definition name="ADmemberlist" extends="baseLayout">
+	<definition name="ADmemberPage" extends="baseLayout">
     	<put-attribute name="title" value="회원 목록"/>
-      	<put-attribute name="body" value="/WEB-INF/views/member/ADmemberlist.jsp"/>
+      	<put-attribute name="body" value="/WEB-INF/views/member/ADmemberPage.jsp"/>
     </definition>
     
     <definition name="ADmemberdetail" extends="baseLayout">

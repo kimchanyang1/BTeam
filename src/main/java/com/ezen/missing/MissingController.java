@@ -14,7 +14,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
+
+import oracle.net.aso.i;
 
 
 
@@ -25,7 +28,7 @@ public class MissingController {
 	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
 		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		int total = micdao.missingEndTotal();
-		int cntPage = 1;
+		int cntPage = 5;
 		int cntPerPage = 9;
 		if (nowPage==null) {
 			nowPage="1";
@@ -91,7 +94,13 @@ public class MissingController {
 		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		MissingDTO missingdetail = micdao.missingdetail(mis_no);
 		mo.addAttribute("mic",missingdetail);
-			
+		if (missingdetail.getMis_gb().equals("실종")) {
+			MovePageVO move = micdao.missingMovePage(mis_no);
+			mo.addAttribute("move",move);
+		} else if (missingdetail.getMis_gb().equals("귀가")) {
+			MovePageVO move = micdao.missingEndMovePage(mis_no);
+			mo.addAttribute("move",move);
+		}
 		return "missingdetail";
 	}
 	
@@ -152,7 +161,7 @@ public class MissingController {
 		
 		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.missingmodify_insert(mis_no, mis_gb, mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel,mis_content,mis_readcount);
-		return "redirect:missingoutform";
+		return "redirect:missingpage";
 	}
 
 
@@ -164,8 +173,9 @@ public class MissingController {
 		mic.rehoming(mis_no);
 		return "redirect:missingdetail?mis_no="+mis_no;
 	}
-	
-	
+
+
+
 	public String missingpage(PagingDTO dto, Model mo,SqlSession sqlSession
 				,@RequestParam(value="nowPage", required=false)String nowPage)
 	{

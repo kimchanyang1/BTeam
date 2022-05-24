@@ -14,6 +14,17 @@ textarea {
 	line-height: 150%;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#missingdelete').click(function(){
+		let msg = confirm("정말 삭제하시겠습니까?");
+		if (msg) {
+			var url = "missingdelete?mis_no=${mic.mis_no}";
+			$(location).attr('href',url);
+		}
+	});
+});
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -104,7 +115,7 @@ textarea {
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">
 					<a href="missingmodifyform?mis_no=${mic.mis_no}"><B><input type="button" value="수정"></B></a>
-					<a href="missingdelete?mis_no=${mic.mis_no}"><B><input type="button" value="삭제"></a>	
+					<B><input id="missingdelete" type="button" value="삭제">
 				<c:if test="${mic.mis_gb eq '귀가'}">
 					<button id="longbutton" onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'"><B>후기글쓰기</B></button>
 				</c:if>
@@ -113,9 +124,23 @@ textarea {
 	</tr>
 <tr>
 	<td colspan="4">
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
-		<button id="b2" onclick="location.href='rehome'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+		<c:choose>
+			<c:when test="${move.lastno != 9999}">
+				<button id="b2" onclick="location.href='missingdetail?mis_no=${move.lastno}'"><B>◀ 이전글</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>이전글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
+		<button id="b2" onclick="location.href='missingoutform'"><B>목록</B></button>
+		<c:choose>
+			<c:when test="${move.nextno != 9999}">
+				<button id="b2" onclick="location.href='missingdetail?mis_no=${move.nextno}'"><B>다음글 ▶</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>다음글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>		
 </table>

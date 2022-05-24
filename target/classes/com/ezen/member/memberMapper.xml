@@ -73,4 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT * FROM board WHERE mem_no=#{mem_no} order by bd_no desc
 </select>
 
+<select id="ADmemberTotal" resultType="int">
+	select count(*) from member
+</select>
+
+<select id="ADmemberPage" resultMap="member">
+	select * from (select rownum rn, A.* from(select * from member order by mem_no desc)A) where rn between #{start} and #{end}
+</select>
+
 </mapper>

@@ -12,14 +12,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.likes.LikesController;
-import com.ezen.likes.LikesService;
 import com.ezen.member.MemberDTO;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
-		
-
 	// ±Û¾²±â
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
@@ -83,7 +81,9 @@ public class BoardController {
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		boardreadcount(bd_no, sqlSession);
 		BoardDTO boardlist = bs.boarddetail(bd_no);
+		MovePageVO move = bs.boardMovePage(bd_no);
 		md.addAttribute("boarddetail", boardlist);
+		md.addAttribute("move", move);
 		
 		return "boarddetailform";
 	}
@@ -170,6 +170,7 @@ public class BoardController {
 	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
 
 		BoardService bs = sqlSession.getMapper(BoardService.class);
+		LikesController lc = new LikesController();
 		int total = bs.boardtotalcount();
 		int cntPage = 5;
 		int cntPerPage = 15;
@@ -178,6 +179,11 @@ public class BoardController {
 		}
 		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
 		ArrayList<BoardDTO> list = bs.boardpage(page);
+		for (BoardDTO boardDTO : list) {
+			int bd_no = boardDTO.getBd_no();
+			int bd_likes = lc.likescount(bd_no, sqlSession);
+			boardDTO.setBd_likes(bd_likes);
+		}
 		model.addAttribute("page", page);
 		model.addAttribute("boardlist", list);
 		

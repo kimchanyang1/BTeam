@@ -55,6 +55,17 @@ $(document).ready(function(){
     likesCount();
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#boarddelete').click(function(){
+		let msg = confirm("정말 삭제하시겠습니까?");
+		if (msg) {
+			var url = "boarddelete?bd_no="+${boarddetail.bd_no};
+			$(location).attr('href',url);
+		}
+	});
+});
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -124,15 +135,29 @@ $(document).ready(function(){
 		</c:if>
 		<c:if test="${boarddetail.mem_no eq mdto.mem_no || mdto.mem_id eq 'admin'}">
 			<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
-			<button onclick="location.href='boarddelete?bd_no=${boarddetail.bd_no }'"><B>삭제</B></button>
+			<button id="boarddelete"><B>삭제</B></button>
 		</c:if>
 	</td>
 </tr>
 <tr>
 	<td colspan="3">
-		<button id="b2" onclick="location.href='boarddetail?bd_no=${(boarddetail.bd_no)-1 }'"><B>◀ 이전글</B></button>
+		<c:choose>
+			<c:when test="${move.lastno != 9999}">
+				<button id="b2" onclick="location.href='boarddetail?bd_no=${move.lastno}'"><B>◀ 이전글</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>이전글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 		<button id="b2" onclick="location.href='board'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='barddetail?bd_no=${(boarddetail.bd_no)+1 }'"><B>다음글 ▶</B></button>
+		<c:choose>
+			<c:when test="${move.nextno != 9999}">
+				<button id="b2" onclick="location.href='boarddetail?bd_no=${move.nextno}'"><B>다음글 ▶</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>다음글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 </table>

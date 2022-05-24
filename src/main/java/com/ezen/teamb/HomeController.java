@@ -124,7 +124,6 @@ public class HomeController {
 		return mic.missingmodifyinput(request,sqlSession);
 	}
 	
-
 	
 	// 귀가 완료
 	@RequestMapping(value = "/missingend")
@@ -157,11 +156,6 @@ public class HomeController {
 	@RequestMapping(value = "/rehomeinput")
 	public ModelAndView rhinput(MultipartHttpServletRequest multi) {
 		return rc.rhinput(multi, sqlSession);
-	}
-	
-	@RequestMapping(value = "/rehomeoutform")
-	public String rhoutput(Model mo) {
-		return rc.rhoutput(sqlSession, mo);
 	}
 	
 	// REHOME
@@ -224,9 +218,14 @@ public class HomeController {
 	}
 	
 	// REHOME
-	@RequestMapping(value = "/rehome")
+	@RequestMapping(value = "/rehomeoutform")
 	public String rehomegpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return rc.rehomepage(dto, mo, sqlSession, nowPage);
+	}
+	
+	@RequestMapping(value = "/rehomeadminpage")
+	public String rehomeadminpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
+		return rc.rehomeadminpage(dto, mo, sqlSession, nowPage);
 	}
 	
 	@RequestMapping(value = "/signupform1")
@@ -319,9 +318,12 @@ public class HomeController {
 		return mc.membermodify(request, sqlSession, model);
 	}
 	
-	@RequestMapping(value = "/memberlist")
-	public String ADmemberlist(HttpServletRequest request, Model model) {
-		return mc.ADmemberlist(sqlSession, request, model);
+	@RequestMapping(value = "/ADmemberPage")
+	public String ADmemberPage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
+		return mc.ADmemberPage(sqlSession, model, nowPage);
 	}
 	
 	@RequestMapping(value = "/ADmemberdetail")
@@ -333,7 +335,6 @@ public class HomeController {
 	public String ADmembersearch(HttpServletRequest request, Model model) {
 		return mc.ADmembersearch(sqlSession, request, model);
 	}
-	
 	
 	
 	
