@@ -10,44 +10,47 @@
 		<put-attribute name="footer" value="/WEB-INF/views/main/bottom.jsp"/>
 	</definition>
 	
+	
 	<definition name="Rehomeinputform" extends="baseLayout">
 		<put-attribute name="title" value="분양임보 게시글 등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomeinputform.jsp"/>
 	</definition>
+	
 	
 	<definition name="Rehomeoutform" extends="baseLayout">
 		<put-attribute name="title" value="분양임보 게시글 목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomeoutform.jsp"/>
 	</definition>
 	
+	
 	<definition name="Rehomedetail" extends="baseLayout">
 		<put-attribute name="title" value="분양임보 게시글"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomedetail.jsp"/>
 	</definition>
+	
 	
 	<definition name="Rehomemodifyform" extends="baseLayout">
 		<put-attribute name="title" value="분양임보 게시글 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/Rehomemodifyform.jsp"/>
 	</definition>
 	
+	
 	<definition name="rehomeadmin" extends="baseLayout">
 		<put-attribute name="title" value="분양/임시보호 관리자페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeadmin.jsp"/>
 	</definition>
+	
 	
 	<definition name="rehomeend" extends="baseLayout">
 		<put-attribute name="title" value="분양완료"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeend.jsp"/>
 	</definition>
 	
+	
 	<definition name="rehomeimboform" extends="baseLayout">
 		<put-attribute name="title" value="분양완료"/>
 		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeimboform.jsp"/>
 	</definition>
 	
-	<definition name="rehomeEndPage" extends="baseLayout">
-		<put-attribute name="title" value="분양완료"/>
-		<put-attribute name="body" value="/WEB-INF/views/rehome/rehomeEndPage.jsp"/>
-	</definition>
 	
 </tiles-definitions>

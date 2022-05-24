@@ -8,16 +8,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class NoticeController {
-
-	public String noticeoutform(SqlSession sqlSession, Model model) {
-		NoticeService ns = sqlSession.getMapper(NoticeService.class);
-		ArrayList<NoticeDTO> noticelist = ns.noticeoutform();
-		model.addAttribute("noticelist", noticelist);
-		return "noticeoutform";
-	}
 
 	public String noticepage(SqlSession sqlSession, Model model, String nowPage) {
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
@@ -34,7 +28,7 @@ public class NoticeController {
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("page", page);
-		return "noticePage";
+		return "noticeoutform";
 	}
 	
 	public String noticeinputform(HttpServletRequest request, Model model) {
@@ -51,7 +45,7 @@ public class NoticeController {
 		String nt_content = request.getParameter("nt_content");
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ns.noticeinput(mem_no, mem_nickname, nt_title, nt_content);
-		return "redirect:noticeoutform";
+		return "redirect: noticeoutform";
 	}
 
 	public String noticedetail(HttpServletRequest request, SqlSession sqlSession, Model model) {
@@ -59,7 +53,9 @@ public class NoticeController {
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		noticereadcount(nt_no, ns);
 		NoticeDTO ndto = ns.noticedetail(nt_no);
+		MovePageVO move = ns.noticeMovePage(nt_no);
 		model.addAttribute("ndto", ndto);
+		model.addAttribute("move", move);
 		return "noticedetail";
 	}
 	
@@ -80,7 +76,7 @@ public class NoticeController {
 		int nt_no = Integer.parseInt(request.getParameter("nt_no"));
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ns.noticedelete(nt_no);
-		return "redirect:home";
+		return "redirect:noticeoutform";
 	}
 
 	public String noticemodifyform(HttpServletRequest request, SqlSession sqlSession, Model model) {

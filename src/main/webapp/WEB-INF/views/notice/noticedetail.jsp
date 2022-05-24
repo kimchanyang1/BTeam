@@ -25,10 +25,9 @@ textarea {
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#noticedelete').click(function(){
-		let kk = confirm($('#mem_nickname').text()+'글을 정말 삭제하시겠습니까?');
-		if (kk) {
-			alert('삭제 실행');
-			var url = "noticedelete?nt_no="+$('#nt_no').text();
+		let msg = confirm("${ndto.mem_nickname}님 글을 정말 삭제하시겠습니까?");
+		if (msg) {
+			var url = "noticedelete?nt_no="+${ndto.nt_no};
 			$(location).attr('href',url);
 		}
 	});
@@ -71,9 +70,23 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td colspan="3">
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<c:choose>
+			<c:when test="${move.lastno != 9999}">
+				<button id="b2" onclick="location.href='noticedetail?nt_no=${move.lastno}'"><B>◀ 이전글</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>이전글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 		<button id="b2" onclick="location.href='noticeoutform'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+		<c:choose>
+			<c:when test="${move.nextno != 9999}">
+				<button id="b2" onclick="location.href='noticedetail?nt_no=${move.nextno}'"><B>다음글 ▶</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>다음글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 

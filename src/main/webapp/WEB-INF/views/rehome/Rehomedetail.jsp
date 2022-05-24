@@ -15,6 +15,17 @@ textarea {
 }
 </style>
 <meta charset="UTF-8">
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#rehomedelete').click(function(){
+		let msg = confirm("정말 삭제하시겠습니까?");
+		if (msg) {
+			var url = "rehomedelete?rh_no=${rd.rh_no}";
+			$(location).attr('href',url);
+		}
+	});
+});
+</script>
 
 <title>분양/임시보호 게시글</title>
 </head>
@@ -111,7 +122,7 @@ textarea {
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq rd.mem_nickname || mem_id eq 'admin'}">
 				<a href="rehomemodifyform?rh_no=${rd.rh_no }"><B><input type="button" value="수정"></B></a>
-				<a href="rehomedelete?rh_no=${rd.rh_no }"><B><input type="button" value="삭제"></B></a>
+				<B><input id="rehomedelete" type="button" value="삭제"></B>
 				<c:if test="${rd.rh_gb2 eq '분양완료'}">
 					<button id="longbutton" onclick="location.href='epilogueinputform?ep_gb=분양완료&ep_originno=${rd.rh_no}'"><B>후기글쓰기</B></button>
 				</c:if>
@@ -120,9 +131,23 @@ textarea {
 </tr>
 <tr>
 	<td colspan="4">
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<c:choose>
+			<c:when test="${move.lastno != 9999}">
+				<button id="b2" onclick="location.href='rehomedetail?rh_no=${move.lastno}'"><B>◀ 이전글</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>이전글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 		<button id="b2" onclick="location.href='rehome'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+		<c:choose>
+			<c:when test="${move.nextno != 9999}">
+				<button id="b2" onclick="location.href='rehomedetail?rh_no=${move.nextno}'"><B>다음글 ▶</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>다음글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 </table>

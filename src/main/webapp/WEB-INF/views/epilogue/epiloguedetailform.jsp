@@ -23,22 +23,21 @@ textarea {
 <br><br>
 
 <table border="0" align="center" width="700">
-<c:forEach items="${epiloguedetail }" var="e">
 <tr>
 	<td colspan="3" align="left">
-		<B>　${e.ep_gb}</B>
+		<B>　${epiloguedetail.ep_gb}</B>
 	</td>
 </tr>
 <tr>
 	<td colspan="3" align="left">
-		<h4><B>　${e.ep_title }</B></h4>
+		<h4><B>　${epiloguedetail.ep_title }</B></h4>
 	</td>
 </tr>
 <tr>
 	<td colspan="3" align="left">
-		<fmt:parseDate value="${e.ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+		<fmt:parseDate value="${epiloguedetail.ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${e.mem_nickname}</B>　　조회 ${e.ep_readcount}　　${writedaystring }　　댓글 ?</td>
+		<B>　${epiloguedetail.mem_nickname}</B>　　조회 ${epiloguedetail.ep_readcount}　　${writedaystring }　　댓글 ?</td>
 </tr>
 <tr>
 	<td>　　</td></tr>
@@ -46,19 +45,19 @@ textarea {
 	<td>　　</td></tr>
 <tr>
 	<td>　　　　</td>
-	<td><img src="${pageContext.request.contextPath}/image/${e.ep_image}" width="600px"></td>
+	<td><img src="${pageContext.request.contextPath}/image/${epiloguedetail.ep_image}" width="600px"></td>
 	<td>　　　　</td>
 </tr>
 <tr>
 	<td>　　</td></tr>
 <tr>
 	<td>　　　　</td>
-	<td><textarea id="detailarea" readonly="readonly">${e.ep_content }</textarea></td>
+	<td><textarea id="detailarea" readonly="readonly">${epiloguedetail.ep_content }</textarea></td>
 	<td>　　　　</td>
 </tr>
 <tr>
 	<td colspan="3" align="center">
-		<input type="hidden" value="${e.mem_no }" readonly="readonly">
+		<input type="hidden" value="${epiloguedetail.mem_no }" readonly="readonly">
 		<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
 	</td>
 </tr>
@@ -68,20 +67,44 @@ textarea {
 	</td></tr>
 <tr>
 	<td colspan="3" align="right">　　
-		<c:if test="${e.mem_no eq mem_no || mem_id eq 'admin'}">
-			<button onclick="location.href='epiloguemodifyselect?ep_no=${e.ep_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'"><B>수정</B></button>
-			<button onclick="location.href='epiloguedelete?ep_no=${e.ep_no }'"><B>삭제</B></button>
+		<c:if test="${epiloguedetail.mem_no eq mem_no || mem_id eq 'admin'}">
+			<button onclick="location.href='epiloguemodifyselect?ep_no=${epiloguedetail.ep_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'"><B>수정</B></button>
+			<button id="epiloguedelete"><B>삭제</B></button>
 		</c:if>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#epiloguedelete').click(function(){
+				let msg = confirm("정말 삭제하시겠습니까?");
+				if (msg) {
+					var url = "epiloguedelete?ep_no="+"${epiloguedetail.ep_no}";
+					$(location).attr('href',url);
+				}
+			});
+		});
+		</script>
 	</td>
 </tr>
 <tr>
 	<td colspan="3">
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>◀ 이전글</B></button>
+		<c:choose>
+			<c:when test="${move.lastno != 9999}">
+				<button id="b2" onclick="location.href='epiloguedetail?ep_no=${move.lastno}'"><B>◀ 이전글</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>이전글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 		<button id="b2" onclick="location.href='epilogue'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='rehomedetail?rh_no=${rdto[rd].rh_no }'"><B>다음글 ▶</B></button>
+		<c:choose>
+			<c:when test="${move.nextno != 9999}">
+				<button id="b2" onclick="location.href='epiloguedetail?ep_no=${move.nextno}'"><B>다음글 ▶</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>다음글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
-</c:forEach>
 </table>
 
 </body>

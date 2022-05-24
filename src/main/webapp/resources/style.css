@@ -83,6 +83,7 @@ input[type=text], input[type=password], input[type=date], input[type=tel], input
   outline: none;
   padding-left: 10px; margin: 5px;
   background-color: #ffe8d2;
+  cursor: pointer;
 }
 
 input[type=submit], input[type=reset], input[type=button], button {

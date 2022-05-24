@@ -35,7 +35,7 @@ table {
 	<th>　나이　</th>
 	<th>　성별　</th>
 </tr>	
-<c:forEach items="${ADmemberlist}" var="am">
+<c:forEach items="${ADmemberList}" var="am">
 <tr>
 	<th>　${am.mem_no }　</th>
 	<th>
@@ -55,6 +55,28 @@ table {
 	<th>　${am.gender} </th>
 </tr>
 </c:forEach>
+	<tr>
+		<th colspan="5">
+			<c:if test="${page.startPage != 1}">
+				<a href="ADmemberPage?nowPage=1">&lt;&lt;</a>
+			</c:if>
+			<c:if test="${page.startPage != 1}">
+				<a href="ADmemberPage?nowPage=${page.startPage - 1}">&lt;</a>
+			</c:if>
+			<c:forEach begin="${page.startPage}" end="${page.endPage}" step="1" var="i">
+				<c:choose>
+					<c:when test="${i eq page.nowPage}">${i}</c:when>
+					<c:otherwise><a href="ADmemberPage?nowPage=${i}">${i}</a></c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${page.endPage != page.lastPage}">
+				<a href="ADmemberPage?nowPage=${page.endPage + 1}">&gt;</a>
+			</c:if>
+			<c:if test="${page.endPage != page.lastPage}">
+				<a href="ADmemberPage?nowPage=${page.lastPage}">&gt;&gt;</a>
+			</c:if>
+		</th>
+	</tr>
 </table>
 <br><br>
 

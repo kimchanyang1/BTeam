@@ -7,31 +7,19 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ezen.likes.LikesController;
 import com.ezen.member.MemberDTO;
 import com.ezen.reply.ReplyDTO;
 import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
-
-	
-	// 자유게시판
-	public String boardoutform(SqlSession sqlSession, Model md) {
-
-		BoardService bs = sqlSession.getMapper(BoardService.class);
-		ArrayList<BoardDTO> boardlist = bs.boardout();
-		md.addAttribute("boardlist", boardlist);
-			
-		return "boardoutform";
-	}
-		
-
 	// 글쓰기
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
@@ -95,9 +83,11 @@ public class BoardController {
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		boardreadcount(bd_no, sqlSession);
 		BoardDTO boardlist = bs.boarddetail(bd_no);
+		MovePageVO move = bs.boardMovePage(bd_no);
 		md.addAttribute("boarddetail", boardlist);
+		md.addAttribute("move", move);
 		
-		replyout(bd_no, md, sqlSession);
+		boardreplyout(bd_no, md, sqlSession);
 		
 		return "boarddetailform";
 	}
@@ -107,28 +97,6 @@ public class BoardController {
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardreadcount(bd_no);
-	}
-	
-	
-	//댓글 입력
-	public String replyinput(HttpServletRequest request, Model mo,SqlSession sqlSession)
-	{
-		int rep_originno = Integer.parseInt(request.getParameter("bd_no"));
-		String rep_id = request.getParameter("mem_id");
-		String rep_content = request.getParameter("rep_content");
-		
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.replyinput(rep_originno, rep_id, rep_content);
-		
-		return "boarddetailform";
-	}
-	
-	//댓글 목록
-	public void replyout(int rep_originno, Model mo, SqlSession sqlSession)
-	{
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		ArrayList<ReplyDTO> replist = res.replyout(rep_originno);
-		mo.addAttribute("replist", replist);
 	}
 
 	// 수정
@@ -203,7 +171,9 @@ public class BoardController {
 
 
 	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
+
 		BoardService bs = sqlSession.getMapper(BoardService.class);
+		LikesController lc = new LikesController();
 		int total = bs.boardtotalcount();
 		int cntPage = 5;
 		int cntPerPage = 15;
@@ -212,9 +182,57 @@ public class BoardController {
 		}
 		PagingDTO page = new PagingDTO(total, Integer.parseInt(nowPage), cntPerPage, cntPage);
 		ArrayList<BoardDTO> list = bs.boardpage(page);
+		for (BoardDTO boardDTO : list) {
+			int bd_no = boardDTO.getBd_no();
+			int bd_likes = lc.likescount(bd_no, sqlSession);
+			boardDTO.setBd_likes(bd_likes);
+		}
 		model.addAttribute("page", page);
 		model.addAttribute("boardlist", list);
-		return "boardpage";
+		
+		return "boardoutform";
+	}
+	
+	//댓글 입력
+	public String boardreplyinput(HttpServletRequest request, Model mo,SqlSession sqlSession)
+	{
+		int rep_originno = Integer.parseInt(request.getParameter("bd_no"));
+		String rep_id = request.getParameter("mem_id");
+		String rep_content = request.getParameter("rep_content");
+			
+		ReplyService res = sqlSession.getMapper(ReplyService.class);
+		res.boardreplyinput(rep_originno, rep_id, rep_content);
+		mo.addAttribute("bd_no", rep_originno);
+			
+		return "redirect: boarddetail";
+	}
+		
+	//댓글 목록
+	public void boardreplyout(int rep_originno, Model mo, SqlSession sqlSession)
+	{
+		ReplyService res = sqlSession.getMapper(ReplyService.class);
+		ArrayList<ReplyDTO> replist = res.boardreplyout(rep_originno);
+		mo.addAttribute("replist", replist);
+	}
+	
+	//댓글 수정
+	public void boardreplymodify()
+	{
+		
+	}
+	
+	//댓글 삭제
+	public String boardreplydelete(HttpServletRequest request, Model mo,SqlSession sqlSession)
+	{
+		int rep_no = Integer.parseInt(request.getParameter("rep_no"));
+		
+		ReplyService res = sqlSession.getMapper(ReplyService.class);
+		res.boardreplydelete(rep_no);
+		
+		int bd_no = Integer.parseInt(request.getParameter("bd_no"));
+		mo.addAttribute("bd_no", bd_no);
+		
+		return "redirect: boarddetail";
 	}
 
 }

@@ -16,15 +16,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/epilogue/epilogueoutform.jsp"/>
 	</definition>
 	
+	
 	<definition name="epilogueinputform" extends="baseLayout">
 		<put-attribute name="title" value="후기게시판 글쓰기"/>
 		<put-attribute name="body" value="/WEB-INF/views/epilogue/epilogueinputform.jsp"/>
 	</definition>
 	
+	
 	<definition name="epiloguedetailform" extends="baseLayout">
 		<put-attribute name="title" value="후기게시판 디테일"/>
 		<put-attribute name="body" value="/WEB-INF/views/epilogue/epiloguedetailform.jsp"/>
 	</definition>
+	
 	
 	<definition name="epiloguemodifyform" extends="baseLayout">
 		<put-attribute name="title" value="후기게시판 수정폼"/>

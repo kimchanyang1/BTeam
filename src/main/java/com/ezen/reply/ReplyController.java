@@ -18,7 +18,7 @@ public class ReplyController {
 		String rep_content = request.getParameter("rep_content");
 		
 		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.replyinput(rep_originno, rep_id, rep_content);
+		res.boardreplyinput(rep_originno, rep_id, rep_content);
 		replyout(rep_originno, mo, sqlSession);
 		
 		return "boarddetailform";
@@ -27,7 +27,7 @@ public class ReplyController {
 	public void replyout(int rep_originno, Model mo, SqlSession sqlSession)
 	{
 		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		ArrayList<ReplyDTO> replist = res.replyout(rep_originno);
+		ArrayList<ReplyDTO> replist = res.boardreplyout(rep_originno);
 		mo.addAttribute("replist", replist);
 	}
 }

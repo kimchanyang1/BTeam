@@ -8,4 +8,5 @@ public interface LikesService {
 	public void likes_update(Map<String, Object> map);
 	public void likes_delete(Map<String, Object> map);
 	public int likes_count(int likes_boardno);
+	public int boardlikes(int likes_boardno);
 }

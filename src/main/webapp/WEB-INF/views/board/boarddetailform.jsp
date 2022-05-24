@@ -55,6 +55,17 @@ $(document).ready(function(){
     likesCount();
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#boarddelete').click(function(){
+		let msg = confirm("정말 삭제하시겠습니까?");
+		if (msg) {
+			var url = "boarddelete?bd_no="+${boarddetail.bd_no};
+			$(location).attr('href',url);
+		}
+	});
+});
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -80,7 +91,8 @@ $(document).ready(function(){
 	<td colspan="3" align="left">
 		<fmt:parseDate value="${boarddetail.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　추천수 <font color="#ff8000">???</font></td>
+		<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　
+		추천수 <font color="#ff8000">　<B><span class="likes_count"></span></B></font></td>
 </tr>
 <tr>
 	<td>　　</td></tr>
@@ -123,7 +135,7 @@ $(document).ready(function(){
 		</c:if>
 		<c:if test="${boarddetail.mem_no eq mdto.mem_no || mdto.mem_id eq 'admin'}">
 			<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
-			<button onclick="location.href='boarddelete?bd_no=${boarddetail.bd_no }'"><B>삭제</B></button>
+			<button id="boarddelete"><B>삭제</B></button>
 		</c:if>
 	</td>
 </tr>
@@ -136,7 +148,7 @@ $(document).ready(function(){
 						</c:if>
 						<c:if test="${ mdto.mem_id != null }">
 							<i class="fas fa-user w3-padding-16"></i> ${ mdto.mem_id }
-							<form action="replyinput" method="post">
+							<form action="boardreplyinput" method="post">
 								<input type="hidden" name="bd_no" id="bd_no" value="${ boarddetail.bd_no }"> 
 								<input type="hidden" name="mem_id" id="mem_id" value="${ mdto.mem_id }">
 								<textarea rows="5" cols="50" class="w3-input w3-border" placeholder="댓글 작성" name="rep_content" id="rep_content"></textarea>
@@ -147,12 +159,23 @@ $(document).ready(function(){
 		
 		<table>
 			<c:forEach items="${replist }" var="rep">
+			<input type="hidden" name="rep_no" value="${rep.rep_no }">
 				<tr>
 					<td>
 						${rep.rep_id }
 					</td>
 					<td>
 						${rep.rep_content }
+					</td>
+					<td>
+						<a href="boardreplymodify?rep_no=${rep.rep_no }&bd_no=${boarddetail.bd_no }">
+							수정
+						</a>
+					</td>
+					<td>
+						<a href="boardreplydelete?rep_no=${rep.rep_no }&bd_no=${boarddetail.bd_no }">
+							삭제
+						</a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -161,9 +184,23 @@ $(document).ready(function(){
 </tr>
 <tr>
 	<td colspan="3">
-		<button id="b2" onclick="location.href='boarddetail?bd_no=${(boarddetail.bd_no)-1 }'"><B>◀ 이전글</B></button>
+		<c:choose>
+			<c:when test="${move.lastno != 9999}">
+				<button id="b2" onclick="location.href='boarddetail?bd_no=${move.lastno}'"><B>◀ 이전글</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>이전글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 		<button id="b2" onclick="location.href='board'"><B>목록</B></button>
-		<button id="b2" onclick="location.href='barddetail?bd_no=${(boarddetail.bd_no)+1 }'"><B>다음글 ▶</B></button>
+		<c:choose>
+			<c:when test="${move.nextno != 9999}">
+				<button id="b2" onclick="location.href='boarddetail?bd_no=${move.nextno}'"><B>다음글 ▶</B></button>
+			</c:when>
+			<c:otherwise>
+				<B>다음글이 없습니다</B>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 </table>
