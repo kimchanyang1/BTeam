@@ -5,7 +5,7 @@ CREATE TABLE reply(
 rep_originno NUMBER(6, 0),
 rep_no NUMBER(6, 0) PRIMARY KEY,
 rep_id VARCHAR2(20),
-rep_writeday VARCHAR2(20),
+rep_writeday DATE DEFAULT SYSDATE,
 rep_content VARCHAR2(2000));
 
 CREATE SEQUENCE rep_no;
