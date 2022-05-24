@@ -2,6 +2,7 @@ package com.ezen.board;
 
 import java.util.ArrayList;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public interface BoardService {
@@ -36,6 +37,9 @@ public interface BoardService {
 
 
 	public ArrayList<BoardDTO> boardpage(PagingDTO page);
+
+
+	public MovePageVO boardMovePage(int bd_no);
 
 	
 

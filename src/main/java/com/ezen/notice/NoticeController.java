@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class NoticeController {
@@ -52,7 +53,9 @@ public class NoticeController {
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		noticereadcount(nt_no, ns);
 		NoticeDTO ndto = ns.noticedetail(nt_no);
+		MovePageVO move = ns.noticeMovePage(nt_no);
 		model.addAttribute("ndto", ndto);
+		model.addAttribute("move", move);
 		return "noticedetail";
 	}
 	
@@ -73,7 +76,7 @@ public class NoticeController {
 		int nt_no = Integer.parseInt(request.getParameter("nt_no"));
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ns.noticedelete(nt_no);
-		return "redirect:home";
+		return "redirect:noticeoutform";
 	}
 
 	public String noticemodifyform(HttpServletRequest request, SqlSession sqlSession, Model model) {

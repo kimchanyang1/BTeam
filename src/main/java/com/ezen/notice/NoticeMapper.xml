@@ -43,4 +43,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	delete from notice where nt_no=#{nt_no}
 </delete>
 
+<select id="noticeMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 nt_no,
+		 LEAD(nt_no,1,9999) OVER(ORDER BY nt_no) AS nextno,
+		 LAG(nt_no,1,9999) OVER(ORDER BY nt_no) AS lastno,
+		 nt_title,
+		 LEAD(nt_title,1,9999) OVER(ORDER BY nt_no) AS nexttitle,
+         LAG(nt_title,1,9999) OVER(ORDER BY nt_no) AS lasttitle
+         
+		 FROM notice
+         order by nt_no DESC) 
+         WHERE nt_no = #{nt_no}
+</select>
+
 </mapper>

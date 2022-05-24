@@ -14,7 +14,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
+
+import oracle.net.aso.i;
 
 
 
@@ -91,7 +94,13 @@ public class MissingController {
 		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		MissingDTO missingdetail = micdao.missingdetail(mis_no);
 		mo.addAttribute("mic",missingdetail);
-			
+		if (missingdetail.getMis_gb().equals("실종")) {
+			MovePageVO move = micdao.missingMovePage(mis_no);
+			mo.addAttribute("move",move);
+		} else if (missingdetail.getMis_gb().equals("귀가")) {
+			MovePageVO move = micdao.missingEndMovePage(mis_no);
+			mo.addAttribute("move",move);
+		}
 		return "missingdetail";
 	}
 	

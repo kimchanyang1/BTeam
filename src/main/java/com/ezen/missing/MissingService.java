@@ -2,6 +2,7 @@ package com.ezen.missing;
 
 import java.util.ArrayList;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public interface MissingService {
@@ -18,4 +19,6 @@ public interface MissingService {
 	
 	public int cntpage();
 	public ArrayList<MissingDTO> selectpage(PagingDTO dto);
+	public MovePageVO missingMovePage(int mis_no);
+	public MovePageVO missingEndMovePage(int mis_no);
 }

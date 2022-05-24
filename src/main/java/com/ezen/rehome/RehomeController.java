@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class RehomeController {
@@ -55,7 +56,7 @@ public class RehomeController {
 		
 		return mav;
 	}
-	
+	/*
 	public String rhoutput(SqlSession sqlSession, Model mo)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
@@ -65,7 +66,7 @@ public class RehomeController {
 		
 		return "Rehomeoutform";
 	}
-	
+	*/
 	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo)
 	{
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
@@ -74,6 +75,13 @@ public class RehomeController {
 		rhreadcount(rh_no, sqlSession);
 		RehomeDTO rd = rs.rehomedetail(rh_no);
 		mo.addAttribute("rd", rd);
+		if (rd.getRh_gb2().equals("분양완료")) {
+			MovePageVO move = rs.rehomeEndMovePage(rh_no);
+			mo.addAttribute("move",move);
+		} else {
+			MovePageVO move = rs.rehomeMovePage(rh_no);
+			mo.addAttribute("move",move);
+		}
 		
 		return "Rehomedetail";
 	}
@@ -128,7 +136,7 @@ public class RehomeController {
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		rs.rehomemodify(rh_no, rh_gb1, rh_gb2, rh_gb3, rh_title, rh_pname, rh_pno, rh_misdate, rh_misplace, rh_image, mem_no, mem_nickname, mem_tel, rh_content, rh_readcount);		
 		
-		return "redirect: rehomepage";
+		return "redirect:rehomedetail?rh_no="+rh_no;
 	}
 	
 	public String rhsearch(SqlSession sqlSession, HttpServletRequest request, Model mo)
@@ -242,6 +250,7 @@ public class RehomeController {
 	mo.addAttribute("rdto", rh.selectpage(dto));
 	return "rehomeadmin";
 }
+
 	
 
 }

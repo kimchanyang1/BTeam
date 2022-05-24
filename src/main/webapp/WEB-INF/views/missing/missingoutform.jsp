@@ -36,18 +36,18 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="thumbnail">
-					<p align="left"><B>제목</B>　${missingout[mic].mis_title } </p>
-						<fmt:parseDate value="${missingout[mic].mis_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-						<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-					<p align="left"><B>일자</B>　${writedaystring } </p>
-					<a href="missingdetail?mis_no=${missingout[mic].mis_no}">
-				 		<img src="${pageContext.request.contextPath}/image/${missingout[mic].mis_image}" style="width: 200px; height: 200px;">	
-					<div class="caption">
-						<p><B>${missingout[mic].mem_nickname }</B></p>
-					</div>
-					</a>
-					</div>
+						<a href="missingdetail?mis_no=${missingout[mic].mis_no}">
+							<div class="thumbnail" style="cursor: pointer;">
+								<p align="left"><B>제목</B>　${missingout[mic].mis_title } </p>
+									<fmt:parseDate value="${missingout[mic].mis_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+								<p align="left"><B>일자</B>　${writedaystring } </p>
+							 		<img src="${pageContext.request.contextPath}/image/${missingout[mic].mis_image}" style="width: 200px; height: 200px;">	
+								<div class="caption">
+									<p><B>${missingout[mic].mem_nickname}</B></p>
+								</div>
+							</div>
+						</a>
 				</div>
 		<c:if test="${e%3 eq 2}">
 		</td>

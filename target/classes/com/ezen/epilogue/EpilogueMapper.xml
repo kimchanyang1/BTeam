@@ -66,4 +66,18 @@
 			WHERE RN BETWEEN #{start} AND #{end}
 </select>
 
+<select id="epilogueMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 EP_NO,
+		 LEAD(EP_NO,1,9999) OVER(ORDER BY EP_NO) AS nextno,
+		 LAG(EP_NO,1,9999) OVER(ORDER BY EP_NO) AS lastno,
+		 EP_TITLE,
+		 LEAD(EP_TITLE,1,9999) OVER(ORDER BY EP_NO) AS nexttitle,
+         LAG(EP_TITLE,1,9999) OVER(ORDER BY EP_NO) AS lasttitle
+         
+		 FROM EPILOGUE
+         order by EP_NO DESC) 
+         WHERE EP_NO = #{EP_NO}
+</select>
+
 </mapper>

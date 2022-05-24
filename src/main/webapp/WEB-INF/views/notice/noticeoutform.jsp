@@ -49,10 +49,10 @@ table {
 	</tr>	
 		<c:forEach items="${noticeList}" var="data">
 	<tr>
-		<th>　${data.rn}　</th>
+		<th>　${data.nt_no}　</th>
 		<th>
 			<a href="noticedetail?nt_no=${data.nt_no}">
-				<input id="title" type="text" value="　${data.nt_title}"></a></th>
+				<input id="title" type="text" value="　${data.nt_title}" style="cursor: pointer;" readonly="readonly"></a></th>
 		<th>　${data.mem_nickname}　</th>
 		<th>　<fmt:parseDate value="${data.nt_writeday}" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yy-MM-dd HH:mm"/>

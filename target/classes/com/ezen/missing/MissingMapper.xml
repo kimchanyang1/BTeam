@@ -49,8 +49,38 @@
 <select id="selectpage" resultType="com.ezen.missing.MissingDTO">
 	select * from(
 		select rownum rn,A.* from(
-		select * from missing order by mis_no desc)A)
+		select * from missing where mis_gb='실종' order by mis_no desc)A)
 			where rn between #{start} and #{end}
+</select>
+
+<select id="missingMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 mis_no,
+		 LEAD(mis_no,1,9999) OVER(ORDER BY mis_no) AS nextno,
+		 LAG(mis_no,1,9999) OVER(ORDER BY mis_no) AS lastno,
+		 mis_title,
+		 LEAD(mis_title,1,9999) OVER(ORDER BY mis_no) AS nexttitle,
+         LAG(mis_title,1,9999) OVER(ORDER BY mis_no) AS lasttitle
+         
+		 FROM missing
+		 where mis_gb='실종'
+         order by mis_no DESC) 
+         WHERE mis_no = #{mis_no}
+</select>
+
+<select id="missingEndMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 mis_no,
+		 LEAD(mis_no,1,9999) OVER(ORDER BY mis_no) AS nextno,
+		 LAG(mis_no,1,9999) OVER(ORDER BY mis_no) AS lastno,
+		 mis_title,
+		 LEAD(mis_title,1,9999) OVER(ORDER BY mis_no) AS nexttitle,
+         LAG(mis_title,1,9999) OVER(ORDER BY mis_no) AS lasttitle
+         
+		 FROM missing
+		 where mis_gb='귀가'
+         order by mis_no DESC) 
+         WHERE mis_no = #{mis_no}
 </select>
 
 </mapper>

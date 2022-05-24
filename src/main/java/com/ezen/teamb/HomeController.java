@@ -158,11 +158,6 @@ public class HomeController {
 		return rc.rhinput(multi, sqlSession);
 	}
 	
-	@RequestMapping(value = "/rehomeoutform")
-	public String rhoutput(Model mo) {
-		return rc.rhoutput(sqlSession, mo);
-	}
-	
 	// REHOME
 	@RequestMapping(value = "/rehomeend")
 	public String rehomeEndPage(
@@ -223,7 +218,7 @@ public class HomeController {
 	}
 	
 	// REHOME
-	@RequestMapping(value = "/rehome")
+	@RequestMapping(value = "/rehomeoutform")
 	public String rehomegpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return rc.rehomepage(dto, mo, sqlSession, nowPage);
 	}

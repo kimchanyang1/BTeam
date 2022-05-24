@@ -50,4 +50,18 @@
 	SELECT * FROM BOARD WHERE MEM_NICKNAME LIKE '%'||#{param1}||'%'
 </select>
 
+<select id="boardMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 BD_NO,
+		 LEAD(BD_NO,1,9999) OVER(ORDER BY BD_NO) AS nextno,
+		 LAG(BD_NO,1,9999) OVER(ORDER BY BD_NO) AS lastno,
+		 BD_TITLE,
+		 LEAD(BD_TITLE,1,9999) OVER(ORDER BY BD_NO) AS nexttitle,
+         LAG(BD_TITLE,1,9999) OVER(ORDER BY BD_NO) AS lasttitle
+         
+		 FROM board
+         order by BD_NO DESC) 
+         WHERE BD_NO = #{BD_NO}
+</select>
+
 </mapper>

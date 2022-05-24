@@ -2,6 +2,7 @@ package com.ezen.epilogue;
 
 import java.util.ArrayList;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public interface EpilogueService {
@@ -15,7 +16,7 @@ public interface EpilogueService {
 
 
 	
-	public ArrayList<EpilogueDTO> epiloguedetail(int ep_no);
+	public EpilogueDTO epiloguedetail(int ep_no);
 
 	public void epiloguereadcount(int ep_no);
 
@@ -42,5 +43,8 @@ public interface EpilogueService {
 	public int cntpage();
 	
 	public ArrayList<EpilogueDTO> selectpage(PagingDTO dto);
+
+
+	public MovePageVO epilogueMovePage(int ep_no);
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.likes.LikesController;
 import com.ezen.member.MemberDTO;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
@@ -80,7 +81,9 @@ public class BoardController {
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		boardreadcount(bd_no, sqlSession);
 		BoardDTO boardlist = bs.boarddetail(bd_no);
+		MovePageVO move = bs.boardMovePage(bd_no);
 		md.addAttribute("boarddetail", boardlist);
+		md.addAttribute("move", move);
 		
 		return "boarddetailform";
 	}

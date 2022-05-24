@@ -77,13 +77,44 @@
 </update>
 
 <select id="cntpage" resultType="int">
-	select count(*) from  rehome
+	select count(*) from  rehome where rh_gb1='승인' and rh_gb2!='분양완료'
 </select>
 
 <select id="selectpage" resultType="com.ezen.rehome.RehomeDTO">
 	select * from(
 		select rownum rn,A.* from(
-		select * from rehome order by rh_no desc)A)
+		select * from rehome where rh_gb1='승인' and rh_gb2!='분양완료' order by rh_no desc)A)
 			where rn between #{start} and #{end}
 </select>
+
+<select id="rehomeMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 rh_no,
+		 LEAD(rh_no,1,9999) OVER(ORDER BY rh_no) AS nextno,
+		 LAG(rh_no,1,9999) OVER(ORDER BY rh_no) AS lastno,
+		 rh_title,
+		 LEAD(rh_title,1,9999) OVER(ORDER BY rh_no) AS nexttitle,
+         LAG(rh_title,1,9999) OVER(ORDER BY rh_no) AS lasttitle
+         
+		 FROM rehome
+		 where rh_gb1='승인' and rh_gb2!='분양완료'
+         order by rh_no DESC) 
+         WHERE rh_no = #{rh_no}
+</select>
+
+<select id="rehomeEndMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
+select * from(SELECT
+		 rh_no,
+		 LEAD(rh_no,1,9999) OVER(ORDER BY rh_no) AS nextno,
+		 LAG(rh_no,1,9999) OVER(ORDER BY rh_no) AS lastno,
+		 rh_title,
+		 LEAD(rh_title,1,9999) OVER(ORDER BY rh_no) AS nexttitle,
+         LAG(rh_title,1,9999) OVER(ORDER BY rh_no) AS lasttitle
+         
+		 FROM rehome
+		 where rh_gb1='승인' and rh_gb2='분양완료'
+         order by rh_no DESC) 
+         WHERE rh_no = #{rh_no}
+</select>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.ezen.notice;
 
 import java.util.ArrayList;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public interface NoticeService {
@@ -14,5 +15,6 @@ public interface NoticeService {
 	
 	public int noticetotalcount();
 	public ArrayList<NoticeDTO> noticePage(PagingDTO page);
+	public MovePageVO noticeMovePage(int nt_no);
 	
 }

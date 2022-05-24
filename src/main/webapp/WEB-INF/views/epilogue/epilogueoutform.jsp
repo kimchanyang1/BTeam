@@ -23,19 +23,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div class="thumbnail">
-					<p align="left"><B>구분</B>　${epiloguelist[e].ep_gb } </p>
-					<p align="left"><B>제목</B>　${epiloguelist[e].ep_title } </p>
-						<fmt:parseDate value="${epiloguelist[e].ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-						<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-					<p align="left"><B>일자</B>　${writedaystring } </p>
-					<a href="epiloguedetail?ep_no=${epiloguelist[e].ep_no }">
-					<img src="${pageContext.request.contextPath}/image/${epiloguelist[e].ep_image }" style="width: 200px; height: 200px;">
-				<div class="caption">
-					<p><B>${epiloguelist[e].mem_nickname }</B></p>
-				</div>
-				</a>	
-				</div>
+				<a href="epiloguedetail?ep_no=${epiloguelist[e].ep_no}">
+					<div class="thumbnail" style="cursor: pointer;">
+						<p align="left"><B>구분</B>　${epiloguelist[e].ep_gb } </p>
+						<p align="left"><B>제목</B>　${epiloguelist[e].ep_title } </p>
+							<fmt:parseDate value="${epiloguelist[e].ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+						<p align="left"><B>일자</B>　${writedaystring } </p>
+						<img src="${pageContext.request.contextPath}/image/${epiloguelist[e].ep_image }" style="width: 200px; height: 200px;">
+						<div class="caption">
+							<p><B>${epiloguelist[e].mem_nickname }</B></p>
+						</div>
+					</div>
+				</a>
 			</div>
 	<c:if test="${e%3 eq 2}">
 	</td>

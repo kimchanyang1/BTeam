@@ -2,6 +2,7 @@ package com.ezen.rehome;
 
 import java.util.ArrayList;
 
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public interface RehomeService {
@@ -22,5 +23,7 @@ public interface RehomeService {
 	
 	public ArrayList<RehomeDTO> rehomeendpage(PagingDTO page);
 	public int rehomeendtotal();
+	public MovePageVO rehomeMovePage(int rh_no);
+	public MovePageVO rehomeEndMovePage(int rh_no);
 	
 }

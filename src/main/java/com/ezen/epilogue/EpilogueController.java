@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
 import com.ezen.teamb.FileUploadController;
+import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class EpilogueController {
@@ -106,8 +107,10 @@ public class EpilogueController {
 		
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
 		epiloguereadcount(ep_no, sqlSession);
-		ArrayList<EpilogueDTO> epiloguedetail = ep.epiloguedetail(ep_no);
+		EpilogueDTO epiloguedetail = ep.epiloguedetail(ep_no);
+		MovePageVO move = ep.epilogueMovePage(ep_no);
 		md.addAttribute("epiloguedetail", epiloguedetail);
+		md.addAttribute("move", move);
 		
 		return "epiloguedetailform";
 	}

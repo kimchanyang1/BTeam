@@ -30,7 +30,7 @@
         	</li>
         	
 			<li class="active">
-				<a href="rehome">분양/임시보호</a>
+				<a href="rehomeoutform">분양/임시보호</a>
         	</li>
         	
 			<li class="active">
