@@ -112,7 +112,7 @@ public class MissingController {
 	}
 	
 	public String missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
-	{
+	{		
 		int mis_no = Integer.parseInt(multi.getParameter("mis_no"));
 		String mis_gb = multi.getParameter("mis_gb");	
 		String mis_gb2 = multi.getParameter("mis_gb2");	

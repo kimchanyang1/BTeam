@@ -51,7 +51,7 @@ public class NoticeController {
 		String nt_content = request.getParameter("nt_content");
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
 		ns.noticeinput(mem_no, mem_nickname, nt_title, nt_content);
-		return "redirect:noticeoutform";
+		return "redirect:noticepage";
 	}
 
 	public String noticedetail(HttpServletRequest request, SqlSession sqlSession, Model model) {
