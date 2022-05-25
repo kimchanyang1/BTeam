@@ -12,7 +12,7 @@ CREATE SEQUENCE rep_no;
  */
 
 public class ReplyDTO {
-
+	
 	int rep_originno; //댓글을 달 게시글의 번호
 	int rep_no; //댓글 번호. 시퀀스
 	String rep_id; //댓글 작성자 닉네임

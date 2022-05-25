@@ -25,5 +25,6 @@ public interface RehomeService {
 	public int rehomeendtotal();
 	public MovePageVO rehomeMovePage(int rh_no);
 	public MovePageVO rehomeEndMovePage(int rh_no);
+	public ArrayList<RehomeDTO> rehomeAdminPage(PagingDTO dto);
 	
 }

@@ -41,7 +41,7 @@ public class RehomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.setViewName("redirect:rehome");
+		mav.setViewName("redirect:rehomeoutform");
 		
 		HttpSession hs = multi.getSession();
         int mem_no = (int) hs.getAttribute("mem_no");
@@ -219,37 +219,34 @@ public class RehomeController {
 
 	
 	public String rehomepage(PagingDTO dto, Model mo,SqlSession sqlSession
-			,@RequestParam(value="nowPage", required=false)String nowPage)
-	{
-	RehomeService rh = sqlSession.getMapper(RehomeService.class);
-	int total = rh.cntpage();
-	if(nowPage == null)
-	{
-		nowPage = "1";
-	}
-
-	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
-	mo.addAttribute("paging", dto);
-	mo.addAttribute("rdto", rh.selectpage(dto));
+			,@RequestParam(value="nowPage", required=false)String nowPage) {
+		RehomeService rh = sqlSession.getMapper(RehomeService.class);
+		int total = rh.cntpage();
+		if(nowPage == null){
+			nowPage = "1";
+		}
 	
-	return "Rehomeoutform";
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("rdto", rh.selectpage(dto));
+		
+		return "Rehomeoutform";
 	}
 	
 	public String rehomeadminpage(PagingDTO dto, Model mo,SqlSession sqlSession
-			,@RequestParam(value="nowPage", required=false)String nowPage)
-	{
-	RehomeService rh = sqlSession.getMapper(RehomeService.class);
-	int total = rh.cntpage();
-	if(nowPage == null)
-	{
-		nowPage = "1";
+			,@RequestParam(value="nowPage", required=false)String nowPage) {
+		RehomeService rh = sqlSession.getMapper(RehomeService.class);
+		int total = rh.cntpage();
+		if(nowPage == null) {
+			nowPage = "1";
+		}
+	
+		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
+		ArrayList<RehomeDTO> list = rh.rehomeAdminPage(dto);
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("rdto", list);
+		return "rehomeadmin";
 	}
-
-	dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
-	mo.addAttribute("paging", dto);
-	mo.addAttribute("rdto", rh.selectpage(dto));
-	return "rehomeadmin";
-}
 
 	
 

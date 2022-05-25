@@ -87,6 +87,13 @@
 			where rn between #{start} and #{end}
 </select>
 
+<select id="rehomeAdminPage" resultType="com.ezen.rehome.RehomeDTO">
+	select * from(
+		select rownum rn,A.* from(
+		select * from rehome order by rh_no desc)A)
+			where rn between #{start} and #{end}
+</select>
+
 <select id="rehomeMovePage" parameterType="int" resultType="com.ezen.teamb.MovePageVO">
 select * from(SELECT
 		 rh_no,
