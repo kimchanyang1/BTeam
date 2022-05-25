@@ -265,8 +265,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(HttpServletRequest request, Model model) {
-		return mc.Login(request, model, sqlSession);
+	public String Login(HttpServletRequest request, Model model, HttpServletResponse response) {
+		return mc.Login(request, model, sqlSession, response);
 	}
 	
 	@RequestMapping(value = "/logout")

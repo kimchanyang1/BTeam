@@ -50,8 +50,8 @@ $(document).ready(function(){
 		<fmt:parseDate value="${replist[rep].rep_writeday}" var="writedayDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedayDate}" var="writedayString" pattern="yyyy-MM-dd HH:mm"/>
 		<p>${writedayString}</p>
-		<p id="repmodify${rep}">수정</p>　
-		<p>삭제</p>
+		<p id="repmodify${rep}" style="cursor: pointer;">수정</p>　
+		<p style="cursor: pointer;">삭제</p>
 	</div>
 </div>
 </c:forEach>
