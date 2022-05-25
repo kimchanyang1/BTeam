@@ -107,7 +107,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/missingdetail")
 	public String missingdetail(HttpServletRequest request,Model mo) {
-		return mic.missingdetail(request, mo ,sqlSession);
+		return mic.missingdetail(request, mo ,sqlSession, rep);
 	}
 	
 	@RequestMapping(value = "/missingdelete")
@@ -270,8 +270,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(HttpServletRequest request, Model model) {
-		return mc.Login(request, model, sqlSession);
+	public String Login(HttpServletRequest request, Model model, HttpServletResponse response) {
+		return mc.Login(request, model, sqlSession, response);
 	}
 	
 	@RequestMapping(value = "/logout")
@@ -433,7 +433,7 @@ public class HomeController {
 	@RequestMapping(value = "/boarddetail")
 	public String bb3(HttpServletRequest request, Model md) {
 		
-		return bc.boarddetailform(sqlSession, request, md);
+		return bc.boarddetailform(sqlSession, request, md, rep);
 	}
 	
 	
@@ -497,14 +497,19 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/boardreplyinput")
-	public String boardreplyinput(HttpServletRequest request, Model mo) {
-		return bc.boardreplyinput(request, mo, sqlSession);
-	}
-	
 	@RequestMapping(value = "/boardreplydelete")
 	public String boardreplydelete(HttpServletRequest request, Model mo) {
 		return bc.boardreplydelete(request, mo, sqlSession);
+	}
+	
+	@RequestMapping(value = "/replycount")
+	public @ResponseBody int replyCount(@RequestParam("reply_boardno") int reply_boardno) {
+		return rep.replyCount(sqlSession, reply_boardno);
+	}
+	
+	@RequestMapping(value = "/replyinput")
+	public String replyinput(HttpServletRequest request, Model mo) {
+		return rep.replyinput(request, mo, sqlSession);
 	}
 	
 }

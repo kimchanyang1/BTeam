@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.ezen.epilogue.EpilogueDTO;
-import com.ezen.epilogue.EpilogueService;
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
@@ -87,7 +85,7 @@ public class MissingController {
 		
 	}
 	
-	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession)
+	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession, ReplyController rep)
 	{
 		int mis_no;
 		mis_no = Integer.parseInt(request.getParameter("mis_no"));
@@ -102,6 +100,7 @@ public class MissingController {
 			MovePageVO move = micdao.missingEndMovePage(mis_no);
 			mo.addAttribute("move",move);
 		}
+		rep.replyout("missing", mis_no, mo, sqlSession);
 		return "missingdetail";
 	}
 	

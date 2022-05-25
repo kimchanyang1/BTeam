@@ -1,5 +1,7 @@
 package com.ezen.member;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -59,7 +61,7 @@ public class MemberController {
 		return "loginform";
 	}
 	
-	public String Login(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	public String Login(HttpServletRequest request, Model model, SqlSession sqlSession, HttpServletResponse response) {
 		HttpSession hs = request.getSession();
 		hs.removeAttribute("memoryid");
 		hs.removeAttribute("memorycheck");
@@ -68,21 +70,49 @@ public class MemberController {
 		String memoryid = request.getParameter("memoryid");
 		
 		MemberService ms = sqlSession.getMapper(MemberService.class);
-		MemberDTO login = ms.Login(mem_id, mem_pw);
+		MemberDTO login = ms.Login(mem_id);
 		if (login != null) {
-			hs.setAttribute("mem_no", login.getMem_no());
-			hs.setAttribute("mem_id", login.getMem_id());
-			hs.setAttribute("mem_nickname", login.getMem_nickname());
-			hs.setAttribute("mem_tel", login.getMem_tel());
-			hs.setAttribute("logon", true);
-			if (memoryid != null) {
-				hs.setAttribute("memoryid", mem_id);
-				hs.setAttribute("memorycheck", true);
+			if (login.getMem_pw().equals(mem_pw)) {
+				hs.setAttribute("mem_no", login.getMem_no());
+				hs.setAttribute("mem_id", login.getMem_id());
+				hs.setAttribute("mem_nickname", login.getMem_nickname());
+				hs.setAttribute("mem_tel", login.getMem_tel());
+				hs.setAttribute("logon", true);
+				if (memoryid != null) {
+					hs.setAttribute("memoryid", mem_id);
+					hs.setAttribute("memorycheck", true);
+				}
+				return "redirect:home";
+			} else {
+				model.addAttribute("result", "loginfail");
+				try {
+					response.setContentType("text/html; charset=utf-8");
+					response.setCharacterEncoding("UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('틀린 비밀번호입니다 다시 확인해주세요');");
+					out.println("location.href='loginform';");
+					out.println("</script>");
+					model.addAttribute("memoryid", mem_id);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return "";
 			}
-			return "redirect:home";
 		} else {
 			model.addAttribute("result", "loginfail");
-			return "redirect:signupform1";
+			try {
+				response.setContentType("text/html; charset=utf-8");
+				response.setCharacterEncoding("UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('없는 아이디입니다. 회원가입해주세요.');");
+				out.println("location.href='signpolicy';");
+				out.println("</script>");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return "";
 		}
 	}
 	
@@ -127,7 +157,7 @@ public class MemberController {
 		String mem_address = request.getParameter("mem_address");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		ms.membermodify(mem_pw, mem_nickname, mem_jumin, mem_tel, mem_mail, mem_address, mem_no);
-		Login(request, model, sqlSession);
+		Login(request, model, sqlSession, null);
 		return "redirect:memberdetail";
 	}
 
@@ -254,28 +284,28 @@ public class MemberController {
 		    	if (jumin.length()>8) {
 			    switch (jumin.substring(7, 8)) {
 			    	case "1":
-			            gender = "����";
+			            gender = "남자";
 			            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
 			            break;
 			        case "2":
-			            gender = "����";
+			            gender = "여자";
 			            age = nowyear-1900-Integer.parseInt(jumin.substring(0, 2));
 			            break;
 			        case "3":
-			            gender = "����";
+			            gender = "남자";
 			            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
 			            break;
 			        case "4":
-			            gender = "����";
+			            gender = "여자";
 			            age = nowyear-2000-Integer.parseInt(jumin.substring(0, 2));
 			            break;
 			        }
 				}else {
-		            gender = "�ֹε�Ϲ�ȣ����";
+		            gender = "주민등록번호 오류";
 		            age = -2;
 				}
 			} else {
-	            gender = "�ֹε�Ϲ�ȣ����";
+	            gender = "주민등록번호 없음";
 	            age = -1;
 			}
 		    memberDTO.setAge(age);
