@@ -140,6 +140,11 @@ public class HomeController {
 	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return mic.missingpage(dto, mo, sqlSession, nowPage);
 	}
+	
+	@RequestMapping(value = "/missingreplyinput")
+	public String missingreplyinput(HttpServletRequest request, Model mo) {
+		return mic.missingreplyinput(request, mo, sqlSession);
+	}
 
 	
 	@RequestMapping(value = "/rehoming")

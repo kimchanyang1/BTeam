@@ -21,7 +21,25 @@ rh_readcount NUMBER(6));
 
 create SEQUENCE rh_no;
 
+�ӽú�ȣ �о� ������
+insert into rehome values (rh_no.nextval, '����', '�ӽú�ȣ', '��', '�׽�Ʈ1', '�������1', 0000001, sysdate, '������1', '1.png', 1, '�׽���1', '010-1111-1111', sysdate, '�׽�Ʈ��۳���1', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�', '��', '�׽�Ʈ2', '�������2', 0000001, sysdate, '������1', '1.png', 1, '�׽���2', '010-2222-2222', sysdate, '�׽�Ʈ��۳���2', 0);
+insert into rehome values (rh_no.nextval, '����', '�ӽú�ȣ', '��', '�׽�Ʈ3', '�������3', 0000003, sysdate, '������3', '1.png', 3, '�׽���3', '030-3333-3333', sysdate, '�׽�Ʈ��۳���3', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�', '��', '�׽�Ʈ4', '�������4', 0000004, sysdate, '������4', '1.png', 4, '�׽���4', '040-4444-4444', sysdate, '�׽�Ʈ��۳���4', 0);
+insert into rehome values (rh_no.nextval, '����', '�ӽú�ȣ', '��', '�׽�Ʈ5', '�������5', 0000005, sysdate, '������5', '1.png', 5, '�׽���5', '050-5555-5555', sysdate, '�׽�Ʈ��۳���5', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�', '��', '�׽�Ʈ6', '�������6', 0000006, sysdate, '������6', '1.png', 6, '�׽���6', '060-6666-6666', sysdate, '�׽�Ʈ��۳���6', 0);
+insert into rehome values (rh_no.nextval, '����', '�ӽú�ȣ', '��', '�׽�Ʈ7', '�������7', 0000007, sysdate, '������7', '1.png', 7, '�׽���7', '070-7777-7777', sysdate, '�׽�Ʈ��۳���7', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�', '��', '�׽�Ʈ8', '�������8', 0000008, sysdate, '������8', '1.png', 8, '�׽���8', '080-8888-8888', sysdate, '�׽�Ʈ��۳���8', 0);
 
+�о�Ϸ� ������
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ1', '�������1', 0000001, sysdate, '������1', '1.png', 1, '�׽���1', '010-1111-1111', sysdate, '�׽�Ʈ��۳���1', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ2', '�������2', 0000001, sysdate, '������1', '1.png', 1, '�׽���2', '010-2222-2222', sysdate, '�׽�Ʈ��۳���2', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ3', '�������3', 0000003, sysdate, '������3', '1.png', 3, '�׽���3', '030-3333-3333', sysdate, '�׽�Ʈ��۳���3', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ4', '�������4', 0000004, sysdate, '������4', '1.png', 4, '�׽���4', '040-4444-4444', sysdate, '�׽�Ʈ��۳���4', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ5', '�������5', 0000005, sysdate, '������5', '1.png', 5, '�׽���5', '050-5555-5555', sysdate, '�׽�Ʈ��۳���5', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ6', '�������6', 0000006, sysdate, '������6', '1.png', 6, '�׽���6', '060-6666-6666', sysdate, '�׽�Ʈ��۳���6', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ7', '�������7', 0000007, sysdate, '������7', '1.png', 7, '�׽���7', '070-7777-7777', sysdate, '�׽�Ʈ��۳���7', 0);
+insert into rehome values (rh_no.nextval, '����', '�о�Ϸ�', '��', '�׽�Ʈ8', '�������8', 0000008, sysdate, '������8', '1.png', 8, '�׽���8', '080-8888-8888', sysdate, '�׽�Ʈ��۳���8', 0);
  */
 
 public class RehomeDTO {

@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.epilogue.EpilogueDTO;
 import com.ezen.epilogue.EpilogueService;
+import com.ezen.reply.ReplyDTO;
+import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
@@ -208,5 +210,5 @@ public class MissingController {
 		
 		return "missingoutform";
 	}
-	
+		
 }

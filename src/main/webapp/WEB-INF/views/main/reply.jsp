@@ -23,7 +23,7 @@ $(document).ready(function(){
 			"<div  style='text-align: center;flex-basis: 20%;align-self: center;'>"+
 				"<i class='fas fa-user w3-padding-16'> ${ mdto.mem_id }</i>"+
 			"</div>"+
-			"<div style='flex: 1;text-align: justify;'>"+
+			"<div style='flex: 1;text-align: justify;'>"+	
 				"<input type='hidden' name='bd_no' id='bd_no' value='${ boarddetail.bd_no }'>"+ 
 				"<input type='hidden' name='mem_id' id='mem_id' value='${ mdto.mem_id }'>"+
 				"<textarea id='replyarea' name='rep_content'>${replist[rep].rep_content}</textarea>"+
@@ -66,10 +66,11 @@ $(document).ready(function(){
 	</div>
 	<div style="flex: 1;text-align: justify;">
 		<br>
-		<c:if test="${ mdto.mem_id != null }">		
+		<c:if test="${ mdto.mem_id != null}">		
 			<input type="hidden" name="bd_no" id="bd_no" value="${ boarddetail.bd_no }"> 
 			<input type="hidden" name="mem_id" id="mem_id" value="${ mdto.mem_id }">
-			<textarea id="replyarea" name="rep_content"></textarea>
+		
+			<!--  <textarea id="replyarea" name="rep_content"></textarea> -->
 		</c:if>
 		<c:if test="${ mdto.mem_id == null }">
 			<textarea id="replyarea" readonly="readonly">
@@ -81,7 +82,7 @@ $(document).ready(function(){
 	<div style="flex-basis: 20%;align-self: center;">
 		<br>
 		<c:if test="${ mdto.mem_id != null }">
-			<B><input id="replybutton" type="submit" value="등록"></B>
+			<B><input id="replybutton"  type="submit" value="등록"></B>
 		</c:if>
 		<c:if test="${ mdto.mem_id == null }">
 			<button id="replybutton" onclick="location.href='loginform'"><B>로그인</B></button>
