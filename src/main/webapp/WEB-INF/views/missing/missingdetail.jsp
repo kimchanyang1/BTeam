@@ -110,7 +110,7 @@ $(document).ready(function(){
 	
 <tr>
 	<td>　　</td></tr>
-	
+	<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
 	<tr>
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.likes.LikesController;
 import com.ezen.member.MemberDTO;
+import com.ezen.reply.ReplyController;
 import com.ezen.reply.ReplyDTO;
 import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
@@ -63,7 +64,7 @@ public class BoardController {
 
 
 	// ������
-	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md, ReplyController rep) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
@@ -74,7 +75,7 @@ public class BoardController {
 		md.addAttribute("boarddetail", boardlist);
 		md.addAttribute("move", move);
 		
-		boardreplyout(bd_no, md, sqlSession);
+		rep.replyout("board", bd_no, md, sqlSession);
 		
 		return "boarddetailform";
 	}
@@ -90,14 +91,10 @@ public class BoardController {
 	public String boardmodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		String mem_nickname=request.getParameter("mem_nickname");
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		ArrayList<BoardDTO> boardlist = bs.boardmodifyselect(bd_no);
 		md.addAttribute("boardmodify", boardlist);
-		md.addAttribute("mem_no", mem_no);
-		md.addAttribute("mem_nickname", mem_nickname);
 		
 		return "boardmodifyform";
 	}
@@ -178,34 +175,6 @@ public class BoardController {
 		model.addAttribute("boardlist", list);
 		
 		return "boardoutform";
-	}
-	
-	//��� �Է�
-	public String boardreplyinput(HttpServletRequest request, Model mo,SqlSession sqlSession)
-	{
-		int rep_originno = Integer.parseInt(request.getParameter("bd_no"));
-		String rep_id = request.getParameter("mem_id");
-		String rep_content = request.getParameter("rep_content");
-			
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.boardreplyinput(rep_originno, rep_id, rep_content);
-		mo.addAttribute("bd_no", rep_originno);
-			
-		return "redirect: boarddetail";
-	}
-		
-	//��� ���
-	public void boardreplyout(int rep_originno, Model mo, SqlSession sqlSession)
-	{
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		ArrayList<ReplyDTO> replist = res.boardreplyout(rep_originno);
-		mo.addAttribute("replist", replist);
-	}
-	
-	//��� ����
-	public void boardreplymodify()
-	{
-		
 	}
 	
 	//��� ����

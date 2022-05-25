@@ -47,8 +47,8 @@ function check() {
 <br><br>
 
 <form action="boardmodify" method="post" enctype="multipart/form-data" name="form1">
-	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
+	<input type="hidden" name="mem_no" value="${mem_no}" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mem_nickname}" readonly="readonly">
 
 <table border="0" align="center">
 <c:forEach items="${boardmodify }" var="b">

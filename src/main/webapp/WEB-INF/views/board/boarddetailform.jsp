@@ -95,8 +95,8 @@ $(document).ready(function(){
 
 <table border="0" align="center" width="700">
 	<input type="hidden" value="${boarddetail.mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
+	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
 	<tr>
 		<td colspan="3" align="left">
 			<B>　글번호 ${boarddetail.bd_no}</B>
@@ -137,13 +137,10 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="3" align="center">
-			<input type="hidden" value="${e.mem_no }" readonly="readonly">
-			<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3" align="center">　　
-			<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
+		<td colspan="3" align="center">
 		</td></tr>
 	<tr>
 		<td colspan="3" align="right">
@@ -160,8 +157,8 @@ $(document).ready(function(){
 					&nbsp;<span class="likes_count"></span>
 				</button> 
 			</c:if>
-			<c:if test="${boarddetail.mem_no eq mdto.mem_no || mem_id eq 'admin'}">
-				<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
+			<c:if test="${boarddetail.mem_no eq mem_no || mem_id eq 'admin'}">
+				<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'"><B>수정</B></button>
 				<button id="boarddelete"><B>삭제</B></button>
 			</c:if>
 		</td>
