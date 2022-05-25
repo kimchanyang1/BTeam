@@ -19,13 +19,34 @@ textarea {
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function check() {
+	try{
+		var f = document.form1;
+
+		var title = f.bd_title.value;
+		var content = f.bd_content.value;
+		if (title=="") {
+			alert("제목은 필수입니다.");
+			return false;
+		}else if (content=="") {
+			alert("내용을 적어주세요.");
+			return false;
+		}
+		f.submit();
+    }
+    catch(error){
+		alert(error.message);
+    }
+}
+</script>
 </head>
 <body>
 
 <h4><B><font color="#fdafab">글수정</font></B></h4>
 <br><br>
 
-<form action="boardmodify" method="post" enctype="multipart/form-data">
+<form action="boardmodify" method="post" enctype="multipart/form-data" name="form1">
 	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
 	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
 
@@ -47,7 +68,7 @@ textarea {
 	<td colspan="2">　　</td></tr>
 <tr>
 	<td colspan="2"><B>
-		<input type="submit" value="수정">
+		<input type="button" onclick="check()" value="수정">
 		<a href="boarddetail?bd_no=${b.bd_no}"><input id="cancel" type="button" value="취소"></a></B></td></tr>
 </c:forEach>
 </table>

@@ -64,19 +64,6 @@ public class BoardController {
 
 	// ������
 	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
-
-		HttpSession hs = request.getSession();
-		if (hs.getAttribute("mem_no")!=null) {
-			int mem_no = (int) hs.getAttribute("mem_no");
-			String mem_id = (String) hs.getAttribute("mem_id");
-			String mem_nickname = (String) hs.getAttribute("mem_nickname");
-			MemberDTO mdto = new MemberDTO();
-			mdto.setMem_no(mem_no);
-			mdto.setMem_id(mem_id);
-			mdto.setMem_nickname(mem_nickname);
-			
-			md.addAttribute("mdto", mdto);
-		}
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
