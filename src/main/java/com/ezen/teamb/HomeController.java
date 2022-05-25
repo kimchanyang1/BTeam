@@ -198,6 +198,11 @@ public class HomeController {
 		return rc.rehomeadmin(sqlSession, mo);
 	}
 	
+	@RequestMapping(value = "/rehomeadminsearch")
+	public String rehomeadminsearch(HttpServletRequest request, Model mo) {
+		return rc.rehomeadminsearch(sqlSession, request, mo);
+	}
+	
 	@RequestMapping(value = "/rehomeok")
 	public String rehomeok(HttpServletRequest request) {
 		return rc.rehomeok(sqlSession, request);

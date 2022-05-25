@@ -16,6 +16,25 @@
 <h6><B>승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
 <br><br>
 
+<form action="rehomeadminsearch" method="post">
+<table border="0" align="center" width="500">
+	<tr>
+		<td colspan="3">
+			<label><input type="checkbox" name="gb1" value="미확인"> 미확인</label> &emsp;
+			<label><input type="checkbox" name="gb1" value="승인"> 승인</label> &emsp;
+			<label><input type="checkbox" name="gb1" value="보류"> 보류</label> &emsp;
+			<label><input type="checkbox" name="gb1" value="거절"> 거절</label> &emsp;
+		</td>
+	</tr>
+	<tr>
+		<td>　발견장소　</td>
+		<td><input type="text" name="sword"></td>
+		<td><B><input type="submit" value="조회"></B></td>
+	</tr>
+</table>
+</form>
+<br><br>
+
 <table border="0" align="center" width="700">
 	<tr>
 		<td>
