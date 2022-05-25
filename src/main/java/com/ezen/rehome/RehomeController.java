@@ -235,6 +235,7 @@ public class RehomeController {
 
 	
 	public String rehomepage(PagingDTO dto, Model mo,SqlSession sqlSession
+
 			,@RequestParam(value="nowPage", required=false)String nowPage)
 	{
 		RehomeService rh = sqlSession.getMapper(RehomeService.class);
@@ -249,29 +250,25 @@ public class RehomeController {
 		mo.addAttribute("paging", dto);
 		mo.addAttribute("rdto", list);
 		
-		for (RehomeDTO rehomeDTO : list) {
-			System.out.println(rehomeDTO.rh_no);
-		}
 		return "Rehomeoutform";
 	}
 	
 	public String rehomeadminpage(PagingDTO dto, Model mo,SqlSession sqlSession
-			,@RequestParam(value="nowPage", required=false)String nowPage)
-	{
+
+			,@RequestParam(value="nowPage", required=false)String nowPage) {
 		RehomeService rh = sqlSession.getMapper(RehomeService.class);
 		int total = rh.cntpage();
-		if(nowPage == null)
-		{
+		if(nowPage == null) {
+
 			nowPage = "1";
 		}
 	
 		dto = new PagingDTO(total, Integer.parseInt(nowPage), 15, 5);
-		mo.addAttribute("paging", dto);
-		mo.addAttribute("rdto", rh.selectpage(dto));
-		
-		return "rehomeadmin";
-}
 
-	
+		ArrayList<RehomeDTO> list = rh.rehomeAdminPage(dto);
+		mo.addAttribute("paging", dto);
+		mo.addAttribute("rdto", list);
+		return "rehomeadmin";
+	}	
 
 }
