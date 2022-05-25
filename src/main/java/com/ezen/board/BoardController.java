@@ -20,7 +20,7 @@ import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
-	// ±Û¾²±â
+	// ï¿½Û¾ï¿½ï¿½ï¿½
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
@@ -62,21 +62,8 @@ public class BoardController {
 	}
 
 
-	// µðÅ×ÀÏ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
-
-		HttpSession hs = request.getSession();
-		if (hs.getAttribute("mem_no")!=null) {
-			int mem_no = (int) hs.getAttribute("mem_no");
-			String mem_id = (String) hs.getAttribute("mem_id");
-			String mem_nickname = (String) hs.getAttribute("mem_nickname");
-			MemberDTO mdto = new MemberDTO();
-			mdto.setMem_no(mem_no);
-			mdto.setMem_id(mem_id);
-			mdto.setMem_nickname(mem_nickname);
-			
-			md.addAttribute("mdto", mdto);
-		}
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
@@ -92,14 +79,14 @@ public class BoardController {
 		return "boarddetailform";
 	}
 	
-	// Á¶È¸¼ö Áõ°¡
+	// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void boardreadcount(int bd_no, SqlSession sqlSession) {
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardreadcount(bd_no);
 	}
 
-	// ¼öÁ¤
+	// ï¿½ï¿½ï¿½ï¿½
 	public String boardmodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
@@ -134,7 +121,7 @@ public class BoardController {
 	}
 
 
-	// »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½
 	public String boarddelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
@@ -146,7 +133,7 @@ public class BoardController {
 	}
 	
 	
-	// °Ë»ö
+	// ï¿½Ë»ï¿½
 	public String boardsearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		String selectname = request.getParameter("selectname");
@@ -193,7 +180,7 @@ public class BoardController {
 		return "boardoutform";
 	}
 	
-	//´ñ±Û ÀÔ·Â
+	//ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 	public String boardreplyinput(HttpServletRequest request, Model mo,SqlSession sqlSession)
 	{
 		int rep_originno = Integer.parseInt(request.getParameter("bd_no"));
@@ -207,7 +194,7 @@ public class BoardController {
 		return "redirect: boarddetail";
 	}
 		
-	//´ñ±Û ¸ñ·Ï
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void boardreplyout(int rep_originno, Model mo, SqlSession sqlSession)
 	{
 		ReplyService res = sqlSession.getMapper(ReplyService.class);
@@ -215,13 +202,13 @@ public class BoardController {
 		mo.addAttribute("replist", replist);
 	}
 	
-	//´ñ±Û ¼öÁ¤
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void boardreplymodify()
 	{
 		
 	}
 	
-	//´ñ±Û »èÁ¦
+	//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public String boardreplydelete(HttpServletRequest request, Model mo,SqlSession sqlSession)
 	{
 		int rep_no = Integer.parseInt(request.getParameter("rep_no"));

@@ -9,7 +9,7 @@
 </select>
 
 <select id="boardpage" resultType="com.ezen.board.BoardDTO">
-	select * from (select rownum rn, A.* from(select * from BOARD order by BD_NO asc)A) where rn between #{start} and #{end} order by rn desc
+	select * from (select rownum rn, A.* from(select * from BOARD order by BD_NO DESC)A) where rn between #{start} and #{end}
 </select>
 
 

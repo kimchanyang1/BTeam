@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -500,6 +501,11 @@ public class HomeController {
 	@RequestMapping(value = "/boardreplydelete")
 	public String boardreplydelete(HttpServletRequest request, Model mo) {
 		return bc.boardreplydelete(request, mo, sqlSession);
+	}
+	
+	@RequestMapping(value = "/replycount")
+	public @ResponseBody int replyCount(@RequestParam("reply_boardno") int reply_boardno) {
+		return rep.replyCount(sqlSession, reply_boardno);
 	}
 	
 }

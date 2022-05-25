@@ -18,4 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	delete from reply where rep_no=#{param1}
 </delete>
 
+<select id="replyCount" resultType="int">
+	select count(*) from reply where rep_originno=#{rep_originno}
+</select>
+
 </mapper>

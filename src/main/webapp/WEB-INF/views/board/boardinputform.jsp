@@ -34,8 +34,8 @@ function check() {
 		}
 		f.submit();
     }
-    catch(err){
-		alert(err.message);
+    catch(error){
+		alert(error.message);
     }
 }
 </script>

@@ -13,11 +13,11 @@ CREATE SEQUENCE rep_no;
 
 public class ReplyDTO {
 	
-	int rep_originno; //´ñ±ÛÀ» ´Ş °Ô½Ã±ÛÀÇ ¹øÈ£
-	int rep_no; //´ñ±Û ¹øÈ£. ½ÃÄö½º
-	String rep_id; //´ñ±Û ÀÛ¼ºÀÚ ´Ğ³×ÀÓ
-	String rep_writeday; //´ñ±Û ÀÛ¼º³¯Â¥
-	String rep_content; //´ñ±Û ³»¿ë
+	int rep_originno; //ëŒ“ê¸€ ì›ë˜ê¸€ë²ˆí˜¸
+	int rep_no; //ëŒ“ê¸€ ê¸€ë²ˆí˜¸
+	String rep_id; //ëŒ“ê¸€ ì ì€ì‚¬ëŒ
+	String rep_writeday; //ëŒ“ê¸€ ì ì€ë‚ ì§œ
+	String rep_content; //ëŒ“ê¸€ ë‚´ìš©
 	
 	public ReplyDTO() {
 		super();

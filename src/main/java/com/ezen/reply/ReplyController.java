@@ -30,4 +30,10 @@ public class ReplyController {
 		ArrayList<ReplyDTO> replist = res.boardreplyout(rep_originno);
 		mo.addAttribute("replist", replist);
 	}
+
+	public int replyCount(SqlSession sqlSession, int reply_boardno) {
+		ReplyService rs = sqlSession.getMapper(ReplyService.class);
+		int replyCount = rs.replyCount(reply_boardno);
+		return replyCount;
+	}
 }
