@@ -2,56 +2,34 @@ package com.ezen.reply;
 
 /* 
 CREATE TABLE reply(
-rep_table VARCHAR2(20),
-rep_originno NUMBER(6, 0) PRIMARY KEY,
-rep_no NUMBER(6, 0),
-rep_nickname VARCHAR2(20),
-rep_writeday VARCHAR2(20),
-rep_content VARCHAR2(20),
-rep_repno NUMBER(6, 0),
-rep_step NUMBER(6, 0),
-rep_indent NUMBER(6, 0));
+rep_originno NUMBER(6, 0),
+rep_no NUMBER(6, 0) PRIMARY KEY,
+rep_id VARCHAR2(20),
+rep_writeday DATE DEFAULT SYSDATE,
+rep_content VARCHAR2(2000));
 
 CREATE SEQUENCE rep_no;
  */
 
 public class ReplyDTO {
 
-	String rep_table; //´ñ±ÛÀ» ´Þ °Ô½Ã±ÛÀÇ °Ô½ÃÆÇ
 	int rep_originno; //´ñ±ÛÀ» ´Þ °Ô½Ã±ÛÀÇ ¹øÈ£
 	int rep_no; //´ñ±Û ¹øÈ£. ½ÃÄö½º
-	String rep_nickname; //´ñ±Û ÀÛ¼ºÀÚ ´Ð³×ÀÓ
+	String rep_id; //´ñ±Û ÀÛ¼ºÀÚ ´Ð³×ÀÓ
 	String rep_writeday; //´ñ±Û ÀÛ¼º³¯Â¥
 	String rep_content; //´ñ±Û ³»¿ë
-	int rep_repno; //´ñ±ÛÀ» ´Þ ´ñ±ÛÀÇ ¹øÈ£
-	int rep_step; //´ñ±Û µé¿©¾²±â
-	int rep_indent; //´ñ±Û ³»·Á¾²±â
 	
 	public ReplyDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public ReplyDTO(String rep_table, int rep_originno, int rep_no, String rep_nickname, String rep_writeday,
-			String rep_content, int rep_repno, int rep_step, int rep_indent) {
+	public ReplyDTO(int rep_originno, int rep_no, String rep_id, String rep_writeday, String rep_content) {
 		super();
-		this.rep_table = rep_table;
 		this.rep_originno = rep_originno;
 		this.rep_no = rep_no;
-		this.rep_nickname = rep_nickname;
+		this.rep_id = rep_id;
 		this.rep_writeday = rep_writeday;
 		this.rep_content = rep_content;
-		this.rep_repno = rep_repno;
-		this.rep_step = rep_step;
-		this.rep_indent = rep_indent;
-	}
-
-	public String getRep_table() {
-		return rep_table;
-	}
-
-	public void setRep_table(String rep_table) {
-		this.rep_table = rep_table;
 	}
 
 	public int getRep_originno() {
@@ -70,12 +48,12 @@ public class ReplyDTO {
 		this.rep_no = rep_no;
 	}
 
-	public String getRep_nickname() {
-		return rep_nickname;
+	public String getRep_id() {
+		return rep_id;
 	}
 
-	public void setRep_nickname(String rep_nickname) {
-		this.rep_nickname = rep_nickname;
+	public void setRep_id(String rep_id) {
+		this.rep_id = rep_id;
 	}
 
 	public String getRep_writeday() {
@@ -93,29 +71,4 @@ public class ReplyDTO {
 	public void setRep_content(String rep_content) {
 		this.rep_content = rep_content;
 	}
-
-	public int getRep_repno() {
-		return rep_repno;
-	}
-
-	public void setRep_repno(int rep_repno) {
-		this.rep_repno = rep_repno;
-	}
-
-	public int getRep_step() {
-		return rep_step;
-	}
-
-	public void setRep_step(int rep_step) {
-		this.rep_step = rep_step;
-	}
-
-	public int getRep_indent() {
-		return rep_indent;
-	}
-
-	public void setRep_indent(int rep_indent) {
-		this.rep_indent = rep_indent;
-	}
-	
 }

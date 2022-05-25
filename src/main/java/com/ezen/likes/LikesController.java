@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 public class LikesController {
 
 	@RequestMapping(value = "/likesupdate")
@@ -35,5 +36,5 @@ public class LikesController {
 		
 		return count;
 	}
-	
+
 }

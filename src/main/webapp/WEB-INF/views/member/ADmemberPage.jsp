@@ -35,7 +35,7 @@ table {
 	<th>　나이　</th>
 	<th>　성별　</th>
 </tr>	
-<c:forEach items="${ADmemberlist}" var="am">
+<c:forEach items="${ADmemberList}" var="am">
 <tr>
 	<th>　${am.mem_no }　</th>
 	<th>
@@ -55,6 +55,32 @@ table {
 	<th>　${am.gender} </th>
 </tr>
 </c:forEach>
+<tr>
+	<td colspan="6">　　</td></tr>
+	<tr>
+		<th colspan="6">
+			<c:if test="${page.startPage != 1}">
+				<a href="ADmemberPage?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
+			</c:if>
+			<c:if test="${page.startPage != 1}">
+				<a href="ADmemberPage?nowPage=${page.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
+			</c:if>
+			<c:forEach begin="${page.startPage}" end="${page.endPage}" step="1" var="i">
+				<c:choose>
+					<c:when test="${i eq page.nowPage}">
+						<font color="#ff8000"><B> 　${i}　</B></font>
+					</c:when>
+					<c:otherwise><a href="ADmemberPage?nowPage=${i}">　${i}　</a></c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${page.endPage != page.lastPage}">
+				<a href="ADmemberPage?nowPage=${page.endPage + 1}"><i class="fas fa-angle-right" style="font-size:18px;"></i></a>
+			</c:if>
+			<c:if test="${page.endPage != page.lastPage}">
+				<a href="ADmemberPage?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
+			</c:if>
+		</th>
+	</tr>
 </table>
 <br><br>
 

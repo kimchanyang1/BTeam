@@ -25,4 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select count(*) from likes where likes_boardno = #{likes_boardno}
 </select>
 
+<!-- Board 게시판에 나타나낼 게시글 추천수 -->
+<select id="boardlikes" resultType="int">
+	select count(*) from likes where likes_boardno = #{likes_boardno}
+</select>
+
 </mapper>

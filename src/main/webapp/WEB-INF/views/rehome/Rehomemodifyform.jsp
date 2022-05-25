@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,14 +47,37 @@ textarea {
 			<table border="0" align="center">
 			<tr>
 				<th>　　구분　　</th>
-				<td><input type="radio" name="rh_gb2" value="임보"> 임시보호 &emsp;
-					<input type="radio" name="rh_gb2" value="분양"> 분양
+				<td>
+					<input
+						type="radio"
+						name="rh_gb2"
+						value="임보"
+						<c:if test="${rd.rh_gb2 eq '임보'}">checked="checked"</c:if>
+					> 임시보호 &emsp;
+					<input
+						type="radio"
+						name="rh_gb2"
+						value="분양"
+						<c:if test="${rd.rh_gb2 eq '분양'}">checked="checked"</c:if>
+					> 분양
 				</td>
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="rh_gb3" value="개"> 개 &emsp;
-					<input type="radio" name="rh_gb3" value="고양이"> 고양이</td>
+				<td>
+					<input 
+						type="radio"
+						name="rh_gb3"
+						value="개"
+						<c:if test="${rd.rh_gb3 eq '개'}">checked="checked"</c:if>
+					> 개 &emsp;
+					<input
+						type="radio"
+						name="rh_gb3"
+						value="고양이"
+						<c:if test="${rd.rh_gb3 eq '고양이'}">checked="checked"</c:if>
+					> 고양이
+				</td>
 			</tr>
 			<tr>
 				<th>　　제목　　</th>

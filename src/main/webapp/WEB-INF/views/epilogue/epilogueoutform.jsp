@@ -6,12 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -29,19 +23,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div class="thumbnail">
-					<p align="left"><B>구분</B>　${epiloguelist[e].ep_gb } </p>
-					<p align="left"><B>제목</B>　${epiloguelist[e].ep_title } </p>
-						<fmt:parseDate value="${epiloguelist[e].ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-						<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-					<p align="left"><B>일자</B>　${writedaystring } </p>
-					<a href="epiloguedetail?ep_no=${epiloguelist[e].ep_no }">
-					<img src="${pageContext.request.contextPath}/image/${epiloguelist[e].ep_image }" style="width: 200px; height: 200px;">
-				<div class="caption">
-					<p><B>${epiloguelist[e].mem_nickname }</B></p>
-				</div>
-				</a>	
-				</div>
+				<a href="epiloguedetail?ep_no=${epiloguelist[e].ep_no}">
+					<div class="thumbnail" style="cursor: pointer;">
+						<p align="left"><B>구분</B>　${epiloguelist[e].ep_gb } </p>
+						<p align="left"><B>제목</B>　${epiloguelist[e].ep_title } </p>
+							<fmt:parseDate value="${epiloguelist[e].ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+						<p align="left"><B>일자</B>　${writedaystring } </p>
+						<img src="${pageContext.request.contextPath}/image/${epiloguelist[e].ep_image }" style="width: 200px; height: 200px;">
+						<div class="caption">
+							<p><B>${epiloguelist[e].mem_nickname }</B></p>
+						</div>
+					</div>
+				</a>
 			</div>
 	<c:if test="${e%3 eq 2}">
 	</td>
@@ -52,27 +46,35 @@
 	</c:forEach>
 	</c:if>
 	
-	   		<tr>      
-               <td colspan="5">             
+	<tr>
+		<td colspan="5">　　</td></tr>
+	   		<tr>
+	   		 <td colspan="5" align="center">  
+               <c:if test="${paging.startPage != 1}">
+					<a href="epilogue?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
+				</c:if>    
                <c:if test="${paging.startPage != 1 }">
-               <a href="epiloguepage?nowPage=${paging.startPage - 1}">&lt;</a>
+               <a href="epilogue?nowPage=${paging.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
                </c:if>
                    
                <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
                	<c:choose>
                		<c:when test="${paging.nowPage eq i}">
-               			${i}
+               			<font color="#ff8000"><B>　${i}　</B></font>
                		</c:when>
                		<c:otherwise>
-               			<a href="epiloguepage?nowPage=${i}">${i}</a>
+               			<a href="epilogue?nowPage=${i}">　${i}　</a>
                		</c:otherwise>      		
                	</c:choose>        	
                 </c:forEach>
                 
                <c:if test="${paging.endPage != paging.lastPage}">
-                  <a  href="epiloguepage?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+                  <a  href="epilogue?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
                </c:if>
-               </td>
+               <c:if test="${paging.endPage != paging.lastPage}">
+				<a href="epilogue?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
+			</c:if>
+			</td>
             </tr>
 </table>
 
