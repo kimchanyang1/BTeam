@@ -19,6 +19,10 @@ public class ReplyDTO {
 	String rep_id; //댓글 적은사람
 	String rep_writeday; //댓글 적은날짜
 	String rep_content; //댓글 내용
+	String rep_table;//원래글 테이블
+	int rep_repno;// 원래 댓글 번호
+	int rep_step;//내려쓰기
+	int rep_indent;//들여쓰기
 	
 	public ReplyDTO() {
 		super();
@@ -72,4 +76,37 @@ public class ReplyDTO {
 	public void setRep_content(String rep_content) {
 		this.rep_content = rep_content;
 	}
+
+	public String getRep_table() {
+		return rep_table;
+	}
+
+	public void setRep_table(String rep_table) {
+		this.rep_table = rep_table;
+	}
+
+	public int getRep_repno() {
+		return rep_repno;
+	}
+
+	public void setRep_repno(int rep_repno) {
+		this.rep_repno = rep_repno;
+	}
+
+	public int getRep_step() {
+		return rep_step;
+	}
+
+	public void setRep_step(int rep_step) {
+		this.rep_step = rep_step;
+	}
+
+	public int getRep_indent() {
+		return rep_indent;
+	}
+
+	public void setRep_indent(int rep_indent) {
+		this.rep_indent = rep_indent;
+	}
+	
 }

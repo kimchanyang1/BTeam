@@ -7,19 +7,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 댓글 입력 -->
 <insert id="replyInput">
-	insert into reply values(#{rep_table}, #{rep_originno}, rep_no.nextval, #{rep_id}, sysdate, #{rep_content})
+	insert into reply values(#{rep_table}, #{rep_originno}, rep_no.nextval, #{rep_id}, sysdate, #{rep_content}, rep_no.currval, 0, 0)
 </insert>
 
-<select id="boardreplyout" resultType="com.ezen.reply.ReplyDTO">
-	select * from reply where rep_table=#{param1} and rep_originno=#{param2}
+<select id="replyout" resultType="com.ezen.reply.ReplyDTO">
+	select * from reply where rep_table=#{param1} and rep_originno=#{param2} order by rep_repno asc, rep_step asc
 </select>
 
-<delete id="boardreplydelete">
-	delete from reply where rep_no=#{param1}
+<delete id="replyDelete">
+	delete from reply where rep_no=#{rep_no}
 </delete>
 
 <select id="replyCount" resultType="int">
 	select count(*) from reply where rep_originno=#{rep_originno}
 </select>
+
+<select id="replySearch" resultType="com.ezen.reply.ReplyDTO">
+	select * from reply where rep_no=#{rep_no}
+</select>
+
+<update id="replyModify">
+	update reply set rep_content=#{rep_content} where rep_no=#{rep_no}
+</update>
+
+<update id="replyReplyStep">
+	update reply set rep_step=rep_step+1 where rep_repno=#{rep_repno} and rep_step >= #{rep_step}
+</update>
+
+<insert id="replyReplyInput">
+	insert into reply values(#{rep_table}, #{rep_originno}, rep_no.nextval, #{rep_id}, sysdate, #{rep_content}, #{rep_repno}, #{rep_step}, #{rep_indent})
+</insert>
 
 </mapper>

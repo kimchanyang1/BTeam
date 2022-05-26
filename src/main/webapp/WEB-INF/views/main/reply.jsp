@@ -16,30 +16,73 @@
 <c:forEach begin="0" end="${fn:length(replist)-1}" var="rep">
 <script type="text/javascript">
 $(document).ready(function(){
+	
 	$("#repmodify"+${rep}).click(function(){
 		var value = 
-		"<form action='boardreplyinput' method='post'>"+
+		"<form action='replyModify' method='post'>"+
 		"<div style='width: 700px;margin: auto;display: flex;padding: 10px;'>"+
 			"<div  style='text-align: center;flex-basis: 20%;align-self: center;'>"+
 				"<i class='fas fa-user w3-padding-16'> ${ mem_id }</i>"+
 			"</div>"+
-
 			"<div style='flex: 1;text-align: justify;'>"+	
-				"<input type='hidden' name='bd_no' id='bd_no' value='${ boarddetail.bd_no }'>"+ 
-				"<input type='hidden' name='mem_id' id='mem_id' value='${ mem_id }'>"+
-
-				"<textarea id='replyarea' name='rep_content'>${replist[rep].rep_content}</textarea>"+
+				"<input type='hidden' name='rep_no' value='${ replist[rep].rep_no }'>"+ 
+				"<textarea id='replyarea' name='rep_content'>${ replist[rep].rep_content }</textarea>"+
 			"</div>"+
 			"<div style='flex-basis: 20%;align-self: center;'>"+
-				"<B><input id='replybutton' type='submit' value='등록'></B>"+
+				"<B><input id='replybutton' type='submit' value='수정'></B>"+
 			"</div>"+
 		"</div>"+
 		"</form>";
 		$('#rep'+${rep}).html(value);
 	});
+	
+	$(".repRep"+${rep}).click(function(){
+		$("div[id^='repRep']").html("");
+		var value = 
+			"<form action='replyReplyInput' method='post'>"+
+			"<div style='width: 700px;margin: auto;display: flex;padding: 10px;'>"+
+			"<c:forEach begin='1' end='${replist[rep].rep_indent+1}'><div style='text-align: right;flex-basis: 10%;'><br>▷▷</div></c:forEach>"+
+				"<div  style='text-align: center;flex-basis: 20%;align-self: center;'>"+
+					"<i class='fas fa-user w3-padding-16'> ${ mem_id }</i>"+
+				"</div>"+
+				"<div style='flex: 1;text-align: justify;'>"+
+					"<input type='hidden' name='rep_id' value='${ mem_id }'>"+ 
+					"<input type='hidden' name='rep_repno' value='${ replist[rep].rep_repno }'>"+ 
+					"<input type='hidden' name='rep_indent' value='${replist[rep].rep_indent}'>"+ 
+					"<input type='hidden' name='rep_step' value='${ replist[rep].rep_step }'>"+ 
+					"<c:choose><c:when test='${ boarddetail.bd_no != null}'>"+
+							"<input type='hidden' name='rep_table' value='board'>"+
+							"<input type='hidden' name='rep_originno' value='${ boarddetail.bd_no }'>"+
+						"</c:when><c:when test='${ mic.mis_no != null}'>"+
+							"<input type='hidden' name='rep_table' value='missing'>"+
+							"<input type='hidden' name='rep_originno' value='${ mic.mis_no }'>"+
+						"</c:when><c:when test='${ rd.rh_no != null}'>"+
+							"<input type='hidden' name='rep_table' value='rehome'>"+
+							"<input type='hidden' name='rep_originno' value='${ rd.rh_no }'>"+
+						"</c:when><c:when test='${ epiloguedetail.ep_no != null}'>"+
+							"<input type='hidden' name='rep_table' value='epilogue'>"+
+							"<input type='hidden' name='rep_originno' value='${ epiloguedetail.ep_no }'>"+
+						"</c:when></c:choose>"+
+					"<textarea id='replyarea' name='rep_content'></textarea>"+
+				"</div>"+
+				"<div style='flex-basis: 20%;align-self: center;'>"+
+					"<B><input id='replybutton' type='submit' value='등록'></B>"+
+				"</div>"+
+			"</div>"+
+			"</form>";
+		$('#repRep'+${rep}).html(value);
+	});
 });
 </script>
 <div style="width: 700px;margin: auto;display: flex;padding: 10px;" id="rep${rep}">
+	<c:if test="${replist[rep].rep_indent > 0}">
+	<c:forEach begin="1" end="${replist[rep].rep_indent}">
+	<div style="text-align: right;flex-basis: 10%;">
+		<br>
+		▷▷
+	</div>
+	</c:forEach>
+	</c:if>
 	<div  style="text-align: center;flex-basis: 20%;">
 		<br>
 		<B>${replist[rep].rep_id}</B>
@@ -54,10 +97,23 @@ $(document).ready(function(){
 		<p>${writedayString}</p>
 		<c:if test="${replist[rep].rep_id eq mem_id}">
 		<p id="repmodify${rep}" style="cursor: pointer;">수정</p>　
-		<p style="cursor: pointer;">삭제</p>
+		<p id="repDelete${rep}" style="cursor: pointer;">삭제</p>
 		</c:if>
+		<button style="align-items: end;" class="repRep${rep}">답글달기</button>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$('#repDelete'+${rep}).click(function(){
+				let msg = confirm("정말 삭제하시겠습니까?");
+				if (msg) {
+					var url = "replyDelete?rep_no="+${ replist[rep].rep_no };
+					$(location).attr('href',url);
+				}
+			});
+		});
+		</script>
 	</div>
 </div>
+<div id="repRep${rep}"></div>
 </c:forEach>
 </c:if>
 <form action="replyinput" method="post">
@@ -89,7 +145,6 @@ $(document).ready(function(){
 					<input type="hidden" name="rep_table" value="epilogue">
 					<input type="hidden" name="rep_originno" value="${ epiloguedetail.ep_no }">
 				</c:when>
-				
 			</c:choose>
 			<textarea id="replyarea" name="rep_content"></textarea>
 

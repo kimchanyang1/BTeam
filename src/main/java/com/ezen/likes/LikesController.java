@@ -17,6 +17,7 @@ public class LikesController {
 	private SqlSession sqlSession;
 
 	@RequestMapping(value = "/likesupdate")
+	@ResponseBody
 	public void likesupdate(@RequestParam("likes_boardno") int likes_boardno, @RequestParam("likes_id") String likes_id)
 	{
 		LikesService ls = sqlSession.getMapper(LikesService.class);
@@ -35,11 +36,11 @@ public class LikesController {
 	}
 
 	@RequestMapping(value="/likescount")
-	public @ResponseBody int likescount(@RequestParam("likes_boardno") int likes_boardno)
+	@ResponseBody
+	public int likescount(@RequestParam("likes_boardno") int likes_boardno)
 	{
 		LikesService ls = sqlSession.getMapper(LikesService.class);
-		int count = 0;
-		count = ls.likes_count(likes_boardno); //�Խñ� �� ��õ ��
+		int count = ls.likes_count(likes_boardno);
 		return count;
 	}
 

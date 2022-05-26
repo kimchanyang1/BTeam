@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.likes.LikesController;
+import com.ezen.likes.LikesService;
 import com.ezen.reply.ReplyController;
 import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
@@ -183,7 +183,7 @@ public class BoardController {
 	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
 
 		BoardService bs = sqlSession.getMapper(BoardService.class);
-		LikesController lc = new LikesController();
+		LikesService ls = sqlSession.getMapper(LikesService.class);
 		int total = bs.boardtotalcount();
 		int cntPage = 5;
 		int cntPerPage = 15;
@@ -194,7 +194,7 @@ public class BoardController {
 		ArrayList<BoardDTO> list = bs.boardpage(page);
 		for (BoardDTO boardDTO : list) {
 			int bd_no = boardDTO.getBd_no();
-			int bd_likes = lc.likescount(bd_no);
+			int bd_likes = ls.likes_count(bd_no);
 			boardDTO.setBd_likes(bd_likes);
 		}
 		model.addAttribute("page", page);
