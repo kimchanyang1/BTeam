@@ -4,36 +4,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
+@Controller
 public class LikesController {
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@RequestMapping(value = "/likesupdate")
-	public void likesupdate(int likes_boardno, String likes_id, SqlSession sqlSession)
+	public void likesupdate(@RequestParam("likes_boardno") int likes_boardno, @RequestParam("likes_id") String likes_id)
 	{
+		LikesService ls = sqlSession.getMapper(LikesService.class);
 		Map<String, Object> map = new HashMap<>();
 		map.put("likes_boardno", likes_boardno);
 		map.put("likes_id", likes_id);
 		
 		int result = 0;
-		LikesService ls = sqlSession.getMapper(LikesService.class);
-		result = ls.likes_check(map); //µ¿ÀÏ °Ô½Ã±Û¿¡ ´ëÇÑ ÀÌÀü ÃßÃµ ¿©ºÎ È®ÀÎ
+		result = ls.likes_check(map); //ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		
-		if(result == 0){ // ÃßÃµÇÏÁö ¾Ê¾Ò´Ù¸é ÃßÃµ Ãß°¡
+		if(result == 0){ // ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ ï¿½ï¿½Ãµ ï¿½ß°ï¿½
 			ls.likes_update(map);
-		}else{ // ÃßÃµÀ» ÇÏ¿´´Ù¸é ÃßÃµ »èÁ¦
+		}else{ // ï¿½ï¿½Ãµï¿½ï¿½ ï¿½Ï¿ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½Ãµ ï¿½ï¿½ï¿½ï¿½
 			ls.likes_delete(map);
 		}
 	}
-	
-	public int likescount(int likes_boardno, SqlSession sqlSession)
+
+	@RequestMapping(value="/likescount")
+	public @ResponseBody int likescount(@RequestParam("likes_boardno") int likes_boardno)
 	{
-		int count = 0;
-		
 		LikesService ls = sqlSession.getMapper(LikesService.class);
-		count = ls.likes_count(likes_boardno); //°Ô½Ã±Û ÃÑ ÃßÃµ ¼ö
-		
+		int count = 0;
+		count = ls.likes_count(likes_boardno); //ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ ï¿½ï¿½Ãµ ï¿½ï¿½
 		return count;
 	}
 

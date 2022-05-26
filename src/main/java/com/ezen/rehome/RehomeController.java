@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +17,11 @@ import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
+@Controller
 public class RehomeController {
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public String rhinputform()
 	{
@@ -75,7 +81,7 @@ public class RehomeController {
 		rhreadcount(rh_no, sqlSession);
 		RehomeDTO rd = rs.rehomedetail(rh_no);
 		mo.addAttribute("rd", rd);
-		if (rd.getRh_gb2().equals("ºÐ¾ç¿Ï·á")) {
+		if (rd.getRh_gb2().equals("ï¿½Ð¾ï¿½Ï·ï¿½")) {
 			MovePageVO move = rs.rehomeEndMovePage(rh_no);
 			mo.addAttribute("move",move);
 		} else {
@@ -197,7 +203,7 @@ public class RehomeController {
 	}
 	
 	
-	// ºÐ¾ç ¿Ï·á
+	// ï¿½Ð¾ï¿½ ï¿½Ï·ï¿½
 	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);

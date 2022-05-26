@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,11 +20,11 @@ import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
-
-
-
 @Controller
 public class MissingController {
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	// out
 	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
@@ -85,8 +87,9 @@ public class MissingController {
 		return mav;
 		
 	}
-	
-	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession, ReplyController rep)
+
+	@RequestMapping(value = "/missingdetail")
+	public String missingdetail(HttpServletRequest request, Model mo,ReplyController rep)
 	{
 		int mis_no;
 		mis_no = Integer.parseInt(request.getParameter("mis_no"));

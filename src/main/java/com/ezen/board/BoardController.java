@@ -6,21 +6,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.likes.LikesController;
-import com.ezen.member.MemberDTO;
 import com.ezen.reply.ReplyController;
-import com.ezen.reply.ReplyDTO;
 import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
+@Controller
 public class BoardController {
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	// �۾���
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
@@ -75,7 +80,7 @@ public class BoardController {
 		md.addAttribute("boarddetail", boardlist);
 		md.addAttribute("move", move);
 		
-		rep.replyout("board", bd_no, md, sqlSession);
+		rep.replyout("board", bd_no, md);
 		
 		return "boarddetailform";
 	}
@@ -168,7 +173,7 @@ public class BoardController {
 		ArrayList<BoardDTO> list = bs.boardpage(page);
 		for (BoardDTO boardDTO : list) {
 			int bd_no = boardDTO.getBd_no();
-			int bd_likes = lc.likescount(bd_no, sqlSession);
+			int bd_likes = lc.likescount(bd_no);
 			boardDTO.setBd_likes(bd_likes);
 		}
 		model.addAttribute("page", page);

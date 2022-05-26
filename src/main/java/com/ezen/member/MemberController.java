@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.ezen.board.BoardDTO;
@@ -19,8 +21,11 @@ import com.ezen.missing.MissingDTO;
 import com.ezen.rehome.RehomeDTO;
 import com.ezen.teamb.PagingDTO;
 
-
+@Controller
 public class MemberController {
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public String signupform1() {
 		return "signupform1";
