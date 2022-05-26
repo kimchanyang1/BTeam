@@ -209,7 +209,7 @@ public class BoardController {
 		int rep_no = Integer.parseInt(request.getParameter("rep_no"));
 		
 		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.boardreplydelete(rep_no);
+		res.replyDelete(rep_no);
 		
 		int bd_no = Integer.parseInt(request.getParameter("bd_no"));
 		mo.addAttribute("bd_no", bd_no);
