@@ -163,7 +163,7 @@ $(document).ready(function(){
 		</td>
 	<!-- 작성일자 parseDate로 변환하려 하면 value attribute can not be parsed 오류남  -->	
 		<td align="right">
-			${rep.rep_writeday}　
+			${rep.rep_writeday}
 		</td>
 	<!-- 작성일자 parseDate로 변환하려 하면 value attribute can not be parsed 오류남  -->		
 	</tr>

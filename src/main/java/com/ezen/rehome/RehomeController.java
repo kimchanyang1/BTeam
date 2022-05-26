@@ -41,7 +41,7 @@ public class RehomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.setViewName("redirect:rehome");
+		mav.setViewName("redirect:rehomeoutform");
 		
 		HttpSession hs = multi.getSession();
         int mem_no = (int) hs.getAttribute("mem_no");
