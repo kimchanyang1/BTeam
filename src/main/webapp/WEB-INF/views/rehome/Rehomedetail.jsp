@@ -25,6 +25,23 @@ $(document).ready(function(){
 		}
 	});
 });
+$.ajax({
+	url: "replycount",
+    type: "POST",
+    data: {
+    	reply_boardno: ${rd.rh_no}
+    },
+    success: function (responseData) {
+    	$("#ajax").remove();
+		var count = JSON.parse(responseData);
+    	$(".reply_count").html(count); //span 으로 가서 추천 수 보여줌
+    },
+    error:function(request,error){
+        alert("에러코드 : "+request.status+"\n에러 : "+error);
+        var win = window.open("", "ERROR", "width=500,height=600");
+        win.document.write(request.responseText);
+    }
+});
 </script>
 
 <title>분양/임시보호 게시글</title>
@@ -70,7 +87,7 @@ $(document).ready(function(){
 	<td colspan="4" align="left">
 		<fmt:parseDate value="${rd.rh_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${rd.mem_nickname }</B>　　조회 ${rd.rh_readcount}　　${writedaystring }　　댓글 ?</td>
+		<B>　${rd.mem_nickname }</B>　　조회 ${rd.rh_readcount}　　${writedaystring }　　댓글 <font color="#ff8000">　<B><span class="reply_count"></span></B></font></td>
 </tr>
 <tr>
 	<td>　　</td></tr>
