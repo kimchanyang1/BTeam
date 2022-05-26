@@ -36,8 +36,11 @@ textarea {
 			<table border="0" align="center">
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="mis_gb2" value="개">개 &emsp;
-					<input type="radio" name="mis_gb2" value="고양이"> 고양이</td>
+				<td>
+					<label><input type="radio" name="mis_gb2" value="개">개 </label>
+					&emsp;
+					<label><input type="radio" name="mis_gb2" value="고양이"> 고양이</label>
+				</td>
 			</tr>
 			<tr>
 				<th>　　제목　　</th>

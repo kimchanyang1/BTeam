@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,8 +47,19 @@ textarea {
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="mis_gb2" value="개">개
-					<input type="radio" name="mis_gb2" value="고양이">고양이</td>
+				<td>
+					<label>
+						<input type="radio" name="mis_gb2" value="개"
+						<c:if test="${mic.mis_gb2 eq '개'}">checked="checked"</c:if>
+						>개
+					</label>
+					&emsp;
+					<label>
+						<input type="radio" name="mis_gb2" value="고양이"
+						<c:if test="${mic.mis_gb2 eq '고양이'}">checked="checked"</c:if>
+						>고양이
+					</label>
+				</td>
 			</tr>
 			<tr>
 				<th>　　제목　　</th>
