@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.missing.MissingDTO;
 import com.ezen.missing.MissingService;
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
@@ -59,7 +60,7 @@ public class RehomeController {
 		return mav;
 	}
 
-	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo,ReplyController rep)
 	{
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		
@@ -67,14 +68,14 @@ public class RehomeController {
 		rhreadcount(rh_no, sqlSession);
 		RehomeDTO rd = rs.rehomedetail(rh_no);
 		mo.addAttribute("rd", rd);
-		if (rd.getRh_gb2().equals("�о�Ϸ�")) {
+		if (rd.getRh_gb2().equals("占싻억옙狗占�")) {
 			MovePageVO move = rs.rehomeEndMovePage(rh_no);
 			mo.addAttribute("move",move);
 		} else {
 			MovePageVO move = rs.rehomeMovePage(rh_no);
 			mo.addAttribute("move",move);
 		}
-		
+		rep.replyout("rehome", rh_no, mo, sqlSession);
 		return "Rehomedetail";
 	}
 	
@@ -180,6 +181,23 @@ public class RehomeController {
 		mo.addAttribute("rdto", rdto);
 		return "rehomeadmin";
 	}
+	
+	public String rehomeadminsearch(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	{
+		RehomeService rs = sqlSession.getMapper(RehomeService.class);
+		
+		String[] gb1list = request.getParameterValues("gb1");
+		String sword = request.getParameter("sword");
+		
+		RehomesearchVO rsvo = new RehomesearchVO();
+		rsvo.setGb1list(gb1list);
+		rsvo.setSword(sword);
+		
+		ArrayList<RehomeDTO> rdto = rs.rehomeadminsearch(rsvo);
+		mo.addAttribute("rdto", rdto);
+		
+		return "rehomeadmin";
+	}
 
 	public String rehomeok(SqlSession sqlSession, HttpServletRequest request) {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
@@ -213,7 +231,7 @@ public class RehomeController {
 	}
 	
 	
-	// �о� �Ϸ�
+	// 占싻억옙 占싹뤄옙
 	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);

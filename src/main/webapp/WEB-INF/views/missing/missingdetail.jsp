@@ -110,7 +110,6 @@ $(document).ready(function(){
 	
 <tr>
 	<td>　　</td></tr>
-	
 	<tr>
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">

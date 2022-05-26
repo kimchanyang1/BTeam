@@ -84,6 +84,8 @@ textarea {
 		</script>
 	</td>
 </tr>
+<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
+
 <tr>
 	<td colspan="3">
 		<c:choose>

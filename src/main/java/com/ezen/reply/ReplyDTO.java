@@ -2,6 +2,7 @@ package com.ezen.reply;
 
 /* 
 CREATE TABLE reply(
+rep_table VARCHAR2(20),
 rep_originno NUMBER(6, 0),
 rep_no NUMBER(6, 0) PRIMARY KEY,
 rep_id VARCHAR2(20),

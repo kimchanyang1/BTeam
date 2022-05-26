@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.board.BoardDTO;
 import com.ezen.member.MemberDTO;
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
@@ -88,7 +89,7 @@ public class EpilogueController {
 	
 	
 	// detail
-	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md,ReplyController rep) {
 		
 		HttpSession hs = request.getSession();
 		MemberDTO login = (MemberDTO) hs.getAttribute("login");
@@ -113,6 +114,7 @@ public class EpilogueController {
 		md.addAttribute("epiloguedetail", epiloguedetail);
 		md.addAttribute("move", move);
 		
+		rep.replyout("epilogue", ep_no, md, sqlSession);
 		return "epiloguedetailform";
 	}
 	

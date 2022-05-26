@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +47,20 @@ textarea {
 <tr>
 	<td colspan="2">　　</td></tr>
 <tr>
-	<td colspan="2"><B>
-		<input type="submit" value="등록">
-		<a href="epilogue"><input id="cancel" type="button" value="취소"></a></B></td></tr>
+	<td colspan="2">
+		<B>
+			<input type="submit" value="등록">
+			<c:choose>
+				<c:when test="${ep_gb eq '귀가완료'}">
+					<input id="cancel" type="button" onclick="location.href='missingdetail?mis_no=${ep_originno}'" value="취소">
+				</c:when>
+				<c:when test="${ep_gb eq '분양완료'}">
+					<input id="cancel" type="button" onclick="location.href='rehomedetail?rh_no=${ep_originno}'" value="취소">
+				</c:when>
+			</c:choose>
+		</B>
+	</td>
+</tr>
 </table>
 </form>
 

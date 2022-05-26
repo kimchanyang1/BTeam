@@ -2,9 +2,11 @@ package com.ezen.rehome;
 
 public class RehomesearchVO {
 
+	String[] gb1list;
 	String[] gb2list;
 	String[] gb3list;
 	
+	String gb1;
 	String gb2;
 	String gb3;
 	
@@ -15,13 +17,24 @@ public class RehomesearchVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RehomesearchVO(String[] gb2list, String[] gb3list, String gb2, String gb3, String sword) {
+	public RehomesearchVO(String[] gb1list, String[] gb2list, String[] gb3list, String gb1, String gb2, String gb3,
+			String sword) {
 		super();
+		this.gb1list = gb1list;
 		this.gb2list = gb2list;
 		this.gb3list = gb3list;
+		this.gb1 = gb1;
 		this.gb2 = gb2;
 		this.gb3 = gb3;
 		this.sword = sword;
+	}
+
+	public String[] getGb1list() {
+		return gb1list;
+	}
+
+	public void setGb1list(String[] gb1list) {
+		this.gb1list = gb1list;
 	}
 
 	public String[] getGb2list() {
@@ -38,6 +51,14 @@ public class RehomesearchVO {
 
 	public void setGb3list(String[] gb3list) {
 		this.gb3list = gb3list;
+	}
+
+	public String getGb1() {
+		return gb1;
+	}
+
+	public void setGb1(String gb1) {
+		this.gb1 = gb1;
 	}
 
 	public String getGb2() {

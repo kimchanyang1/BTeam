@@ -20,10 +20,10 @@
 <table border="0" align="center" width="500">
 	<tr>
 		<td colspan="3">
-			<input type="checkbox" name="gb2" value="임시보호"> 임시보호 &emsp;
-			<input type="checkbox" name="gb2" value="분양"> 분양 &emsp;
-			<input type="checkbox" name="gb3" value="개"> 개 &emsp;
-			<input type="checkbox" name="gb3" value="고양이"> 고양이 &emsp;
+			<label><input type="checkbox" name="gb2" value="임시보호"> 임시보호</label> &emsp;
+			<label><input type="checkbox" name="gb2" value="분양"> 분양</label> &emsp;
+			<label><input type="checkbox" name="gb3" value="개"> 개</label> &emsp;
+			<label><input type="checkbox" name="gb3" value="고양이"> 고양이</label> &emsp;
 		</td>
 	</tr>
 	<tr>

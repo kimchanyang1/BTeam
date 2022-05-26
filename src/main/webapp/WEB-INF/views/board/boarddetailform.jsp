@@ -137,6 +137,7 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="3" align="center">
+
 			<!-- 
 			<input type="hidden" value="${e.mem_no }" readonly="readonly">
 			<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
@@ -146,6 +147,11 @@ $(document).ready(function(){
 	<tr>
 		<td colspan="3" align="center">　　
 			<!-- <input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly"> -->
+
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center">
 		</td></tr>
 	<tr>
 		<td colspan="3" align="right">
