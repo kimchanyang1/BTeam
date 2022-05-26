@@ -25,8 +25,7 @@ public class BoardController {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
-	// �۾���
+
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
@@ -68,7 +67,7 @@ public class BoardController {
 	}
 
 
-	// ������
+	// 占쏙옙占쏙옙占쏙옙
 	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md, ReplyController rep) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
@@ -80,19 +79,19 @@ public class BoardController {
 		md.addAttribute("boarddetail", boardlist);
 		md.addAttribute("move", move);
 		
-		rep.replyout("board", bd_no, md);
+		rep.replyout("board", bd_no, md, sqlSession);
 		
 		return "boarddetailform";
 	}
 	
-	// ��ȸ�� ����
+	// 占쏙옙회占쏙옙 占쏙옙占쏙옙
 	public void boardreadcount(int bd_no, SqlSession sqlSession) {
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardreadcount(bd_no);
 	}
 
-	// ����
+	// 占쏙옙占쏙옙
 	public String boardmodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
@@ -104,7 +103,7 @@ public class BoardController {
 		return "boardmodifyform";
 	}
 	
-	public String boardmodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	public ModelAndView boardmodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("bd_image");
 		
@@ -113,17 +112,39 @@ public class BoardController {
 		String bd_content=multi.getParameter("bd_content");
 		String bd_image=mf.getOriginalFilename();
 		
+		
+		ModelAndView mav = new ModelAndView();
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+				
+		if(bd_image == "")
+		{
+			BoardDTO bdto = bs.boarddetail(bd_no);
+			bd_image= bdto.getBd_image();
+		}
+		else
+		{
+			
+			FileUploadController fuc = new FileUploadController();
+			try {
+				mav = fuc.upload(multi);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		mav.setViewName("redirect: board");
+		
 		int mem_no=Integer.parseInt(multi.getParameter("mem_no"));
 		String mem_nickname=multi.getParameter("mem_nickname");
 		
-		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardmodify(bd_title, mem_no, mem_nickname, bd_content, bd_image, bd_no);
 		
-		return "redirect: board";
+		return mav;
 	}
 
 
-	// ����
+	// 占쏙옙占쏙옙
 	public String boarddelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
@@ -135,7 +156,7 @@ public class BoardController {
 	}
 	
 	
-	// �˻�
+	// 占싯삼옙
 	public String boardsearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		String selectname = request.getParameter("selectname");
@@ -181,8 +202,8 @@ public class BoardController {
 		
 		return "boardoutform";
 	}
-	
-	//��� ����
+
+	//占쏙옙占� 占쏙옙占쏙옙
 	public String boardreplydelete(HttpServletRequest request, Model mo,SqlSession sqlSession)
 	{
 		int rep_no = Integer.parseInt(request.getParameter("rep_no"));

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.MemberDTO;
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
@@ -93,7 +94,7 @@ public class EpilogueController {
 	
 	
 	// detail
-	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md,ReplyController rep) {
 		
 		HttpSession hs = request.getSession();
 		MemberDTO login = (MemberDTO) hs.getAttribute("login");
@@ -118,6 +119,7 @@ public class EpilogueController {
 		md.addAttribute("epiloguedetail", epiloguedetail);
 		md.addAttribute("move", move);
 		
+		rep.replyout("epilogue", ep_no, md, sqlSession);
 		return "epiloguedetailform";
 	}
 	
@@ -136,7 +138,7 @@ public class EpilogueController {
 		String mem_nickname=request.getParameter("mem_nickname");
 		
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
-		ArrayList<EpilogueDTO> epiloguelist = ep.epiloguemodifyselect(ep_no);
+		EpilogueDTO epiloguelist = ep.epiloguemodifyselect(ep_no);
 		md.addAttribute("epiloguelist", epiloguelist);
 		md.addAttribute("mem_no", mem_no);
 		md.addAttribute("mem_nickname", mem_nickname);
@@ -144,7 +146,7 @@ public class EpilogueController {
 		return "epiloguemodifyform";
 	}
 	
-	public String epiloguemodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	public ModelAndView epiloguemodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("ep_image");
 		
@@ -153,13 +155,35 @@ public class EpilogueController {
 		String ep_content=multi.getParameter("ep_content");
 		String ep_image=mf.getOriginalFilename();
 		
+		ModelAndView mav = new ModelAndView();
+		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
+		
+		if(ep_image == "")
+		{
+			EpilogueDTO edto = ep.epiloguedetail(ep_no);
+			ep_image= edto.getEp_image();
+		}
+		else
+		{
+			
+			FileUploadController fuc = new FileUploadController();
+			try {
+				mav = fuc.upload(multi);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		mav.setViewName("redirect: epilogue");
+		
 		int mem_no=Integer.parseInt(multi.getParameter("mem_no"));
 		String mem_nickname=multi.getParameter("mem_nickname");
 		
-		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
+		
 		ep.epiloguemodify(ep_title, mem_no, mem_nickname, ep_content, ep_image, ep_no);
 		
-		return "redirect: epilogue";
+		return mav;
 	}
 
 

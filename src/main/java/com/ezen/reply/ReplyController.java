@@ -39,6 +39,12 @@ public class ReplyController {
 		} else if (rep_table.equals("missing")) {
 			return "redirect:missingdetail?mis_no="+rep_originno;
 		}
+		else if (rep_table.equals("rehome")) {
+			return "redirect:rehomedetail?rh_no="+rep_originno;
+		}
+		else if (rep_table.equals("epilogue")) {
+			return "redirect:epiloguedetail?ep_no="+rep_originno;
+		}
 		return null;
 	}
 	

@@ -55,6 +55,7 @@ public class NoticeController {
 		String nt_title = request.getParameter("nt_title");
 		String nt_content = request.getParameter("nt_content");
 		ns.noticeinput(mem_no, mem_nickname, nt_title, nt_content);
+
 		return "redirect: noticeoutform";
 	}
 

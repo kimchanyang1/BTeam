@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.board.BoardController;
 import com.ezen.epilogue.EpilogueController;
-import com.ezen.likes.LikesController;
 import com.ezen.member.MemberController;
 
 import com.ezen.rehome.RehomeController;
@@ -70,7 +69,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/missingmodifyinput")
-	public String missingmodifyinput(MultipartHttpServletRequest request) {
+	public ModelAndView missingmodifyinput(MultipartHttpServletRequest request) {
 		return mic.missingmodifyinput(request,sqlSession);
 	}
 	
@@ -88,8 +87,7 @@ public class HomeController {
 	@RequestMapping(value = "/missingoutform")
 	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return mic.missingpage(dto, mo, sqlSession, nowPage);
-	}
-
+	}	
 	
 	@RequestMapping(value = "/rehoming")
 	public String rehoming(HttpServletRequest request) {
@@ -119,7 +117,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/rehomedetail")
 	public String rhdetail(HttpServletRequest request, Model mo) {
-		return rc.rhdetail(sqlSession, request, mo);
+		return rc.rhdetail(sqlSession, request, mo, rep);
 	}
 	
 	@RequestMapping(value = "/rehomedelete")
@@ -133,7 +131,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/rehomemodify")
-	public String rhmodify(MultipartHttpServletRequest multi) {
+	public ModelAndView rhmodify(MultipartHttpServletRequest multi) {
 		return rc.rhmodify(sqlSession, multi);
 	}
 	
@@ -145,6 +143,11 @@ public class HomeController {
 	@RequestMapping(value = "/rehomeadmin")
 	public String rehomeadmin(Model mo) {
 		return rc.rehomeadmin(sqlSession, mo);
+	}
+	
+	@RequestMapping(value = "/rehomeadminsearch")
+	public String rehomeadminsearch(HttpServletRequest request, Model mo) {
+		return rc.rehomeadminsearch(sqlSession, request, mo);
 	}
 	
 	@RequestMapping(value = "/rehomeok")
@@ -313,7 +316,7 @@ public class HomeController {
 	@RequestMapping(value = "/epiloguedetail")
 	public String ee3(HttpServletRequest request, Model md) {
 		
-		return ep.epiloguedetailform(sqlSession, request, md);
+		return ep.epiloguedetailform(sqlSession, request, md, rep);
 	}
 	
 	
@@ -325,7 +328,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/epiloguemodify")
-	public String ee5(MultipartHttpServletRequest multi) {
+	public ModelAndView ee5(MultipartHttpServletRequest multi) {
 		
 		return ep.epiloguemodify(sqlSession, multi);
 	}
@@ -389,7 +392,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/boardmodify")
-	public String bb5(MultipartHttpServletRequest multi) {
+	public ModelAndView bb5(MultipartHttpServletRequest multi) {
 		
 		return bc.boardmodify(sqlSession, multi);
 	}

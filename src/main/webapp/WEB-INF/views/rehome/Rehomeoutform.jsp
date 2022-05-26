@@ -20,10 +20,10 @@
 <table border="0" align="center" width="500">
 	<tr>
 		<td colspan="3">
-			<input type="checkbox" name="gb2" value="임시보호"> 임시보호 &emsp;
-			<input type="checkbox" name="gb2" value="분양"> 분양 &emsp;
-			<input type="checkbox" name="gb3" value="개"> 개 &emsp;
-			<input type="checkbox" name="gb3" value="고양이"> 고양이 &emsp;
+			<label><input type="checkbox" name="gb2" value="임시보호"> 임시보호</label> &emsp;
+			<label><input type="checkbox" name="gb2" value="분양"> 분양</label> &emsp;
+			<label><input type="checkbox" name="gb3" value="개"> 개</label> &emsp;
+			<label><input type="checkbox" name="gb3" value="고양이"> 고양이</label> &emsp;
 		</td>
 	</tr>
 	<tr>
@@ -78,10 +78,10 @@
 			<tr>      
                <td colspan="5">  
                <c:if test="${paging.startPage != 1}">
-					<a href="rehome?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
+					<a href="rehomeoutform?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
 				</c:if>           
                <c:if test="${paging.startPage != 1 }">
-               <a href="rehome?nowPage=${paging.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
+               <a href="rehomeoutform?nowPage=${paging.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
                </c:if>
                    
                <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
@@ -90,16 +90,16 @@
                			<font color="#ff8000"><B>　${i}　</B></font>
                		</c:when>
                		<c:otherwise>
-               			<a href="rehome?nowPage=${i}">　${i}　</a>
+               			<a href="rehomeoutform?nowPage=${i}">　${i}　</a>
                		</c:otherwise>      		
                	</c:choose>        	
                 </c:forEach>
                 
                <c:if test="${paging.endPage != paging.lastPage}">
-                  <a  href="rehome?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-right" style="font-size:18px;"></i></a>
+                  <a  href="rehomeoutform?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-right" style="font-size:18px;"></i></a>
                </c:if>
                <c:if test="${paging.endPage != paging.lastPage}">
-				<a href="rehome?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
+				<a href="rehomeoutform?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
 			</c:if>
                </td>
             </tr>

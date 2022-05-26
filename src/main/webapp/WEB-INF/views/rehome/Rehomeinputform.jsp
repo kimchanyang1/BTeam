@@ -105,7 +105,7 @@ textarea {
 	<tr>
 		<th colspan="2">
 		<input type="submit" value="등록">
-		<a href="rehomepage"><input id="cancel" type="button" value="취소"></a>
+		<a href="rehomeoutform"><input id="cancel" type="button" value="취소"></a>
 		</th>
 	</tr>
 </table>

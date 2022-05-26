@@ -23,9 +23,11 @@ $(document).ready(function(){
 			"<div  style='text-align: center;flex-basis: 20%;align-self: center;'>"+
 				"<i class='fas fa-user w3-padding-16'> ${ mem_id }</i>"+
 			"</div>"+
-			"<div style='flex: 1;text-align: justify;'>"+
-				"<input type='hidden' name='bd_no' value='${ boarddetail.bd_no }'>"+ 
-				"<input type='hidden' name='mem_id' value='${ mem_id }'>"+
+
+			"<div style='flex: 1;text-align: justify;'>"+	
+				"<input type='hidden' name='bd_no' id='bd_no' value='${ boarddetail.bd_no }'>"+ 
+				"<input type='hidden' name='mem_id' id='mem_id' value='${ mem_id }'>"+
+
 				"<textarea id='replyarea' name='rep_content'>${replist[rep].rep_content}</textarea>"+
 			"</div>"+
 			"<div style='flex-basis: 20%;align-self: center;'>"+
@@ -79,9 +81,20 @@ $(document).ready(function(){
 					<input type="hidden" name="rep_table" value="missing">
 					<input type="hidden" name="rep_originno" value="${ mic.mis_no }">
 				</c:when>
+				<c:when test="${ rd.rh_no != null}">
+					<input type="hidden" name="rep_table" value="rehome">
+					<input type="hidden" name="rep_originno" value="${ rd.rh_no }">
+				</c:when>
+				<c:when test="${ epiloguedetail.ep_no != null}">
+					<input type="hidden" name="rep_table" value="epilogue">
+					<input type="hidden" name="rep_originno" value="${ epiloguedetail.ep_no }">
+				</c:when>
+				
 			</c:choose>
 			<textarea id="replyarea" name="rep_content"></textarea>
+
 		</c:if>
+		
 		<c:if test="${ mem_id == null }">
 			<textarea id="replyarea" readonly="readonly">
 
@@ -92,8 +105,10 @@ $(document).ready(function(){
 	</div>
 	<div style="flex-basis: 20%;align-self: center;">
 		<br>
+
 		<c:if test="${ mem_id != null }">
 			<B><input id="replybutton" type="submit" value="등록"></B>
+
 		</c:if>
 		<c:if test="${ mem_id == null }">
 			<button id="replybutton" onclick="location.href='loginform'"><B>로그인</B></button>
