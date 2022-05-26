@@ -22,7 +22,7 @@ textarea {
 </style>
 <meta charset="UTF-8">
 
-<title>분양/임시보호 게시글 수정</title>
+<title>임시보호/분양 게시글 수정</title>
 </head>
 <body>
 
@@ -51,8 +51,8 @@ textarea {
 					<input
 						type="radio"
 						name="rh_gb2"
-						value="임보"
-						<c:if test="${rd.rh_gb2 eq '임보'}">checked="checked"</c:if>
+						value="임시보호"
+						<c:if test="${rd.rh_gb2 eq '임시보호'}">checked="checked"</c:if>
 					> 임시보호 &emsp;
 					<input
 						type="radio"
