@@ -1,5 +1,7 @@
 package com.ezen.teamb;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +13,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.missing.MissingController;
+import com.ezen.missing.MissingDTO;
+import com.ezen.missing.MissingService;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.board.BoardController;
+import com.ezen.board.BoardDTO;
+import com.ezen.board.BoardService;
 import com.ezen.epilogue.EpilogueController;
 import com.ezen.likes.LikesController;
 import com.ezen.member.MemberController;
 
 import com.ezen.notice.NoticeController;
 import com.ezen.rehome.RehomeController;
+import com.ezen.rehome.RehomeDTO;
+import com.ezen.rehome.RehomeService;
 import com.ezen.reply.ReplyController;
 
 @Controller
@@ -43,11 +51,29 @@ public class HomeController {
 	
 	@RequestMapping(value = "/")
 	public String home() {
-		return "home";
+		return "redirect: home";
 	}
 	
 	@RequestMapping(value = "/home")
-	public String home1() {
+	public String home1(Model mo) {
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		ArrayList<MissingDTO> missingout = micdao.missingout();
+		mo.addAttribute("missingout", missingout);
+		
+		RehomeService rh = sqlSession.getMapper(RehomeService.class);
+		ArrayList<RehomeDTO> rhlist = rh.rehomeoutput();
+		mo.addAttribute("rdto", rhlist);
+		
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+		ArrayList<BoardDTO> boardlist = bs.boardmainout();
+		for (BoardDTO boardDTO : boardlist) {
+			int bd_no = boardDTO.getBd_no();
+			int bd_likes = lc.likescount(bd_no, sqlSession);
+			boardDTO.setBd_likes(bd_likes);
+		}
+		
+		mo.addAttribute("boardlist", boardlist);
+		
 		return "home";
 	}
 	
