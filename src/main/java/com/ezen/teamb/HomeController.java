@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.missing.MissingController;
 import com.ezen.missing.MissingDTO;
 import com.ezen.missing.MissingService;
 
@@ -40,12 +39,12 @@ public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private MissingController mic = new MissingController();
 	private RehomeController rc = new RehomeController();
 	private MemberController mc = new MemberController();
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
 	private ReplyController rep = new ReplyController();
+	private LikesController lc = new LikesController();
 
 	
 	@RequestMapping(value = "/")
@@ -65,63 +64,9 @@ public class HomeController {
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		ArrayList<BoardDTO> boardlist = bs.boardmainout();
-		for (BoardDTO boardDTO : boardlist) {
-			int bd_no = boardDTO.getBd_no();
-			LikesService lc = sqlSession.getMapper(LikesService.class);
-			int bd_likes = lc.likes_count(bd_no);
-		
-			boardDTO.setBd_likes(bd_likes);
-		}
-		
 		mo.addAttribute("boardlist", boardlist);
 		
 		return "home";
-	}
-	
-	@RequestMapping(value = "/missinginputform")
-	public String missing() {
-		return mic.missinginputform();
-	}
-	
-	@RequestMapping(value = "/missinginput")
-	public ModelAndView missinginput(MultipartHttpServletRequest request) {
-		return mic.missinginput(request, sqlSession);
-	}
-	
-	@RequestMapping(value = "/missingdelete")
-	public String missingdelete(HttpServletRequest request) {
-		return mic.missingdelete(request,sqlSession);
-	}
-	
-	@RequestMapping(value = "/missingmodifyform")
-	public String missingmodifyform(HttpServletRequest request, Model mo) {
-		return mic.missingmodifyform(request, mo, sqlSession);
-	}
-	
-	@RequestMapping(value = "/missingmodifyinput")
-	public ModelAndView missingmodifyinput(MultipartHttpServletRequest request) {
-		return mic.missingmodifyinput(request,sqlSession);
-	}
-	
-	
-	// 귀가 완료
-	@RequestMapping(value = "/missingend")
-	public String missingEndPage(
-			Model model, 
-			@RequestParam(value = "nowPage", required = false)String nowPage
-			) {
-		return mic.missingEndPage(sqlSession, model, nowPage);
-	}
-	
-
-	@RequestMapping(value = "/missingoutform")
-	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
-		return mic.missingpage(dto, mo, sqlSession, nowPage);
-	}	
-	
-	@RequestMapping(value = "/rehoming")
-	public String rehoming(HttpServletRequest request) {
-		return mic.rehoming(request,sqlSession);
 	}
 	
 
@@ -462,10 +407,5 @@ public class HomeController {
 		return "location";
 	}
 	
-	
-	@RequestMapping(value = "/boardreplydelete")
-	public String boardreplydelete(HttpServletRequest request, Model mo) {
-		return bc.boardreplydelete(request, mo, sqlSession);
-	}
 	
 }

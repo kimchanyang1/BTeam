@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-	<h1>TeamB</h1>
+	<h1 style="color: white;">PETMILLY</h1>
 </header>
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">

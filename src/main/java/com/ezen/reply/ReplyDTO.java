@@ -18,15 +18,15 @@ CREATE SEQUENCE rep_no;
 
 public class ReplyDTO {
 	
-	int rep_originno; //´ñ±Û ¿ø·¡±Û¹øÈ£
-    int rep_no; //´ñ±Û ±Û¹øÈ£
-    String rep_id; //´ñ±Û ÀûÀº»ç¶÷
-    String rep_writeday; //´ñ±Û ÀûÀº³¯Â¥
-    String rep_content; //´ñ±Û ³»¿ë
-    String rep_table;//¿ø·¡±Û Å×ÀÌºí
-    int rep_repno;// ¿ø·¡ ´ñ±Û ¹øÈ£
-    int rep_step;//³»·Á¾²±â
-    int rep_indent;//µé¿©¾²±â
+	int rep_originno; //ëŒ“ê¸€ ì›ë˜ê¸€ë²ˆí˜¸
+    int rep_no; //ëŒ“ê¸€ ê¸€ë²ˆí˜¸
+    String rep_id; //ëŒ“ê¸€ ì ì€ì‚¬ëŒ
+    String rep_writeday; //ëŒ“ê¸€ ì ì€ë‚ ì§œ
+    String rep_content; //ëŒ“ê¸€ ë‚´ìš©
+    String rep_table;//ì›ë˜ê¸€ í…Œì´ë¸”
+    int rep_repno;// ì›ë˜ ëŒ“ê¸€ ë²ˆí˜¸
+    int rep_step;//ë‚´ë ¤ì“°ê¸°
+    int rep_indent;//ë“¤ì—¬ì“°ê¸°
 	
 	public ReplyDTO() {
 		super();

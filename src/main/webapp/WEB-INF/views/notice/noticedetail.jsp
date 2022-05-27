@@ -50,6 +50,7 @@ $(document).ready(function(){
 		<fmt:parseDate value="${ndto.nt_writeday}" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
 		<B>　${ndto.mem_nickname}</B>　　조회 ${ndto.nt_readcount}　　${writedaystring } </td>
+
 </tr>
 <tr>
 	<td>　　</td></tr>

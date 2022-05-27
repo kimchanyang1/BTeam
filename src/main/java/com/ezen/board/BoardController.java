@@ -1,6 +1,7 @@
 package com.ezen.board;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -202,19 +203,10 @@ public class BoardController {
 		
 		return "boardoutform";
 	}
-
-	//占쏙옙占� 占쏙옙占쏙옙
-	public String boardreplydelete(HttpServletRequest request, Model mo,SqlSession sqlSession)
-	{
-		int rep_no = Integer.parseInt(request.getParameter("rep_no"));
-		
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.replyDelete(rep_no);
-		
-		int bd_no = Integer.parseInt(request.getParameter("bd_no"));
-		mo.addAttribute("bd_no", bd_no);
-		
-		return "redirect: boarddetail";
+	
+	public void likesUpdate(SqlSession sqlSession, Map<String, Object> map) {
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+		bs.likesUpdate(map);
 	}
 
 }

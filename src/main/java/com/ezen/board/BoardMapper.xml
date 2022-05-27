@@ -19,7 +19,7 @@
 </insert>
 
 <select id="boardmainout" resultType="com.ezen.board.BoardDTO">
-	SELECT * FROM BOARD order by bd_likes desc
+	SELECT * FROM BOARD order by bd_likes desc, bd_no asc
 </select>
 
 <select id="boarddetail" resultType="com.ezen.board.BoardDTO">
@@ -66,5 +66,9 @@ select * from(SELECT
          order by BD_NO DESC) 
          WHERE BD_NO = #{BD_NO}
 </select>
+
+<update id="likesUpdate">
+	update board set bd_likes=#{bd_likes} where bd_no=#{likes_boardno}
+</update>
 
 </mapper>

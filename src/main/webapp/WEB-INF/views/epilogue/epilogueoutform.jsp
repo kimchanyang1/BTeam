@@ -15,68 +15,47 @@
 <h6><B>🐶😻</B></h6>
 <br><br>
 
-<table border="0" align="center" width="700">
-<tr>
-	<td>
-	<c:if test="${fn:length(epiloguelist) > 0}">
-	<c:forEach var="e" begin="0" end="${fn:length(epiloguelist)-1}" step="1">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<a href="epiloguedetail?ep_no=${epiloguelist[e].ep_no}">
-					<div class="thumbnail" style="cursor: pointer;">
-						<p align="left"><B>구분</B>　${epiloguelist[e].ep_gb } </p>
-						<p align="left"><B>제목</B>　${epiloguelist[e].ep_title } </p>
-							<fmt:parseDate value="${epiloguelist[e].ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-							<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-						<p align="left"><B>일자</B>　${writedaystring } </p>
-						<img src="${pageContext.request.contextPath}/image/${epiloguelist[e].ep_image }" style="width: 200px; height: 200px;">
-						<div class="caption">
-							<p><B>${epiloguelist[e].mem_nickname }</B></p>
-						</div>
-					</div>
-				</a>
+<div class="container" align="center" width="700">
+	<div class="row">
+		<c:forEach var="ep" items="${epiloguelist}">
+		<div class="col-md-4">
+			<div class="thumbnail" style="cursor: pointer;" onclick="location.href='epiloguedetail?ep_no=${ep.ep_no}'">
+				<p align="left"><B>구분</B>　${ep.ep_gb } </p>
+				<p align="left"><B>제목</B>　${ep.ep_title } </p>
+					<fmt:parseDate value="${ep.ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+					<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+				<p align="left"><B>일자</B>　${writedaystring } </p>
+				<img src="${pageContext.request.contextPath}/image/${ep.ep_image }" style="width: 200px; height: 200px;">
+				<div class="caption">
+					<p><B>${ep.mem_nickname }</B></p>
+				</div>
 			</div>
-	<c:if test="${e%3 eq 2}">
-	</td>
-</tr>
-<tr>
-	<td>
-	</c:if>
+		</div>
 	</c:forEach>
+	</div>
+	<c:if test="${paging.startPage != 1}">
+		<a href="epilogue?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
+	</c:if>           
+	<c:if test="${paging.startPage != 1 }">
+		<a href="epilogue?nowPage=${paging.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
 	</c:if>
-	
-	<tr>
-		<td colspan="5">　　</td></tr>
-	   		<tr>
-	   		 <td colspan="5" align="center">  
-               <c:if test="${paging.startPage != 1}">
-					<a href="epilogue?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
-				</c:if>    
-               <c:if test="${paging.startPage != 1 }">
-               <a href="epilogue?nowPage=${paging.startPage - 1}"><i class="fas fa-angle-left" style="font-size:18px;"></i></a>
-               </c:if>
-                   
-               <c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
-               	<c:choose>
-               		<c:when test="${paging.nowPage eq i}">
-               			<font color="#ff8000"><B>　${i}　</B></font>
-               		</c:when>
-               		<c:otherwise>
-               			<a href="epilogue?nowPage=${i}">　${i}　</a>
-               		</c:otherwise>      		
-               	</c:choose>        	
-                </c:forEach>
-                
-               <c:if test="${paging.endPage != paging.lastPage}">
-                  <a  href="epilogue?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-               </c:if>
-               <c:if test="${paging.endPage != paging.lastPage}">
-				<a href="epilogue?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
-			</c:if>
-			</td>
-            </tr>
-</table>
+	<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="i">
+		<c:choose>
+			<c:when test="${paging.nowPage eq i}">
+				<font color="#ff8000"><B>　${i}　</B></font>
+			</c:when>
+			<c:otherwise>
+				<a href="epilogue?nowPage=${i}">　${i}　</a>
+			</c:otherwise>      		
+		</c:choose>        	
+	</c:forEach>
+	<c:if test="${paging.endPage != paging.lastPage}">
+		<a  href="epilogue?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}"><i class="fas fa-angle-right" style="font-size:18px;"></i></a>
+	</c:if>
+	<c:if test="${paging.endPage != paging.lastPage}">
+		<a href="epilogue?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
+	</c:if>
+</div>
 
 <br><br>
 
