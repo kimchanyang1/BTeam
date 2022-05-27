@@ -11,7 +11,7 @@
 </head>
 <body>
 <table></table>
-<div style="width: 700px;margin: auto;display: flex;background: #fbdee2;padding: 5px;"><B style="margin: auto;">댓글</B></div>
+<div style="width: 700px;margin: auto;display: flex;background: #fbdee2;padding: 10px;"><B style="margin: auto;">댓글</B></div>
 <c:if test="${fn:length(replist)>0}">
 <c:forEach begin="0" end="${fn:length(replist)-1}" var="rep">
 <script type="text/javascript">
@@ -41,8 +41,8 @@ $(document).ready(function(){
 		var value = 
 			"<form action='replyReplyInput' method='post'>"+
 			"<div style='width: 700px;margin: auto;display: flex;padding: 10px;'>"+
-			"<c:forEach begin='1' end='${replist[rep].rep_indent+1}'><div style='text-align: right;flex-basis: 10%;'><br>▷▷</div></c:forEach>"+
-				"<div  style='text-align: center;flex-basis: 20%;align-self: center;'>"+
+			"<c:forEach begin='1' end='${replist[rep].rep_indent+1}'><div style='text-align: right;flex-basis: 5%;'><br>└</div></c:forEach>"+
+				"<div  style='text-align: center;flex-basis: 10%;align-self: center;'>"+
 					"<i class='fas fa-user w3-padding-16'> ${ mem_id }</i>"+
 				"</div>"+
 				"<div style='flex: 1;text-align: justify;'>"+
@@ -74,32 +74,44 @@ $(document).ready(function(){
 	});
 });
 </script>
-<div style="width: 700px;margin: auto;display: flex;padding: 10px;" id="rep${rep}">
+<div style="width: 700px;margin: auto;display: flex;padding: 20px;" id="rep${rep}">
 	<c:if test="${replist[rep].rep_indent > 0}">
 	<c:forEach begin="1" end="${replist[rep].rep_indent}">
-	<div style="text-align: right;flex-basis: 10%;">
+	<div style="text-align: right; flex-basis: 5%;">
 		<br>
-		▷▷
+		└
 	</div>
 	</c:forEach>
 	</c:if>
-	<div  style="text-align: center;flex-basis: 20%;">
+	<div style="text-align: center; flex-basis: 20%;">
 		<br>
 		<B>${replist[rep].rep_id}</B>
 	</div>
-	<div style="flex: 1;text-align: justify;">
+	<div style="flex: 1; text-align: justify; line-height: 150%;">
 		<br>
-		${replist[rep].rep_content}
+		${replist[rep].rep_content}	
 	</div>
 	<div style="flex-basis: 20%;">
 		<fmt:parseDate value="${replist[rep].rep_writeday}" var="writedayDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedayDate}" var="writedayString" pattern="yyyy-MM-dd HH:mm"/>
 		<p>${writedayString}</p>
-		<c:if test="${replist[rep].rep_id eq mem_id}">
-		<p id="repmodify${rep}" style="cursor: pointer;">수정</p>　
-		<p id="repDelete${rep}" style="cursor: pointer;">삭제</p>
-		</c:if>
-		<button style="align-items: end;" class="repRep${rep}">답글달기</button>
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"><B>· · ·</B>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<c:if test="${replist[rep].rep_id eq mem_id}">
+						<li><B><p id="repmodify${rep}" style="cursor: pointer;">　　수정</p></B></li>
+						<li><B><p id="repDelete${rep}" style="cursor: pointer;">　　삭제</p></B></li>
+						</c:if>
+						<c:if test="${replist[rep].rep_indent != 2 }">
+						<li><B>　　<button style="align-items: end;" class="repRep${rep}">댓글</button></B></li>
+						</c:if>
+					</ul>
+				</li>
+			</ul>
+		</div>
 		<script type="text/javascript">
 		$(document).ready(function(){
 			$('#repDelete'+${rep}).click(function(){
@@ -114,6 +126,7 @@ $(document).ready(function(){
 	</div>
 </div>
 <div id="repRep${rep}"></div>
+<hr width="700px">
 </c:forEach>
 </c:if>
 <form action="replyinput" method="post">

@@ -44,11 +44,11 @@ $.ajax({
 });
 </script>
 
-<title>분양/임시보호 게시글</title>
+<title>임시보호/분양 게시글</title>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 
-<h4><B><font color="#fdafab">임시분양/보호 게시판</font></B></h4>
+<h4><B><font color="#fdafab">임시보호/분양 게시판</font></B></h4>
 <br><br>
 
 <input type="hidden" name="rh_no" value="${rd.rh_no }">

@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양/임시보호</title>
+<title>임시보호/분양</title>
 </head>
 <body>
 
-<h4><B><font color="#fdafab">임시분양/보호 게시판</font></B></h4>
-<h6><B>임시분양자 또는 분양자를 구하는 게시판입니다</B></h6>
+<h4><B><font color="#fdafab">임시보호/분양 게시판</font></B></h4>
+<h6><B>임시보호자 또는 분양자를 구하는 게시판입니다</B></h6>
 <h6><B><font color="red">* 글쓰기는 로그인 후 가능합니다</font></B></h6>
 <br><br>
 

@@ -49,7 +49,7 @@ $(document).ready(function(){
 	<td colspan="3" align="left">
 		<fmt:parseDate value="${ndto.nt_writeday}" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${ndto.mem_nickname}</B>　　조회 ${ndto.nt_readcount}　　${writedaystring }　　댓글 ?　　추천수 ?</td>
+		<B>　${ndto.mem_nickname}</B>　　조회 ${ndto.nt_readcount}　　${writedaystring } </td>
 </tr>
 <tr>
 	<td>　　</td></tr>

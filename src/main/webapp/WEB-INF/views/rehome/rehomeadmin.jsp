@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양/임시보호 관리자 페이지</title>
+<title>임시보호/분양 관리자 페이지</title>
 </head>
 <body>
 
 <h4><B><font color="#fdafab">관리자 전용 분양 완료 게시판</font></B></h4>
 <h6><B><font color="red">관리자 전용 게시판입니다</font></B></h6>
-<h6><B>승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
+<h6><B>승인할 시, 임시보호/분양 게시판으로 글이 이동합니다</B></h6>
 <br><br>
 
 <form action="rehomeadminsearch" method="post">

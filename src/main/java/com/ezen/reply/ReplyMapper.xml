@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 <select id="replyout" resultType="com.ezen.reply.ReplyDTO">
-	select * from reply where rep_table=#{param1} and rep_originno=#{param2} order by rep_repno asc, rep_step asc
+	select * from reply where rep_table=#{param1} and rep_originno=#{param2} order by rep_repno asc, rep_writeday asc, rep_step desc
 </select>
 
 <delete id="replyDelete">

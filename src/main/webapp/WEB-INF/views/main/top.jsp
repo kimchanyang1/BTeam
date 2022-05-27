@@ -30,7 +30,7 @@
         	</li>
         	
 			<li class="active">
-				<a href="rehomeoutform">분양/임시보호</a>
+				<a href="rehomeoutform">임시보호/분양</a>
         	</li>
         	
 			<li class="active">
@@ -54,7 +54,7 @@
 						<li class="active">
 							<a class="dropdown-toggle" data-toggle="dropdown" style="cursor: pointer;">관리자 메뉴<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="rehomeadminpage">분양/임시보호 관리</a></li>
+								<li><a href="rehomeadminpage">임시보호/분양 관리</a></li>
 								<li><a href="ADmemberPage">회원목록 관리</a></li>
 							</ul>
 						</li>
