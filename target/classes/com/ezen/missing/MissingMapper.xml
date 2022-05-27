@@ -43,7 +43,7 @@
 </update>
 
 <select id="cntpage" resultType="int">
-	select count(*) from  missing
+	select count(*) from missing where mis_gb='실종'
 </select>
 
 <select id="selectpage" resultType="com.ezen.missing.MissingDTO">

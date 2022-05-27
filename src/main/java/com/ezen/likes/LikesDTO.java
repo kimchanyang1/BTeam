@@ -13,9 +13,9 @@ CREATE SEQUENCE likes_SEQ;
 public class LikesDTO {
 
 	int likes_seq;
-	int likes_count; //ÃßÃµ ¼ö ÀúÀå, PK
-	int likes_boardno; //ÃßÃµÇÑ °Ô½Ã±ÛÀÇ ±Û ¹øÈ£ ÀúÀå
-	String likes_id; //ÃßÃµÇÑ À¯ÀúÀÇ ¾ÆÀÌµğ ÀúÀå
+    int likes_count; //ì¶”ì²œ ìˆ˜ ì €ì¥, PK
+    int likes_boardno; //ì¶”ì²œí•œ ê²Œì‹œê¸€ì˜ ê¸€ ë²ˆí˜¸ ì €ì¥
+    String likes_id; //ì¶”ì²œí•œ ìœ ì €ì˜ ì•„ì´ë”” ì €ì¥
 	
 	public LikesDTO() {
 		super();

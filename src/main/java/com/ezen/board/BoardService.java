@@ -1,35 +1,36 @@
 package com.ezen.board;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public interface BoardService {
 
-	// ÀÔ·Â
+	// ï¿½Ô·ï¿½
 	public void boardinput(String bd_title, int mem_no, String mem_nickname, String bd_content, String bd_image);
 
-	//¸ÞÀÎ ÀÎ±â±Û Á¶È¸
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ ï¿½ï¿½È¸
 	public ArrayList<BoardDTO> boardmainout();
 	
-	// µðÅ×ÀÏ, Á¶È¸¼ö Áõ°¡
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public BoardDTO boarddetail(int bd_no);
 
 	public void boardreadcount(int bd_no);
 
 
-	// ¼öÁ¤
+	// ï¿½ï¿½ï¿½ï¿½
 	public ArrayList<BoardDTO> boardmodifyselect(int bd_no);
 
 	public void boardmodify(String bd_title, int mem_no, String mem_nickname, String bd_content, String bd_image, int bd_no);
 	
 	
-	// »èÁ¦
+	// ï¿½ï¿½ï¿½ï¿½
 	public void boarddelete(int bd_no);
 
 
-	// °Ë»ö
+	// ï¿½Ë»ï¿½
 	public ArrayList<BoardDTO> searchtitle(String searchname);
 
 	public ArrayList<BoardDTO> searchnickname(String searchname);
@@ -42,6 +43,8 @@ public interface BoardService {
 
 
 	public MovePageVO boardMovePage(int bd_no);
+
+	public void likesUpdate(Map<String, Object> map);
 
 	
 

@@ -24,6 +24,7 @@ import com.ezen.board.BoardController;
 import com.ezen.board.BoardDTO;
 import com.ezen.board.BoardService;
 import com.ezen.epilogue.EpilogueController;
+import com.ezen.likes.LikesController;
 import com.ezen.likes.LikesService;
 import com.ezen.member.MemberController;
 
@@ -43,6 +44,7 @@ public class HomeController {
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
 	private ReplyController rep = new ReplyController();
+	private LikesController lc = new LikesController();
 
 	
 	@RequestMapping(value = "/")
@@ -62,14 +64,6 @@ public class HomeController {
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		ArrayList<BoardDTO> boardlist = bs.boardmainout();
-		for (BoardDTO boardDTO : boardlist) {
-			int bd_no = boardDTO.getBd_no();
-			LikesService lc = sqlSession.getMapper(LikesService.class);
-			int bd_likes = lc.likes_count(bd_no);
-		
-			boardDTO.setBd_likes(bd_likes);
-		}
-		
 		mo.addAttribute("boardlist", boardlist);
 		
 		return "home";

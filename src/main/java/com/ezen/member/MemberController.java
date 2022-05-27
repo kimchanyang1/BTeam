@@ -169,14 +169,6 @@ public class MemberController {
 	public int IdCheckForm(String mem_id, SqlSession sqlSession, HttpServletResponse response) {
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		int use = ms.IdCheck(mem_id);
-		/*
-		String parseJson = "{\"id\":\""+use+"\"}";
-		try {
-			response.getWriter().print(parseJson);
-		} catch (IOException e) {
-			e.printStackTrace();
-		};
-		*/
 		return use;
 	}
 	

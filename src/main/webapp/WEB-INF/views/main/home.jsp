@@ -10,72 +10,56 @@
 <body>
 <h5><B>인기 게시글 한 눈에 보기</B></h5>
 <h3><B>지금 사람들은 이 게시글에 주목하고 있어요!</B></h3>
+
 <br><br><br><br><br>
+
 <div>
 	<h4><B><font color="#fdafab">🌸 실종 게시판 🌸</font></B></h4><br>
-	<table border="0" align="center" width="700">
-		<tr>
-			<td>
-				<c:if test="${fn:length(missingout) > 0}">
-				<c:forEach var="mic" begin="0" end="2" step="1">		
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<a href="missingdetail?mis_no=${missingout[mic].mis_no}">
-								<div class="thumbnail" style="cursor: pointer;">
-									<p align="left"><B>제목</B>　${missingout[mic].mis_title } </p>
-										<fmt:parseDate value="${missingout[mic].mis_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-										<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-									<p align="left"><B>일자</B>　${writedaystring } </p>
-								 		<img src="${pageContext.request.contextPath}/image/${missingout[mic].mis_image}" style="width: 200px; height: 200px;">	
-									<div class="caption">
-										<p><B>${missingout[mic].mem_nickname}</B></p>
-									</div>
-								</div>
-							</a>
+	<div class="container" style="margin: auto;" width="700">
+		<div class="row">
+			<c:if test="${fn:length(missingout) > 0}">
+			<c:forEach var="mic" begin="0" end="2" step="1">	
+				<div class="col-md-4">
+					<div class="thumbnail" style="cursor: pointer;" onclick="location.href='missingdetail?mis_no=${missingout[mic].mis_no}'">
+						<p align="left"><B>제목</B>　${missingout[mic].mis_title } </p>
+							<fmt:parseDate value="${missingout[mic].mis_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+						<p align="left"><B>일자</B>　${writedaystring } </p>
+					 		<img src="${pageContext.request.contextPath}/image/${missingout[mic].mis_image}" style="width: 200px; height: 200px;">	
+						<div class="caption">
+							<p><B>${missingout[mic].mem_nickname}</B></p>
 						</div>
-					<c:if test="${e%3 eq 2}">
-			</td>
-		</tr>
-					</c:if>
-				</c:forEach>
-				</c:if>
-	</table>
+					</div>
+				</div>
+			</c:forEach>
+			</c:if>
+		</div>
+	</div>
 </div>
 
 <br><br><br><br><br>
 
 <div>
 	<h4><B><font color="#fdafab">🌸 임시보호/분양 게시판 🌸</font></B></h4><br>
-	<table border="0" align="center" width="700">
-		<tr>
-			<td>
-			<c:if test="${fn:length(rdto) > 0}">
-			<c:forEach var="rd" begin="0" end="2" step="1">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4">
-						<a href="rehomedetail?rh_no=${rdto[rd].rh_no}">
-							<div class="thumbnail" style="cursor: pointer;">
-								<p align="left"><B>구분</B>　[${rdto[rd].rh_gb2 }/${rdto[rd].rh_gb3 }] </p>
-								<p align="left"><B>제목</B>　${rdto[rd].rh_title } </p>
-									<fmt:parseDate value="${rdto[rd].rh_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-									<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-								<p align="left"><B>일자</B>　${writedaystring } </p>
-									<img src="${pageContext.request.contextPath}/image/${rdto[rd].rh_image }" style="width: 200px; height: 200px;">
-								<div class="caption">
-									<p><B>${rdto[rd].mem_nickname }</B></p>
-								</div>
-							</div>
-						</a>
+	<div class="container">
+		<div class="row">
+			<c:forEach var="rd" items="${rdto}" begin="0" end="2">
+			<div class="col-md-4">
+				<div class="thumbnail" style="cursor: pointer;" onclick="location.href='rehomedetail?rh_no=${rd.rh_no}'">
+					<p align="left"><B>구분</B>　[${rd.rh_gb2 }/${rd.rh_gb3 }] </p>
+					<p align="left"><B>제목</B>　${rd.rh_title } </p>
+						<fmt:parseDate value="${rd.rh_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+					<p align="left"><B>일자</B>　${writedaystring } </p>
+						<img src="${pageContext.request.contextPath}/image/${rd.rh_image }" style="width: 200px; height: 200px;">
+					<div class="caption">
+						<p><B>${rd.mem_nickname }</B></p>
 					</div>
-				<c:if test="${e%3 eq 2}">
-			</td>
-		</tr>
-				</c:if>
+				</div>
+			</div>
 			</c:forEach>
-			</c:if>
-	</table>
+		</div>
+	</div>
 </div>
 
 <br><br><br><br><br>

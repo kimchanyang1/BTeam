@@ -1,6 +1,7 @@
 package com.ezen.board;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -201,6 +202,11 @@ public class BoardController {
 		model.addAttribute("boardlist", list);
 		
 		return "boardoutform";
+	}
+	
+	public void likesUpdate(SqlSession sqlSession, Map<String, Object> map) {
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+		bs.likesUpdate(map);
 	}
 
 }
