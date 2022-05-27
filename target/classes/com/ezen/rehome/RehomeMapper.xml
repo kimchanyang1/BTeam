@@ -57,8 +57,9 @@
 					<foreach collection="gb3list" item="gb3" open="(" close=")" separator=",">
 						#{gb3}
 					</foreach>
+			and
 			</if>
-			and rh_misplace like '%'||#{sword}||'%'
+			rh_misplace like '%'||#{sword}||'%'
 			and rh_gb1='승인' and rh_gb2!='분양완료'
 		</where>
 		order by rh_no desc
