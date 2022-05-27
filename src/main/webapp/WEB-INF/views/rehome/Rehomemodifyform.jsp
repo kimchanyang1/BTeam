@@ -48,35 +48,43 @@ textarea {
 			<tr>
 				<th>　　구분　　</th>
 				<td>
+				<label>
 					<input
 						type="radio"
 						name="rh_gb2"
 						value="임시보호"
 						<c:if test="${rd.rh_gb2 eq '임시보호'}">checked="checked"</c:if>
 					> 임시보호 &emsp;
+				</label>
+				<label>
 					<input
 						type="radio"
 						name="rh_gb2"
 						value="분양"
 						<c:if test="${rd.rh_gb2 eq '분양'}">checked="checked"</c:if>
 					> 분양
+				</label>	
 				</td>
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
 				<td>
+				<label>
 					<input 
 						type="radio"
 						name="rh_gb3"
 						value="개"
 						<c:if test="${rd.rh_gb3 eq '개'}">checked="checked"</c:if>
 					> 개 &emsp;
+				</label>
+				<label>	
 					<input
 						type="radio"
 						name="rh_gb3"
 						value="고양이"
 						<c:if test="${rd.rh_gb3 eq '고양이'}">checked="checked"</c:if>
 					> 고양이
+				</label>	
 				</td>
 			</tr>
 			<tr>

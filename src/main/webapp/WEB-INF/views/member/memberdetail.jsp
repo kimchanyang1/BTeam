@@ -5,14 +5,14 @@
 <head>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#memberdelete').click(function(){
-		let kk = confirm($('#mem_nickname').text()+'님 정말 탈퇴하실건가요?');
-		if (kk) {
-			alert('탈퇴 실행');
-			var url = "memberdelete?mem_no="+$('#mem_no').text();
-			$(location).attr('href',url);
-		}
-	});
+    $('#memberdelete').click(function(){
+        let kk = confirm("${mdto.mem_nickname}"+'님 정말 탈퇴하실건가요?');
+        if (kk) {
+            alert('탈퇴 실행');
+            var url = "memberdelete?mem_no="+${mdto.mem_no};
+            $(location).attr('href',url);
+        }
+    });
 });
 </script>
 

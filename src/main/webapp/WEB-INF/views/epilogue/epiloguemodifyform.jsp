@@ -26,7 +26,7 @@ textarea {
 <br><br>
 
 <form action="epiloguemodify" method="post" enctype="multipart/form-data">
-	<input type="text" name="ep_no" value="${epiloguelist.ep_no}" readonly="readonly">
+	<input type="hidden" name="ep_no" value="${epiloguelist.ep_no}" readonly="readonly">
 	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
 	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
 
