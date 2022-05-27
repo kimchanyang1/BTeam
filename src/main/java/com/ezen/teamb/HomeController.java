@@ -1,5 +1,7 @@
 package com.ezen.teamb;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.missing.MissingController;
+import com.ezen.missing.MissingDTO;
+import com.ezen.missing.MissingService;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,10 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.board.BoardController;
+import com.ezen.board.BoardDTO;
+import com.ezen.board.BoardService;
 import com.ezen.epilogue.EpilogueController;
+import com.ezen.likes.LikesService;
 import com.ezen.member.MemberController;
 
 import com.ezen.rehome.RehomeController;
+import com.ezen.rehome.RehomeDTO;
+import com.ezen.rehome.RehomeService;
 import com.ezen.reply.ReplyController;
 
 @Controller
@@ -30,7 +38,6 @@ public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private MissingController mic = new MissingController();
 	private RehomeController rc = new RehomeController();
 	private MemberController mc = new MemberController();
 	private EpilogueController ep = new EpilogueController();
@@ -44,54 +51,28 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/home")
-	public String home1() {
+	public String home1(Model mo) {
+		MissingService micdao = sqlSession.getMapper(MissingService.class);
+		ArrayList<MissingDTO> missingout = micdao.missingout();
+		mo.addAttribute("missingout", missingout);
+		
+		RehomeService rh = sqlSession.getMapper(RehomeService.class);
+		ArrayList<RehomeDTO> rhlist = rh.rehomeoutput();
+		mo.addAttribute("rdto", rhlist);
+		
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+		ArrayList<BoardDTO> boardlist = bs.boardmainout();
+		for (BoardDTO boardDTO : boardlist) {
+			int bd_no = boardDTO.getBd_no();
+			LikesService lc = sqlSession.getMapper(LikesService.class);
+			int bd_likes = lc.likes_count(bd_no);
+		
+			boardDTO.setBd_likes(bd_likes);
+		}
+		
+		mo.addAttribute("boardlist", boardlist);
+		
 		return "home";
-	}
-	
-	@RequestMapping(value = "/missinginputform")
-	public String missing() {
-		return mic.missinginputform();
-	}
-	
-	@RequestMapping(value = "/missinginput")
-	public ModelAndView missinginput(MultipartHttpServletRequest request) {
-		return mic.missinginput(request, sqlSession);
-	}
-	
-	@RequestMapping(value = "/missingdelete")
-	public String missingdelete(HttpServletRequest request) {
-		return mic.missingdelete(request,sqlSession);
-	}
-	
-	@RequestMapping(value = "/missingmodifyform")
-	public String missingmodifyform(HttpServletRequest request, Model mo) {
-		return mic.missingmodifyform(request, mo, sqlSession);
-	}
-	
-	@RequestMapping(value = "/missingmodifyinput")
-	public ModelAndView missingmodifyinput(MultipartHttpServletRequest request) {
-		return mic.missingmodifyinput(request,sqlSession);
-	}
-	
-	
-	// 귀가 완료
-	@RequestMapping(value = "/missingend")
-	public String missingEndPage(
-			Model model, 
-			@RequestParam(value = "nowPage", required = false)String nowPage
-			) {
-		return mic.missingEndPage(sqlSession, model, nowPage);
-	}
-	
-
-	@RequestMapping(value = "/missingoutform")
-	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
-		return mic.missingpage(dto, mo, sqlSession, nowPage);
-	}	
-	
-	@RequestMapping(value = "/rehoming")
-	public String rehoming(HttpServletRequest request) {
-		return mic.rehoming(request,sqlSession);
 	}
 	
 

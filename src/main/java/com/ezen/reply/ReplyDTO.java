@@ -7,7 +7,11 @@ rep_originno NUMBER(6, 0),
 rep_no NUMBER(6, 0) PRIMARY KEY,
 rep_id VARCHAR2(20),
 rep_writeday DATE DEFAULT SYSDATE,
-rep_content VARCHAR2(2000));
+rep_content VARCHAR2(2000),
+rep_repno NUMBER(6, 0),
+rep_step NUMBER(6, 0),
+rep_indent NUMBER(6, 0)
+);
 
 CREATE SEQUENCE rep_no;
  */
@@ -15,14 +19,14 @@ CREATE SEQUENCE rep_no;
 public class ReplyDTO {
 	
 	int rep_originno; //댓글 원래글번호
-	int rep_no; //댓글 글번호
-	String rep_id; //댓글 적은사람
-	String rep_writeday; //댓글 적은날짜
-	String rep_content; //댓글 내용
-	String rep_table;//원래글 테이블
-	int rep_repno;// 원래 댓글 번호
-	int rep_step;//내려쓰기
-	int rep_indent;//들여쓰기
+    int rep_no; //댓글 글번호
+    String rep_id; //댓글 적은사람
+    String rep_writeday; //댓글 적은날짜
+    String rep_content; //댓글 내용
+    String rep_table;//원래글 테이블
+    int rep_repno;// 원래 댓글 번호
+    int rep_step;//내려쓰기
+    int rep_indent;//들여쓰기
 	
 	public ReplyDTO() {
 		super();

@@ -21,11 +21,11 @@ textarea {
 </style>
 <meta charset="UTF-8">
 
-<title>분양/임시보호 게시글 등록</title>
+<title>임시보호/분양 게시글 등록</title>
 </head>
 <body>
 
-<h4><B><font color="#fdafab">임시분양/보호 게시판 글쓰기</font></B></h4>
+<h4><B><font color="#fdafab">임시보호/분양 게시판 글쓰기</font></B></h4>
 <br><br>
 
 <form action="rehomeinput" method="post" enctype="multipart/form-data">

@@ -26,7 +26,11 @@ public class MissingController {
 	private SqlSession sqlSession;
 
 	// out
-	public String missingEndPage(SqlSession sqlSession, Model model, String nowPage) {
+	@RequestMapping(value = "/missingend")
+	public String missingEndPage(
+			Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
 		MissingService micdao = sqlSession.getMapper(MissingService.class);
 		int total = micdao.missingEndTotal();
 		int cntPage = 5;
@@ -44,14 +48,16 @@ public class MissingController {
 		return "missingend";
 	}
 	
-	
-	// input
+
+	@RequestMapping(value = "/missinginputform")
 	public String missinginputform()
 	{
 			return "missinginputform";
 	}
 
-	public ModelAndView missinginput(MultipartHttpServletRequest multi, SqlSession sqlSession) {
+
+	@RequestMapping(value = "/missinginput")
+	public ModelAndView missinginput(MultipartHttpServletRequest multi) {
 		String mis_gb = "실종";
 		String mis_gb2 = multi.getParameter("mis_gb2");
 		String mis_title = multi.getParameter("mis_title");
@@ -113,7 +119,9 @@ public class MissingController {
 		micdao.missingreadcount(mis_no);
 	}
 	
-	public String missingdelete(HttpServletRequest request,SqlSession sqlSession)
+
+	@RequestMapping(value = "/missingdelete")
+	public String missingdelete(HttpServletRequest request)
 	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
 		
@@ -123,7 +131,9 @@ public class MissingController {
 		return "redirect:missingoutform";
 	}
 	
-	public String missingmodifyform(HttpServletRequest request,Model mo, SqlSession sqlSession)
+
+	@RequestMapping(value = "/missingmodifyform")
+	public String missingmodifyform(HttpServletRequest request,Model mo)
 	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
 		
@@ -134,7 +144,9 @@ public class MissingController {
 		return "missingmodifyform";
 	}
 	
-	public ModelAndView missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
+
+	@RequestMapping(value = "/missingmodifyinput")
+	public ModelAndView missingmodifyinput(MultipartHttpServletRequest multi)
 	{		
 		int mis_no = Integer.parseInt(multi.getParameter("mis_no"));
 		String mis_gb = multi.getParameter("mis_gb");	
@@ -183,7 +195,7 @@ public class MissingController {
 	}
 
 
-
+	@RequestMapping(value = "/rehoming")
 	public String rehoming(HttpServletRequest request, SqlSession sqlSession) 
 	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
@@ -194,7 +206,8 @@ public class MissingController {
 
 
 
-	public String missingpage(PagingDTO dto, Model mo,SqlSession sqlSession
+	@RequestMapping(value = "/missingoutform")
+	public String missingpage(PagingDTO dto, Model mo
 				,@RequestParam(value="nowPage", required=false)String nowPage)
 	{
 		MissingService mic = sqlSession.getMapper(MissingService.class);

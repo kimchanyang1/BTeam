@@ -174,18 +174,19 @@ $(document).ready(function(){
 			</c:if>
 		</td>
 	</tr>
-	
-	
-	
-	
-	<tr>
-		<td>　　</td></tr>
 	<tr>
 		<td>　　</td>
-		<td width="500px">　　</td>
+	</tr>
+	<tr>
 		<td>　　</td>
 	</tr>
 	<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
+	<tr>
+		<td>　　</td>
+	</tr>
+	<tr>
+		<td>　　</td>
+	</tr>
 	<tr>
 		<td colspan="3">
 			<c:choose>

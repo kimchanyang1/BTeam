@@ -18,6 +18,9 @@
 	 VALUES(BD_NO_SEQ.NEXTVAL, #{param1}, #{param2}, #{param3}, #{param4}, 0, #{param5}, 0)
 </insert>
 
+<select id="boardmainout" resultType="com.ezen.board.BoardDTO">
+	SELECT * FROM BOARD order by bd_likes desc
+</select>
 
 <select id="boarddetail" resultType="com.ezen.board.BoardDTO">
 	SELECT * FROM BOARD WHERE BD_NO = #{param1}

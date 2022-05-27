@@ -10,7 +10,9 @@ public interface BoardService {
 	// 입력
 	public void boardinput(String bd_title, int mem_no, String mem_nickname, String bd_content, String bd_image);
 
-
+	//메인 인기글 조회
+	public ArrayList<BoardDTO> boardmainout();
+	
 	// 디테일, 조회수 증가
 	public BoardDTO boarddetail(int bd_no);
 
