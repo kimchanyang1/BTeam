@@ -137,6 +137,17 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="3" align="center">
+
+			<!-- 
+			<input type="hidden" value="${e.mem_no }" readonly="readonly">
+			<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
+			 -->
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center">　　
+			<!-- <input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly"> -->
+
 		</td>
 	</tr>
 	<tr>
@@ -163,87 +174,19 @@ $(document).ready(function(){
 			</c:if>
 		</td>
 	</tr>
-	
-	
-	
-	
-	<tr>
-		<td>　　</td></tr>
-	<tr>
-		<td>　　</td>
-		<td width="500px">　　</td>
-		<td>　　</td>
-	</tr>
-<<<<<<< HEAD
-	<tr>
-		<td colspan="4" align="center" bgcolor="#fbdee2"><B>　댓글</B>
-	</tr>
-<c:forEach items="${replist }" var="rep">
-	<tr>
-		<td colspan="2" height="20px" align="left">
-			<input type="hidden" name="rep_no" value="${rep.rep_no }"><B>　${rep.rep_id }</B>
-		</td>
-	<!-- 작성일자 parseDate로 변환하려 하면 value attribute can not be parsed 오류남  -->	
-		<td align="right">
-			${rep.rep_writeday}
-		</td>
-	<!-- 작성일자 parseDate로 변환하려 하면 value attribute can not be parsed 오류남  -->		
-	</tr>
-	<tr>
-		<td>　　</td>
-		<td align="left" height="20px">
-			${rep.rep_content }
-		</td>
-		<td>
-			<c:if test="${rep.rep_id eq mdto.mem_id || mdto.mem_id eq 'admin'}">
-				<a href="boardreplymodify?rep_no=${rep.rep_no }&bd_no=${boarddetail.bd_no }">수정</a>　
-				<a href="boardreplydelete?rep_no=${rep.rep_no }&bd_no=${boarddetail.bd_no }">삭제</a>
-			</c:if>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3"><hr></td>
-	</tr>
-</c:forEach>
-	<tr>
-		<td>
-			<c:if test="${ mdto.mem_id != null }">
-				<i class="fas fa-user w3-padding-16"> ${ mdto.mem_id }</i>
-			</c:if>	
-		</td>
-		<td>
-			<c:if test="${ mdto.mem_id != null }">		
-				<form action="boardreplyinput" method="post">
-					<input type="hidden" name="bd_no" id="bd_no" value="${ boarddetail.bd_no }"> 
-					<input type="hidden" name="mem_id" id="mem_id" value="${ mdto.mem_id }">
-						<textarea id="replyarea" name="rep_content"></textarea>
-			</c:if>
-			<c:if test="${ mdto.mem_id == null }">
-				<textarea id="replyarea" readonly="readonly">
-	
-						댓글 작성은 로그인 후 가능합니다.
-				</textarea>
-			</c:if>
-		</td>
-		<td>
-			<c:if test="${ mdto.mem_id != null }">
-				<B><input id="replybutton" type="submit" value="등록"></B>
-				</form>
-			</c:if>
-			<c:if test="${ mdto.mem_id == null }">
-				<button id="replybutton" onclick="location.href='loginform'"><B>로그인</B></button>
-			</c:if>
-		</td>
-	</tr>
 	<tr>
 		<td>　　</td>
 	</tr>
 	<tr>
 		<td>　　</td>
 	</tr>
-=======
 	<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
->>>>>>> 79748132a87e54d5e0ee153943a627561dc84979
+	<tr>
+		<td>　　</td>
+	</tr>
+	<tr>
+		<td>　　</td>
+	</tr>
 	<tr>
 		<td colspan="3">
 			<c:choose>

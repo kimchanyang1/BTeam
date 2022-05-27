@@ -14,7 +14,6 @@ public class RehomesearchVO {
 
 	public RehomesearchVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RehomesearchVO(String[] gb1list, String[] gb2list, String[] gb3list, String gb1, String gb2, String gb3,

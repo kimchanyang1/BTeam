@@ -7,12 +7,11 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
+<h5><B>인기 게시글 한 눈에 보기</B></h5>
+<h3><B>지금 사람들은 이 게시글에 주목하고 있어요!</B></h3>
+<br><br><br><br><br>
 <div>
-	<h3>실종</h3>
+	<h4><B><font color="#fdafab">🌸 실종 게시판 🌸</font></B></h4><br>
 	<table border="0" align="center" width="700">
 		<tr>
 			<td>
@@ -43,8 +42,10 @@
 	</table>
 </div>
 
+<br><br><br><br><br>
+
 <div>
-	<h3>임시보호/분양</h3>
+	<h4><B><font color="#fdafab">🌸 임시보호/분양 게시판 🌸</font></B></h4><br>
 	<table border="0" align="center" width="700">
 		<tr>
 			<td>
@@ -76,8 +77,10 @@
 	</table>
 </div>
 
+<br><br><br><br><br>
+
 <div>
-	<h3>자유게시판 인기글</h3>
+	<h4><B><font color="#fdafab">🌸 자유게시판 🌸</font></B></h4><br>
 	<table border="0" align="center" width="800">
 		<tr>
 			<th>　글번호　</th>

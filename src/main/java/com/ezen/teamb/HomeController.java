@@ -26,9 +26,9 @@ import com.ezen.board.BoardDTO;
 import com.ezen.board.BoardService;
 import com.ezen.epilogue.EpilogueController;
 import com.ezen.likes.LikesController;
+import com.ezen.likes.LikesService;
 import com.ezen.member.MemberController;
 
-import com.ezen.notice.NoticeController;
 import com.ezen.rehome.RehomeController;
 import com.ezen.rehome.RehomeDTO;
 import com.ezen.rehome.RehomeService;
@@ -40,18 +40,17 @@ public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	private NoticeController nc = new NoticeController();
 	private MissingController mic = new MissingController();
 	private RehomeController rc = new RehomeController();
 	private MemberController mc = new MemberController();
 	private EpilogueController ep = new EpilogueController();
 	private BoardController bc = new BoardController();
-	private LikesController lc = new LikesController();
 	private ReplyController rep = new ReplyController();
+
 	
 	@RequestMapping(value = "/")
 	public String home() {
-		return "redirect: home";
+		return "redirect:home";
 	}
 	
 	@RequestMapping(value = "/home")
@@ -68,56 +67,15 @@ public class HomeController {
 		ArrayList<BoardDTO> boardlist = bs.boardmainout();
 		for (BoardDTO boardDTO : boardlist) {
 			int bd_no = boardDTO.getBd_no();
-			int bd_likes = lc.likescount(bd_no, sqlSession);
+			LikesService lc = sqlSession.getMapper(LikesService.class);
+			int bd_likes = lc.likes_count(bd_no);
+		
 			boardDTO.setBd_likes(bd_likes);
 		}
 		
 		mo.addAttribute("boardlist", boardlist);
 		
 		return "home";
-	}
-	
-	@RequestMapping(value = "/noticeoutform")
-	public String noticepage(
-			Model model, 
-			@RequestParam(value = "nowPage", required = false)String nowPage
-			) {
-		return nc.noticepage(sqlSession, model, nowPage);
-	}
-	
-	
-	@RequestMapping(value = "/noticeinputform")
-	public String noticeinputform(HttpServletRequest request, Model model) {
-		return nc.noticeinputform(request, model);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/noticeinput")
-	public String noticeinput(HttpServletRequest request) {
-		return nc.noticeinput(request, sqlSession);
-	}
-	
-	//占쏙옙占쏙옙 占쌘쇽옙占쏙옙占쏙옙占쏙옙
-	@RequestMapping(value = "/noticedetail")
-	public String noticedetail(HttpServletRequest request, Model model) {
-		return nc.noticedetail(request, sqlSession, model);
-	}
-	
-	//占쏙옙占쏙옙 占쏙옙占쏙옙
-	@RequestMapping(value = "/noticemodifyform")
-	public String noticemodifyform(HttpServletRequest request, Model model) {
-		return nc.noticemodifyform(request, sqlSession, model);
-	}
-	
-	//占쏙옙占쏙옙 占쏙옙占쏙옙
-	@RequestMapping(value = "/noticemodify")
-	public String noticemodify(HttpServletRequest request, Model model) {
-		return nc.noticemodify(request, sqlSession, model);
-	}
-	
-	//占쏙옙占쏙옙 占쏙옙占쏙옙
-	@RequestMapping(value = "/noticedelete")
-	public String noticedelete(HttpServletRequest request, Model model) {
-		return nc.noticedelete(request, sqlSession, model);
 	}
 	
 	@RequestMapping(value = "/missinginputform")
@@ -128,12 +86,6 @@ public class HomeController {
 	@RequestMapping(value = "/missinginput")
 	public ModelAndView missinginput(MultipartHttpServletRequest request) {
 		return mic.missinginput(request, sqlSession);
-	}
-	
-	
-	@RequestMapping(value = "/missingdetail")
-	public String missingdetail(HttpServletRequest request,Model mo) {
-		return mic.missingdetail(request, mo ,sqlSession, rep);
 	}
 	
 	@RequestMapping(value = "/missingdelete")
@@ -165,8 +117,7 @@ public class HomeController {
 	@RequestMapping(value = "/missingoutform")
 	public String missingpage(Model mo, PagingDTO dto,@RequestParam(value="nowPage", required=false)String nowPage) {
 		return mic.missingpage(dto, mo, sqlSession, nowPage);
-	}
-
+	}	
 	
 	@RequestMapping(value = "/rehoming")
 	public String rehoming(HttpServletRequest request) {
@@ -196,7 +147,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/rehomedetail")
 	public String rhdetail(HttpServletRequest request, Model mo) {
-		return rc.rhdetail(sqlSession, request, mo);
+		return rc.rhdetail(sqlSession, request, mo, rep);
 	}
 	
 	@RequestMapping(value = "/rehomedelete")
@@ -395,7 +346,7 @@ public class HomeController {
 	@RequestMapping(value = "/epiloguedetail")
 	public String ee3(HttpServletRequest request, Model md) {
 		
-		return ep.epiloguedetailform(sqlSession, request, md);
+		return ep.epiloguedetailform(sqlSession, request, md, rep);
 	}
 	
 	
@@ -511,31 +462,10 @@ public class HomeController {
 		return "location";
 	}
 	
-	@RequestMapping(value="/likesupdate")
-	public @ResponseBody void likesupdate(@RequestParam("likes_boardno") int likes_boardno, @RequestParam("likes_id") String likes_id) {
-		lc.likesupdate(likes_boardno, likes_id, sqlSession);
-	}
-	
-	@RequestMapping(value="/likescount")
-	public @ResponseBody int likescount(@RequestParam("likes_boardno") int likes_boardno)
-	{
-		return lc.likescount(likes_boardno, sqlSession);
-	}
-	
 	
 	@RequestMapping(value = "/boardreplydelete")
 	public String boardreplydelete(HttpServletRequest request, Model mo) {
 		return bc.boardreplydelete(request, mo, sqlSession);
-	}
-	
-	@RequestMapping(value = "/replycount")
-	public @ResponseBody int replyCount(@RequestParam("reply_boardno") int reply_boardno) {
-		return rep.replyCount(sqlSession, reply_boardno);
-	}
-	
-	@RequestMapping(value = "/replyinput")
-	public String replyinput(HttpServletRequest request, Model mo) {
-		return rep.replyinput(request, mo, sqlSession);
 	}
 	
 }

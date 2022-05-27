@@ -7,18 +7,26 @@ rep_originno NUMBER(6, 0),
 rep_no NUMBER(6, 0) PRIMARY KEY,
 rep_id VARCHAR2(20),
 rep_writeday DATE DEFAULT SYSDATE,
-rep_content VARCHAR2(2000));
+rep_content VARCHAR2(2000),
+rep_repno NUMBER(6, 0),
+rep_step NUMBER(6, 0),
+rep_indent NUMBER(6, 0)
+);
 
 CREATE SEQUENCE rep_no;
  */
 
 public class ReplyDTO {
 	
-	int rep_originno; //ëŒ“ê¸€ ì›ë˜ê¸€ë²ˆí˜¸
-	int rep_no; //ëŒ“ê¸€ ê¸€ë²ˆí˜¸
-	String rep_id; //ëŒ“ê¸€ ì ì€ì‚¬ëŒ
-	String rep_writeday; //ëŒ“ê¸€ ì ì€ë‚ ì§œ
-	String rep_content; //ëŒ“ê¸€ ë‚´ìš©
+	int rep_originno; //´ñ±Û ¿ø·¡±Û¹øÈ£
+    int rep_no; //´ñ±Û ±Û¹øÈ£
+    String rep_id; //´ñ±Û ÀûÀº»ç¶÷
+    String rep_writeday; //´ñ±Û ÀûÀº³¯Â¥
+    String rep_content; //´ñ±Û ³»¿ë
+    String rep_table;//¿ø·¡±Û Å×ÀÌºí
+    int rep_repno;// ¿ø·¡ ´ñ±Û ¹øÈ£
+    int rep_step;//³»·Á¾²±â
+    int rep_indent;//µé¿©¾²±â
 	
 	public ReplyDTO() {
 		super();
@@ -72,4 +80,37 @@ public class ReplyDTO {
 	public void setRep_content(String rep_content) {
 		this.rep_content = rep_content;
 	}
+
+	public String getRep_table() {
+		return rep_table;
+	}
+
+	public void setRep_table(String rep_table) {
+		this.rep_table = rep_table;
+	}
+
+	public int getRep_repno() {
+		return rep_repno;
+	}
+
+	public void setRep_repno(int rep_repno) {
+		this.rep_repno = rep_repno;
+	}
+
+	public int getRep_step() {
+		return rep_step;
+	}
+
+	public void setRep_step(int rep_step) {
+		this.rep_step = rep_step;
+	}
+
+	public int getRep_indent() {
+		return rep_indent;
+	}
+
+	public void setRep_indent(int rep_indent) {
+		this.rep_indent = rep_indent;
+	}
+	
 }

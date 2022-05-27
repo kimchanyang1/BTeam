@@ -6,19 +6,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.board.BoardDTO;
 import com.ezen.member.MemberDTO;
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
+@Controller
 public class EpilogueController {
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	// out
 	public String epiloguepage(PagingDTO dto, Model mo,SqlSession sqlSession
@@ -88,7 +94,7 @@ public class EpilogueController {
 	
 	
 	// detail
-	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md,ReplyController rep) {
 		
 		HttpSession hs = request.getSession();
 		MemberDTO login = (MemberDTO) hs.getAttribute("login");
@@ -113,6 +119,7 @@ public class EpilogueController {
 		md.addAttribute("epiloguedetail", epiloguedetail);
 		md.addAttribute("move", move);
 		
+		rep.replyout("epilogue", ep_no, md, sqlSession);
 		return "epiloguedetailform";
 	}
 	

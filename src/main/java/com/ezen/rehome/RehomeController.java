@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,11 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.missing.MissingDTO;
 import com.ezen.missing.MissingService;
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
+@Controller
 public class RehomeController {
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public String rhinputform()
 	{
@@ -59,7 +66,7 @@ public class RehomeController {
 		return mav;
 	}
 
-	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo,ReplyController rep)
 	{
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		
@@ -67,14 +74,14 @@ public class RehomeController {
 		rhreadcount(rh_no, sqlSession);
 		RehomeDTO rd = rs.rehomedetail(rh_no);
 		mo.addAttribute("rd", rd);
-		if (rd.getRh_gb2().equals("占싻억옙狗占�")) {
+		if (rd.getRh_gb2().equals("분양완료")) {
 			MovePageVO move = rs.rehomeEndMovePage(rh_no);
 			mo.addAttribute("move",move);
 		} else {
 			MovePageVO move = rs.rehomeMovePage(rh_no);
 			mo.addAttribute("move",move);
 		}
-		
+		rep.replyout("rehome", rh_no, mo, sqlSession);
 		return "Rehomedetail";
 	}
 	
@@ -230,7 +237,6 @@ public class RehomeController {
 	}
 	
 	
-	// 占싻억옙 占싹뤄옙
 	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);

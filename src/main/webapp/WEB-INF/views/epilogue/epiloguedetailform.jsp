@@ -37,7 +37,7 @@ textarea {
 	<td colspan="3" align="left">
 		<fmt:parseDate value="${epiloguedetail.ep_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 		<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-		<B>　${epiloguedetail.mem_nickname}</B>　　조회 ${epiloguedetail.ep_readcount}　　${writedaystring }　　댓글 ?</td>
+		<B>　${epiloguedetail.mem_nickname}</B>　　조회 ${epiloguedetail.ep_readcount}　　${writedaystring }　　댓글 <font color="#ff8000">　<B><span class="reply_count"></span></B></font></td>
 </tr>
 <tr>
 	<td>　　</td></tr>
@@ -81,9 +81,28 @@ textarea {
 				}
 			});
 		});
+		$.ajax({
+			url: "replycount",
+		    type: "POST",
+		    data: {
+		    	reply_boardno: ${epiloguedetail.ep_no}
+		    },
+		    success: function (responseData) {
+		    	$("#ajax").remove();
+				var count = JSON.parse(responseData);
+		    	$(".reply_count").html(count); //span 으로 가서 추천 수 보여줌
+		    },
+		    error:function(request,error){
+		        alert("에러코드 : "+request.status+"\n에러 : "+error);
+		        var win = window.open("", "ERROR", "width=500,height=600");
+		        win.document.write(request.responseText);
+		    }
+		});
 		</script>
 	</td>
 </tr>
+<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
+
 <tr>
 	<td colspan="3">
 		<c:choose>

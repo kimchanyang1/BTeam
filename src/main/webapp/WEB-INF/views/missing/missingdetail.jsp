@@ -24,6 +24,24 @@ $(document).ready(function(){
 		}
 	});
 });
+
+$.ajax({
+	url: "replycount",
+    type: "POST",
+    data: {
+    	reply_boardno: ${mic.mis_no}
+    },
+    success: function (responseData) {
+    	$("#ajax").remove();
+		var count = JSON.parse(responseData);
+    	$(".reply_count").html(count); //span 으로 가서 추천 수 보여줌
+    },
+    error:function(request,error){
+        alert("에러코드 : "+request.status+"\n에러 : "+error);
+        var win = window.open("", "ERROR", "width=500,height=600");
+        win.document.write(request.responseText);
+    }
+});
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -53,7 +71,7 @@ $(document).ready(function(){
 		<td colspan="4" align="left">
 			<fmt:parseDate value="${mic.mis_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-			<B>　${mic.mem_nickname }</B>　　조회 ${mic.mis_readcount}　　${writedaystring }　　댓글 ?</td>
+			<B>　${mic.mem_nickname }</B>　　조회 ${mic.mis_readcount}　　${writedaystring }　　댓글 <font color="#ff8000">　<B><span class="reply_count"></span></B></td>
 	</tr>
 		
 	<tr>
@@ -110,7 +128,6 @@ $(document).ready(function(){
 	
 <tr>
 	<td>　　</td></tr>
-	<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
 	<tr>
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">
@@ -126,6 +143,8 @@ $(document).ready(function(){
 		</c:if>
 	</td>
 	</tr>
+	 <jsp:include page="/WEB-INF/views/main/reply.jsp"/>
+	
 <tr>
 	<td colspan="4">
 		<c:choose>
