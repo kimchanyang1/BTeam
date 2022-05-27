@@ -7,13 +7,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>분양/임시보호 관리자 페이지</title>
+<title>임시보호/분양 관리자 페이지</title>
 </head>
 <body>
 
 <h4><B><font color="#fdafab">관리자 전용 분양 완료 게시판</font></B></h4>
 <h6><B><font color="red">관리자 전용 게시판입니다</font></B></h6>
-<h6><B>승인할 시, 분양/임시보호 게시판으로 글이 이동합니다</B></h6>
+<h6><B>승인할 시, 임시보호/분양 게시판으로 글이 이동합니다</B></h6>
+<br><br>
+
+<form action="rehomeadminsearch" method="post">
+<table border="0" align="center" width="500">
+	<tr>
+		<td colspan="3">
+			<label><input type="checkbox" name="gb1" value="미확인"> 미확인</label> &emsp;
+			<label><input type="checkbox" name="gb1" value="승인"> 승인</label> &emsp;
+			<label><input type="checkbox" name="gb1" value="보류"> 보류</label> &emsp;
+			<label><input type="checkbox" name="gb1" value="거절"> 거절</label> &emsp;
+		</td>
+	</tr>
+	<tr>
+		<td>　발견장소　</td>
+		<td><input type="text" name="sword"></td>
+		<td><B><input type="submit" value="조회"></B></td>
+	</tr>
+</table>
+</form>
 <br><br>
 
 <table border="0" align="center" width="700">
@@ -24,19 +43,19 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="thumbnail">
-						<p align="left"><B>구분　<font color="red">${rdto[rd].rh_gb1 } </font></B></p>
-						<p align="left"><B>제목</B>　${rdto[rd].rh_title } </p>
-							<fmt:parseDate value="${rdto[rd].rh_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
-							<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-						<p align="left"><B>일자</B>　${writedaystring } </p>
-						<a href="rehomedetail?rh_no=${rdto[rd].rh_no }">
-						<img src="${pageContext.request.contextPath}/image/${rdto[rd].rh_image }" style="width: 200px; height: 200px;">
-					<div class="caption">
-						<p><B>${rdto[rd].mem_nickname }</B></p>
-					</div>
+					<a href="rehomedetail?rh_no=${rdto[rd].rh_no }">
+						<div class="thumbnail">
+							<p align="left"><B>구분　<font color="red">${rdto[rd].rh_gb1 } </font></B></p>
+							<p align="left"><B>제목</B>　${rdto[rd].rh_title } </p>
+								<fmt:parseDate value="${rdto[rd].rh_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
+							<p align="left"><B>일자</B>　${writedaystring } </p>
+							<img src="${pageContext.request.contextPath}/image/${rdto[rd].rh_image }" style="width: 200px; height: 200px;">
+						<div class="caption">
+							<p><B>${rdto[rd].mem_nickname }</B></p>
+						</div>
 					</a>	
-					</div>
+				</div>
 				</div>
 		<c:if test="${e%3 eq 2}">
 		</td>

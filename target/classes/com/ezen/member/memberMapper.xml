@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </resultMap>
 
 <select id="Login" resultMap="member">
-	select * from member where mem_id=#{param1} and mem_pw=#{param2}
+	select * from member where mem_id=#{param1}
 </select>
 
 <delete id="memberdelete">

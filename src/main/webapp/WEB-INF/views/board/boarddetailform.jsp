@@ -22,14 +22,15 @@ $(document).ready(function(){
 	        type: "POST",
 	        data: {
 	        	likes_boardno: ${boarddetail.bd_no},
-	        	likes_id: "${mdto.mem_id}"
+	        	likes_id: "${mem_id}"
 	        },
 	        success: function () {
 		        likesCount();
 	        },
 	        error:function(request,error){
-	            alert("에러입니다");
-	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error);
+	            var win = window.open("", "ERROR", "width=500,height=600");
+	            win.document.write(request.responseText);
 	        }
 		});
 	});
@@ -47,12 +48,30 @@ $(document).ready(function(){
             	$(".likes_count").html(count); //span 으로 가서 추천 수 보여줌
             },
 	        error:function(request,error){
-	            alert("에러입니다"+${boarddetail.bd_no}+";");
-	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error+"\n리스폰스텍스트"+request.responseText);
+	            alert("리퀘스트 스테이터스 : "+request.status+"\n에러 : "+error);
+	            var win = window.open("", "ERROR", "width=500,height=600");
+	            win.document.write(request.responseText);
 	        }
 		});
     }
     likesCount();
+});
+$.ajax({
+	url: "replycount",
+    type: "POST",
+    data: {
+    	reply_boardno: ${boarddetail.bd_no}
+    },
+    success: function (responseData) {
+    	$("#ajax").remove();
+		var count = JSON.parse(responseData);
+    	$(".reply_count").html(count); //span 으로 가서 추천 수 보여줌
+    },
+    error:function(request,error){
+        alert("에러코드 : "+request.status+"\n에러 : "+error);
+        var win = window.open("", "ERROR", "width=500,height=600");
+        win.document.write(request.responseText);
+    }
 });
 </script>
 <script type="text/javascript">
@@ -76,8 +95,8 @@ $(document).ready(function(){
 
 <table border="0" align="center" width="700">
 	<input type="hidden" value="${boarddetail.mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
-	<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
+	<input type="hidden" name="mem_no" value="${mem_no }" readonly="readonly">
+	<input type="hidden" name="mem_nickname" value="${mem_nickname }" readonly="readonly">
 	<tr>
 		<td colspan="3" align="left">
 			<B>　글번호 ${boarddetail.bd_no}</B>
@@ -90,9 +109,10 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="3" align="left">
-			<fmt:parseDate value="${boarddetail.bd_writeday }" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<fmt:parseDate value="${boarddetail.bd_writeday}" var="writedaydate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${writedaydate }" var="writedaystring" pattern="yyyy-MM-dd HH:mm"/>
-			<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　댓글 ?　　
+			<B>　${boarddetail.mem_nickname}</B>　　조회 ${boarddetail.bd_readcount}　　${writedaystring }　　
+			댓글 <font color="#ff8000">　<B><span class="reply_count"></span></B></font>　　
 			추천수 <font color="#ff8000">　<B><span class="likes_count"></span></B></font></td>
 	</tr>
 	<tr>
@@ -101,7 +121,11 @@ $(document).ready(function(){
 		<td>　　</td></tr>
 	<tr>
 		<td>　　　　</td>
-		<td><img src="${pageContext.request.contextPath}/image/${boarddetail.bd_image}" width="500px"></td>
+		<td>
+			<c:if test="${boarddetail.bd_image != null}">
+			<img src="${pageContext.request.contextPath}/image/${boarddetail.bd_image}" width="500px">
+			</c:if>
+		</td>
 		<td>　　　　</td>
 	</tr>
 	<tr>
@@ -113,31 +137,28 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="3" align="center">
-			<input type="hidden" value="${e.mem_no }" readonly="readonly">
-			<input type="hidden" name="mem_no" value="${mdto.mem_no }" readonly="readonly">
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3" align="center">　　
-			<input type="hidden" name="mem_nickname" value="${mdto.mem_nickname }" readonly="readonly">
+		<td colspan="3" align="center">
 		</td></tr>
 	<tr>
 		<td colspan="3" align="right">
-			<c:if test="${ mdto.mem_id == null }">
+			<c:if test="${ mem_id == null }">
 				<font color="red"><B>추천은 로그인 후 사용 가능합니다.　</B></font>
 				<button>	
 					<i class="fas fa-heart" style="font-size:16px;color:red"></i>
 					<span class="likes_count"></span>
 				</button>	
 			</c:if>
-			<c:if test="${ mdto.mem_id != null }">
+			<c:if test="${ mem_id != null }">
 				<button class="w3-button w3-black w3-round" id="likes_update">
 					<i class="fas fa-heart" style="font-size:16px;color:red"></i>
 					&nbsp;<span class="likes_count"></span>
 				</button> 
 			</c:if>
-			<c:if test="${boarddetail.mem_no eq mdto.mem_no || mdto.mem_id eq 'admin'}">
-				<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mdto.mem_no }&mem_nickname=${mdto.mem_nickname }'"><B>수정</B></button>
+			<c:if test="${boarddetail.mem_no eq mem_no || mem_id eq 'admin'}">
+				<button onclick="location.href='boardmodifyselect?bd_no=${boarddetail.bd_no }&mem_no=${mem_no }&mem_nickname=${mem_nickname }'"><B>수정</B></button>
 				<button id="boarddelete"><B>삭제</B></button>
 			</c:if>
 		</td>
@@ -153,6 +174,7 @@ $(document).ready(function(){
 		<td width="500px">　　</td>
 		<td>　　</td>
 	</tr>
+<<<<<<< HEAD
 	<tr>
 		<td colspan="4" align="center" bgcolor="#fbdee2"><B>　댓글</B>
 	</tr>
@@ -219,6 +241,9 @@ $(document).ready(function(){
 	<tr>
 		<td>　　</td>
 	</tr>
+=======
+	<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
+>>>>>>> 79748132a87e54d5e0ee153943a627561dc84979
 	<tr>
 		<td colspan="3">
 			<c:choose>

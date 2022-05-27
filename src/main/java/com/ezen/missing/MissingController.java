@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
-import oracle.net.aso.i;
 
 
 
@@ -86,7 +85,7 @@ public class MissingController {
 		
 	}
 	
-	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession)
+	public String missingdetail(HttpServletRequest request, Model mo,SqlSession sqlSession, ReplyController rep)
 	{
 		int mis_no;
 		mis_no = Integer.parseInt(request.getParameter("mis_no"));
@@ -101,6 +100,7 @@ public class MissingController {
 			MovePageVO move = micdao.missingEndMovePage(mis_no);
 			mo.addAttribute("move",move);
 		}
+		rep.replyout("missing", mis_no, mo, sqlSession);
 		return "missingdetail";
 	}
 	
@@ -131,8 +131,8 @@ public class MissingController {
 		return "missingmodifyform";
 	}
 	
-	public String missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
-	{
+	public ModelAndView missingmodifyinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
+	{		
 		int mis_no = Integer.parseInt(multi.getParameter("mis_no"));
 		String mis_gb = multi.getParameter("mis_gb");	
 		String mis_gb2 = multi.getParameter("mis_gb2");	
@@ -144,6 +144,29 @@ public class MissingController {
 		String mis_pno = multi.getParameter("mis_pno");
 		MultipartFile mf = multi.getFile("mis_image");
 		String mis_image = mf.getOriginalFilename();
+		
+		ModelAndView mav = new ModelAndView();
+		MissingService mic = sqlSession.getMapper(MissingService.class);
+		
+		if(mis_image == "")
+		{
+			MissingDTO mdto = mic.missingdetail(mis_no);
+			mis_image= mdto.getMis_image();
+		}
+		else
+		{
+			
+			FileUploadController fuc = new FileUploadController();
+			try {
+				mav = fuc.upload(multi);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		mav.setViewName("redirect: missingoutform");
+		
 		String mis_readcount = multi.getParameter("mis_readcount");	
 				
 		HttpSession hs = multi.getSession();
@@ -151,17 +174,9 @@ public class MissingController {
         String mem_nickname = (String) hs.getAttribute("mem_nickname");
         String mem_tel = (String) hs.getAttribute("mem_tel");
 		 
-		/*
-		HttpSession hs = multi.getSession();
-        MemberDTO login = (MemberDTO) hs.getAttribute("login");
-        int mem_no = login.getMem_no();
-        String mem_nickname = login.getMem_nickname();
-        String mem_tel = login.getMem_tel();
-		*/
 		
-		MissingService mic = sqlSession.getMapper(MissingService.class);
 		mic.missingmodify_insert(mis_no, mis_gb, mis_gb2, mis_title,mis_pname,mis_pno,mis_misdate,mis_misplace,mis_image, mem_no, mem_nickname, mem_tel,mis_content,mis_readcount);
-		return "redirect:missingpage";
+		return mav;
 	}
 
 

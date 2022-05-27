@@ -27,11 +27,11 @@ $(document).ready(function(){
 });
 </script>
 
-<title>분양/임시보호 게시글</title>
+<title>임시보호/분양 게시글</title>
 </head>
 <body oncontextmenu='return false' onselectstart='return false' ondragstart='return false'>
 
-<h4><B><font color="#fdafab">임시분양/보호 게시판</font></B></h4>
+<h4><B><font color="#fdafab">임시보호/분양 게시판</font></B></h4>
 <br><br>
 
 <input type="hidden" name="rh_no" value="${rd.rh_no }">
@@ -41,9 +41,11 @@ $(document).ready(function(){
 <c:if test="${mem_no eq 0}">
 <tr>
 	<th align="left" colspan="4">　${rd.rh_gb1}　 
-		<button onclick="location.href='rehomeok?rh_no=${rd.rh_no}&rh_gb1=승인'">승인</button>
-		<button onclick="location.href='rehomeok?rh_no=${rd.rh_no}&rh_gb1=보류'">보류</button>
-		<button onclick="location.href='rehomeok?rh_no=${rd.rh_no}&rh_gb1=거절'">거절</button>
+		<c:if test="${rd.rh_gb1 != '승인'}">
+			<button onclick="location.href='rehomeok?rh_no=${rd.rh_no}&rh_gb1=승인'">승인</button>
+			<button onclick="location.href='rehomeok?rh_no=${rd.rh_no}&rh_gb1=보류'">보류</button>
+			<button onclick="location.href='rehomeok?rh_no=${rd.rh_no}&rh_gb1=거절'">거절</button>
+		</c:if>
 	</th>
 </tr>
 </c:if>
@@ -121,11 +123,15 @@ $(document).ready(function(){
 <tr>
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq rd.mem_nickname || mem_id eq 'admin'}">
-				<a href="rehomemodifyform?rh_no=${rd.rh_no }"><B><input type="button" value="수정"></B></a>
-				<B><input id="rehomedelete" type="button" value="삭제"></B>
-				<c:if test="${rd.rh_gb2 eq '분양완료'}">
+			<c:choose>
+				<c:when test="${rd.rh_gb2 eq '분양완료'}">
 					<button id="longbutton" onclick="location.href='epilogueinputform?ep_gb=분양완료&ep_originno=${rd.rh_no}'"><B>후기글쓰기</B></button>
-				</c:if>
+				</c:when>
+				<c:otherwise>
+					<a href="rehomemodifyform?rh_no=${rd.rh_no}"><B><input type="button" value="수정"></B></a>
+					<B><input id="rehomedelete" type="button" value="삭제"></B>
+				</c:otherwise>
+			</c:choose>
 		</c:if>
 	</td>
 </tr>

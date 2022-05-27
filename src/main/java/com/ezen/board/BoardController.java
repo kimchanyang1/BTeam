@@ -12,15 +12,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.likes.LikesController;
-import com.ezen.member.MemberDTO;
-import com.ezen.reply.ReplyDTO;
+import com.ezen.reply.ReplyController;
 import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
 
 public class BoardController {
-	// ±Û¾²±â
+	// å ìŒœì–µì˜™å ì™ì˜™
 	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
@@ -62,21 +61,8 @@ public class BoardController {
 	}
 
 
-	// µğÅ×ÀÏ
-	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md) {
-
-		HttpSession hs = request.getSession();
-		if (hs.getAttribute("mem_no")!=null) {
-			int mem_no = (int) hs.getAttribute("mem_no");
-			String mem_id = (String) hs.getAttribute("mem_id");
-			String mem_nickname = (String) hs.getAttribute("mem_nickname");
-			MemberDTO mdto = new MemberDTO();
-			mdto.setMem_no(mem_no);
-			mdto.setMem_id(mem_id);
-			mdto.setMem_nickname(mem_nickname);
-			
-			md.addAttribute("mdto", mdto);
-		}
+	// å ì™ì˜™å ì™ì˜™å ì™ì˜™
+	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md, ReplyController rep) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
@@ -87,35 +73,31 @@ public class BoardController {
 		md.addAttribute("boarddetail", boardlist);
 		md.addAttribute("move", move);
 		
-		boardreplyout(bd_no, md, sqlSession);
+		rep.replyout("board", bd_no, md, sqlSession);
 		
 		return "boarddetailform";
 	}
 	
-	// Á¶È¸¼ö Áõ°¡
+	// å ì™ì˜™íšŒå ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	public void boardreadcount(int bd_no, SqlSession sqlSession) {
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardreadcount(bd_no);
 	}
 
-	// ¼öÁ¤
+	// å ì™ì˜™å ì™ì˜™
 	public String boardmodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		String mem_nickname=request.getParameter("mem_nickname");
 		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		ArrayList<BoardDTO> boardlist = bs.boardmodifyselect(bd_no);
 		md.addAttribute("boardmodify", boardlist);
-		md.addAttribute("mem_no", mem_no);
-		md.addAttribute("mem_nickname", mem_nickname);
 		
 		return "boardmodifyform";
 	}
 	
-	public String boardmodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	public ModelAndView boardmodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("bd_image");
 		
@@ -124,17 +106,39 @@ public class BoardController {
 		String bd_content=multi.getParameter("bd_content");
 		String bd_image=mf.getOriginalFilename();
 		
+		
+		ModelAndView mav = new ModelAndView();
+		BoardService bs = sqlSession.getMapper(BoardService.class);
+				
+		if(bd_image == "")
+		{
+			BoardDTO bdto = bs.boarddetail(bd_no);
+			bd_image= bdto.getBd_image();
+		}
+		else
+		{
+			
+			FileUploadController fuc = new FileUploadController();
+			try {
+				mav = fuc.upload(multi);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		mav.setViewName("redirect: board");
+		
 		int mem_no=Integer.parseInt(multi.getParameter("mem_no"));
 		String mem_nickname=multi.getParameter("mem_nickname");
 		
-		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardmodify(bd_title, mem_no, mem_nickname, bd_content, bd_image, bd_no);
 		
-		return "redirect: board";
+		return mav;
 	}
 
 
-	// »èÁ¦
+	// å ì™ì˜™å ì™ì˜™
 	public String boarddelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
@@ -146,7 +150,7 @@ public class BoardController {
 	}
 	
 	
-	// °Ë»ö
+	// å ì‹¯ì‚¼ì˜™
 	public String boardsearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
 		
 		String selectname = request.getParameter("selectname");
@@ -192,36 +196,8 @@ public class BoardController {
 		
 		return "boardoutform";
 	}
-	
-	//´ñ±Û ÀÔ·Â
-	public String boardreplyinput(HttpServletRequest request, Model mo,SqlSession sqlSession)
-	{
-		int rep_originno = Integer.parseInt(request.getParameter("bd_no"));
-		String rep_id = request.getParameter("mem_id");
-		String rep_content = request.getParameter("rep_content");
-			
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.boardreplyinput(rep_originno, rep_id, rep_content);
-		mo.addAttribute("bd_no", rep_originno);
-			
-		return "redirect: boarddetail";
-	}
-		
-	//´ñ±Û ¸ñ·Ï
-	public void boardreplyout(int rep_originno, Model mo, SqlSession sqlSession)
-	{
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		ArrayList<ReplyDTO> replist = res.boardreplyout(rep_originno);
-		mo.addAttribute("replist", replist);
-	}
-	
-	//´ñ±Û ¼öÁ¤
-	public void boardreplymodify()
-	{
-		
-	}
-	
-	//´ñ±Û »èÁ¦
+
+	//å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™
 	public String boardreplydelete(HttpServletRequest request, Model mo,SqlSession sqlSession)
 	{
 		int rep_no = Integer.parseInt(request.getParameter("rep_no"));

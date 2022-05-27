@@ -22,7 +22,7 @@ public interface EpilogueService {
 
 
 	// 占쏙옙占쏙옙
-	public ArrayList<EpilogueDTO> epiloguemodifyselect(int ep_no);
+	public EpilogueDTO epiloguemodifyselect(int ep_no);
 
 	public void epiloguemodify(String ep_title, int mem_no, String mem_nickname, String ep_content, String ep_image, int ep_no);
 

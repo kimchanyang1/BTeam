@@ -6,13 +6,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function logincheck() {
+	try{
+		var f = document.form1;
+
+		var id = f.mem_id.value;
+		var pw = f.mem_pw.value;
+		if (id=="") {
+			alert("아이디를 입력해 주세요");
+			return false;
+		}else if (pw=="") {
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+		document.form1.submit();
+    }
+    catch(err){
+		alert(err.message);
+    }
+}
+</script>
 </head>
 <body>
 
 <h4><B><font color="#fdafab">로그인</font></B></h4>
 <br><br>
 
-<form action="login" method="post">
+<form action="login" method="post" name="form1">
 	
 <div style="width: 20%;margin: auto;padding: 10px;">
 	<span class="glyphicon glyphicon-user"><input id="login" type="text" name="mem_id" placeholder="아이디" value="${memoryid}"></span><br>
@@ -24,7 +45,7 @@
 	</div>
 	<br>
 	<div style="padding: 5px;">
-		<input type="submit" value="로그인">
+		<input type="button" onclick="logincheck()" value="로그인">
 	</div>
 </div>
 </form>

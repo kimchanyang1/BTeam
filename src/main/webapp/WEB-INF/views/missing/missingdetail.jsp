@@ -110,15 +110,19 @@ $(document).ready(function(){
 	
 <tr>
 	<td>　　</td></tr>
-	
+	<jsp:include page="/WEB-INF/views/main/reply.jsp"/>
 	<tr>
 	<td colspan="4" align="right">
 		<c:if test="${mem_nickname eq mic.mem_nickname || mem_id eq 'admin'}">
+			<c:choose>
+				<c:when test="${mic.mis_gb eq '귀가'}">
+					<button id="longbutton" onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'"><B>후기글쓰기</B></button>
+				</c:when>
+				<c:otherwise>
 					<a href="missingmodifyform?mis_no=${mic.mis_no}"><B><input type="button" value="수정"></B></a>
 					<B><input id="missingdelete" type="button" value="삭제">
-				<c:if test="${mic.mis_gb eq '귀가'}">
-					<button id="longbutton" onclick="location.href='epilogueinputform?ep_gb=귀가완료&ep_originno=${mic.mis_no}'"><B>후기글쓰기</B></button>
-				</c:if>
+				</c:otherwise>
+			</c:choose>
 		</c:if>
 	</td>
 	</tr>
