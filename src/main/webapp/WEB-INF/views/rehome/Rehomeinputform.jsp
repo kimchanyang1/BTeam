@@ -36,14 +36,24 @@ textarea {
 			<table border="0" align="center">
 			<tr>
 				<th>　　구분　　</th>
-				<td><input type="radio" name="rh_gb2" value="임시보호"> 임시보호 &emsp;
+				<td>
+				<label>
+					<input type="radio" name="rh_gb2" value="임시보호"> 임시보호 &emsp;
+				</label>
+				<label>
 					<input type="radio" name="rh_gb2" value="분양"> 분양
+				</label>
 				</td>
 			</tr>
 			<tr>
 				<th>　　종류　　</th>
-				<td><input type="radio" name="rh_gb3" value="개"> 개 &emsp;
+				<td>
+				<label>
+					<input type="radio" name="rh_gb3" value="개"> 개 &emsp;
+				</label>	
+				<label>
 					<input type="radio" name="rh_gb3" value="고양이"> 고양이</td>
+				</label>	
 			</tr>
 			<tr>
 				<th>　　제목　　</th>

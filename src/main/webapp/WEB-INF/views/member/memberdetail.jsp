@@ -5,6 +5,7 @@
 <head>
 <script type="text/javascript">
 $(document).ready(function(){
+<<<<<<< HEAD
 	$('#memberdelete').click(function(){
 		let kk = confirm("${mdto.mem_nickname}"+'님 정말 탈퇴하실건가요?');
 		if (kk) {
@@ -13,6 +14,16 @@ $(document).ready(function(){
 			$(location).attr('href',url);
 		}
 	});
+=======
+    $('#memberdelete').click(function(){
+        let kk = confirm("${mdto.mem_nickname}"+'님 정말 탈퇴하실건가요?');
+        if (kk) {
+            alert('탈퇴 실행');
+            var url = "memberdelete?mem_no="+${mdto.mem_no};
+            $(location).attr('href',url);
+        }
+    });
+>>>>>>> 6a671179714cebd65330578983896e57c453260e
 });
 </script>
 
