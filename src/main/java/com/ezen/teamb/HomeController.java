@@ -433,9 +433,4 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/boardreplydelete")
-	public String boardreplydelete(HttpServletRequest request, Model mo) {
-		return bc.boardreplydelete(request, mo, sqlSession);
-	}
-	
 }

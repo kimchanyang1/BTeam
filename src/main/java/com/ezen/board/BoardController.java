@@ -203,18 +203,4 @@ public class BoardController {
 		return "boardoutform";
 	}
 
-	//占쏙옙占� 占쏙옙占쏙옙
-	public String boardreplydelete(HttpServletRequest request, Model mo,SqlSession sqlSession)
-	{
-		int rep_no = Integer.parseInt(request.getParameter("rep_no"));
-		
-		ReplyService res = sqlSession.getMapper(ReplyService.class);
-		res.boardreplydelete(rep_no);
-		
-		int bd_no = Integer.parseInt(request.getParameter("bd_no"));
-		mo.addAttribute("bd_no", bd_no);
-		
-		return "redirect: boarddetail";
-	}
-
 }
