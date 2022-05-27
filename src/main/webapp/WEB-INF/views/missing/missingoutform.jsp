@@ -40,6 +40,7 @@
 		</div>
 	</c:forEach>
 	</div>
+<c:if test="${paging.startPage != 0}">
 	<c:if test="${paging.startPage != 1}">
 		<a href="missingoutform?nowPage=1"><i class="fas fa-angle-double-left" style="font-size:18px;"></i></a>
 	</c:if>           
@@ -62,6 +63,7 @@
 	<c:if test="${paging.endPage != paging.lastPage}">
 		<a href="missingoutform?nowPage=${page.lastPage}"><i class="fas fa-angle-double-right" style="font-size:18px;"></i></a>
 	</c:if>
+</c:if>
 </div>
 </body>
 </html>

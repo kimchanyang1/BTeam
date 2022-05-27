@@ -14,6 +14,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ezen.board.BoardDTO;
 import com.ezen.epilogue.EpilogueDTO;
@@ -27,23 +31,19 @@ public class MemberController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public String signupform1() {
-		return "signupform1";
-	}
 	
-	public String signupform2() {
-		return "signupform2";
-	}
-	
+	@RequestMapping(value = "/signpolicy")
 	public String signpolicy(){
 		return "Memberpolicy";
 	}
 	
+	@RequestMapping(value = "/signupform")
 	public String Signupform() {
 		return "signupform";
 	}
 	
-	public String Signup(HttpServletRequest request, SqlSession sqlSession) {
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String Signup(HttpServletRequest request) {
 		String mem_id = request.getParameter("mem_id");
 		String mem_pw = request.getParameter("mem_pw");
 		String mem_name = request.getParameter("mem_name");
@@ -62,11 +62,13 @@ public class MemberController {
 		return "redirect:home";
 	}
 	
+	@RequestMapping(value = "/loginform")
 	public String Loginform() {
 		return "loginform";
 	}
 	
-	public String Login(HttpServletRequest request, Model model, SqlSession sqlSession, HttpServletResponse response) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String Login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		HttpSession hs = request.getSession();
 		hs.removeAttribute("memoryid");
 		hs.removeAttribute("memorycheck");
@@ -121,6 +123,7 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping(value = "/logout")
 	public String Logout(HttpServletRequest request) {
 		HttpSession hs = request.getSession();
 		hs.removeAttribute("mem_no");
@@ -131,7 +134,8 @@ public class MemberController {
 		return "redirect:home";
 	}
 	
-	public String memberdetail(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/memberdetail")
+	public String memberdetail(HttpServletRequest request, Model model) {
 		HttpSession hs = request.getSession();
 		int mem_no = (int) hs.getAttribute("mem_no");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
@@ -140,19 +144,22 @@ public class MemberController {
 		return "memberdetail";
 	}
 	
-	public String memberdelete(HttpServletRequest request, SqlSession sqlSession) {
+	@RequestMapping(value = "/memberdelete")
+	public String memberdelete(HttpServletRequest request) {
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		ms.memberdelete(mem_no);
 		return "redirect:logout";
 	}
-
-	public String membermodifyform(HttpServletRequest request, Model model, SqlSession sqlSession) {
-		memberdetail(request, model, sqlSession);
+	
+	@RequestMapping(value = "/membermodifyform")
+	public String membermodifyform(HttpServletRequest request, Model model) {
+		memberdetail(request, model);
 		return "membermodifyform";
 	}
-
-	public String membermodify(HttpServletRequest request, SqlSession sqlSession, Model model) {
+	
+	@RequestMapping(value = "/membermodify", method = RequestMethod.POST)
+	public String membermodify(HttpServletRequest request, Model model) {
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		String mem_pw = request.getParameter("mem_pw");
 		String mem_nickname = request.getParameter("mem_nickname");
@@ -162,17 +169,20 @@ public class MemberController {
 		String mem_address = request.getParameter("mem_address");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		ms.membermodify(mem_pw, mem_nickname, mem_jumin, mem_tel, mem_mail, mem_address, mem_no);
-		Login(request, model, sqlSession, null);
+		Login(request, null, model);
 		return "redirect:memberdetail";
 	}
 
-	public int IdCheckForm(String mem_id, SqlSession sqlSession, HttpServletResponse response) {
+	@RequestMapping(value = "/IdCheckForm", method = RequestMethod.GET)
+	@ResponseBody
+	public int IdCheckForm(@RequestParam("mem_id") String mem_id) {
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		int use = ms.IdCheck(mem_id);
 		return use;
 	}
 	
-	public String ADmemberdetail(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/ADmemberdetail")
+	public String ADmemberdetail(HttpServletRequest request, Model model) {
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		MemberDTO mdto = ms.memberdetail(mem_no);
@@ -180,7 +190,8 @@ public class MemberController {
 		return "ADmemberdetail";
 	}
 	
-	public String ADmembersearch(SqlSession sqlSession, HttpServletRequest request, Model model) {
+	@RequestMapping(value = "/ADmembersearch")
+	public String ADmembersearch(HttpServletRequest request, Model model) {
 		
 		String selectname = request.getParameter("selectname");
 		String searchname = request.getParameter("searchname");
@@ -206,11 +217,13 @@ public class MemberController {
 		return "ADmemberlist";
 	}
 
-	public String memberwritelist(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/memberwritelist")
+	public String memberwritelist(HttpServletRequest request, Model model) {
 		return "memberwritelist";
 	}
 	
-	public String membermissingwrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/membermissingwrite")
+	public String membermissingwrite(HttpServletRequest request, Model model) {
 		HttpSession hs = request.getSession();
 		int mem_no = (int) hs.getAttribute("mem_no");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
@@ -221,7 +234,8 @@ public class MemberController {
 		return "missingoutform";
 	}
 	
-	public String memberrehomewrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/memberrehomewrite")
+	public String memberrehomewrite(HttpServletRequest request, Model model) {
 		HttpSession hs = request.getSession();
 		int mem_no = (int) hs.getAttribute("mem_no");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
@@ -232,7 +246,8 @@ public class MemberController {
 		return "Rehomeoutform";
 	}
 	
-	public String memberepiloguewrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/memberepiloguewrite")
+	public String memberepiloguewrite(HttpServletRequest request, Model model) {
 		HttpSession hs = request.getSession();
 		int mem_no = (int) hs.getAttribute("mem_no");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
@@ -243,7 +258,8 @@ public class MemberController {
 		return "epilogueoutform";
 	}
 	
-	public String memberboardwrite(HttpServletRequest request, Model model, SqlSession sqlSession) {
+	@RequestMapping(value = "/memberboardwrite")
+	public String memberboardwrite(HttpServletRequest request, Model model) {
 		HttpSession hs = request.getSession();
 		int mem_no = (int) hs.getAttribute("mem_no");
 		MemberService ms = sqlSession.getMapper(MemberService.class);
@@ -253,8 +269,10 @@ public class MemberController {
 		
 		return "boardoutform";
 	}
-
-	public String ADmemberPage(SqlSession sqlSession, Model model, String nowPage) {
+	
+	@RequestMapping(value = "/ADmemberPage")
+	public String ADmemberPage(Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage) {
 		MemberService ms = sqlSession.getMapper(MemberService.class);
 		int total = ms.ADmemberTotal();
 		int cntPage = 5;

@@ -10,13 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.likes.LikesService;
 import com.ezen.reply.ReplyController;
-import com.ezen.reply.ReplyService;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
 import com.ezen.teamb.PagingDTO;
@@ -26,8 +27,11 @@ public class BoardController {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	private ReplyController rc = new ReplyController();
 
-	public String boardinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	@RequestMapping(value = "/boardinputform")
+	public String boardinputform(HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
 		
@@ -41,7 +45,8 @@ public class BoardController {
 	}
 	
 	// input
-	public ModelAndView boardinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	@RequestMapping(value = "/boardinput")
+	public ModelAndView boardinput(MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("bd_image");
 		
@@ -68,8 +73,9 @@ public class BoardController {
 	}
 
 
-	// 占쏙옙占쏙옙占쏙옙
-	public String boarddetailform(SqlSession sqlSession, HttpServletRequest request, Model md, ReplyController rep) {
+	// 자세히 보기
+	@RequestMapping(value = "/boarddetail")
+	public String boarddetailform(HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
@@ -80,20 +86,20 @@ public class BoardController {
 		md.addAttribute("boarddetail", boardlist);
 		md.addAttribute("move", move);
 		
-		rep.replyout("board", bd_no, md, sqlSession);
+		rc.replyout("board", bd_no, md, sqlSession);
 		
 		return "boarddetailform";
 	}
 	
-	// 占쏙옙회占쏙옙 占쏙옙占쏙옙
+	// 게시판 조회수 세기
 	public void boardreadcount(int bd_no, SqlSession sqlSession) {
-		
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		bs.boardreadcount(bd_no);
 	}
 
-	// 占쏙옙占쏙옙
-	public String boardmodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	// 자세히보기 검색
+	@RequestMapping(value = "/boardmodifyselect")
+	public String boardmodifyselect(HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
@@ -104,7 +110,8 @@ public class BoardController {
 		return "boardmodifyform";
 	}
 	
-	public ModelAndView boardmodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	@RequestMapping(value = "/boardmodify")
+	public ModelAndView boardmodify(MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("bd_image");
 		
@@ -144,9 +151,9 @@ public class BoardController {
 		return mav;
 	}
 
-
-	// 占쏙옙占쏙옙
-	public String boarddelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	// 삭제
+	@RequestMapping(value = "/boarddelete")
+	public String boarddelete(HttpServletRequest request, Model md) {
 		
 		int bd_no=Integer.parseInt(request.getParameter("bd_no"));
 		
@@ -156,9 +163,9 @@ public class BoardController {
 		return "redirect: board";
 	}
 	
-	
-	// 占싯삼옙
-	public String boardsearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	// 검색
+	@RequestMapping(value = "/boardsearch")
+	public String boardsearch(HttpServletRequest request, Model md) {
 		
 		String selectname = request.getParameter("selectname");
 		String searchname = request.getParameter("searchname");
@@ -180,8 +187,9 @@ public class BoardController {
 		return "boardoutform";
 	}
 
-
-	public String boardpage(SqlSession sqlSession, Model model, String nowPage) {
+	@RequestMapping(value = "/board")
+	public String boardpage(Model model, 
+			@RequestParam(value = "nowPage", required = false)String nowPage) {
 
 		BoardService bs = sqlSession.getMapper(BoardService.class);
 		LikesService ls = sqlSession.getMapper(LikesService.class);

@@ -8,13 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.missing.MissingDTO;
-import com.ezen.missing.MissingService;
 import com.ezen.reply.ReplyController;
 import com.ezen.teamb.FileUploadController;
 import com.ezen.teamb.MovePageVO;
@@ -26,12 +26,14 @@ public class RehomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@RequestMapping(value = "/rehomeinputform")
 	public String rhinputform()
 	{
 		return "Rehomeinputform";
 	}
 	
-	public ModelAndView rhinput(MultipartHttpServletRequest multi, SqlSession sqlSession)
+	@RequestMapping(value = "/rehomeinput")
+	public ModelAndView rhinput(MultipartHttpServletRequest multi)
 	{
 		String rh_gb2 = multi.getParameter("rh_gb2");
 		String rh_gb3 = multi.getParameter("rh_gb3");
@@ -65,8 +67,9 @@ public class RehomeController {
 		
 		return mav;
 	}
-
-	public String rhdetail(SqlSession sqlSession, HttpServletRequest request, Model mo,ReplyController rep)
+	
+	@RequestMapping(value = "/rehomedetail")
+	public String rhdetail(HttpServletRequest request, Model mo,ReplyController rep)
 	{
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		
@@ -91,7 +94,8 @@ public class RehomeController {
 		rs.rehomereadcount(rh_no);
 	}
 	
-	public String rhdelete(SqlSession sqlSession, HttpServletRequest request)
+	@RequestMapping(value = "/rehomedelete")
+	public String rhdelete(HttpServletRequest request)
 	{
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		
@@ -101,7 +105,8 @@ public class RehomeController {
 		return "redirect: rehomeoutform";
 	}
 	
-	public String rhmodifyform(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	@RequestMapping(value = "/rehomemodifyform")
+	public String rhmodifyform(HttpServletRequest request, Model mo)
 	{
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		
@@ -112,7 +117,8 @@ public class RehomeController {
 		return "Rehomemodifyform";
 	}
 	
-	public ModelAndView rhmodify(SqlSession sqlSession, MultipartHttpServletRequest multi)
+	@RequestMapping(value = "/rehomemodify")
+	public ModelAndView rhmodify(MultipartHttpServletRequest multi)
 	{
 		int rh_no = Integer.parseInt(multi.getParameter("rh_no"));
 		String rh_gb1 = multi.getParameter("rh_gb1");
@@ -162,7 +168,8 @@ public class RehomeController {
 		return mav;
 	}
 	
-	public String rhsearch(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	@RequestMapping(value = "/rehomesearch")
+	public String rhsearch(HttpServletRequest request, Model mo)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		
@@ -180,15 +187,17 @@ public class RehomeController {
 		
 		return "Rehomeoutform";
 	}
-
-	public String rehomeadmin(SqlSession sqlSession, Model mo) {
+	
+	@RequestMapping(value = "/rehomeadmin")
+	public String rehomeadmin(Model mo) {
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		ArrayList<RehomeDTO> rdto = rs.rehomeadmin();
 		mo.addAttribute("rdto", rdto);
 		return "rehomeadmin";
 	}
 	
-	public String rehomeadminsearch(SqlSession sqlSession, HttpServletRequest request, Model mo)
+	@RequestMapping(value = "/rehomeadminsearch")
+	public String rehomeadminsearch(HttpServletRequest request, Model mo)
 	{
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		
@@ -204,16 +213,18 @@ public class RehomeController {
 		
 		return "rehomeadmin";
 	}
-
-	public String rehomeok(SqlSession sqlSession, HttpServletRequest request) {
+	
+	@RequestMapping(value = "/rehomeok")
+	public String rehomeok(HttpServletRequest request) {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		String rh_gb1 = request.getParameter("rh_gb1");
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		rs.rehomeok(rh_no, rh_gb1);
 		return "redirect:rehomedetail?rh_no="+rh_no;
 	}
-
-	public String rehomeimbo(SqlSession sqlSession, HttpServletRequest request) {
+	
+	@RequestMapping(value = "/rehomeimbo", method = RequestMethod.POST)
+	public String rehomeimbo(HttpServletRequest request) {
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
@@ -222,23 +233,28 @@ public class RehomeController {
 		rs.rehomeimbo(rh_no, mem_no, mem_nickname, mem_tel);
 		return "redirect:rehomedetail?rh_no="+rh_no;
 	}
-
-	public String rehomebun(SqlSession sqlSession, HttpServletRequest request) {
+	
+	@RequestMapping(value = "/rehomebun")
+	public String rehomebun(HttpServletRequest request) {
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		rs.rehomebun(rh_no);
 		return "redirect:rehomedetail?rh_no="+rh_no;
 	}
-
+	
+	@RequestMapping(value = "/rehomeimboform")
 	public String rehomeimboform(HttpServletRequest request, Model mo) {
 		int rh_no = Integer.parseInt(request.getParameter("rh_no"));
 		mo.addAttribute("rh_no", rh_no);
 		return "rehomeimboform";
 	}
 	
-	
-	public String rehomeEndPage(SqlSession sqlSession, Model mo, String nowPage)
-	{
+	// REHOME
+	@RequestMapping(value = "/rehomeend")
+	public String rehomeEndPage(
+			Model mo, 
+			@RequestParam(value = "nowPage", required = false)String nowPage
+			) {
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
 		int total = rs.rehomeendtotal();
 		int cntPage = 5;
@@ -255,12 +271,11 @@ public class RehomeController {
 		
 		return "rehomeend";
 	}
-
 	
-	public String rehomepage(PagingDTO dto, Model mo,SqlSession sqlSession
-
-			,@RequestParam(value="nowPage", required=false)String nowPage)
-	{
+	// REHOME
+	@RequestMapping(value = "/rehomeoutform")
+	public String rehomepage(PagingDTO dto, Model mo
+			,@RequestParam(value="nowPage", required=false)String nowPage) {
 		RehomeService rh = sqlSession.getMapper(RehomeService.class);
 		int total = rh.cntpage();
 		if(nowPage == null)
@@ -276,8 +291,8 @@ public class RehomeController {
 		return "Rehomeoutform";
 	}
 	
-	public String rehomeadminpage(PagingDTO dto, Model mo,SqlSession sqlSession
-
+	@RequestMapping(value = "/rehomeadminpage")
+	public String rehomeadminpage(PagingDTO dto, Model mo
 			,@RequestParam(value="nowPage", required=false)String nowPage) {
 		RehomeService rh = sqlSession.getMapper(RehomeService.class);
 		int total = rh.cntpage();

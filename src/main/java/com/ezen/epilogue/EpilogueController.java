@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -26,10 +27,10 @@ public class EpilogueController {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// out
-	public String epiloguepage(PagingDTO dto, Model mo,SqlSession sqlSession
-			,@RequestParam(value="nowPage", required=false)String nowPage)
-	{
+	//EPILOGUE	
+	@RequestMapping(value = "/epilogue")
+	public String epiloguepage(Model mo, PagingDTO dto, 
+			@RequestParam(value="nowPage", required=false)String nowPage) {
 		EpilogueService ep = sqlSession.getMapper(EpilogueService.class);
 	int total = ep.cntpage();
 	if(nowPage == null)
@@ -47,7 +48,8 @@ public class EpilogueController {
 	
 	
 	// input
-	public String epilogueinputformgo(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	@RequestMapping(value = "/epilogueinputform")
+	public String epilogueinputform(HttpServletRequest request, Model md) {
 
 		HttpSession hs = request.getSession();
 		
@@ -64,7 +66,8 @@ public class EpilogueController {
 		return "epilogueinputform";
 	}
 	
-	public ModelAndView epilogueinput(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	@RequestMapping(value = "/epilogueinput")
+	public ModelAndView epilogueinput(MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("ep_image");
 		
@@ -94,7 +97,8 @@ public class EpilogueController {
 	
 	
 	// detail
-	public String epiloguedetailform(SqlSession sqlSession, HttpServletRequest request, Model md,ReplyController rep) {
+	@RequestMapping(value = "/epiloguedetail")
+	public String epiloguedetailform(HttpServletRequest request, Model md,ReplyController rep) {
 		
 		HttpSession hs = request.getSession();
 		MemberDTO login = (MemberDTO) hs.getAttribute("login");
@@ -131,7 +135,8 @@ public class EpilogueController {
 	
 	
 	// modify
-	public String epiloguemodifyselect(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	@RequestMapping(value = "/epiloguemodifyselect")
+	public String epiloguemodifyselect(HttpServletRequest request, Model md) {
 		
 		int ep_no=Integer.parseInt(request.getParameter("ep_no"));
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
@@ -146,7 +151,8 @@ public class EpilogueController {
 		return "epiloguemodifyform";
 	}
 	
-	public ModelAndView epiloguemodify(SqlSession sqlSession, MultipartHttpServletRequest multi) {
+	@RequestMapping(value = "/epiloguemodify")
+	public ModelAndView epiloguemodify(MultipartHttpServletRequest multi) {
 		
 		MultipartFile mf = multi.getFile("ep_image");
 		
@@ -188,7 +194,8 @@ public class EpilogueController {
 
 
 	// delete
-	public String epiloguedelete(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	@RequestMapping(value = "/epiloguedelete")
+	public String epiloguedelete(HttpServletRequest request, Model md) {
 		
 		int ep_no=Integer.parseInt(request.getParameter("ep_no"));
 		
@@ -200,7 +207,8 @@ public class EpilogueController {
 	
 	
 	// search
-	public String epiloguesearch(SqlSession sqlSession, HttpServletRequest request, Model md) {
+	@RequestMapping(value = "/epiloguesearch")
+	public String epiloguesearch(HttpServletRequest request, Model md) {
 		
 		String selectname1 = request.getParameter("selectname1");
 		String selectname2 = request.getParameter("selectname2");		
