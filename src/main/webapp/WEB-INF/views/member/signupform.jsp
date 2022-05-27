@@ -23,11 +23,13 @@ function id_check(){
         success:function(responseData){
         	$("#ajax").remove();
 			var use = JSON.parse(responseData);
-            alert(use+"개의 아이디 보유");
             if (use == 0) {
                 $("#idCheck").attr("value","idChecked");
+                alert("사용 가능한 아이디입니다.");
+                $("#idCheckShow").text("아이디 체크완료");
 			}else {
                 $("#idCheck").attr("value","idUnchecked");
+                alert("사용 불가능한 아이디입니다.");
 			}
         },
         error:function(request,error){
@@ -38,6 +40,7 @@ function id_check(){
 };
 function reCheck() {
     $("#idCheck").attr("value","idUnchecked");
+    $("#idCheckShow").text("");
 }
 function checking() {
 	try{
@@ -50,9 +53,12 @@ function checking() {
 		var name = f.mem_name.value;
 		var nickname = f.mem_nickname.value;
 		var jumin = f.mem_jumin.value;
+		var jumincheck = /^\d{6}-\d{7}$/;
 		var tel = f.mem_tel.value;
+		var telcheck = /^\d{3}-\d{4}-\d{4}$/;
 		var emailid = f.emailid.value;
 		var address = f.mem_address.value;
+		
 		if (id=="") {
 			alert("아이디를 입력해 주세요");
 			return false;
@@ -72,10 +78,16 @@ function checking() {
 			alert("닉네임을 입력해 주세요.");
 			return false;
 		}else if (jumin=="") {
-			alert("주민번호를 입력해 주세요.");
+			alert("주민등록번호를 입력해 주세요.");
+			return false;
+		}else if (!jumincheck.test(jumin)) {
+			alert("주민등록번호 형식이 다릅니다.");
 			return false;
 		}else if (tel=="") {
 			alert("전화번호를 입력해 주세요.");
+			return false;
+		}else if (!telcheck.test(tel)) {
+			alert("전화번호 형식이 다릅니다.");
 			return false;
 		}else if (emailid=="") {
 			alert("이메일을 입력해 주세요.");
@@ -119,6 +131,7 @@ table {
 	<tr>
 		<th><br>　아이디　</th>
 		<td align="right">
+			<b style="color: red;" id="idCheckShow"></b>
 			<button type="button" onclick="id_check()" id="parentForm"><B>중복확인</B></button>
 			<input type="hidden" value="idUnchecked" name="idCheck" id="idCheck" readonly="readonly">
 		</td>
@@ -166,7 +179,7 @@ table {
 	</tr>
 	<tr>	
 		<td colspan="2">
-			<input type="text" name="mem_jumin" placeholder="주민등록번호를 입력해주세요"></td>
+			<input type="text" name="mem_jumin" placeholder="주민등록번호를 입력해주세요(######-#######)"></td>
 	</tr>
 	
 	<tr>
@@ -174,7 +187,7 @@ table {
 	</tr>
 	<tr>	
 		<td colspan="2">
-			<input type="text" name="mem_tel" placeholder="연락처를 입력해주세요"></td>
+			<input type="tel" name="mem_tel" placeholder="연락처를 입력해주세요(###-####-####)"></td>
 	</tr>
 	
 	<tr>
