@@ -48,14 +48,9 @@ public class NoticeController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/noticeinput")
-	public String noticeinput(HttpServletRequest request) {
+	public String noticeinput(NoticeDTO dto) {
 		NoticeService ns = sqlSession.getMapper(NoticeService.class);
-		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
-		String mem_nickname = request.getParameter("mem_nickname");
-		String nt_title = request.getParameter("nt_title");
-		String nt_content = request.getParameter("nt_content");
-		ns.noticeinput(mem_no, mem_nickname, nt_title, nt_content);
-
+		ns.noticeinput(dto);
 		return "redirect: noticeoutform";
 	}
 

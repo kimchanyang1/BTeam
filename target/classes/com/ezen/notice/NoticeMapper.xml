@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="noticeinput">
-	insert into notice values(notice_seq.nextval, #{param1}, #{param2}, sysdate, #{param3}, #{param4}, 0)
+	insert into notice values(notice_seq.nextval, #{mem_no}, #{mem_nickname}, sysdate, #{nt_title}, #{nt_content}, 0)
 </insert>
 
 <update id="noticereadcount">

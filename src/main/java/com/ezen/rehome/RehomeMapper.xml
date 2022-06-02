@@ -5,8 +5,9 @@
 <mapper namespace="com.ezen.rehome.RehomeService">
 
 <insert id="rehomeinput">
-	insert into rehome(rh_no, rh_gb1, rh_gb2, rh_gb3, rh_title, rh_pname, rh_pno, rh_misdate, rh_misplace, rh_image, mem_no, mem_nickname, mem_tel, rh_content, rh_readcount)
-		values (rh_no.nextval, '미확인', #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9}, #{param10}, #{param11}, #{param12}, 0)
+	insert into rehome values (rh_no.nextval, '미확인', #{rh_gb2}, #{rh_gb3}, 
+		#{rh_title}, #{rh_pname}, #{rh_pno}, #{rh_misdate}, #{rh_misplace}, 
+		#{rh_image}, #{mem_no}, #{mem_nickname}, #{mem_tel}, sysdate, #{rh_content}, 0)
 </insert>
 
 <select id="rehomeoutput" resultType="com.ezen.rehome.RehomeDTO">

@@ -1,8 +1,8 @@
 package com.ezen.rehome;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,17 +33,10 @@ public class RehomeController {
 	}
 	
 	@RequestMapping(value = "/rehomeinput")
-	public ModelAndView rhinput(MultipartHttpServletRequest multi)
+	public ModelAndView rhinput(MultipartHttpServletRequest multi, RehomeDTO rdto)
 	{
-		String rh_gb2 = multi.getParameter("rh_gb2");
-		String rh_gb3 = multi.getParameter("rh_gb3");
-		String rh_title = multi.getParameter("rh_title");
-		String rh_pname = multi.getParameter("rh_pname");
-		int rh_pno = Integer.parseInt(multi.getParameter("rh_pno"));
-		String rh_misdate = multi.getParameter("rh_misdate");
-		String rh_misplace = multi.getParameter("rh_misplace");
-		MultipartFile mf = multi.getFile("rh_image");
-		String rh_image = mf.getOriginalFilename();
+		MultipartFile mf = multi.getFile("imagefile");
+		rdto.setRh_image(mf.getOriginalFilename());
 
 		ModelAndView mav = new ModelAndView();
 		FileUploadController fuc = new FileUploadController();
@@ -54,16 +47,8 @@ public class RehomeController {
 		}
 		mav.setViewName("redirect:rehomeoutform");
 		
-		HttpSession hs = multi.getSession();
-        int mem_no = (int) hs.getAttribute("mem_no");
-        String mem_nickname = (String) hs.getAttribute("mem_nickname");
-        String mem_tel = (String) hs.getAttribute("mem_tel");
-        
-        String rh_content = multi.getParameter("rh_content");	
-		
 		RehomeService rs = sqlSession.getMapper(RehomeService.class);
-		
-		rs.rehomeinput(rh_gb2, rh_gb3, rh_title, rh_pname, rh_pno, rh_misdate, rh_misplace, rh_image, mem_no, mem_nickname, mem_tel, rh_content);
+		rs.rehomeinput(rdto);
 		
 		return mav;
 	}
