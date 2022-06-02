@@ -12,7 +12,7 @@
 <!-- * 카카오맵 - 지도퍼가기 -->
 <!-- 1. 지도 노드 -->
 
-<div id="daumRoughmapContainer1652112035452" class="root_daum_roughmap root_daum_roughmap_landing" style="margin-left: 550px;"></div>
+<div id="daumRoughmapContainer1652112035452" class="root_daum_roughmap root_daum_roughmap_landing" style="margin-left: auto; margin-right: auto;"></div>
 
 <!--
 	2. 설치 스크립트
@@ -23,12 +23,12 @@
 
 <!-- 3. 실행 스크립트 -->
 
-<script charset="UTF-8"">
+<script charset="UTF-8">
 	new daum.roughmap.Lander({
 		"timestamp" : "1652112035452",
 		"key" : "2a6ak",
-		"mapWidth" : "640", // 640
-		"mapHeight" : "360" // 360
+		"mapWidth" : "640", 
+		"mapHeight" : "360" 
 	}).render();
 </script>
 

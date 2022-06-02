@@ -18,6 +18,7 @@
 		margin-right: 100px;
 	}
 	#agree{
+		text-align:left;
 		font-size: 15px;
 		margin: 15px;
 	}
@@ -40,12 +41,6 @@
 <title>title</title>
 </head>
 <body>
-<!-- 
-펫밀리: Din library
-펫밀리: 도서관
-구분3: 
--->
-
 	<table id="table1">
 		<tr>
 			<td><div id="sub_navi"><a id="sub_navi" href="book">HOME</a> > 이용약관</div></td>
