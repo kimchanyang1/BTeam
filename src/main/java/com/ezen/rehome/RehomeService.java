@@ -7,7 +7,7 @@ import com.ezen.teamb.PagingDTO;
 
 public interface RehomeService {
 
-	public void rehomeinput(String rh_gb2, String rh_gb3, String rh_title, String rh_pname, int rh_pno, String rh_misdate, String rh_misplace, String rh_image, int mem_no, String mem_nickname, String mem_tel, String rh_content);
+	public void rehomeinput(RehomeDTO rdto);
 	public ArrayList<RehomeDTO> rehomeoutput();
 	public RehomeDTO rehomedetail(int rh_no);
 	public void rehomereadcount(int rh_no);

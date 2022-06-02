@@ -29,6 +29,9 @@ textarea {
 <br><br>
 
 <form action="rehomeinput" method="post" enctype="multipart/form-data">
+<input type="hidden" value="${mem_no}" name="mem_no" readonly="readonly">
+<input type="hidden" value="${mem_nickname}" name="mem_nickname" readonly="readonly">
+<input type="hidden" value="${mem_tel}" name="mem_tel" readonly="readonly">
 <table border="0" align="center">
 	<tr>
 		<td bgcolor="#fbdee2">　　</td>
@@ -86,7 +89,7 @@ textarea {
 			</tr>
 			<tr>
 				<th>　이미지　</th>
-				<td><input type="file" name="rh_image"></td>
+				<td><input type="file" name="imagefile"></td>
 			</tr>
 			</table>
 		</td>

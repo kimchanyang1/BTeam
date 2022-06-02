@@ -1,5 +1,7 @@
 package com.ezen.rehome;
 
+import com.ezen.member.MemberDTO;
+
 /*
 create table rehome(
 rh_no NUMBER(6) PRIMARY KEY,
@@ -53,6 +55,7 @@ public class RehomeDTO {
 	String mem_nickname, mem_tel;
 	String rh_writeday, rh_content;
 	int rh_readcount;
+	MemberDTO mdto;
 	
 	public RehomeDTO() {
 		super();
@@ -206,6 +209,14 @@ public class RehomeDTO {
 
 	public void setRh_readcount(int rh_readcount) {
 		this.rh_readcount = rh_readcount;
+	}
+
+	public MemberDTO getMdto() {
+		return mdto;
+	}
+
+	public void setMdto(MemberDTO mdto) {
+		this.mdto = mdto;
 	}
 
 }
