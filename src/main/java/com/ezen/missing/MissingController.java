@@ -196,7 +196,7 @@ public class MissingController {
 
 
 	@RequestMapping(value = "/rehoming")
-	public String rehoming(HttpServletRequest request, SqlSession sqlSession) 
+	public String rehoming(HttpServletRequest request) 
 	{
 		int mis_no = Integer.parseInt(request.getParameter("mis_no"));
 		MissingService mic = sqlSession.getMapper(MissingService.class);
