@@ -220,3 +220,4 @@ INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플5', 4, '예�
 INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플6', 3, '예제용3', sysdate, '샘플내용6', 0, '1.jpg', 0);
 INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플7', 2, '예제용2', sysdate, '샘플내용7', 0, '1.jpg', 0);
 INSERT INTO board VALUES (BD_NO_SEQ.nextval, '자유게시판 샘플8', 1, '예제용1', sysdate, '샘플내용8', 0, '1.jpg', 0);
+
