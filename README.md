@@ -1,4 +1,4 @@
-# Petmilly
+# Petmilly Project
 
 톰캣연동 후 실행 첫 페이지  localhost:본인포트/teamb/home
 
