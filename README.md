@@ -46,7 +46,7 @@
 
 8) 공지 사항 게시판 http://localhost:(포트번호)/teamb/noticeoutform
 
-![image](https://user-images.githubusercontent.com/105031126/172659074-d18c4145-05fb-4f11-8738-dd8a81502edf.png)
+![image](https://user-images.githubusercontent.com/105031126/172662651-c4e71a33-bf05-4f9b-8af9-6f1559bdf239.png)
 
 9) 실종 게시판 http://localhost:(포트번호)/teamb/missingoutform
 
