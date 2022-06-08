@@ -2,8 +2,59 @@
 
 톰캣연동 후 실행 첫 페이지  localhost:본인포트/teamb/loginform
 
-DB생성 참고
+프로젝트 특징
+1) 반려동물 실종 신고 및 임시보호/분양이 가능한 웹 사이트로 구현
+2) 게시판 글 작성, 수정, 삭제, 검색 기능 구현(관리자, 회원만 글 작성 가능)
+3) 실종 게시판의 경우 글을 작성하면 미승인 상태로 실종 게시판에 등록
+   관리자, 작성자가 귀가 완료 처리 시 귀가 완료 게시판에 보이도록 구현
+4) 임시보호/분양 게시판의 경우 글을 작성하면 미승인 상태로 관리자 전용 게시판에 등록 
+   관리자가 승인 • 보류 • 거절을 판단하여 승인 시 임시보호/분양 
+   게시판에 등록        게시판 상세 페이지에서 임시보호 완료를 선택 시 임시보호자의 
+   정보를 업데이트       분양 완료를 선택 시 분양 완료 게시판로 이동
+5) 전체 게시판은 글 등록자 혹은 관리자만 수정 • 삭제가 가능하며 삭제 버튼 클릭 시 팝업으로 재확인
+6) 답글, 댓글 기능 구현
+7) 자유게시판 추천 수 기능 구현
 
+화면 구현
+1) 메인화면 http://localhost:(포트번호)/teamb/home
+![image](https://user-images.githubusercontent.com/105031126/172657808-8852648f-f001-4480-83bf-0dbf598586ee.png)
+
+2) 로그인 페이지 http://localhost:(포트번호)/teamb/loginform
+![image](https://user-images.githubusercontent.com/105031126/172658314-434c4c32-6e5b-478d-829b-f518a2032880.png)
+
+3) 임시보호/분양 관리자 게시판 
+![image](https://user-images.githubusercontent.com/105031126/172658453-c9fc9831-8862-4a6b-8cbf-882040df8f77.png)
+
+4) 찾아오시는 길 http://localhost:(포트번호)/teamb/location
+![image](https://user-images.githubusercontent.com/105031126/172659794-96f7f606-d20d-443f-ad17-41bcc6398d59.png)
+
+5) 회원목록 관리 페이지 http://localhost:(포트번호)/teamb/rehomeadminpage
+![image](https://user-images.githubusercontent.com/105031126/172658555-30bc8bf4-d7e0-4235-87a3-6ad662e3a75f.png)
+
+6) 개인 정보 처리 방침 http://localhost:(포트번호)/teamb/policyprivate
+![image](https://user-images.githubusercontent.com/105031126/172658811-eb3978de-b2a3-4ee2-b246-399fa9147628.png)
+
+7) 이용약관 http://localhost:(포트번호)/teamb/policyservice
+![image](https://user-images.githubusercontent.com/105031126/172658961-48e20117-18c7-42d3-b5af-ddc66f43ddb2.png)
+
+8) 공지 사항 게시판 http://localhost:(포트번호)/teamb/noticeoutform
+![image](https://user-images.githubusercontent.com/105031126/172659074-d18c4145-05fb-4f11-8738-dd8a81502edf.png)
+
+9) 실종 게시판 http://localhost:(포트번호)/teamb/missingoutform
+![image](https://user-images.githubusercontent.com/105031126/172659951-9a18445c-3715-45e1-99b1-b8e6b23f1005.png)
+
+10) 실종 게시판 상세 페이지 http://localhost:(포트번호)/teamb/missingdetail
+![image](https://user-images.githubusercontent.com/105031126/172660420-b973e4d5-4a28-4f3c-8e6d-10c6859582da.png)
+
+11) 임시보호/분양 게시판 http://localhost:(포트번호)/teamb/rehomeoutform
+![image](https://user-images.githubusercontent.com/105031126/172660723-037cb719-e524-4644-80c5-f85a3e818d4d.png)
+
+12) 임시보호/분양 상세 페이지 http://localhost:(포트번호)/teamb/rehomedetail
+![image](https://user-images.githubusercontent.com/105031126/172660819-6bc9579a-fc1b-451f-bfcb-908e948e7098.png)
+
+13) 자유 게시판 http://localhost:(포트번호)/teamb/board
+![image](https://user-images.githubusercontent.com/105031126/172660989-0a628c54-8f89-4522-9d5c-61afd5bcd1af.png)
+DB생성 참고
 # 관리자 생성 SQL 
 INSERT INTO member VALUES (0, 'admin','admin', '관리자', '관리자','','','','');
 
