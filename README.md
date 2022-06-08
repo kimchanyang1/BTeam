@@ -1,6 +1,6 @@
 # Petmilly
 
-톰캣연동 후 실행 첫 페이지  localhost:본인포트/teamb/loginform
+톰캣연동 후 실행 첫 페이지  localhost:본인포트/teamb/home
 
 프로젝트 특징
 1) 반려동물 실종 신고 및 임시보호/분양이 가능한 웹 사이트로 구현
@@ -49,18 +49,23 @@
 ![image](https://user-images.githubusercontent.com/105031126/172659074-d18c4145-05fb-4f11-8738-dd8a81502edf.png)
 
 9) 실종 게시판 http://localhost:(포트번호)/teamb/missingoutform
+
 ![image](https://user-images.githubusercontent.com/105031126/172659951-9a18445c-3715-45e1-99b1-b8e6b23f1005.png)
 
 10) 실종 게시판 상세 페이지 http://localhost:(포트번호)/teamb/missingdetail
+
 ![image](https://user-images.githubusercontent.com/105031126/172660420-b973e4d5-4a28-4f3c-8e6d-10c6859582da.png)
 
 11) 임시보호/분양 게시판 http://localhost:(포트번호)/teamb/rehomeoutform
+
 ![image](https://user-images.githubusercontent.com/105031126/172660723-037cb719-e524-4644-80c5-f85a3e818d4d.png)
 
 12) 임시보호/분양 상세 페이지 http://localhost:(포트번호)/teamb/rehomedetail
+
 ![image](https://user-images.githubusercontent.com/105031126/172660819-6bc9579a-fc1b-451f-bfcb-908e948e7098.png)
 
 13) 자유 게시판 http://localhost:(포트번호)/teamb/board
+
 ![image](https://user-images.githubusercontent.com/105031126/172660989-0a628c54-8f89-4522-9d5c-61afd5bcd1af.png)
 
 
