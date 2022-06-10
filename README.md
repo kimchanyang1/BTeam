@@ -231,9 +231,13 @@ INSERT INTO notice VALUES (NOTICE_SEQ.nextval, 1, '예제용', sysdate, '샘플1
 # MISSING DATA
 # 실종 게시판 데이터
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글1', '테스트개1', 0000001, sysdate, '실종지1', '1.png', 1, '테스터1', '010-1111-1111', sysdate , '테스트글내용1' ,0);
+
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글2', '테스트개2', 0000002, sysdate, '실종지2', '1.png', 2, '테스터2', '010-2222-2222', sysdate , '테스트글내용2' ,0);
+
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글3', '테스트개3', 0000003, sysdate, '실종지3', '1.png', 3, '테스터3', '010-3333-3333', sysdate , '테스트글내용3' ,0);
+
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글4', '테스트개4', 0000004, sysdate, '실종지4', '1.png', 4, '테스터4', '010-4444-4444', sysdate , '테스트글내용4' ,0);
+
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글5', '테스트개5', 0000005, sysdate, '실종지5', '1.png', 5, '테스터5', '010-5555-5555', sysdate , '테스트글내용5' ,0);
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글6', '테스트개6', 0000006, sysdate, '실종지6', '1.png', 6, '테스터6', '010-6666-6666', sysdate , '테스트글내용6' ,0);
 INSERT INTO MISSING VALUES(MIS_NO.NEXTVAL, '실종', '개', '테스트글7', '테스트개7', 0000007, sysdate, '실종지7', '1.png', 7, '테스터7', '010-7777-7777', sysdate , '테스트글내용7' ,0);
