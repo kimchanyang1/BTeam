@@ -276,6 +276,7 @@ insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테�
 insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트7', '양산형개7', 0000007, sysdate, '실종지7', '1.png', 7, '테스터7', '070-7777-7777', sysdate, '테스트용글내용7', 0);
 insert into rehome values (rh_no.nextval, '승인', '분양완료', '개', '테스트8', '양산형개8', 0000008, sysdate, '실종지8', '1.png', 8, '테스터8', '080-8888-8888', sysdate, '테스트용글내용8', 0);
 
+
 # EPILOGUE DATA
 실종 , 임시보호/분양 게시판에 출력된 게시물 클릭 후
 상세페이지에서 실종 : 귀가완료 , 임시보호/분양: 분양완료 버튼 클릭 후
