@@ -21,7 +21,6 @@
 ![image](https://user-images.githubusercontent.com/105031126/172657808-8852648f-f001-4480-83bf-0dbf598586ee.png)
 
 2) 로그인 페이지 http://localhost:(포트번호)/teamb/loginform
-![image](https://user-images.githubusercontent.com/105031421/173011919-ac10a6c9-b94d-4dd5-a1af-dec9234d6377.png)
 
 ![image](https://user-images.githubusercontent.com/105031126/172658314-434c4c32-6e5b-478d-829b-f518a2032880.png)
 
